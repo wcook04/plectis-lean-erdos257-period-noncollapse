@@ -6,20 +6,20 @@
 % `tectonic erdos-1049-rational-base-lambert.tex` or `make`.
 \documentclass[11pt]{article}
 \input{problem-note-preamble}
-\renewcommand{\commit}{99f4bf47422abbd8757cbb22b50ba079d764d3a7}
-\renewcommand{\commitshort}{99f4bf47422a}
+\renewcommand{\commit}{ca0e13f8acf5ccf48506e4bdb870953d3a0856fa}
+\renewcommand{\commitshort}{ca0e13f8acf5}
 \hypersetup{
-  pdftitle={Sharp height and four-jet obstructions at base 3/2 for Erdős Problem 1049},
+  pdftitle={Irrationality of F(31/4) and the exact normalized Hankel order (Erdős Problem 1049)},
   pdfsubject={Erdős Problem Notes: Problem 1049},
-  pdfkeywords={irrationality, Lambert series, rational base, Padé approximation, Lean 4},
+  pdfkeywords={irrationality, Lambert series, rational base, Hankel determinant, q-logarithm, Padé approximation, Lean 4},
 }
 
-\runninghead{Erd\H{o}s \#1049: sharp obstructions at base 3/2}
-\title{Sharp Height and Four-Jet Obstructions at Base $3/2$}
-\subtitle{An exact $41/65$ certificate for Erd\H{o}s
-Problem~\#1049}
+\runninghead{Erd\H{o}s \#1049: an irrational base and the exact Hankel order}
+\title{Irrationality of $F(31/4)$ and the\\Exact Normalized Hankel Order}
+\subtitle{Ordinary specialisation of published 2004 lemmas, exact Hankel order,
+and the remaining arithmetic at $3/2$}
 \author{Will Cook}
-\date{July 2026}
+\date{September 2026}
 
 \begin{document}
 \maketitle
@@ -32,10 +32,68 @@ Let
  F(t)=\sum_{n\ge1}\frac1{t^n-1}.
 \]
 Erd\H{o}s Problem~\#1049 asks whether \(F(t)\) is irrational for every
-rational \(t>1\).  The problem remains open, and this paper proves no
-irrationality result at \(t=3/2\).
+rational \(t>1\).  For coprime integers \(a>b\ge1\) with
+\(\log b/\log a<\theta^{*}=C_{0}/C_{1}\), this note proves \(F(a/b)\)
+irrational by an ordinary argument; in particular every
+\(F\bigl((31/4)^{r}\bigr)\) is irrational.  The parent case \(t=3/2\)
+is not settled here.
 
-The main exact input is
+Zudilin's
+$q$-harmonic construction in the direction \((14,12,14;27)\) survives
+substitution of a rational base directly into its polynomial identity, and the
+resulting exponent budget gives the threshold
+\(\log b/\log a<C_0/C_1=0.4056830213840605\ldots\) for coprime \(a>b\ge1\).
+Since \(\log 4/\log 31<81/200\) lies below it, \(F\bigl((31/4)^r\bigr)\) is
+irrational for every \(r\ge1\).  Zudilin announced in 2016 that his results
+extend to a rational base under an assumption of exactly this shape, for some
+computable constant he did not name.  What is supplied here is the rational
+specialisation of the 2004 forms, with the denominator accounting and the
+limit passage carried out in full, which identifies the printed
+\(\mu\) as an admissible constant for \(F\) itself, and with it the strip
+\((1/2-1/\pi^{2},\theta^{*})\) above the Bundschuh--V\"a\"an\"anen region.
+Among coprime pairs with numerator at most \(60\), that difference strip
+contains four members \((31,4)\), \((53,5)\), \((54,5)\), \((56,5)\);
+the count \(137\) is the size of the full contour region, not of the strip.
+The proof consumes Lemmas~1, 2 and~7 of Zudilin~2004 and nothing else external.
+It is not kernel-checked; Lean checks the finite part, namely the trigamma
+constants, the bounds \(81/200<\theta^*<1/2\), and the membership and exclusion
+of the bases involved.  A companion Archimedean cap shows that a base-independent coefficient-height bound
+on final pairs in \(\mathbb Z[X]^{2}\), together with a degree upper bound of order
+\(\delta n^{2}\), yields only a sufficient cutoff \(\sigma/(\sigma+\delta)\le 1/2\).
+Excluding a particular family beyond that cutoff requires its actual degree and remainder
+asymptotics; the displayed degree estimate does not by itself rule out every construction
+at bases with \(b^{2}\ge a\), \(3/2\) included.  Laurent polynomials may appear only
+in intermediate norm estimates, not as the final pair.
+
+A second principal theorem sharpens the normalized Hankel estimate in Zudilin's
+Pad\'e construction.  At \(x=z=1\), if \(V_N^*\) is his rank-\(N\)
+normalized determinant, then for every \(N\ge1\)
+\[
+ \operatorname{ord}_q V_N^*=\frac{N(N-1)(2N-1)}6,
+ \qquad
+ [q^{\operatorname{ord}_q V_N^*}]V_N^*
+   =\frac{(N!)^2(N+1)!}{2^N}.
+\]
+The published argument proves the displayed order only as a lower bound.  An
+associated-graded recurrence identifies every transformed-row leading
+coefficient, and a Vandermonde determinant proves equality.  The equality
+determines the first nonzero formal term; a bound for the residual at a fixed
+value of \(q\) is a separate analytic statement.  A companion ordinary-proof
+note records a positive discrete measure for these same rows, from which
+\(V_N^*>0\) and \(\log(V_N^*/(C_N q^{B_N}))=O_q(N)\).  That estimate is not
+used in the rational-base argument, and it does not prove irrationality at
+\(3/2\).  This is a route closure, not an irrationality result:
+denominator-factor extraction and alternative integral models remain open.
+
+Separately, at a rational target $a/q$, prime support in the denominator
+coordinate of an integral approximation row forces the sharp gap
+$|Ba/q-A|\ge1/q$.  A first-power determinant condition forces that gap in at
+least one of two rows, and two noncollinear integral rows cannot both have
+remainders tending to zero.  These are exact arithmetic endgames, but their
+prime-support and analytic-decay hypotheses are not constructed for the
+actual $q$-Ap\'ery family.
+
+At \(3/2\), a second exact input is
 \[
  2^{64}<3^{41}<2^{65}.
 \]
@@ -54,7 +112,7 @@ this counting threshold is exact.  A bounded-fibre lemma shows how a uniform
 bound on analytic-remainder multiplicities would force one collision outside
 the remainder nullspace.  No such bound is proved for an actual
 \(q\)-Ap\'ery or Zudilin family.  Under the additional hypothesis that adjacent
-minors vanish and the second coordinates are units, a B\'ezout shear reduces
+minors vanish and each row is unimodular, a B\'ezout shear reduces
 the sufficient selector width from \(2S+4R\) to \(S+2R\).
 
 Two further obstructions explain why direct integer-base arguments do not
@@ -77,11 +135,17 @@ survives normalisation, whose selected polynomial pair and remainder are
 nonzero, and whose decay beats its height.
 \end{abstract}
 
-\begin{paperresult}{What the paper rules out}
+\begin{paperresult}{Sharp formula and exact remaining boundary}
+\textbf{All-rank formula.} Zudilin's normalized Hankel lower bound is an
+equality at $x=z=1$, with first coefficient $(N!)^2(N+1)!/2^N$; hidden
+normalized-Hankel order is therefore unavailable as extra analytic decay.
+\textbf{Rational gap.} Prime-supported integral rows have a sharp $1/q$
+gap, and noncollinear pairs cannot both decay to zero; constructing the
+required rows remains open.
 \textbf{Exact arithmetic.} The bracket $2^{64}<3^{41}<2^{65}$ excludes the
 stated scalar and first-order Hermite--Pad\'e height mechanisms at $3/2$.
 It also yields the sharp finite four-jet count at bottom depth $41$, with a
-B\'ezout--Pl\"ucker reduction under explicit minor and unit hypotheses.
+B\'ezout--Pl\"ucker reduction under explicit minor and unimodular hypotheses.
 \textbf{Transfer obstruction.} Direct integer-base clearing fails by an exact
 growth inequality and forcing recurrence.  \textbf{Open boundary.} No
 primitive noncollapsed approximation family with a sufficiently small
@@ -240,18 +304,35 @@ treated by Kova\v{c} and Tao~\cite{kovactao2024}.
 
 The rational non-integer
 progress relevant here is instead the height criterion of Bundschuh and
-V\"a\"an\"anen~\cite{bv1994}, which remains the strongest explicit numerical
-threshold among the sources compared here for this value.  Zudilin's later
+V\"a\"an\"anen~\cite{bv1994}, which is the explicit antecedent compared here.  The present rational
+specialisation has the larger displayed cutoff $\theta^{*}$; bibliographical
+priority is not asserted.  Zudilin's later
 Pad\'e-and-Hankel treatment also admits non-integral rational bases: its
 generalized $q$-logarithm remarks that its results also hold for non-integer
 $p=r/s$ with $|p|>1$, under an assumption $\log|r|>c\log|s|$ for some computable
-$c>0$~\cite{zudilin2016}.  No value of $c$ is computed there, and we do not
-compute one; we record the remark because it shows the rational-base extension
-was already contemplated, and because any threshold of that shape is a
-statement about $\log s/\log r$ of exactly the kind
-Section~\ref{sec:sevenhalves} treats.
-No claim of priority is made for the analysis below.  It records the formal
-status and limits of the argument; it does not add a theorem about $F(t)$.
+$c>0$~\cite{zudilin2016}.  No value of $c$ is computed there.
+Section~\ref{sec:rational-base-irrationality} computes a threshold of exactly
+that shape, $\log s/\log r<C_0/C_1$, from the earlier
+direction~\cite{zudilin2004} rather than from the generalized $q$-logarithm.
+The remark is therefore both the closest antecedent and the sharpest reason to
+withhold any priority claim: the rational-base extension was contemplated in
+print, only its constant was left uncomputed.
+
+Section~\ref{sec:hankel-order} returns to the normalized determinant in
+Zudilin's Section~4 and sharpens its $q$-order estimate at $x=z=1$.  The
+closest recent determinant comparison we found is Chern--Jiu--Li--Wang's
+theory of $q$-binomial transforms~\cite{chern2026}.  Their theorems determine
+the highest degree and leading coefficient in an independent transform
+parameter for two finite $q$-binomial transforms of an arbitrary sequence.
+The result below instead determines the lowest $q$-exponent and first
+coefficient of Zudilin's particular infinite $q$-hypergeometric moment
+sequence after fixing $x=z=1$.  Their paper neither treats this sequence nor
+the generalized $q$-logarithm, so its leading-coefficient theorems do not imply
+Theorem~\ref{res:zudilin-sharp-qorder}.  This is an exact comparison of theorem
+statements, not a priority claim.
+No claim of priority is made for the analysis below.  The principal theorems
+are ordinary proofs.  Their finite arithmetic and generic formal consumers
+are identified separately.
 
 \paragraph{Erd\H{o}s's integer-base argument, in outline.}
 For an integer $b\ge2$, Erd\H{o}s rewrites
@@ -374,7 +455,9 @@ but no claim of exact optimality at every $T$ is made.
 \paragraph{Results and boundary.}
 The linked Lean declarations establish exact inequalities, congruences,
 finite collision counts, recurrence identities, and exclusions for the named
-models.  Bundschuh and V\"a\"an\"anen's irrationality theorem at \(7/2\),
+models.  The normalized-Hankel theorem is an ordinary all-rank proof with a
+Lean-checked source-tail, recurrence, and determinant chain plus finite replay,
+not yet an end-to-end Lean theorem.  Bundschuh and V\"a\"an\"anen's theorem at \(7/2\),
 Rivin's functional nonrationality theorem, and the two-variable Mahler theorem
 used below remain external results.  None of the formal statements proves an
 irrationality result at a rational noninteger base.  At \(3/2\), the missing
@@ -382,8 +465,13 @@ step is still an actual primitive approximation family with nonzero remainder
 and an asymptotic height margin.
 
 \paragraph{Structure.}
+Section~\ref{sec:hankel-order} proves the all-rank normalized-Hankel order and
+leading coefficient and states exactly which analytic route it closes.
 Section~\ref{sec:sharp} derives the height and charge exclusions from the sharp
-$41/65$ power certificate.  Section~\ref{sec:primitive} proves that integer scalar content is neutral for the
+$41/65$ power certificate.  Section~\ref{sec:prime-support} proves the sharp
+one- and two-row rational gaps, the no-double-decay theorem, the real
+unit-determinant height--decay tradeoff, and the reduced selector collision.
+Section~\ref{sec:primitive} proves that integer scalar content is neutral for the
 local-to-Archimedean balance.
 
 Section~\ref{sec:endpoints} proves the endpoint
@@ -403,9 +491,367 @@ declaration at the pinned source revision~\commitshort.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Lambert series; rational base;
-Pad\'e approximation; Lean~4.
+Hankel determinant; $q$-logarithm; Pad\'e approximation; Lean~4.
 \qquad
 \textbf{MSC 2020.} 11J72 (primary); 11J82, 68V20 (secondary).
+
+\section{A rational base at which $F$ is irrational}
+\label{sec:rational-base-irrationality}
+
+\emph{This section records the state of the argument on 2 September 2026.  It
+is an ordinary complete proof consuming three published lemmas of
+Zudilin~2004, with the finite part Lean-checked and the whole not
+kernel-checked.}
+
+Write $F(t)=\sum_{m\ge1}(t^m-1)^{-1}$ as in the problem statement, and for
+coprime integers $a>b\ge1$ put $t=a/b$.  Two published thresholds bound the
+rational bases at which irrationality is currently reachable by a height
+argument.  Duverney's Th\'eor\`eme~2 \cite[Th.~2, p.~174]{duverney1996} covers
+$\log b/\log a<\tfrac13(1-3/\pi^2)=0.23207\ldots$, and Bundschuh and
+V\"a\"an\"anen's Theorem~2 in the case $\alpha=-1$ \cite[Thm.~2,
+p.~177]{bv1994} covers the larger region
+\[
+  \frac{\log b}{\log a}<\frac12-\frac1{\pi^2}=0.398678\ldots .
+\]
+Their printed hypothesis for $\alpha=-1$ is $\lambda<(1/2+1/\pi^{2})^{-1}$ with
+$\lambda=\log h(q)/\log|q|$; at $q=a/b$ this reads
+$\log a/\log(a/b)<(1/2+1/\pi^{2})^{-1}$, which is the displayed inequality.
+Zudilin's Theorem~1 \cite[Thm.~1]{zudilin2004} gives the irrationality
+exponent $\mu=2.46497868\ldots$ for the integer-base $q$-harmonic series in the
+direction $(\alpha_0,\alpha_1,\alpha_2;\beta)=(14,12,14;27)$ with $m=15$, and
+the closing paragraph of \cite[\S2]{zudilin2016} announces that the results
+extend to non-integer $p=r/s$ with $|p|>1$ under an assumption
+$\log|r|>c\log|s|$ for some computable $c>0$, without naming $c$ and without
+printing a proof.  The theorem below specialises the 2004 forms at a rational
+base and carries out the denominator accounting, which identifies the printed
+$\mu=C_1/C_0$ of the 2004 direction as an admissible $c$ for $F$ itself.  It is
+an explicit-constant extension of an announced remark, and what it buys
+is the strip $(0.398678,0.405683]$, which contains $\log4/\log31=0.403699$.
+
+\begin{theorem}[rational-base region]
+\label{res:rational-base-threshold}
+Let $a>b\ge1$ be coprime integers with
+\[
+  b^{\mu}<a,
+  \qquad\hbox{equivalently}\qquad
+  \frac{\log b}{\log a}<\theta^*=\frac{C_0}{C_1}=0.4056830213840605\ldots,
+  \qquad \mu=\frac{C_1}{C_0}=2.4649786835749750\ldots
+\]
+Then $F(a/b)$ is irrational.  The proof consumes Lemma~7 of
+Zudilin~\cite{zudilin2004} in its polynomial reading at display~(24), together
+with his Lemmas~1 and~2 at the integer instance $p=2$, and nothing else
+external.
+\end{theorem}
+
+\noindent Cyclotomic cancellation is performed before the denominator of
+the rational base is cleared, so the degree budget is that of the cancelled
+forms.
+The remainder series associated to the source displays (8)--(11) is written with
+final $q$-Pochhammer length $\beta-a_2$, as required by the gamma expression (7)
+and the residues (8).  One unnumbered product display on p.~156 of the 2004 source
+has the shorter length $\beta-a_2-1$; that indexing discrepancy is not used here.
+
+\noindent In the normalisation of \cite[\S2]{zudilin2016}, where the announced
+hypothesis is $\log|r|>c\log|s|$ for a computable $c>0$, the constant is
+$c=\mu$, the irrationality exponent of Zudilin's own Theorem~1.  Negative bases
+are not treated.
+
+The two constants are the exponent budgets of Zudilin's direction.  Explicitly
+\[
+  C_1=(\alpha_0+\alpha_1+\alpha_2)\beta-\tfrac12(\alpha_1^2+\alpha_2^2+\beta^2)
+     =\frac{1091}2,
+  \qquad
+  C_0=266-\frac3{\pi^2}\bigl(225-J\bigr)=221.30008816500502\ldots,
+\]
+where
+\[
+  J=\int_0^1\omega(x)\,d\bigl(-\psi'(x)\bigr)
+   =77.94318447500909\ldots,
+  \quad
+  \omega(x)=\max\bigl\{0,\ \lfloor14x\rfloor+\lfloor13x\rfloor-\lfloor12x\rfloor-\lfloor15x\rfloor,\
+  2\lfloor14x\rfloor-\lfloor13x\rfloor-\lfloor15x\rfloor\bigr\},
+\]
+so that $C_1/C_0=\mu=2.46497868\ldots$ and $\theta^*=1/\mu$.  Both published
+thresholds have this shape: Bundschuh--V\"a\"an\"anen's is $1/\mu_{BV}$ with
+$\mu_{BV}=2\pi^2/(\pi^2-2)=2.5082847619\ldots$, and $4^{\mu}=30.4835\ldots<31<4^{\mu_{BV}}=32.3696\ldots$,
+which is exactly why $31/4$ sits between the two regions.  The function
+$\omega$ takes the value $1$ on exactly thirteen intervals, the first being
+$[1/14,1/12)$ and the last $[13/14,14/15)$.  The direction, the thirteen
+demi-intervals, the values $C_1=545.5$ and $C_0=221.30008816\ldots$ and the
+ratio $C_1/C_0=2.46497868\ldots$ are printed at \cite[p.~162]{zudilin2004},
+where that ratio is the irrationality-exponent bound of
+\cite[Thm.~1, p.~154]{zudilin2004} for integer bases.  The further digits
+displayed above and the reciprocal $\theta^{*}$ are recomputed here from the
+same trigamma series.
+
+\begin{corollary}\label{res:thirtyone-four}
+$F\bigl((31/4)^r\bigr)$ is irrational for every integer $r\ge1$.
+\end{corollary}
+
+\noindent The open-closed difference $(1/\mu_{BV},\theta^*)$ gained over
+Bundschuh--V\"a\"an\"anen has no member with $b=2$ or $b=3$.  Its first member
+is $31/4$, followed by $53/5$, $54/5$, $56/5$, $83/6$, $85/6$, $89/6$, and so
+on; the strip is infinite.  Among coprime $a\le60$ the difference contains
+exactly the four pairs $(31,4)$, $(53,5)$, $(54,5)$, $(56,5)$; the count
+$137$ is the full contour region $\log b/\log a<\theta^*$, including the
+earlier Bundschuh--V\"a\"an\"anen members.
+The problem's own base $3/2$ sits at $\theta=0.630930\ldots$, far outside.
+
+\begin{theorem}[Archimedean cap on base-uniform rank-two families]
+\label{res:archimedean-cap}
+Let $(U_n,V_n)$ be pairs in $\mathbb Z[X]^2$ satisfying $\Lambda_n(x)=U_n(x)F(x)-V_n(x)\ne0$,
+$\deg U_n,\deg V_n\le\delta n^2(1+o(1))$,
+$\log\max(H(U_n),H(V_n))\le h n^2(1+o(1))$ with $H$ the $\ell^1$ coefficient
+norm, and
+$\log|\Lambda_n(x)|=-\sigma n^2\log x\,(1+o(1))$ for every real $x>1$, with
+$\sigma,\delta>0$ and $h\ge0$ independent of $x$.  Then with
+$d_n=\max(\deg U_n,\deg V_n)$, the homogenised forms
+$b^{d_n}\Lambda_n(a/b)$ tend to zero whenever
+$\log b/\log a<\sigma/(\sigma+\delta)$, and $\sigma/(\sigma+\delta)\le1/2$.
+\end{theorem}
+
+\begin{proof}
+Write $H_n=\max(H(U_n),H(V_n))$.  Then
+$|U_n(x)|,|V_n(x)|\le (1+\deg U_n+\deg V_n)H_n x^{d_n}$ for real $x>1$.
+Suppose $\sigma>\delta$ and choose an integer $p\ge2$ with
+$(\sigma-\delta)\log p>h$.  Set $a_n=U_n(p)$, $b_n=V_n(p)$ and
+$L_n=a_n F(p)-b_n$.  Hypotheses on height and degree give
+$|a_n|\le\exp((h+\delta\log p)n^2+o(n^2))$, while
+$|L_n|=\exp(-\sigma\log p\,n^2+o(n^2))$.  The adjacent integer
+\[
+ a_nb_{n+1}-a_{n+1}b_n=a_{n+1}L_n-a_n L_{n+1}
+\]
+is then $o(1)$, hence eventually zero.  Also $a_n\ne0$ for large $n$:
+otherwise the nonzero integer $L_n=-b_n$ would have absolute value less
+than $1$.  Thus $b_n/a_n$ is eventually a fixed rational $r$.  If
+$F(p)\ne r$ then $|L_n|\ge|F(p)-r|$; if $F(p)=r$ then $L_n=0$.  Both
+contradict the hypotheses, so $\sigma\le\delta$.
+The homogenised logarithm satisfies
+\[
+ \limsup_{n\to\infty} n^{-2}\log\bigl|b^{d_n}\Lambda_n(a/b)\bigr|
+ \le \delta\log b-\sigma\log(a/b),
+\]
+which is negative on the stated sufficient region.  The conclusion bounds the
+sufficient cutoff furnished by the displayed degree estimate.  An exclusion for a
+particular family requires its actual degree and remainder asymptotics.
+\end{proof}
+
+\noindent The printed Laurent-polynomial domain is false: $U_n=X^{-n^2}$,
+$V_n=0$, $\sigma=1$, $\delta=1/4$ and height $1$ meet those hypotheses and
+violate $\sigma/(\sigma+\delta)\le1/2$.  Final pairs must lie in
+$\mathbb Z[X]^2$; Laurent expressions are permitted only when estimating
+intermediate $\ell^1$ norms.  So $b^2<a$ is a sufficient cap on every
+base-uniform rank-two family in $\mathbb Z[X]^2$ whose degree is controlled by
+the displayed upper bound, Zudilin's included; an actual-degree argument is
+needed before excluding a particular family beyond that cutoff.  The coefficient-height hypothesis is recorded in
+\texttt{ErdosProblems/Erdos1049/RationalBaseIrrationality\_31\_4\_Proof.md}.
+
+\noindent The height ratio is invariant under a common positive power, and
+\[
+  \frac25<\frac{\log4}{\log31}<\frac{81}{200}<\theta^* .
+\]
+The two rational comparisons are exact integer inequalities, $31^2<4^5$ and
+$4^{200}<31^{81}$, and both are Lean-checked
+(\lword{Erdos1049/ZudilinHeightRegion.lean}{65}{twoFifths\_lt\_thirtyoneFour\_log\_ratio}{lower
+bound},
+\lword{Erdos1049/ZudilinHeightRegion.lean}{30}{thirtyoneFour\_log\_ratio\_lt\_eightyOne\_twoHundredths}{upper
+bound}), as is the invariance of the region under common powers
+(\lword{Erdos1049/ZudilinHeightRegion.lean}{59}{thirtyoneFour\_power\_mem\_zudilinHeightRegion}{power
+family}).  The last comparison $81/200<\theta^*$ is a finite rational
+computation: truncating each $\psi_1(u)-\psi_1(v)$ after nine terms gives
+$J>389699/5000$, and $\pi>157/50$ then gives
+$C_0>88371/400=(81/200)\cdot(1091/2)$.  The cutoff $81/200$ is an elementary
+rational sub-boundary of the contour computed here.  It is not a threshold
+stated by Zudilin, and it should never be cited as one.
+
+The base $31/4$ lies strictly outside the Bundschuh--V\"a\"an\"anen region,
+since $\log4/\log31>2/5>1/2-1/\pi^2$; that exclusion is Lean-checked
+(\lword{Erdos1049/ZudilinHeightRegion.lean}{79}{bundschuhVaananenMargin\_lt\_twoFifths}{margin},
+\lword{Erdos1049/ZudilinHeightRegion.lean}{91}{thirtyoneFour\_outside\_bundschuhVaananenHeightRegion}{exclusion}).
+The base $3/2$ lies outside the full contour because
+$\theta^*<1/2<\log2/\log3$ (the last comparison is $3<4$).  The weaker
+sub-boundary $3^{81}<2^{200}$, hence $81/200<\log2/\log3$, remains a
+separate pinned formal lemma
+(\lword{Erdos1049/ZudilinHeightRegion.lean}{122}{threeHalves\_outside\_zudilinHeightRegion}{rational sub-boundary},
+\lword{Erdos1049/ZudilinHeightRegion.lean}{130}{threeHalves\_outside\_bundschuhVaananenHeightRegion}{earlier region}).
+That full-contour comparison, not the weaker $81/200$ sub-boundary, is the
+exclusion of $t=3/2$ from the ordinary region.  The rest of the paper records
+why a different construction family would still be needed at that base.
+
+\subsection*{What the published lemmas supply}
+
+Zudilin's Lemma~7 is a statement in $\mathbb Z[p]$.  It gives
+\[
+  \Lambda_n(p)=p^{-M_n}D_N(p)\,\Omega_n(p)^{-1}F_n(p)
+    =U_n(p)\,h_p(1)-V_n(p),
+  \qquad U_n,V_n\in\mathbb Z[p],
+\]
+where $h_p(1)=\sum_{m\ge1}(p^m-1)^{-1}$, by Gaussian binomial integrality,
+cyclotomic clearing through the least common multiple, stability of the Heine
+transform, and Gauss's lemma for division by the monic $\Omega_n$.  Its
+hypotheses are discharged at the direction fixed above: the parameter tuple is
+$c=(13,14,12,14,15,13)$ with $m(c)=15$ and $s(c)=n$, so $s(c)>0$, and the
+source's~(14) holds because $12n+1\le14n+1$ and $26n+2\le27n+2\le28n+2$.  The
+lemma therefore applies for every $n\ge1$.  The pair
+$(U_n,V_n)$ is unique because $h_p(1)\notin\mathbb Q(p)$.  The standing
+hypothesis $p\in\mathbb Z$ of \cite{zudilin2004} is used only later, at its
+equation~(24), to pass from $\mathbb Z[p]$ to $\mathbb Z$; the argument here
+substitutes the rational base into the polynomial identity instead, and never
+enters that step.  Lemma~2 is the equidistribution input.  It gives
+\[
+  \frac{K_n-W_n}{n^2}\longrightarrow 266-\frac3{\pi^2}(225-J)=C_0 ,
+\]
+with weight $\psi_1(u)-\psi_1(v)$ over the intervals on which $\omega=1$; only
+intervals with $u\ge1/14$ occur, so no level $l>15n$ contributes.  Zudilin's
+Archimedean estimates (17) and (25) are not consumed, and no rational-base
+asymptotic theorem is needed or invoked.
+
+\subsection*{Evidence boundary}
+
+Theorem~\ref{res:rational-base-threshold} is an ordinary complete proof whose
+only external inputs are Lemmas~1, 2 and~7 of \cite{zudilin2004}.  It is not
+kernel-checked.  Lean checks the finite part: the trigamma definition of $J$,
+the bounds $81/200<\theta^*$ from the single $k=0$ term of each trigamma
+difference together with $\pi>3.14$, and $\theta^*<1/2$ from
+$J<\psi_1(1/14)<198$; the membership of $31/4$ and of every power
+$(31/4)^r$ in the contour region; the exclusion of $3/2$ from it; and the exact
+integer bookkeeping of the forms.  Those are in
+\path{ErdosProblems/Erdos1049/RationalBaseContour.lean} and
+\path{ErdosProblems/Erdos1049/ZudilinHeightRegion.lean}.  The written proof is
+\path{ErdosProblems/Erdos1049/RationalBaseIrrationality_31_4_Proof.md}, and the
+contour derivation is
+\path{ErdosProblems/Erdos1049/ZudilinRationalHomogenisationDerivation.md}.  The
+forms $U_n,V_n$ were reconstructed exactly for $n\le3$ by an independent
+implementation, which verified the polynomial divisibility that Lemma~7
+asserts, matched the closed-form degree bookkeeping to the computed degrees,
+confirmed nonvanishing of $\Lambda_n$ and the Archimedean bracket on
+$F_n$, and reproduced the identity to relative error below $10^{-25}$;
+those receipts are the probes
+\path{formal_math/probes/erdos1049_zudilin_c0_c1_check.py} and
+\path{formal_math/probes/erdos1049_zudilin_exact_forms.py} and the logs under
+\path{state/public-source-redacted://erdos1049_contour_adversary/}.
+The convergence $(K_n-W_n)/n^2\to C_0$ is exact at $n=1,2,3$ and numerical at
+$n=10,100,400$; the limit itself is Zudilin's Lemma~2, not a computation.
+
+Priority is bounded rather than settled.  Three rational-base regions are in
+print: Duverney 1996 at $0.23207\ldots$, Bundschuh--V\"a\"an\"anen 1994 at
+$0.398678\ldots$, and Zudilin 2016's unquantified announcement, whose constant
+is not named there.  Zudilin 2004, Tachiya 2004, B\'ezivin 1988, Borwein 1991
+and 1992, Van Assche 2001, Amdeberhan--Zeilberger 1998, and
+Postelmans--Van Assche 2006 all work at integer base.  So does
+Matala-aho, V\"a\"an\"anen and Zudilin~\cite{mvz2006}, whose standing
+hypothesis is $p=1/q\in\mathbb Z\setminus\{0,\pm1\}$ and which states on p.~880
+that its methods do not sharpen Zudilin~2004.  So none of the printed regions
+for $F$ compared here reaches $\log4/\log31$.  What is claimed here is the
+rational specialisation of the 2004 forms, which identifies the printed $\mu$
+as an admissible constant for $F$ itself, together with the resulting decidable
+membership test.  The theorem should be presented as proved, and no priority
+claim is attached to it.
+
+\section{Exact normalized-Hankel order in Zudilin's construction}
+\label{sec:hankel-order}
+
+At $x=z=1$, Zudilin's normalized moments are
+\[
+ v_m^*=\sum_{t\ge0}q^{(m+1)t}
+ \frac{(q;q)_m^3(q^{t+1};q)_m}{(q^{m+1+t};q)_{m+1}},
+ \qquad
+ V_N^*=\det_{0\le i,j<N}(v_{i+j}^*).
+\]
+His row transformation proves
+\[
+ \operatorname{ord}_q V_N^*\ge
+ \frac{N(N-1)(2N-1)}6
+\]
+for every $N\ge1$~\cite[Section~4]{zudilin2016}.  Tracking the first
+associated-graded coefficient shows that this estimate is always sharp.
+
+\begin{theorem}[sharp normalized Hankel order]
+\label{res:zudilin-sharp-qorder}
+For every $N\ge1$,
+\[
+ \operatorname{ord}_q V_N^*=\frac{N(N-1)(2N-1)}6,
+\]
+and the coefficient of the first nonzero monomial is
+\[
+ [q^{N(N-1)(2N-1)/6}]V_N^*
+   =\frac{(N!)^2(N+1)!}{2^N}.
+\]
+\end{theorem}
+
+\begin{proof}
+We sharpen the source row operation before taking the determinant.  For a
+formal series $H(X)=1+\sum_{r\ge1}a_rX^r$, let $c_{j,t}$ be the coefficient of
+tail state zero after $j$ applications of the associated-graded backward
+shift, starting in tail state $t$.  A positive state moves down one place with
+coefficient $-1$, while state zero emits state $s-1$ with coefficient $a_s$.
+Thus
+\[
+ c_{0,t}=\mathbf1_{t=0},\qquad
+ c_{j+1,t}=-c_{j,t-1}\ (t>0),\qquad
+ c_{j+1,0}=\sum_{s\ge1}a_sc_{j,s-1}.
+\]
+If $h_r=[X^r]H(X)^{-1}$, the reciprocal identity
+$h_{r+1}=-\sum_{s=1}^{r+1}a_sh_{r+1-s}$ gives, by induction,
+\[
+ c_{j,t}=(-1)^jh_{j-t}\quad(0\le t\le j),
+ \qquad c_{j,t}=0\quad(t>j).
+\]
+
+For the actual normalized summand, the ratio of consecutive moment indices
+has associated-grade factor
+\[
+ H_t(X)=\frac{(1-X)^3(1-q^tX)^2}
+ {(1-q^tX^2)(1-q^{t+1}X^2)}.
+\]
+At $q=0$ this is $(1-X)^3$ for $t\ge1$, while
+$H_0(X)=(1-X)^4/(1+X)$.  Consequently the $t\ge1$ states contribute
+$(-1)^j\binom{j-t+2}{2}$, and state zero contributes
+\[
+ (-1)^j\frac{(j+1)(j+2)(2j+3)}6.
+\]
+Summing $0\le t\le j$ gives the transformed-row leading term
+\[
+ D_jv_{j+\ell}^*
+ =(-1)^j\frac{(j+1)^2(j+2)}2
+   q^{j(j+1)/2+j\ell}
+  +O\!\left(q^{j(j+1)/2+j\ell+1}\right),
+\]
+where $D_j$ denotes the determinant-preserving source row operation.
+
+After extracting the row factors, the first coefficient matrix is
+$(q^{j\ell})_{0\le j,\ell<N}$.  Its Vandermonde determinant has order
+$N(N-1)(N-2)/6$; the row factors contribute
+$N(N-1)(N+1)/6$.  Their sum is the asserted
+$N(N-1)(2N-1)/6$.  The product of the row coefficients has absolute value
+\[
+ \prod_{j=0}^{N-1}\frac{(j+1)^2(j+2)}2
+ =\frac{(N!)^2(N+1)!}{2^N},
+\]
+and the row signs cancel the leading Vandermonde sign.  Hence the first
+coefficient is positive and has the displayed value.
+\end{proof}
+
+\paragraph{Consequence and evidence boundary.}
+The theorem closes one named possibility: the normalized determinant cannot
+decay faster through an unrecorded increase in formal $q$-order.  The same two formulas are the weight of the unique least-order Gram tuple $k_i=i$.  Formal
+order does not by itself bound the residual at a fixed $q$; the companion
+note \texttt{ErdosProblems/Erdos1049/ZudilinHankelPositiveMeasure.md} supplies a
+positive discrete measure and the two-sided estimate
+$\log(V_N^*/(C_N q^{B_N}))=O_q(N)$.  Neither statement extracts
+a denominator factor, improves the remaining height balance, or proves
+irrationality at $3/2$.  Lean checks the generic recurrence
+\lword{Erdos1049/AdelicHeightBridge.lean}{185}{hankelAssociatedCoeff_eq_reciprocal}{at all depths} and its actual positive/zero tail specializations
+\lword{Erdos1049/AdelicHeightBridge.lean}{388}{hankelAssociatedCoeff_zudilinPositiveTail_closed}{and} \lword{Erdos1049/AdelicHeightBridge.lean}{419}{hankelAssociatedCoeff_zudilinZeroTail_zero}{respectively}.
+The exact tail fan-in \lword{Erdos1049/AdelicHeightBridge.lean}{1454}{zudilinAssociatedTailRowCoeff_eq}{gives the row scalar, while the literal source recurrence} \lword{Erdos1049/AdelicHeightBridge.lean}{1206}{zudilinNormalizedTail_succ}{holds for every index}.
+The step is $1$ below degree $n+1$ \lword{Erdos1049/AdelicHeightBridge.lean}{1005}{coeff_zudilinNormalizedTailStepUnit_eq_zero_of_pos_lt}{with first coefficient $-5$ or $-3$} \lword{Erdos1049/AdelicHeightBridge.lean}{930}{coeff_zudilinNormalizedTailStepUnit_first}{and the exact operator recurrence} \lword{Erdos1049/AdelicHeightBridge.lean}{591}{zudilinBackwardShiftApply_succ}{holds on arbitrary sequences}.
+The first transformed row is complete in every column: \lword{Erdos1049/AdelicHeightBridge.lean}{1407}{zudilinTransformedNormalizedMoment_one_initialMonomial}{packages exact order $\ell+1$ and leading coefficient $-6$}.
+The exact source $D_j$ row matrix preserves every Hankel determinant
+\lword{Erdos1049/AdelicHeightBridge.lean}{700}{det_zudilinBackwardShiftedMomentMatrix}{in power series}; exact tails have unit first monomial
+\lword{Erdos1049/AdelicHeightBridge.lean}{1294}{coeff_zudilinNormalizedTail_leading}{and moments isolate the zero tail below degree $n+1$} \lword{Erdos1049/AdelicHeightBridge.lean}{1349}{coeff_zudilinNormalizedMoment_of_lt}{in every row}.
+Lean checks determinant noncancellation \lword{Erdos1049/AdelicHeightBridge.lean}{1567}{det_zudilinAssociatedLeadingMatrix}{at every rank}, exact order \lword{Erdos1049/AdelicHeightBridge.lean}{1727}{six_mul_order_det_zudilinAssociatedLeadingMatrix}{and the}
+factorial assembly \lword{Erdos1049/AdelicHeightBridge.lean}{1738}{zudilinSharpHankelOrderAndCoeff_algebraicAssembly}{plus the generic unique-minimum bridge} \lword{Erdos1049/AdelicHeightBridge.lean}{771}{order_det_eq_of_unique_minimizing_permutation}{for filtered determinants}.
+The serialized Lean replay and exact ranks $1$ through $7$ pass; only the filtered initial-monomial iteration for rows $j\ge3$ and all columns remains formal.
 
 \section{The sharp $41/65$ certificate}\label{sec:sharp}
 
@@ -528,6 +974,196 @@ Lean propositions.  Their role is exclusion: scalar content and the forced
 first-order border do not supply enough charge.  Higher residual valuations,
 determinant cancellation, a different integral model, and irrationality of
 $F(3/2)$ remain open.
+
+\section{Prime-supported rational gaps and two-row escape}
+\label{sec:prime-support}
+
+A second strand concerns the arithmetic conclusion of a rational linear-form
+argument.  Let \(a,q,A,B\in\Z\) with \(q>0\), and
+write
+\[
+  \Lambda_{A,B}(a/q)=B\frac aq-A .
+\]
+Here \(q\) is the denominator used to present the rational target, whereas
+\(B\) is a coefficient of an integral approximation row.  They play different
+roles.
+
+\begin{theorem}[prime-supported two-row gap]
+\label{res:prime-supported-two-selector-gap}
+Let \(\ell\) be prime and let
+\((A_1,B_1),(A_2,B_2)\in\Z^2\).  Suppose
+\[
+ \ell\nmid q,\qquad
+ \ell\mid B_1,\quad \ell\mid B_2,\qquad
+ \ell^2\nmid A_1B_2-A_2B_1 .
+\]
+Then
+\[
+ \left|\Lambda_{A_1,B_1}(a/q)\right|\ge\frac1q
+ \quad\hbox{or}\quad
+ \left|\Lambda_{A_2,B_2}(a/q)\right|\ge\frac1q .
+\]
+The constant \(1/q\) cannot be increased uniformly.
+\end{theorem}
+
+\begin{proof}
+If \(\ell\) divided both \(A_1\) and \(A_2\), then \(\ell^2\) would divide
+both \(A_1B_2\) and \(A_2B_1\), contrary to the determinant hypothesis.
+Choose \(i\in\{1,2\}\) with \(\ell\nmid A_i\).  If
+\(B_i a-A_iq=0\), primality and \(\ell\mid B_i\) would force
+\(\ell\mid A_i\) or \(\ell\mid q\), again a contradiction.  Hence the
+integer \(B_i a-A_iq\) is nonzero, and
+\[
+ \left|\Lambda_{A_i,B_i}(a/q)\right|
+ =\frac{|B_i a-A_iq|}{q}\ge\frac1q .
+\]
+For sharpness take \(a=1\), \(q=2\), \(\ell=3\),
+\((A_1,B_1)=(1,3)\), and \((A_2,B_2)=(2,3)\).  The determinant is \(-3\),
+while both absolute remainders are \(1/2\).
+\end{proof}
+
+\begin{corollary}[rational two-row no-double-decay]
+\label{res:rational-two-selector-no-double-decay}
+Let \((A_{1,n},B_{1,n})\) and \((A_{2,n},B_{2,n})\) be sequences of integral
+rows satisfying
+\[
+ A_{1,n}B_{2,n}-A_{2,n}B_{1,n}\ne0
+ \qquad\hbox{for every }n .
+\]
+Then the two sequences
+\[
+ \Lambda_{A_{1,n},B_{1,n}}(a/q),
+ \qquad
+ \Lambda_{A_{2,n},B_{2,n}}(a/q)
+\]
+cannot both tend to zero.
+\end{corollary}
+
+\begin{proof}
+At each \(n\), the nonzero exterior determinant prevents both rational linear
+forms from vanishing.  Every nonzero integral linear form at \(a/q\) has
+absolute value at least \(1/q\).  If both sequences tended to zero, then
+eventually both absolute values would be strictly smaller than \(1/q\), a
+contradiction.
+\end{proof}
+
+This corollary is an obstruction at rational targets, not an irrationality
+theorem.  An application must still construct noncollinear rows whose two
+analytic remainders tend to zero under the contrary rationality hypothesis.
+
+\begin{proposition}[one-row prime-supported gap]
+\label{res:prime-supported-one-row-gap}
+Let \(\ell\) be prime, \(\ell\mid B\), \(\ell\nmid A\), and
+\(\ell\nmid q\).  Then
+\[
+ \left|\Lambda_{A,B}(a/q)\right|\ge\frac1q .
+\]
+The constant is sharp.
+\end{proposition}
+
+\begin{proof}
+The numerator \(Ba-Aq\) cannot vanish: otherwise \(\ell\mid Aq\), and
+primality would contradict \(\ell\nmid A\) and \(\ell\nmid q\).  Its
+absolute value is therefore at least one.  Equality is attained by
+\(a=1,q=2,\ell=3,A=1,B=3\).
+\end{proof}
+
+\begin{corollary}[one-row prime-power-supported gap]
+\label{res:prime-power-supported-one-row-gap}
+Let \(\ell\) be prime, let \(r\ge1\), and suppose
+\(\ell^r\mid B\), \(\ell\nmid A\), and \(\ell\nmid q\).  Then
+\[
+ \left|\Lambda_{A,B}(a/q)\right|\ge\frac1q .
+\]
+\end{corollary}
+
+\begin{proof}
+Since \(r\ge1\), the prime \(\ell\) divides \(B\), and
+Proposition~\ref{res:prime-supported-one-row-gap} applies.
+\end{proof}
+
+The prime-power hypothesis records stronger denominator data but does not
+improve the sharp \(1/q\) conclusion.
+
+\begin{proposition}[real unit-determinant height--decay tradeoff]
+\label{res:unit-determinant-height-decay}
+Let \(F\in\R\), let \((A_1,B_1),(A_2,B_2)\in\R^2\), and let
+\(u,v,w,z\in\R\) satisfy \(|uz-vw|=1\).  Define the recombined rows by
+\[
+ (A'_1,B'_1)=u(A_1,B_1)+v(A_2,B_2),\qquad
+ (A'_2,B'_2)=w(A_1,B_1)+z(A_2,B_2).
+\]
+Suppose
+\[
+ |u|,|v|,|w|,|z|\le H
+\]
+and both recombined linear forms have absolute value at most
+\(\varepsilon\ge0\).  Then
+\[
+ |A_1B_2-A_2B_1|
+ \le 2H\varepsilon\bigl(|B_1|+|B_2|\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Writing \(e_i=B'_iF-A'_i\), cancellation of the \(F\)-terms gives
+\[
+ A'_1B'_2-A'_2B'_1=e_2B'_1-e_1B'_2.
+\]
+Its absolute value is at most
+\(\varepsilon(|B'_1|+|B'_2|)\).  The determinant of the recombined rows is
+\((uz-vw)(A_1B_2-A_2B_1)\), so its absolute value equals that of the original
+determinant.  Finally each new denominator coordinate is at most
+\(H(|B_1|+|B_2|)\), giving the displayed bound.
+\end{proof}
+
+The transformation is real and has determinant of absolute value one;
+integer-unimodular changes of basis are a special case.  Thus the proposition
+quantifies a genuine coefficient-height cost: a change of basis cannot make
+both remainders small without paying in the size of its coefficients.
+
+\begin{proposition}[zero-denominator selector collision]
+\label{res:zero-denominator-selector-collision}
+Let \(N\ge1\) and \(w_i\in(\Z/N\Z)^2\) for \(i<k\).  If every second
+coordinate of \(w_i\) is zero and
+\[
+ N<2^k,
+\]
+then two distinct binary selectors have the same vector sum.
+\end{proposition}
+
+\begin{proof}
+Map a binary selector to the first coordinate of its sum.  There are \(2^k\)
+selectors and only \(N\) possible values, so two distinct selectors collide.
+Their second-coordinate sums are both zero by hypothesis.
+\end{proof}
+
+The threshold is \(N<2^k\), rather than the ambient two-coordinate condition
+\(N^2<2^k\), because the denominator coordinate has already collapsed.
+
+\paragraph{Exact Lean identities.}
+The six source-current declarations corresponding to the results above are,
+in theorem order:
+\begin{flushleft}\small
+\path{rational_twoSelector_gap_of_prime_tail_support}\\
+\path{rational_twoSelector_not_both_tendsto_zero}\\
+\path{rational_integerLinearForm_gap_of_prime_support}\\
+\path{rational_integerLinearForm_gap_of_prime_power_support}\\
+\path{twoSelector_unimodular_height_decay_tradeoff}\\
+\path{zmod_binary_collision_of_zero_denominator_coordinates}
+\end{flushleft}
+The formal statements have the same hypotheses and conclusions as the
+displayed results.
+
+\paragraph{Exact remaining hypotheses.}
+\label{bdry:prime-support-remaining-hypotheses}
+Nothing in this section proves that the actual \(q\)-Ap\'ery rows contain a
+suitable prime in their denominator coordinates cofinally, proves the
+first-power determinant condition for a cofinal pair of rows, or supplies the
+analytic remainder estimates needed to invoke
+Corollary~\ref{res:rational-two-selector-no-double-decay}.  These are the exact
+remaining hypotheses between the proved arithmetic consequences and an
+irrationality proof at \(3/2\).
 
 \section{Integer scalar content is neutral}\label{sec:primitive}
 
@@ -752,18 +1388,21 @@ is simply coprime to \(6\).
 
 \begin{corollary}[no gain from integer scalar content or the stated common divisor at
 \(3/2\)]\label{res:nomult}
-Under the endpoint hypotheses of Proposition~\ref{res:commonmult}, neither
-integer scalar content of specialised rows nor a common divisor of the two specialised
-evaluations \(H_W(U)\) and \(H_W(V)\) can supply factors \(2\) and \(3\) by
-those mechanisms in the common-width endpoint architecture studied here.
+For nonzero integer scalar factors and positive compared heights, integer scalar
+multiplication leaves the ratio of a certified divisor to the matching absolute height
+unchanged.  The underlying homogeneous scaling identities continue to hold at scalar
+zero, but that ratio need not be defined there.  Under the endpoint hypotheses of
+Proposition~\ref{res:commonmult}, a common divisor of the unscaled evaluations
+\(H_W(U)\) and \(H_W(V)\) is coprime to \(6\).
 \end{corollary}
 
 \begin{proof}
-By Theorem~\ref{res:content} integer scalar content multiplies the analytic error and
-the exterior determinant, including the absolute determinant height, by exactly
-the factors it introduces, so a divisor obtained that way is paid for by the
-same factor in that height.  By Proposition~\ref{res:commonmult} an integer
-dividing both specialised evaluations is divisible by neither \(2\) nor \(3\).
+Assume the scalar factors are nonzero and the compared heights are positive, so the
+divisor/height ratio is defined.  By Theorem~\ref{res:content} integer scalar content
+multiplies the analytic error and the exterior determinant, including the absolute
+determinant height, by exactly the factors it introduces, so a divisor obtained that
+way is paid for by the same factor in that height.  By Proposition~\ref{res:commonmult}
+an integer dividing both specialised evaluations is divisible by neither \(2\) nor \(3\).
 \end{proof}
 
 One further consequence of Theorem~\ref{res:endpoints} is worth stating,
@@ -793,9 +1432,9 @@ representation.  It checks Proposition~3.6 under the displayed coprimality
 assumptions; it does not certify the later analytic deductions or
 Proposition~8.6.
 
-The methods that reduce denominators at integer bases---the factorial-coset
+The methods that reduce denominators at integer bases, the factorial-coset
 quotients of Rhin and Viola~\cite{rhinviola1996} and the order-twelve group and
-cyclotomic divisor of Zudilin~\cite{zudilin2004}---produce their gain as
+cyclotomic divisor of Zudilin~\cite{zudilin2004}, produce their gain as
 cyclotomic or factorial factors of the coefficient polynomials.
 Proposition~\ref{res:cyclounit} says that transporting such a factor through the
 homogenisation at $(3,2)$ contributes no power of $2$ and no power of $3$,
@@ -941,7 +1580,7 @@ $|A|\le |B|k$, contrary to the hypothesis.
 \begin{theorem}[B\'ezout--Pl\"ucker tail collapse]
 \label{res:plucker-collapse}
 Let $R_0$ be a commutative ring and let $w_n=(A_n,B_n)\in R_0^2$.  Suppose
-that every $B_n$ is a unit and every adjacent minor vanishes:
+that every row is unimodular ($u_n A_n+v_n B_n=1$ for some $u_n,v_n$) and every adjacent minor vanishes:
 \[
  A_nB_{n+1}-B_nA_{n+1}=0\qquad(n\ge0).
 \]
@@ -956,7 +1595,7 @@ width $2S+4R$.
 \end{theorem}
 
 \begin{proof}
-A unit second coordinate makes each row a unimodular anchor.  Vanishing of the
+A B\'ezout identity makes each row a unimodular anchor; a unit coordinate is the special case already recorded.  Vanishing of the
 next minor therefore writes the next row as a scalar multiple of the current
 one; induction places the entire tail on the line through $w_0$ and proves the
 pairwise-minor assertion.  A determinant-one B\'ezout shear sends $w_0$ to
@@ -969,11 +1608,14 @@ and pigeonhole gives the two selectors.
 \end{proof}
 
 \noindent The minor propagation is
-\lword{Erdos1049/BezoutPluckerJets.lean}{191}{adjacent_det_zero_forces_all_det_zero}{kernel checked};
+\lword{Erdos1049/BezoutPluckerJets.lean}{191}{adjacent_det_zero_forces_all_det_zero_of_isCoprime}{unimodular propagation};
 the one-dimensional collision after a B\'ezout shear is
 \lword{Erdos1049/BezoutPluckerJets.lean}{145}{binary_row_collision_of_anchor_det_zero}{kernel checked};
 and the explicit $2$/$3$-depth endpoint is
-\lword{Erdos1049/BezoutPluckerJets.lean}{249}{zmod_binary_tail_collision_of_two_three_depth}{kernel checked}.
+\lword{Erdos1049/BezoutPluckerJets.lean}{299}{zmod_binary_tail_collision_of_two_three_depth_of_isCoprime}{unimodular width}.
+The unit-coordinate wrappers remain as special cases.  Primitive integer rows
+are unimodular modulo every modulus, even when neither coordinate is a unit
+(the pair $(2,3)$ modulo $6$ is the local example).
 This conditional theorem is stronger than the ambient four-jet count only
 after its minor-vanishing hypothesis has been established.  No such all-tail
 hypothesis is proved here for an actual $q$-Ap\'ery or Zudilin family, and the
@@ -1322,7 +1964,9 @@ Bundschuh--V\"a\"an\"anen region
 (\lword{Erdos1049/ZudilinHeightRegion.lean}{91}{thirtyoneFour_outside_bundschuhVaananenHeightRegion}{checked}),
 so the $81/200$ inequality defines a strict set-theoretic enlargement of the
 earlier recorded logarithmic region.  Membership alone supplies no
-irrationality theorem for $31/4$.
+irrationality theorem; the theorem for $31/4$ comes from
+Section~\ref{sec:rational-base-irrationality}, which places $81/200$ below the
+homogenisation threshold $\theta^*$ and imports two lemmas of Zudilin.
 
 It still does not approach $3/2$.  The exact comparison
 \[
@@ -1413,6 +2057,12 @@ section is an irrationality measure.
 Problem~\#1049 remains open.  Theorem~\ref{res:jetkernel} suggests the following precise sufficient
 subproblem for one common-width additive architecture.  It is not asserted to
 be necessary for every proof of irrationality.
+Without a named source family, a primitive scaling, and an effective height
+bound, the unrestricted existence question is equivalent to irrationality of
+$F(3/2)$: Dirichlet supplies a small form, and every integer pair is a
+width-$W$ homogeneous evaluation.  Arbitrary polynomial lifts of already small
+rationals are therefore not a new producer.  The question below requires a
+literal source formula and those scaling data before asking for kernel escape.
 
 \begin{problem}[common-width simultaneous endpoint-jet construction]\label{prob:kernel}
 Exhibit an integer constant \(C\ge1\) and, for every sufficiently large
@@ -1421,7 +2071,8 @@ positive integer \(n\), positive integers \(W_n,R_n,S_n,M_n\) such that
  n^2\le W_n,R_n,S_n\le Cn^2,
  \qquad 4R_n+2S_n\le M_n\le Cn^2,
 \]
-together with polynomial pairs
+together with polynomial pairs coming from a named source family with an
+explicit coefficient-height bound after primitive normalisation,
 \((U_{n,j},V_{n,j})\in\Z[X]^2\) for \(0\le j<M_n\), each of degree at most
 the common declared width \(W_n\), whose specialised integer rows are
 primitive:
@@ -1837,18 +2488,37 @@ equality case for the exponent model & \lrefx{Erdos1049/HermitePadeNoGo.lean}{12
   \href{https://numdam.org/item/CM_1994__91_2_175_0.pdf}{\emph{Arithmetical
   investigations of a certain infinite product}},
   Compositio Math. \textbf{91} (1994), no.~2, 175--199.
+\bibitem{duverney1996} D.~Duverney,
+  \href{https://numdam.org/item/JTNB_1996__8_1_173_0.pdf}{\emph{\`A propos de la
+  s\'erie $\sum_{n=1}^{+\infty}x^n/(q^n-1)$}},
+  J. Th\'eor. Nombres Bordeaux \textbf{8} (1996), no.~1, 173--181.
+  Th\'eor\`eme~2, printed p.~174, gives irrationality of
+  $\sum_{n\ge1}(q^n-1)^{-1}$ for $q=r/s$ under
+  $\log|s|/\log|r|<\tfrac13(1-3/\pi^2)$.
 \bibitem{zudilin2004} W.~Zudilin,
   \href{https://geodesic.mathdoc.fr/articles/10.4064/aa111-2-4/}{\emph{Heine's
   basic transform and a permutation group for \(q\)-harmonic series}},
   Acta Arith. \textbf{111} (2004), no.~2, 153--164,
   doi:10.4064/aa111-2-4.
 \bibitem{zudilin2016} W.~Zudilin,
-  \href{https://arxiv.org/abs/1601.02688}{\emph{Irrationality of the generalized
-  \(q\)-logarithm}}, Res. Number Theory \textbf{2} (2016), Paper 24,
+  \href{https://arxiv.org/abs/1601.02688}{\emph{On the irrationality of
+  generalized \(q\)-logarithm}}, arXiv:1601.02688; Res. Number Theory
+  \textbf{2} (2016),
   doi:\href{https://doi.org/10.1007/s40993-016-0042-x}{10.1007/s40993-016-0042-x}.
   The remark that the results extend to non-integer \(p=r/s\), \(|p|>1\), under
   an assumption \(\log|r|>c\log|s|\) for a computable \(c>0\), is at the end of
-  the introduction; no value of \(c\) is computed there.
+  Section~2; no value of \(c\) is computed there, and the remark is made for the
+  generalized \(q\)-logarithm of that paper.
+\bibitem{mvz2006} T.~Matala-aho, K.~V\"a\"an\"anen and W.~Zudilin,
+  \emph{New irrationality measures for $q$-logarithms},
+  Math. Comp. \textbf{75} (2006), no.~254, 879--889.  Integer base throughout;
+  p.~880 records that the methods there do not sharpen the exponent of
+  \cite{zudilin2004}.
+\bibitem{chern2026} S.~Chern, L.~Jiu, S.~Li, and L.~Wang,
+  \href{https://arxiv.org/abs/2401.17220}{\emph{Leading coefficient in the
+  Hankel determinants related to binomial and $q$-binomial transforms}},
+  Adv. Appl. Math. \textbf{176} (2026), 103051,
+  doi:\href{https://doi.org/10.1016/j.aam.2026.103051}{10.1016/j.aam.2026.103051}.
 \bibitem{adamczewskibell2013} B.~Adamczewski and J.~P. Bell,
   \href{https://arxiv.org/abs/1303.2019}{\emph{A problem about Mahler
   functions}}, Ann. Sc. Norm. Super. Pisa Cl. Sci. \textbf{17} (2017), no.~4,

@@ -1,6 +1,12 @@
 % SPDX-FileCopyrightText: 2026 Will Cook
 % SPDX-License-Identifier: CC-BY-4.0
 %
+% PROVENANCE: superseded historical draft.  The published successor is
+% paper/erdos-249-binary-totient-series.tex in the public release repository
+% wcook04/plectis-lean-erdos249-257 at 8df0dda280 (release/final-20260905).
+% Every label in this file is also defined there; do not export or promote
+% from this copy.
+%
 % Standalone Erdős Problem Note for #249.  This deliberately repeats the
 % gateway paper's definitions and status boundary: independent readability is
 % more important than avoiding duplication.
@@ -27,8 +33,8 @@
 % its own status column.
 \documentclass[11pt]{article}
 \input{problem-note-preamble}
-\renewcommand{\commit}{99f4bf47422abbd8757cbb22b50ba079d764d3a7}
-\renewcommand{\commitshort}{99f4bf47422a}
+\renewcommand{\commit}{ca0e13f8acf5ccf48506e4bdb870953d3a0856fa}
+\renewcommand{\commitshort}{ca0e13f8acf5}
 \hypersetup{
   pdftitle={A basis for the 2-kernel of Euler's totient},
   pdfsubject={Erdős Problem Notes: Problem 249},
@@ -67,19 +73,38 @@ $j\ge0$ and $0\le r<2^j$, write $\ph_{j,r}(n)=\ph(2^jn+r)$.  We prove that
 is a $\Q$-basis for the span of the $2$-kernel of Euler's totient.  Thus the
 dyadic sections through level $e$ have rank exactly $2^e+1$ for every $e\ge1$,
 and two elementary identities generate all their rational linear relations.
-The basis and finite-rank statements are locally proved with novelty
-unassessed; the resulting infinite-dimensionality is also implied by Coons's
-non-$2$-regularity theorem.
+Independence is read off a finite evaluation matrix that is diagonal modulo a chosen prime; the same argument gives rank $k^e+1$ in every integer base $k\ge2$.  The resulting infinite-dimensionality is also implied by Coons's non-$2$-regularity theorem.
 
-A second unconditional theorem determines the positive rank-one
-M\"obius--Mersenne cone exactly.  Its quotient has the unique minimizer
+Separately, the least-residue series $A_m=\sum_{n}(\ph(n)\bmod m)\,2^{-n}$
+is irrational for every $m\ge3$.  At dyadic resolution $m=2^k$, a
+rational-valued map on residue classes of $\ph(n)$ has rational binary value
+if and only if it is constant on the even-indexed classes; the irrationality
+half is locally proved, the converse is an ordinary identification of the
+recurrent support.  Even-indexed means residue classes of $\ph(n)$ modulo
+$2^k$, not the odd-residue kernel sections of the basis above.  Neither
+statement decides the unreduced series $\Stot$.
+
+A second unconditional theorem determines the monomial rank-one M\"obius--Mersenne quotients $Q(e,Y)$.  The unique minimizer is
 $(e,Y)=(1,5)$; every admissible quotient and every nonempty finite positive
-mixture exceeds $\Theta_2=\Stot-1/2$ by more than $21/320$.  This rules out the
-complete positive rank-one and positive direct-sum mechanism, but not signed
-cancellation or genuinely coupled higher-rank approximants.
+mixture exceeds $\Theta_2=\Stot-1/2$ by more than $21/320$.  This determines the monomial quotients $Q(e,Y)$ and their positive finite averages; signed coefficients and coupling before the quotient remain outside the statement.
 
-These structural theorems do not settle Erd\H{o}s Problem~\#249, which asks
-whether
+The closest attack-changing result for the open series is a binary-cyclotomic
+anchor theorem.  Clean anchors and unbounded prime-divisor support occur
+unconditionally in the actual binary layers, but that support can coexist with
+the modular period lock forced by hypothetical rationality.  Thus prime
+production is not the missing step: one must produce cofinal phase
+discrepancy.  The full-depth amplifier adds that once a single nonintegral seed
+exists on a ray, eventual two-syndetic full-depth certificates follow.  It
+removes depth as a cost without producing the first seed.
+
+On the size of a displayed denominator the current unrestricted floor is
+$q\ge2^{39989}$ and $q>10^{12038}$, from $23438$ certified continued-fraction partial
+quotients computed from an $80000$-bit exact rational bracket.  Bit length and decimal digit count are not those exponents, and $10^{12038}<2^{39990}<10^{12039}$, so the two comparisons are not a converted chain.  That is an exact computation and not a Lean theorem.  The Lean-checked Farey exclusion
+below, $q>7.96\times10^{34}$, is the formalised instance of a weaker family;
+both are functions of how many binary digits were committed rather than
+measures of how far the problem has moved.
+
+These advances do not settle Erd\H{o}s Problem~\#249, which asks whether
 \[
   \Stot=\sum_{n\ge1}\frac{\ph(n)}{2^n}
 \]
@@ -91,8 +116,9 @@ prove the exact criterion
   \quad\Longleftrightarrow\quad
   \forall a_0\ \exists a\ge a_0, R_a\notin\Z
 \]
-Canonical Mersenne-residue and full-depth forms sharpen this equivalence, but
-none supplies the needed nonintegral seed. Two quantitative routes also remain
+The actual-LCM and canonical Mersenne formulas are exact coordinates for that
+same unresolved burden, not stronger progress than the anchor/no-go and
+amplification theorems above. Two quantitative routes also remain
 conditional: one separates the actual LCM orbit from the integers; the other
 controls four terms in a first-harmonic decomposition. Their cofinal hypotheses
 are unproved. The exact open boundary is therefore arithmetic control of the
@@ -104,6 +130,10 @@ actual tail, not the finite-rank structure of the totient's dyadic sections.
 for the $2$-kernel of Euler's totient, so the sections through level $e$
 have rank exactly $2^e+1$.  The positive rank-one
 M\"obius--Mersenne cone also has an exact unique minimizer and a uniform gap.
+\textbf{Anchor and no-go advance.} The actual binary-cyclotomic layers have
+clean anchors and unbounded prime-divisor support, but support alone can remain
+period-locked; a separate amplifier removes full depth as a cost once a seed
+exists.
 \textbf{Series reduction.} Irrationality is equivalent to nonintegrality of
 the actual LCM-tail differences cofinally.  \textbf{Open boundary.} The basis
 theorem and cone obstruction do not supply even one required nonintegral seed.
@@ -127,10 +157,7 @@ The principal unconditional result is structural: the two zero-residue
 sections $\ph_{0,0}$ and $\ph_{1,0}$, together with the odd-residue sections,
 form a rational basis, and the two reduction identities below generate every
 rational relation among the sections.  It gives exact finite-level rank but
-no rationality-to-finite-rank bridge.  The positive rank-one
-M\"obius--Mersenne cone is also determined sharply: one unique minimizer,
-the uniform $21/320$ floor, the $1/16$ versus $1/15$ boundary, and closure
-under arbitrary finite positive mixing.
+no rationality-to-finite-rank bridge.  The monomial rank-one M\"obius--Mersenne quotients $Q(e,Y)$ are also determined sharply: one unique minimizer, the uniform $21/320$ floor, the $1/16$ versus $1/15$ boundary, and closure under arbitrary finite positive averages of those quotients.
 
 The closest results concerning the open series are exact reformulations and
 conditional criteria.  The actual power-two LCM orbit gives a cofinal
@@ -166,7 +193,7 @@ the four odd residues $r=1,3,5,7$ are reduced by neither; numerically
 $\ph_{3,4}(1)=\ph(12)=4=2\ph(3)=2\ph_{1,1}(1)$.  So beyond $\ph_{0,0}$ and
 $\ph_{1,0}$ each level contributes only its odd residues, and the count
 through level $e$ is $2+\sum_{j=1}^{e}2^{j-1}=2^e+1$; \ref{res:rank} says that
-count is the exact dimension.
+count is the exact dimension.  Independence is the finite evaluation matrix of Section~\ref{sec:rank}, diagonal modulo a prime.
 
 Two objects built from $\Stot$ recur below.  The \emph{scaled tail}
 $R_N=\sum_{m\ge1}\ph(N+m)/2^m$ is $2^N$ times the part of the series beyond
@@ -278,7 +305,7 @@ of $\Q^{\N}$ as $\Ker_2(\ph)$; so $\mathcal B$ is a basis of that span, which
 is therefore infinite-dimensional.  Since the reductions make every remaining
 section a rational multiple of a member of $\mathcal B$, the $\Q$-linear
 relations among dyadic sections of $\ph$ are exactly those the reductions
-generate --- a one-line consequence of the checked statements, not a further
+generate, a one-line consequence of the checked statements, not a further
 one.
 {\footnotesize\emph{Checked:}
 \mword{Erdos249257/TotientMahlerDefect.lean}{1265}{linearIndependent_oddCoreTotientKernelFamily}{independence},
@@ -309,6 +336,24 @@ while the canonical-family rank is the intermediary because even residues reduce
 the odd-core family.
 \mword{Erdos249257/TotientMahlerDefect.lean}{1145}{not_finiteDimensional_span_fullTotientKernel}{infinite-dimensionality directly}.}
 
+\item\label{res:residueseries} \stag{unconditional progress}
+\textbf{Least-residue series and even-indexed dyadic classification.}
+For every $m\ge3$ the series $A_m=\sum(\ph(n)\bmod m)\,2^{-n}$ is
+irrational.  At $m=2^k$ ($k\ge1$), a rational-valued letter map on residues
+of $\ph$ has rational binary value if and only if it is constant on the
+even-indexed residue classes.  The forward half is Lean-checked; the converse
+is the ordinary identification that every even residue is recurrent at dyadic
+moduli.  Even-indexed means classes of $\ph(n)$ modulo $2^k$; it is not the
+odd-residue indexing of \ref{res:basis}.  An ordinary all-modulus
+classification (rational iff constant on the recurrent set $\mathcal R_m$)
+is recorded separately and does not imply irrationality of $\Stot$.
+{\footnotesize\emph{Checked:}
+\lword{Erdos249/ResidueClassTotientSeries.lean}{518}{irrational_totientObservable_of_isolated_residue}{pulse consumer without a unit centre},
+\lword{Erdos249/ResidueClassTotientSeries.lean}{553}{irrational_totientObservable}{unit-centre special value},
+\lword{Erdos249/ResidueClassTotientSeries.lean}{569}{fixed_resolution_observable_irrational}{dyadic forward half},
+\lword{Erdos249/ResidueClassTotientSeries.lean}{595}{residue_series_irrational}{$A_m$ for $m\ge3$}.
+\emph{Registry:} \texttt{residue\_class\_totient\_series\_irrational}.}
+
 \item\label{res:rankonefloor} \stag{unconditional progress}
 \textbf{Sharp positive rank-one and direct-sum floor.}  Put
 \[
@@ -318,6 +363,9 @@ the odd-core family.
  \frac{\bigl(\sum_{d=1}^{Y}\mu(d)/(2^d-1)^{e+2}\bigr)^2}
       {\sum_{d=1}^{Y}\mu(d)/(2^d-1)^{2e+2}}.
 \]
+The identity $\Stot=\sum_{d\ge1}\mu(d)/(2^d-1)^2+1/2$ is Steve Fan's, posted on
+the problem's discussion page on 16 May 2026~\cite{fan2026totient}; the object
+$\Theta_2$ is his and only the extremal calculation below is ours.
 For every $e\ge1$ and $Y\ge4$, the quotient $Q(e,Y)$ is uniquely minimized
 at $(1,5)$ and satisfies $Q(e,Y)-\Theta_2>21/320>1/16$.  The stronger
 unit-fraction floor $1/15$ fails already at $(1,5)$.  Every nonempty finite
@@ -335,7 +383,7 @@ and genuinely coupled higher-rank kernels remain outside the theorem.
 \lword{Erdos249/RankOneSharpFloor.lean}{655}{positive_direct_sum_sub_theta_two_gt_twentyOne_div_threeTwenty}{positive direct sums},
 \lword{Erdos249/RankOneSharpFloor.lean}{693}{primitive_form_abs_gt_twentyOne_div_threeTwenty}{rational linear-form obstruction}.}
 
-\item\label{res:index} \stag{formalised here}
+\item\label{res:index} \stag{proved here}
 \textbf{Canonical all-base index and unique coordinates.}  For every integer
 $k\ge2$ and level $e$, the two zero-residue channels are followed at level
 $j+1$ by the unique coordinates
@@ -347,19 +395,18 @@ $2+\sum_{j<e}k^j(k-1)=k^e+1$ elements.  This is the concrete quotient and
 nonzero-last-digit mechanism behind the all-base rank statement: it counts
 the canonical candidates and proves the reduction coordinates, but it does
 not prove their linear independence.
-{\footnotesize\emph{Checked:}
-\mword{Erdos249257/TotientKernelIndex.lean}{124}{totientKernelSectionIndex_spec}{coordinate specification},
-\mword{Erdos249257/TotientKernelIndex.lean}{213}{existsUnique_totientKernelResidueAtLevel}{unique representation},
-\mword{Erdos249257/TotientKernelIndex.lean}{241}{card_totientKernelSectionLevel}{level count},
-\mword{Erdos249257/TotientKernelIndex.lean}{277}{card_totientKernelIndex}{full index count}.}
+{\footnotesize\emph{Evidence:}
+\mword{Erdos249257/AllBaseTotientKernel.lean}{852}{card_allBaseCanonicalIndex}{index count},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{644}{linearIndependent_totientAffineForms}{independence}.
+The count is a live Lean theorem for $e\ge1$; independence is unconditional in the same module.  Martin remains prior art, not a Lean dependency.}
 
 \item\label{res:denominator} \stag{formalised here}
 \textbf{Denominator exclusion, sharp for its window.}  If $\Stot=a/q$ with
 $a\in\Z$ and $q\ge1$ then
 $q>79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053\approx7.96\times10^{34}$.
-The constant is optimal for the window that produces it --- the window here is
+The constant is optimal for the window that produces it, the window here being
 the pair $(N,K)=(1,240)$, meaning $240$ committed binary digits of the series
-shifted by one --- in the sense that the next integer up is the exact first
+shifted by one, in the sense that the next integer up is the exact first
 denominator at which that window's certificate fails.  The method is the
 classical Farey mediant argument (Section~\ref{sec:denominator}).
 {\footnotesize\emph{Checked:}
@@ -372,8 +419,8 @@ classical Farey mediant argument (Section~\ref{sec:denominator}).
 \textbf{Rank lower bound for a rational scaled-tail sequence.}  If $\Stot$
 were rational then some integral scaled-tail sequence $u$ for the coefficients
 $\ph$, with positive multiplier, would have for \emph{every} $e$ dyadic
-sections through level $e$ --- formed from $u$ exactly as the $\ph_{j,r}$ are
-formed from $\ph$ --- spanning a space of dimension at least $2^e-1$.  The
+sections through level $e$, formed from $u$ exactly as the $\ph_{j,r}$ are
+formed from $\ph$, spanning a space of dimension at least $2^e-1$.  The
 same lower bound holds for every positive-multiplier integral scaled-tail
 sequence.  This statement is specific to that
 binary scaled-tail representation; it does not constrain arguments formulated
@@ -632,8 +679,8 @@ unbounded, hence not eventually periodic, so \#249 is outside this class.
 
 \item\label{res:primindex} \stag{proved here}
 \textbf{No fixed common denominator clears the normalised weight.}  For every integer
-$D\ge1$ some $n\ge1$ has $D\cdot\Aw(n)/n\notin\Z$ --- for $D=6$ at the prime
-$n=7$, where $\Aw(7)/7=5/7$ --- and any $D$ clearing every coordinate up to a
+$D\ge1$ some $n\ge1$ has $D\cdot\Aw(n)/n\notin\Z$, for $D=6$ at the prime
+$n=7$, where $\Aw(7)/7=5/7$, and any $D$ clearing every coordinate up to a
 horizon $N\ge4$ is divisible by an explicit two-tier primorial ($4$ at $p=2$,
 $p^2$ when $p^2\le N$, else $p$).  No argument that clears the coordinates
 $\Aw(n)/n$ by a single positive integer valid at all $n$ can therefore
@@ -912,33 +959,17 @@ of a search, not a proof of non-existence, and no priority is claimed.
 The next subsection gives an independent, constructive proof of the same
 linear independence.
 
-\subsection{Parity-separated evaluation matrices}
+\subsection{Independence by a diagonal evaluation matrix}
 
-\ref{res:rank} is proved by exhibiting a square matrix of values of the
-sections whose determinant is nonzero, and the linear algebra at its centre is
-simpler than the arithmetic construction that feeds it.  We give the linear
-algebra first, then the arithmetic input it consumes.
+\ref{res:rank} is proved by exhibiting a square evaluation matrix that is diagonal and invertible modulo a chosen prime.  The arithmetic construction is the whole argument.
 
-Evaluate the sections at one point apiece to get a square matrix $M$, and
-suppose each column $j$ admits a fixed power $2^{d_j}$ dividing every entry of
-that column such that, after dividing the column through by it, the diagonal
-entry is odd and every off-diagonal entry is even; call such an $M$ a
-\emph{parity-separated evaluation matrix}.  The normalised matrix is then the
-identity modulo $2$; its determinant is odd, hence nonzero, and the sections are
-independent
-(\mword{Erdos249257/TotientMahlerDefect.lean}{823}{paritySeparatedMatrix_det_ne_zero}{checked}).
+Consider finitely many affine forms $L_i(n)=a_in+b_i$ with positive integer slopes and $a_ib_j\neq a_jb_i$ for $i\neq j$.  Write $g_i=\gcd(a_i,b_i)$ and $A_i(n)=(a_in+b_i)/g_i$.  Choose a prime $\ell$ avoiding every slope, every $g_i\ph(g_i)$, and every nonzero determinant $a_ib_j-a_jb_i$.  For a fixed row $i$ and each $j\neq i$, choose a distinct prime $q_{ij}\equiv1\pmod{\ell}$ avoiding the same finite set of divisors, and impose $L_j(n)\equiv0\pmod{q_{ij}}$ together with $A_i(n)\equiv2\pmod{\ell}$.  The Chinese remainder theorem combines the conditions; Dirichlet's theorem then supplies arbitrarily large $n$ at which $p=A_i(n)$ is prime and $p\nmid g_i$.  The diagonal value is $\ph(g_i)(p-1)\not\equiv0\pmod{\ell}$; each off-diagonal value is divisible by $\ell$.  One choice per row produces an evaluation matrix that is diagonal and invertible modulo $\ell$, so the rational determinant is nonzero
+(\mword{Erdos249257/AllBaseTotientKernel.lean}{644}{linearIndependent_totientAffineForms}{checked}).
 
-Producing evaluation points with exactly that parity pattern is what the
-arithmetic input is for, and it is the harder half.  The Chinese remainder
-theorem together with Dirichlet's theorem on primes in arithmetic progressions
-makes one of the evaluated affine values prime, which fixes the exact power of
-$2$ dividing the diagonal entry, while every other value receives a fresh
-prime divisor congruent to $1$ modulo a large power of two, which supplies the
-one extra factor of two that the off-diagonal entries need
-(\mword{Erdos249257/TotientMahlerDefect.lean}{882}{exists_separatedMinorCertificate_totientAffineOddFamily}{checked}).
-Even residues never enter, because the second reduction has already carried
-them to odd residues at lower levels
-(\mword{Erdos249257/TotientMahlerDefect.lean}{169}{totientKernel_even_residue_reduce}{checked}).
+Restricting a finite relation among members of $\mathcal B$ to $n=2m+1$ makes the two zero-residue sections proportional and leaves pairwise nonproportional odd-residue forms.  The matrix argument eliminates every odd-residue coefficient; evaluation at $n=2$ separates the remaining pair, since $\ph(2)=1$ and $\ph(4)=2$.  Even residues never enter, because the second reduction has already carried them to odd residues at lower levels
+(\mword{Erdos249257/TotientMahlerDefect.lean}{169}{totientKernel_even_residue_reduce}{checked}).  The same construction, with $k\nmid r$ rather than coprimality, is the independence half of Theorem~\ref{thm:kkernelrank}.  A dyadic specialisation using a power of two in place of $\ell$ is recorded as a parity-separated certificate
+(\mword{Erdos249257/TotientMahlerDefect.lean}{823}{paritySeparatedMatrix_det_ne_zero}{checked},
+\mword{Erdos249257/TotientMahlerDefect.lean}{882}{exists_separatedMinorCertificate_totientAffineOddFamily}{checked}).
 
 \ref{res:basis} then needs only two further steps, and both are short.  Linear
 independence is a property of finite subfamilies, so the level-$e$ statement,
@@ -1001,7 +1032,34 @@ excluded.  A reader who regards an explicit Farey exclusion as routine is not
 in disagreement with this note.  \ref{res:basis}, not \ref{res:denominator},
 is where we would ask a sceptical reader to look.
 
-The bound transfers to the coprimality form of Section~\ref{sec:family} with
+\paragraph{The unrestricted floor.}
+A certified continued-fraction prefix gives a larger exclusion by the same
+kind of bookkeeping.  If $\Stot$ were rational its expansion would terminate
+and its reduced denominator would be that of the last convergent, so a
+certified prefix of length $n+1$ forces $q\ge q_{n+1}$.  Certified here means
+that each partial quotient is emitted only when both endpoints of an exact
+rational bracket $lo\le2^B\Stot\le hi$ agree on its integer part, so no
+quotient is read off a float and the prefix stays genuine even if $\Stot$ is
+rational.  Bracketing by the exact prefix
+$lo=\sum_{n\le B}\ph(n)2^{B-n}$ with the omitted tail under
+$\sum_{n>B}n2^{-n}=(B+2)2^{-B}$, and taking $B=80000$ bits, certifies $23438$
+partial quotients and gives
+\[
+  q\ge2^{39989}\qquad\text{and}\qquad q>10^{12038},
+\]
+with the separation $|q_n\Stot-p_n|>0$ verified against the bracket.  At
+$B=40000$ the same computation gives $10^{6018}$, so the printed figure is a
+function of the bit budget.  This is an exact computation and is not
+formalised; the Lean-checked exclusion of this section is the Farey instance
+above.  The two are complementary rather than nested: the dyadic-family
+exclusion with margin reaches denominators near $2^{200000}$ inside a
+restricted family, while the continued-fraction bound excludes every
+denominator below $10^{12038}$ without restriction.  The certified quotients
+are Diophantine-generic, matching L\'evy's constant to $0.33$ percent with
+largest partial quotient $29403$, so the series offers no anomalous convergent
+to test the Mersenne machinery against.
+
+The Farey bound transfers to the coprimality form of Section~\ref{sec:family} with
 the constant halved: the visible-coprime-pair series has no representation
 $a/d$ with $d\le39\,819\,823\,323\,350\,687\,661\,677\,887\,437\,915\,526$
 (\mword{Erdos249257/CertificateKernel.lean}{18572}{tsum_visible_coprime_pairs_ne_int_div_of_den_le_39819823323350687661677887437915526}{checked}),
@@ -1243,7 +1301,7 @@ whose forcing letters lie in the ideal generated by $\ph(H)$, which reproduces
 the true totient differences at $t-2$ prescribed indices, and which every
 finite integer shift polynomial carries to a pair with the same coboundary
 form, the same ideal memberships and an $\ell^1$-weight bound.  It does close
-that hypothesis class.  Two limits.  The witness is a spike --- its state is
+that hypothesis class.  Two limits.  The witness is a spike, whose state is
 $-\ph(H)$ at $t-2$ points and zero elsewhere, so it stays uniformly bounded
 while the strip bounds it respects grow, and the construction is cheap for
 that reason.  And the shifted pairs are not asserted to be nonzero, so an
@@ -1258,51 +1316,40 @@ Each states its unproved hypotheses explicitly.
 
 \paragraph{A prime-orbit sufficient condition.}
 The hypothesis
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{157}{DTWNaturalPrimeTailOrbitStrictGap}{asks}
+\lword{Erdos249/TotientStrictPrimeEscape.lean}{18}{DTWNaturalPrimeTailOrbitStrictGap}{asks}
 for cofinally many primes $p$ at which the first tail-orbit exponential has
 real part strictly below $9/10$.  Granting it,
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{485}{naturalPivotPointEscape_of_naturalPrimeTailOrbitStrictGap}{a positive adaptive truncation budget}
+\lword{Erdos249/TotientStrictPrimeEscape.lean}{27}{naturalPivotPointEscape_of_naturalPrimeTailOrbitStrictGap}{a positive adaptive truncation budget}
 follows, and then
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{524}{irrational_totient_series_of_naturalPrimeTailOrbitStrictGap}{$\Stot$ is irrational}.
+\lword{Erdos249/TotientStrictPrimeEscape.lean}{66}{irrational_totient_series_of_naturalPrimeTailOrbitStrictGap}{$\Stot$ is irrational}.
 The $9/10$ hypothesis is weaker than the earlier $4/5$ hypothesis, but no
-instance of this cofinal hypothesis is proved.
+instance of this cofinal hypothesis is proved.  Those three declarations are
+the entire formal content of the module; everything else in this paragraph is
+ordinary mathematics, and is labelled as such.
 
-The companion block branch is recorded in the same family: a nonpositive
-phase-density predicate
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{35}{TotientTailOrbitNonpositiveBlockDensity}{density hypothesis}
-implies the uniform block-gap predicate
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{25}{TotientTailOrbitBlockGap}{block-gap hypothesis}
-by the checked bridge
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{45}{tailOrbitBlockGap_of_nonpositiveBlockDensity}{density-to-gap implication}.
-Both questions reduce to one exact phase
-dynamics: if
+The remainder of this branch is elementary phase dynamics.  If
 \(\zeta_{h,M}=\operatorname{tailOrbitFirstExp}(h,M)\), then
 \[
   \zeta_{h,M+1}=\zeta_{h,M}^{\,2}
 \]
 because the integer increment in the tail-difference recurrence disappears
-after exponentiation
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{167}{tailOrbitFirstExp_succ}{exact squaring recurrence}.
-Iteration gives the closed form
+after exponentiation.  Iteration gives the closed form
 \[
   \zeta_{h,M+k}=\zeta_{h,M}^{\,2^k},
   \qquad \zeta_{h,N}=\zeta_{h,0}^{\,2^N},
 \]
-and the formal prime-gap predicate is exactly the same $9/10$ test on these
-initial-phase iterates along the shifted primes
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{191}{tailOrbitFirstExp_add}{iterate formula},
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{201}{tailOrbitFirstExp_eq_initial_pow_two}{initial-phase normal form},
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{278}{naturalPrimeTailOrbitStrictGap_iff_initial_phase}{initial-phase equivalence}.
+and the prime-gap predicate is exactly the same $9/10$ test on these
+initial-phase iterates along the shifted primes.  None of these three
+observations is formalised.
 
-The same dynamics gives a sharp obstruction: if an iterate is a dyadic root of
+The same dynamics gives an obstruction: if an iterate is a dyadic root of
 unity, repeated squaring reaches the absorbing phase $1$, so the cofinal strict
-gap is impossible
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{322}{not_naturalPrimeTailOrbitStrictGap_of_dyadic_root}{dyadic-root obstruction}.
-There is also a precise conditional bridge from phase information to the
-prime-index hypothesis: cofinally many nonpositive phases at shifted prime
-indices imply the strict prime-orbit gap
-\lword{Erdos249/TotientStrictPrimeEscape.lean}{465}{naturalPrimeTailOrbitStrictGap_of_cofinal_nonpositive_prime_shift}{prime-alignment implication}.
-The bridge does not supply those prime-aligned visits.
+gap is impossible.  A conditional bridge from phase information to the
+prime-index hypothesis is plausible in the same coordinates, namely that
+cofinally many nonpositive phases at shifted prime indices would imply the
+strict prime-orbit gap; it is recorded here as an expectation and is neither
+proved in this paper nor formalised, and in any case it would not supply those
+prime-aligned visits.
 These are classification and obstruction statements for one conditional
 family, not a classification of the actual initial phase.
 This identifies the missing input as phase-density or prime-index supply for
@@ -1448,11 +1495,9 @@ The certificate is decidable at each $t$, and is kernel-checked at the $28$
 listed scales between $t=1$ and $t=64$
 (\mword{Erdos249257/DiagonalPincerCertificatesT64.lean}{1933}{diagonalPincerCertificateScalesThroughT64}{list},
 \mword{Erdos249257/DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{verification}).
-The current pinned source strengthens that historical list to every $t\le82$,
-with no gaps
-(\lword{Skip/LadderT67.lean}{71264}{exists_diagonalKill_le_82}{checked}).
-The theorem through $t=82$ supplies no instance at $t=83$ and does not
-discharge the cofinal quantifier.
+The $28$ certified scales through $t=64$ are the whole of the checked
+coverage; no scale beyond $64$ is verified, and the finite list discharges no
+part of the cofinal quantifier.
 
 The cyclotomic form exposes more arithmetic structure.  Write
 $C(n)=|\Phi_n(2)|$.
@@ -1491,7 +1536,7 @@ law.  This is a necessary-state theorem under hypothetical rationality: it
 neither constructs a rational example nor proves that the rationality
 hypothesis is consistent, and Erd\H{o}s \#249 remains open.
 
-\subsection{Exact full-depth reduction and a stronger sufficient condition}
+\subsection{Exact full-depth equivalences}
 
 The earlier condition
 \lword{Erdos249/PeriodMultipleEscape.lean}{441}{ApFullDepthEscape}{ApFullDepthEscape}
@@ -1627,8 +1672,9 @@ For a separate denominator-compression argument, define the M\"obius--Mersenne
 ladder
 \[
  \Theta_r=\sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^r},
- \qquad \Theta_2=\Stot-\frac12.
+ \qquad \Theta_2=\Stot-\frac12,
 \]
+whose second rung is Fan's identity~\cite{fan2026totient}.
 Result~\ref{res:rankonefloor} excludes the positive rank-one family by an
 exact extremal calculation, not a coarse interval screen.  The unique minimum
 is $(e,Y)=(1,5)$, and every admissible quotient, hence every nonempty finite
@@ -1659,25 +1705,10 @@ separated from $\Theta_2$ by the uniform gap.
 \subsection{Independent extension}
 
 This subsection previously posed the odd-prime kernel dimension as an open
-problem.  It is now a theorem, and for every integer base rather than for odd
-primes only.  The statement below combines Lean-checked arithmetic, spanning,
-and conditional-rank layers with a paper-level independence argument.  Lean proves the zero-residue
-relation
-(\mword{Erdos249257/TotientKernelReduction.lean}{60}{totient_pow_mul_eq}{checked})
-and the exact division-free composite-base reduction
-(\mword{Erdos249257/TotientKernelReduction.lean}{117}{totient_pow_mul_affine_gcd_cross_eq}{checked}).
-It also proves unique quotient/nonzero-digit coordinates for each admissible
-fixed-level residue and that the resulting finite index has cardinality
-$k^e+1$.  The new conditional layer proves that the canonical family spans
-the complete truncation and that its linear independence implies exact rank
-$k^e+1$.  These are respectively
-\texttt{span\_allBaseTotientKernelThroughLevelFamily\_eq\_canonical} and
-\texttt{finrank\_allBaseTotientKernelThroughLevelFamily\_eq\_of\_linearIndependent}
-in \texttt{Erdos249257/TotientKernelConditional.lean}; their immutable source
-links are added after the module lands in the paper's pinned snapshot.
-The antecedent of the second statement is explicit and is not discharged in
-Lean.  The paper obtains it from Martin's external positive-density theorem
-through the elementary linear-independence consequence recorded above.
+problem.  It is now a theorem, for every integer base rather than for odd
+primes only, and the rank, basis, and relation dimension are Lean-checked
+unconditionally.  Martin's positive-density theorem remains prior art for the
+independence conclusion; it is not a Lean dependency.
 
 \begin{theorem}[exact rank of every totient $k$-kernel truncation]
 \label{thm:kkernelrank}
@@ -1704,22 +1735,29 @@ $t=\max\{s:k^s\mid r\}\ge1$ and $k\nmid u$, then
 
 The checked composite-base statement is deliberately cross-multiplied by
 $\ph(\gcd(k,u))$; the displayed scalar is the equivalent paper-level
-normalisation after exact division.  Lean also checks that this scalar is
-nonzero and gives the exact one-step functional reduction
-\texttt{allBaseTotientKernelSeq\_mul\_residue\_step} in
-\texttt{Erdos249257/TotientKernelConditional.lean}.
-Thus the zero channel, arithmetic reduction, finite-index/cardinality,
-spanning, and conditional-rank layers have kernel receipts.  Martin remains
-the external authority for the linear-independence input and hence for the
-unconditional basis and rank conclusion of Theorem~\ref{thm:kkernelrank}.
+normalisation after exact division.  Lean checks the zero-residue relation,
+the one-step reduction, spanning of the complete truncation, affine-form
+independence, exact rank $k^e+1$, an explicit basis, and the relation-module
+dimension in \texttt{Erdos249257/AllBaseTotientKernel.lean}:
+\mword{Erdos249257/AllBaseTotientKernel.lean}{767}{allBaseTotientKernel_zero_residue}{zero residue},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{783}{allBaseTotientKernel_step}{one-step reduction},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{957}{span_allBaseThroughLevelFamily_eq}{span},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{644}{linearIndependent_totientAffineForms}{affine independence},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{1231}{finrank_allBaseTotientKernel_eq}{rank},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{1248}{allBaseTotientKernelBasis}{basis},
+\mword{Erdos249257/AllBaseTotientKernel.lean}{1344}{finrank_allBaseRelationModule_eq}{relation dimension}.
+The older conditional module \texttt{TotientKernelConditional.lean} is not
+the present authority.  Martin's Theorem~1 still subsumes the independence
+conclusion as prior art and is not formalised; it is not a remaining Lean gap.
 
 The selection condition is $k\nmid r$, not $\gcd(k,r)=1$; for composite $k$ a
 basis residue may share prime factors with $k$.  Independence is obtained by
 restricting to $n=km+1$, where the surviving channels become the affine forms
 $L_0(m)=km+1$ and $L_{j,r}(m)=k^{j+1}m+(k^j+r)$ with $k\nmid r$.  These have
-positive slopes and satisfy $a_ib_j\neq a_jb_i$, so Martin's
-Theorem~1~\cite{martin-phi-inequalities} applies through the linear-independence
-consequence recorded in the prior-work subsection.  The two zero-residue channels
+positive slopes and satisfy $a_ib_j\neq a_jb_i$.  Martin's
+Theorem~1~\cite{martin-phi-inequalities} subsumes the independence conclusion
+as prior art.  Lean discharges it by the finite-determinant row
+\texttt{linearIndependent\_totientAffineForms}, not by importing Martin's density theorem.  The two zero-residue channels
 are proportional on that progression and are separated afterwards by evaluating
 at $n=k$, using $\ph(k^2)=k\ph(k)$ and $\ph(k)<k$.
 
@@ -1751,8 +1789,10 @@ only those particular arguments.
 The constant $7.96\times10^{34}$ of \ref{res:denominator} is the classical
 Farey mediant bound applied to a window with a free parameter $K$; it has
 order $2^{K/2}$, and raising it needs only more committed binary digits, which
-is a computation rather than an idea.  It is not one of the open items of
-Section~\ref{sec:open}.
+is a computation rather than an idea.  The unrestricted floor
+$q\ge2^{39989}$ and $q>10^{12038}$ of Section~\ref{sec:denominator} is larger and is
+the same kind of statement, bought with more bits rather than more structure.
+Neither is one of the open items of Section~\ref{sec:open}.
 
 \subsection{Logical status and analytic input}\label{sec:open}
 
@@ -1761,29 +1801,31 @@ Section~\ref{sec:open}.
 \item The lcm-diagonal and clean cyclotomic-anchor statements are exact
   equivalent formulations of \ref{res:equivalences}: they convert
   irrationality into the existence of an unbounded family of finite
-  tail-difference certificates.  Finite instances are checked --- every
-  $t\le82$, including the historical $28$-scale bank of
-  Section~\ref{sec:frontier} --- and the unbounded family is not.  The
+  tail-difference certificates.  Finite instances are checked, every
+  certified scale $t\le64$, the $28$-scale bank of
+  Section~\ref{sec:frontier}, and the unbounded family is not.  The
   equivalences fix the exact missing quantifier but do not make that
   quantifier easier to prove.  \ref{res:denominator} is a finite instance of a
   \emph{different} family, the gap certificates of \ref{res:supply}, which
   reach irrationality by a one-way implication; the two families should not be
   counted together.
-\item Full-depth period-multiple escape and the four first-harmonic pivot
-  bounds are stronger sufficient conditions; they, and the prime-orbit gap the
-  pivot bounds refine, are unproved.  Failure of either would refute only that
-  argument.
+\item Full-depth period-multiple escape is equivalent to irrationality
+  (\ref{res:fulldepth}).  The four first-harmonic pivot bounds, and the
+  prime-orbit gap they refine, remain sufficient conditions and are unproved.
+  Failure of the equivalent condition would settle \#249 in the opposite
+  direction; failure of a sufficient route would refute only that argument.
 \item Carry-rank compression and genuinely coupled denominator compression
   are separate contradiction targets.  No required upper bound or coupled
   approximant family is proved.
 \item The $k$-kernel rank statement of Theorem~\ref{thm:kkernelrank} is
-  independent of the irrationality problem and settles nothing about it.  Its
-  zero-residue, composite-base arithmetic, finite-index/cardinality, and
-  spanning layers are Lean-checked.  Lean also checks the exact-rank theorem
-  under an explicit linear-independence hypothesis.  That hypothesis remains
-  a paper deduction from Martin's Theorem~1; Martin's theorem is not
-  formalised.  No source was located for the rank, basis, or normal form
-  themselves; that search result is not a priority verdict.
+  independent of the irrationality problem and settles nothing about it.
+  Zero-residue, composite-base arithmetic, spanning, independence, exact
+  rank, basis, and relation-module dimension are Lean-checked in
+  \texttt{AllBaseTotientKernel.lean}.  Martin's Theorem~1 remains prior art
+  for the independence conclusion and is not formalised; it is not a remaining
+  Lean gap.  The residue condition is $k\nmid r$, not $\gcd(k,r)=1$.  No source
+  was located for the rank, basis, or normal form themselves; that search
+  result is not a priority verdict.
 \end{enumerate}
 
 \noindent The correlation source that fits the normalised totient most
@@ -1818,9 +1860,12 @@ function.  Their theorem therefore does not apply unchanged.  The
 Balasubramanian--Giri--Srivastav theorem supplies the missing first- and
 second-moment input in the correct divisor-convolution class, but it does
 \emph{not} supply the residue small-ball or phase anti-concentration estimate
-needed to turn those moments into a certificate.  That modulo-$2^L$ step is
-the precise remaining analytic gap; no irrationality conclusion is drawn from
-the correlation asymptotic alone.
+needed to turn those moments into a certificate.  The obstacle is not the
+extension of a fixed-shift theorem: Theorem~2.2 already allows $|h|\le x/2$.
+The missing input is control of a nonlinear totient block whose length grows
+with the truncation depth $L$, not a two-point correlation of
+$\ph(n)/n$.  That modulo-$2^L$ step is the precise remaining analytic gap;
+no irrationality conclusion is drawn from the correlation asymptotic alone.
 
 \section*{Formal source notes}
 
@@ -1847,9 +1892,9 @@ marked as such; the first three are drawn from checked statements, and the
 last assumes the unproved bounded-order condition.
 
 The small numerical
-instances printed above --- the level-three reductions, the certificate at
+instances printed above, the level-three reductions, the certificate at
 $(1,12,16)$, the first values of $\Aw$, the $p=3$ Euler-factor calculation,
-the mixed-difference table, and the values of $H_t$ --- are computations from
+the mixed-difference table, and the values of $H_t$, are computations from
 the definitions and checked identities beside them, and are not separate
 checked propositions.  Source theorems attributed to Allouche and Shallit,
 Martin, Coons, Bell and Smertnig, Kaneko--Suzuki--Tachiya, Luca--Tachiya, and
@@ -1858,9 +1903,10 @@ formalise Martin's positive-density theorem or Coons's non-regularity theorem.
 
 It does kernel-check an independent dyadic basis/rank proof and a full-kernel
 infinite-dimensionality consequence that Coons already implies.  For every
-base it also kernel-checks the arithmetic reduction, unconditional canonical
-spanning, and the exact-rank conclusion conditional on an explicit
-linear-independence hypothesis; it does not prove that hypothesis.  The
+integer base $k\ge2$ the same arithmetic reductions, unconditional spanning,
+independence, exact rank $k^e+1$, explicit basis, and relation-module dimension
+are kernel-checked in \texttt{AllBaseTotientKernel.lean}; the older conditional
+module is not the present authority.  The
 assessment that no prior source gives an explicit basis, an exact finite-level
 dimension formula, or a relation normal form for the totient $2$-kernel is the
 outcome of a literature search and is not a proof of non-existence.
@@ -1917,8 +1963,9 @@ Erd\H{o}s Problem~\#249 remains open.
   \href{https://doi.org/10.1016/j.jnt.2016.10.001}{DOI};
   \href{https://arxiv.org/abs/1511.02221}{arXiv:1511.02221}.
   The arXiv version's Theorem~2.2 and Remark~2.4 give the uniform shifted
-  divisor-convolution correlation and Euler product used above; the required
-  fixed-shift weighted partial-summation formula follows Corollary~2.8.
+  divisor-convolution correlation ($|h|\le x/2$) and Euler product used above.
+  Weighted partial summation after Corollary~2.8 restores linear factors at a
+  fixed $h$; it does not bound a totient block whose length grows with $L$.
 \bibitem{lucatachiya2017} F.~Luca and Y.~Tachiya,
   \href{https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/2014-14.pdf}
   {\emph{Linear independence results for the values of divisor functions
@@ -1939,6 +1986,10 @@ Erd\H{o}s Problem~\#249 remains open.
   Transcendence Theory}, Cambridge UP, 1988, pp.~102--109,
   doi:\href{https://doi.org/10.1017/CBO9780511897184.009}
   {10.1017/CBO9780511897184.009}.
+\bibitem{fan2026totient} S.~Fan, comment on Erd\H{o}s Problem \#249,
+  \href{https://www.erdosproblems.com/forum/thread/249}{\texttt{erdosproblems.com/forum/thread/249}},
+  19:01 on 16 May 2026: the convolution identity $\varphi=\mu*\mathrm{id}$
+  yields $\sum_{n\ge1}\varphi(n)/2^n=\sum_{n\ge1}\mu(n)/(2^n-1)^2+1/2$.
 \bibitem{erdosproblems} T.~F. Bloom,
   \href{https://www.erdosproblems.com/249}{\emph{Erd\H{o}s Problem \#249}},
   \texttt{erdosproblems.com/249}, accessed 28 July 2026 (page displays
