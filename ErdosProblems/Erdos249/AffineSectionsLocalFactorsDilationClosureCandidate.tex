@@ -1,0 +1,601 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{newpxtext,newpxmath}
+\usepackage[margin=27mm,headheight=14pt]{geometry}
+\usepackage{microtype,booktabs,longtable,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{.25em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem*{remark}{Remark}
+\newcommand{\N}{\mathbb N}\newcommand{\Q}{\mathbb Q}\newcommand{\Z}{\mathbb Z}\newcommand{\C}{\mathbb C}
+\newcommand{\ph}{\varphi}\newcommand{\Span}{\operatorname{span}}\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\sig}{\sigma}\newcommand{\tauu}{\tau}\newcommand{\rad}{\operatorname{rad}}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Affine sections and dilation closure}\fancyhead[R]{\small\thepage}\renewcommand{\headrulewidth}{0pt}
+\title{Affine Sections, Local Factors, and Dilation Closure\\[4pt]\large Round-five research memorandum for Erd\H{o}s \#249}
+\author{Research candidates for independent review}
+\date{7 September 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Restriction to arithmetic progressions separates variable coefficients from affine arithmetic functions. This gives a shorter proof of the existing affine-totient signature classification and removes its bespoke isolation hypothesis from the ordinary argument. The same principle yields proposed exact all-base kernel ranks for the sum-of-divisors and divisor-counting functions. In a base with two prime factors, the ranks differ by one from depth three onwards: their local translation spaces are exponential and polynomial, respectively. A second theorem characterises finite rational dilation closure for bounded integer-weighted Mersenne series. Closure holds exactly for eventually periodic weights; every other weight produces a natural boundary. The M\"obius specialisation therefore excludes finite rational linear dilation closure, although its first-power value is rational. Complete ordinary proofs and exact finite checks accompany the statements. None is asserted to have been compiled in Lean, independently reviewed, or established as a priority claim. No irrationality proof for the unreduced totient series is supplied.
+\end{abstract}
+
+\section{Separate arithmetic progressions before separating coefficients}
+
+The current paper proves rational linear independence of
+$\ph(a_i n+b_i)$ for positive slopes and pairwise nonproportional affine forms.
+Martin's stronger ordering theorem is an antecedent for this independence, and
+his Corollary~4 supplies the corresponding statement for $\sigma$~\cite{martin}.
+The current Lean proof uses a diagonal evaluation matrix instead.
+The following elementary transport should be used before constructing another
+prime-isolation argument.
+
+\begin{definition}
+A finite family $w_i:\N_{>0}\to\Q$ can be \emph{frozen on progressions} if, for
+every $n_0\ge1$, there is $Q\ge1$ such that
+\[
+ w_i(n_0+Qt)=w_i(n_0)\qquad(i,\ t\ge0).
+\]
+The modulus may depend on $n_0$. A common period is sufficient but unnecessary.
+\end{definition}
+
+\begin{lemma}[Progression freezing]\label{lem:freeze}
+Let $L_i(n)=a_i n+b_i$, with $a_i\ge1$, $b_i\ge0$, and
+$a_i b_j\ne a_j b_i$ for $i\ne j$. Suppose an arithmetic function $f$ has
+independent values on every such finite family of affine forms, including
+after restriction to an arithmetic progression. If $w_i$ can be frozen on
+progressions and
+\[
+ \sum_i w_i(n)f(L_i(n))=0\qquad(n\ge1),
+\]
+then every $w_i$ vanishes.
+\end{lemma}
+\begin{proof}
+Fix $n_0$ and a freezing modulus $Q$. Substitute $n=n_0+Qt$.
+The coefficients become the constants $w_i(n_0)$, and the new forms have slopes
+$a_iQ$ and intercepts $a_i n_0+b_i>0$. Their cross determinants are
+\[
+ (a_iQ)(a_jn_0+b_j)-(a_jQ)(a_in_0+b_i)
+ =Q(a_i b_j-a_j b_i)\ne0.
+\]
+Affine independence gives $w_i(n_0)=0$. Since $n_0$ was arbitrary, this proves
+the claim. The same argument applies to an eventual relation at every $n_0$
+beyond its threshold. For periodic coefficients, shifting each residue class
+past that threshold proves vanishing everywhere.
+\end{proof}
+
+\begin{corollary}[Periodic coefficient independence]\label{cor:periodic}
+Pairwise nonproportional affine totient sequences are independent over the
+ring of rational-valued periodic sequences. The same assertion holds for
+$\sigma$ and $\tau$.
+\end{corollary}
+\begin{proof}
+Take a common period and apply Lemma~\ref{lem:freeze}. Independence for $\tau$
+is proved below; the other two cases are also consequences of Martin's
+results. This is a ring-independence assertion about sequences, not about
+values of their generating series.
+\end{proof}
+
+Functions of finitely many exact valuations are an important nonperiodic
+example. Given finitely many positive affine values $L_j(n_0)$ and primes $p$,
+choose $Q$ divisible by
+\[
+ p^{1+\max_j v_p(L_j(n_0))}
+\]
+for every relevant $p$. Then every $v_p(L_j(n_0+Qt))$ is unchanged for $t\ge0$.
+No uniform modulus over all $n_0$ is being claimed.
+
+\subsection{A constructive inverse for the existing signature theorem}
+
+For $L(n)=An+B$ primitive, $A\ge1$, $B\ge0$, and $c\ge1$, put
+\[
+ P(c,A)=\{p:p\mid c,\ p\nmid A\}.
+\]
+The local totient identity gives, at positive arguments,
+\begin{equation}\label{eq:content}
+ \frac{\ph(cL(n))}{\ph(c)}
+ =\ph(L(n))\prod_{\substack{p\in P(c,A)\\p\mid L(n)}}\frac p{p-1}.
+\end{equation}
+The multiplier on the right is periodic. A relation among mixed primitive
+forms therefore separates into one relation per primitive form by
+Corollary~\ref{cor:periodic}. This step requires no new isolation hypothesis.
+
+Fix one such form and let $P$ be the union of its variable content primes.
+Every pattern $T\subseteq P$ occurs as $\{p\in P:p\mid L(n)\}$: $A$ is a unit
+modulo every $p\in P$, so the Chinese remainder theorem prescribes zero or a
+nonzero residue independently. For sets $S,T\subseteq P$, define
+\[
+ K(T,S)=\prod_{p\in T\cap S}\rho_p,\qquad \rho_p=\frac p{p-1}.
+\]
+Indexing by the full Boolean cube makes the inverse explicit:
+\begin{equation}\label{eq:tensor}
+ K=\bigotimes_{p\in P}
+ \begin{pmatrix}1&1\\1&\rho_p\end{pmatrix},\qquad
+ K^{-1}=\bigotimes_{p\in P}
+ \begin{pmatrix}p&-(p-1)\\-(p-1)&p-1\end{pmatrix}.
+\end{equation}
+Both assertions follow by multiplying the two $2\times2$ factors.
+In particular the inverse is integral. For $h=|P|\ge1$,
+\[
+ \det K=\prod_{p\in P}(p-1)^{-2^{h-1}}.
+\]
+Distinct selected columns remain independent by extending their coefficients
+by zero to the full cube. The positive-definiteness argument in the previous
+round is thus replaced by coordinate recovery. The general meet-matrix and
+incidence-factorisation framework is classical~\cite{mattila}; the useful
+specialisation here is the integral inverse and the order of the arithmetic
+reduction.
+
+\begin{theorem}[Signature completeness, with a shorter proof]\label{thm:signature}
+For a finite family $a_i\ge1$, $b_i\ge0$, set
+\[
+ c_i=\gcd(a_i,b_i),\quad A_i=a_i/c_i,\quad B_i=b_i/c_i,
+ \quad \Sigma_i=(A_i,B_i,P(c_i,A_i)).
+\]
+Then
+\[
+ \sum_i\lambda_i\ph(a_i n+b_i)=0\quad(n\ge0)
+ \quad\Longleftrightarrow\quad
+ \sum_{i:\Sigma_i=\Sigma}\lambda_i\ph(c_i)=0\quad\text{for every }\Sigma.
+\]
+The conclusion is unchanged when the relation is required only eventually.
+The rational dimension of the family is the number of distinct signatures.
+\end{theorem}
+\begin{proof}
+Group by primitive form and use \eqref{eq:content}. Progression freezing
+separates these groups. For one group, aggregate coefficients with the same
+set $S=P(c_i,A_i)$. Evaluation on all divisibility patterns gives $K\lambda=0$;
+\eqref{eq:tensor} gives $\lambda=0$. The converse is the content identity.
+Every pattern occurs arbitrarily late, so the argument also treats eventual
+relations. The only possible zero argument is $L(n)=n$ at $n=0$; all its
+content multiples have totient zero there, so that endpoint causes no change.
+\end{proof}
+
+This theorem was already an ordinary-proof result in round four. The new
+contribution in this section is a shorter proof and a smaller formalisation
+interface. The attached \texttt{PeriodicTotientIndependence.lean} and
+\texttt{BooleanEulerInverse.lean} are uncompiled candidates for those two
+interfaces, not a completed Lean proof of Theorem~\ref{thm:signature}.
+
+\subsection{Two inexpensive consequences for the current flagship}
+
+\begin{proposition}[Integral normal form and its exact scope]\label{prop:integral}
+For $k\ge2,e\ge1$, the current canonical totient family is a $\Z$-basis of the
+$\Z$-module generated by the sections through level $e$. The integral relation
+module has a basis consisting of one elementary scalar reduction per omitted
+section. Its rank is $\sum_{j=1}^{e-1}k^j$.
+\end{proposition}
+\begin{proof}
+For a nonzero omitted residue $r=k^tu$, $k\nmid u$, the reduction scalar is
+\[
+ C_k(t,u)=\frac{k^t}{\prod_{p\mid k,\ p\nmid u}p}
+             \prod_{p\mid k,\ p\nmid u}(p-1)\in\Z.
+\]
+Zero-residue reductions also have integral scalars. Rational independence
+therefore implies integral independence and integral spanning. In the free
+module on all channels, each relation ``omitted channel minus its scalar
+multiple of the retained channel'' has a unique omitted-coordinate pivot
+$1$. Subtracting these relations eliminates all omitted coordinates, after
+which independence eliminates the rest. Counting pivots gives the formula.
+\end{proof}
+
+The module in this proposition is not saturated in the full group of
+integer-valued sequences. For $e\ge2$ at base $2$,
+$\ph(4n+3)/2$ is integer-valued, but its unique coefficient on the retained
+channel $\ph(4n+3)$ is $1/2$. It is outside the generated integral module.
+This falsifies an ambient-saturation upgrade.
+
+The rank and basis also survive deletion of any finite prefix. The affine
+matrix rows can be chosen arbitrarily late. For the two zero channels, use
+large $n\equiv1\pmod k$ and large $n=k^t$, giving the distinct ratios
+$\ph(k)$ and $k$. This supplies an eventual-relation normal form without a
+separate compactness argument.
+
+\section{Exact all-base ranks for divisor functions}\label{sec:divisor}
+
+Write $\sigma(n)=\sum_{d\mid n}d$ and $\tau(n)=\sum_{d\mid n}1$, and set both
+functions to zero at $n=0$. For either $f$, define
+\[
+ V^f_{k,e}=\Span_\Q\{n\mapsto f(k^jn+r):0\le j\le e,\ 0\le r<k^j\}.
+\]
+The supplied corpus contains measured ranks $41$ for both functions at
+$(k,e)=(6,2)$. These measurements are not being re-announced as a discovery.
+The proposed result is a formula and a canonical rational basis at every
+base and depth.
+
+\subsection{Arithmetic independence of the primitive classes}
+
+\begin{lemma}\label{lem:divisor-affine}
+For $f=\sigma$ or $f=\tau$, a finite family $n\mapsto f(a_i n+b_i)$ with
+positive slopes and pairwise nonproportional forms is rationally independent.
+The evaluation points witnessing independence may be chosen arbitrarily late.
+\end{lemma}
+\begin{proof}
+A finite shift makes all intercepts positive. Write $L_i=g_iA_i$, where $A_i$
+is primitive. Choose an odd prime $\ell$ avoiding all slopes, contents,
+nonzero cross determinants, and all nonzero integers $f(g_i)$.
+
+For $\sigma$, fix row $i$. For each $j\ne i$, choose a fresh prime
+$q_{ij}\equiv-1\pmod\ell$, avoiding the same finite set, and prescribe
+\[
+ L_j(n)\equiv q_{ij}\pmod{q_{ij}^2}.
+\]
+This forces $v_{q_{ij}}(L_j(n))=1$, so $\ell\mid\sigma(L_j(n))$.
+Also prescribe $A_i(n)\equiv1\pmod\ell$. The CRT combines these conditions.
+On the resulting progression, the primitive form $A_i(n)$ lies in a reduced
+prime progression. Indeed it is a unit modulo each $q_{ij}$, since otherwise
+the cross determinant for $L_i,L_j$ would vanish modulo $q_{ij}$; it is a unit
+modulo $\ell$ by construction; and it is automatically coprime to its own
+slope. Dirichlet supplies a prime $p=A_i(n)$, arbitrarily large and outside
+$g_i$. The diagonal value is $\sigma(g_i)(p+1)\not\equiv0\pmod\ell$.
+
+For $\tau$, choose fresh primes $q_{ij}$ avoiding the finite exceptional set,
+and prescribe
+\[
+ L_j(n)\equiv q_{ij}^{\ell-1}\pmod{q_{ij}^{\ell}}.
+\]
+The exact valuation is $\ell-1$, so $\ell\mid\tau(L_j(n))$. The same
+reducedness argument lets $A_i(n)=p$ be prime and outside $g_i$; now the
+diagonal is $2\tau(g_i)\not\equiv0\pmod\ell$. No distribution theorem for
+simultaneous prime values is used: only one selected primitive form is made
+prime per row.
+
+One such evaluation for each $i$ gives a matrix diagonal and nonsingular
+modulo $\ell$. Its rational determinant is nonzero. For $\sigma$, Martin's
+Corollary~4 is a stronger antecedent; the direct proof is included to display
+the exact hypotheses needed for the transport argument.
+\end{proof}
+
+\subsection{The local dimensions}
+
+Let $k=\prod_{p\mid k}p^{a_p}$. Each nonzero proportionality class of channels
+has a unique first representative
+\[
+ (t,u),\qquad 1\le t\le e,\quad 1\le u<k^t,\quad k\nmid u.
+\]
+Its channels are $(t+s,k^su)$ for $0\le s\le e-t$. Put
+\[
+ g=\gcd(k^t,u),\qquad L(n)=\frac{k^t}{g}n+\frac ug,
+\]
+\begin{equation}\label{eq:Ptu}
+ P_{t,u}=\{p\mid k:v_p(u)\ge t a_p\},\qquad h_{t,u}=|P_{t,u}|.
+\end{equation}
+These are exactly the primes of $k$ which do not divide the slope of $L$.
+They are the primes whose valuations in $L(n)$ can vary.
+
+\begin{lemma}[Local translation dimension]\label{lem:localdimension}
+A class with $m$ consecutive content levels and $h$ variable primes has rank
+\[
+ d_\sigma(m,h)=\min(m,2^h),\qquad
+ d_\tau(m,h)=\min(m,h+1).
+\]
+Its first $d_f(m,h)$ channels form a rational basis.
+\end{lemma}
+\begin{proof}
+At primes of $k$ dividing the primitive slope, $L(n)$ is always a unit. Their
+local factors are nonzero scalars depending only on $s$; divide each channel
+by those scalars. At the variable primes, write $v_p=v_p(L(n))$ and
+$c_p=v_p(g)$. After division by the common factor $f(L(n))$ and multiplication
+by the common nonzero local denominators, the $\sigma$ functions become
+\[
+ H_s(v)=\prod_{p\in P}
+ \frac{p^{v_p+c_p+1}p^{a_p s}-1}{p-1}
+ =\sum_{T\subseteq P}C_T
+       \left(\prod_{p\in T}p^{v_p}\right)\lambda_T^s,
+ \qquad \lambda_T=\prod_{p\in T}p^{a_p},
+\]
+where every $C_T\ne0$. Unique prime factorisation makes the $2^h$ numbers
+$\lambda_T$ distinct. The functions $\prod_{p\in T}p^{v_p}$ are independent:
+restrict each $v_p$ to $0,1$ and use the tensor product of the invertible
+matrices $\left(\begin{smallmatrix}1&1\\1&p\end{smallmatrix}\right)$.
+All these valuation patterns are realised by CRT, with exact valuations
+prescribed modulo $p^{v_p+1}$. A Vandermonde matrix in $s=0,\ldots,m-1$
+therefore has rank $\min(m,2^h)$, and its first $\min(m,2^h)$ columns are
+independent.
+
+For $\tau$ the corresponding functions are
+\[
+ H_s(v)=\prod_{p\in P}(v_p+c_p+1+a_p s)
+       =\sum_{j=0}^h E_j(v)s^j.
+\]
+The polynomial $E_j$ has total degree $h-j$ and a nonzero highest homogeneous
+part. Thus $E_0,\ldots,E_h$ are independent polynomials. A polynomial
+vanishing on all $v\in\N^h$ is zero, by induction on $h$, so they are also
+independent on the realised valuation vectors. The Vandermonde matrix in
+$s$ has rank $\min(m,h+1)$, with the asserted first-column basis.
+
+For the zero class $L(n)=n$, the same proof applies on $n\ge1$ with $g=1$,
+$c_p=0$, and $P$ the full prime support of $k$. At $n=0$ all channels vanish.
+\end{proof}
+
+\begin{theorem}[Proposed all-base divisor-kernel formula]\label{thm:divisor-rank}
+For $k\ge2$, $e\ge0$, and $f\in\{\sigma,\tau\}$,
+\begin{equation}\label{eq:rankformula}
+ \dim_\Q V^f_{k,e}
+ =d_f(e+1,\omega(k))+
+ \sum_{t=1}^e\ \sum_{\substack{1\le u<k^t\\ k\nmid u}}
+       d_f(e-t+1,h_{t,u}).
+\end{equation}
+A rational basis consists of the first $d_f(e+1,\omega(k))$ zero channels and,
+in every nonzero class $(t,u)$, its first $d_f(e-t+1,h_{t,u})$ channels.
+\end{theorem}
+\begin{proof}
+Every channel belongs to one of the specified proportionality classes:
+remove the largest common power of $k$ from its nonzero residue. Two distinct
+first representatives have different primitive forms, because equality of
+the fractions $u/k^t$ would force the representative at the larger level to
+have residue divisible by $k$.
+
+Consider a relation among all classes. In a class with primitive form $L$,
+factor out $f(L(n))$. The coefficient left over is a rational function of
+finitely many exact valuations $v_p(L(n))$. At each $n_0\ge1$ all such
+coefficients, for all classes simultaneously, can be frozen on one
+progression. Lemmas~\ref{lem:freeze} and \ref{lem:divisor-affine} then force
+each primitive-class coefficient to vanish separately. Hence dimensions add
+across the classes. Lemma~\ref{lem:localdimension} supplies each summand and
+its first-level basis. All within-class identities extend to $n=0$; the zero
+class vanishes there and positive-intercept classes have positive values.
+\end{proof}
+
+After division by the scalar factors at primes dividing the primitive slope,
+the class sequence in its content-level index $s$ has annihilator
+\[
+ \prod_{T\subseteq P}(X-\lambda_T)\quad\text{for }\sigma,
+ \qquad (X-1)^{h+1}\quad\text{for }\tau.
+\]
+These give exact coordinate recurrences for every omitted channel. Unlike the
+totient case, the displayed first-level basis need not be integral:
+\[
+ \sigma(64n+16)=\frac{31}{3}\sigma(8n+2).
+\]
+An assertion of integral spanning by that chosen basis would be false.
+
+\begin{corollary}[Prime-power and two-prime-factor bases]\label{cor:twoprimes}
+At a prime-power base $k$, both ranks are $k^e+1$ for $e\ge1$.
+If $k=xy$ with $x=p^a$, $y=q^b$ for distinct primes $p,q$, then, for $e\ge1$,
+\begin{align*}
+ \dim V^\sigma_{k,e}
+ &=k^e+x^{e-1}+y^{e-1}+\min(e+1,4)-3,\\
+ \dim V^\tau_{k,e}
+ &=k^e+x^{e-1}+y^{e-1}+\min(e+1,3)-3.
+\end{align*}
+\end{corollary}
+\begin{proof}
+For a prime-power base, $k\nmid u$ excludes the sole prime from $P_{t,u}$.
+Every nonzero class has dimension one, and the zero class has dimension two.
+
+For two prime factors, a nonzero class has at most one variable prime, since
+$P_{t,u}$ containing both would imply $k^t\mid u$. At first level $t$, the
+numbers of classes having the first or the second variable prime are
+$(y-1)y^{t-1}$ and $(x-1)x^{t-1}$, respectively. Indeed, to have the first
+prime variable one needs $x^t\mid u$, and $k\nmid u$ then excludes divisibility
+by $y$; count the multiples of $x^t$ below $x^ty^t$ accordingly. Each such
+class contributes one extra dimension exactly when $t\le e-1$.
+The total nonzero first representatives number $k^e-1$. Summing the two
+geometric progressions gives the formulas, with the appropriate zero-class
+capacity.
+\end{proof}
+
+In particular, the successive ranks in base $6$ are
+\[
+\begin{array}{c|rrr}
+ e&1&2&3\\\hline
+ \sigma&7&41&230\\
+ \tau&7&41&229\\
+ \ph&7&37&217
+\end{array}
+\]
+The distinction is local. With two variable primes, the sum-of-divisors
+factors have four distinct exponential modes, while the divisor-counting
+factors give a quadratic polynomial with three modes.
+
+\begin{remark}[Positive divisor powers]
+The same $\sigma$ rank formula holds for $\sigma_a(n)=\sum_{d\mid n}d^a$ at
+every positive integer $a$. In the affine independence proof, choose
+$\ell\equiv1\pmod{2a}$ outside the finite exceptional set and choose
+$q_{ij}$ in a residue of order $2a$ modulo $\ell$. Exact valuation one then
+gives $\sigma_a(q_{ij})\equiv0\pmod\ell$. A selected prime
+$p\equiv1\pmod\ell$ gives $\sigma_a(p)\equiv2$. In the local dimension
+proof replace $\lambda_T$ by $\lambda_T^a$, which remain distinct. At the
+formal limit $a\to0$, each local divisor sum becomes its exponent plus one;
+coalescence of the exponential modes explains the polynomial $\tau$ case.
+This last limit is explanatory; the integer $a=0$ theorem was proved directly.
+\end{remark}
+
+\subsection{A rational generating function for the ranks}
+
+There is also a finite closed form for the entire rank sequence. Let $P$ be
+ the prime support of $k$, put $k_T=\prod_{p\in P\setminus T}p^{a_p}$, and set
+\[
+ C_\sigma(h)=2^h,\qquad C_\tau(h)=h+1,\qquad
+ G_S(z)=\sum_{T\supseteq S}(-1)^{|T\setminus S|}
+                  \frac{(k_T-1)z}{1-k_Tz}.
+\]
+\begin{corollary}[Rank generating function]\label{cor:rankseries}
+For $f=\sigma$ or $\tau$, the formal generating function of the cumulative
+kernel ranks is rational and equals
+\[
+ \sum_{e\ge0}(\dim_\Q V^f_{k,e})z^e
+ =\frac{1-z^{C_f(|P|)}+
+       \sum_{S\subseteq P}(1-z^{C_f(|S|)})G_S(z)}{(1-z)^2}.
+\]
+\end{corollary}
+\begin{proof}
+At birth level $t$, the number of admissible $u$ with $P_{t,u}\supseteq T$
+is $(k_T-1)k_T^{t-1}$. Indeed $u$ must be a multiple of
+$\prod_{p\in T}p^{ta_p}$; after removing that factor, the range has length
+$k_T^t$ and multiples of $k_T$ are excluded. Boolean inclusion--exclusion
+therefore makes $G_S$ the birth-level generating function for classes with
+$P_{t,u}=S$ exactly. A class of capacity $C$ contributes
+$\min(e-t+1,C)$ at level $e\ge t$, whose generating function is
+$z^t(1-z^C)/(1-z)^2$. The zero class contributes the same expression with
+$t=0$ and capacity $C_f(|P|)$. Sum the class contributions.
+\end{proof}
+This rationality concerns the dimension sequence, not the arithmetic
+coefficient generating function. The dimensions themselves are unbounded;
+the finite expression describes their growth without asserting regularity
+of the underlying arithmetic sequence.
+
+\section{An exact obstruction to finite rational dilation closure}\label{sec:dilation}
+
+Fix integers $b\ge2$ and $r\ge1$, and let $a_n$ be a bounded integer sequence.
+Define the germs at zero
+\[
+ A(z)=\sum_{n\ge1}a_nz^n,\qquad
+ F_{a,r}(z)=\sum_{n\ge1}\frac{a_nz^n}{(b^n-1)^r},\qquad
+ (\mathcal D_bF)(z)=F(bz).
+\]
+Here $b$ is fixed and $z$ is an auxiliary numerator variable. This is not the
+Mahler substitution $z\mapsto z^b$, and it is not the generating function
+obtained by replacing $b^{-1}$ with $z$ everywhere.
+
+Coefficientwise cancellation gives
+\begin{equation}\label{eq:dilation}
+ (\mathcal D_b-1)^rF_{a,r}=A.
+\end{equation}
+For constant weights and $r=1$, the forcing term is $z/(1-z)$. Duverney's
+account of the classical Lambert-series Pad\'e method displays precisely this
+rational first-order forcing equation~\cite[Eq.~(10)]{duverney}.
+
+\begin{theorem}[Finite rational closure criterion]\label{thm:dilation}
+For bounded integer $a_n$, the following are equivalent:
+\begin{enumerate}[label=(\roman*),itemsep=0pt]
+\item $a_n$ is eventually periodic;
+\item $F_{a,r}$ satisfies a nontrivial finite inhomogeneous rational linear
+ dilation equation
+ \[\sum_{j=0}^J R_j(z)F_{a,r}(b^jz)=R(z),\qquad R_j,R\in\C(z);\]
+\item $F_{a,r}$ belongs to a finite-dimensional $\C(z)$-vector space of
+ meromorphic germs stable under $\mathcal D_b$.
+\end{enumerate}
+If these conditions fail, the circle $|z|=b^r$ is a natural boundary of
+$F_{a,r}$, and $1,F_{a,r}(z),F_{a,r}(bz),\ldots$ are linearly independent over
+$\C(z)$.
+\end{theorem}
+\begin{proof}
+A bounded integer sequence takes values in a finite alphabet. Its generating
+function $A$ is rational if and only if it is eventually periodic. For the
+nontrivial direction, a rational generating function gives an eventual
+constant-coefficient recurrence. A state consisting of its finitely many
+preceding coefficients takes only finitely many values, and the recurrence
+determines the next state. A repeated state forces eventual periodicity.
+
+Suppose $a_n$ is not eventually periodic. Infinitely many coefficients are
+nonzero, so $A$ has radius one. The P\'olya--Carlson theorem gives a natural
+boundary at the unit circle~\cite{bell-miles-ward}. Also $F_{a,r}$ has radius
+$b^r$. Expanding \eqref{eq:dilation}, the term with largest dilation is
+$F_{a,r}(b^rz)$, with coefficient one. Every other term is analytic on
+$|z|<b$. Analytic continuation of $F_{a,r}$ through any point of $|z|=b^r$
+would therefore continue $A$ through the corresponding unit-circle point,
+a contradiction.
+
+Now suppose a rational dilation relation exists, and let $J$ be the largest
+index with $R_J\ne0$. Choose a generic point $z_0$ on
+$|z|=b^{r-J}$ avoiding the finitely many poles of the rational coefficients
+and zeros of $R_J$. All terms $F_{a,r}(b^jz)$ with $j<J$ are analytic near
+$z_0$. Solving for $F_{a,r}(b^Jz)$ continues it through that point, contradicting
+the natural boundary. A relation containing only the rational term is also
+impossible unless that term is zero. This proves the final independence
+assertion and excludes (ii).
+
+If $a_n$ is eventually periodic, $A\in\Q(z)$ and \eqref{eq:dilation}
+proves (ii). Moreover the span of
+$1,F_{a,r},\mathcal D_bF_{a,r},\ldots,\mathcal D_b^{r-1}F_{a,r}$ is
+finite-dimensional and stable under $\mathcal D_b$, since rational functions
+remain rational on replacing $z$ by $bz$. This proves (iii). Conversely,
+finite dimension forces a linear dependence among the dilates, giving (ii).
+The identically zero and eventually zero sequences are included in this
+periodic case.
+\end{proof}
+
+\begin{corollary}[M\"obius obstruction and a rational control]\label{cor:mobius}
+For every $b\ge2$ and $r\ge1$, the M\"obius-weighted function $F_{\mu,r}$ has
+natural boundary $|z|=b^r$ and admits no nontrivial finite rational linear
+dilation equation. Nevertheless
+\[
+ F_{\mu,1}(1)=\frac1b,\qquad
+ F_{\mu,2}(1)=\sum_{n\ge1}\frac{\ph(n)}{b^n}-\frac1b.
+\]
+\end{corollary}
+\begin{proof}
+If $\mu$ had an eventual period $T$, choose a prime $q\nmid T$. Every residue
+class modulo $T$ contains arbitrarily large multiples of $q^2$, so the
+periodic value on each class would have to be zero. This contradicts the
+existence of arbitrarily large primes. Apply Theorem~\ref{thm:dilation}.
+
+Absolute convergence allows geometric expansion and regrouping. For the
+first power, the coefficient of $b^{-m}$ is $\sum_{d\mid m}\mu(d)$, which is
+one at $m=1$ and zero otherwise. For the second power it is
+\[
+ \sum_{d\mid m}\mu(d)(m/d-1)
+ =\ph(m)-\mathbf1_{m=1}.
+\]
+These give the two identities.
+\end{proof}
+
+A cross-problem comparison separates this analytic obstruction from arithmetic
+rationality. Let $a_n$ be the indicator of the squares. It is not eventually
+periodic, since its zero blocks have unbounded length and it has infinitely
+many ones. The same natural-boundary and non-closure conclusion holds, but
+\[
+ F_{a,1}(1)=\sum_{j\ge1}\frac1{b^{j^2}-1}\notin\Q.
+\]
+This irrationality is a case of Duverney's Theorem~1~\cite{duverney} and of the
+reciprocal-summable support theorem in the attached \#257 note. Thus the
+M\"obius and square-support examples have the same analytic obstruction and
+opposite arithmetic outcomes. For \#1049, the constant-weight Lambert family
+lies on the finite-closure side instead.
+
+The finite-alphabet arithmetic hypothesis is essential. Bounded rational
+weights without a common denominator need not satisfy the dichotomy: take
+$a_n=(1-b^{-n})^r$. These weights are nonperiodic, but
+\[
+ F_{a,r}(z)=\sum_{n\ge1}b^{-rn}z^n=\frac{z}{b^r-z}
+\]
+is rational. Bounded rational weights with a common denominator reduce to the
+integer theorem by scaling.
+
+The theorem excludes a finite rational linear closure mechanism in this
+auxiliary variable. It does not exclude all Pad\'e approximants, nonlinear
+functional equations, infinite auxiliary systems, or a value-specific
+construction with effective denominator cancellation. The rational value at
+$r=1$ is an explicit falsifier of any inference from the natural boundary or
+dilation rank alone to irrationality. For $r=2,b=2$, the remaining arithmetic
+quantity for rational approximants is still
+\[
+ 0<q_N\left|F_{\mu,2}(1)-p_N/q_N\right|\longrightarrow0
+\]
+with $p_N/q_N$ in lowest terms. A determinant nonvanishing theorem alone does
+not supply this denominator-scaled error estimate.
+
+\section{Formalisation and falsification boundaries}
+
+The three Lean files are uncompiled proof candidates for periodic transport,
+Boolean inversion and coefficient-level cancellation. They do not formalise
+the complete signature theorem, the divisor ranks or the analytic arguments.
+
+The exact checker passes twenty $(f,k,e)$ cases over each of
+$\mathbb F_{1000003}$ and $\mathbb F_{1000033}$, on both full channel matrices
+and the proposed basis submatrices. All ranks match, including $230$ versus
+$229$ at $(6,3)$. Four rational Boolean inverses, $450$ dilation coefficient
+identities and $56$ coefficients of the rank generating function also pass.
+These finite checks are reproducible; the universal conclusions depend on
+the ordinary proofs, which remain subject to independent review.
+
+\begin{thebibliography}{9}\small
+\bibitem{martin} G.~Martin, \emph{Simultaneous inequalities among values of the
+Euler phi-function}, arXiv:math/0603053, 2006. Theorem~1 and Corollary~4.
+\bibitem{mattila} M.~Mattila and P.~Haukkanen, \emph{On the positive
+definiteness and eigenvalues of meet and join matrices}, arXiv:1209.4287.
+\bibitem{bell-miles-ward} J.~Bell, R.~Miles and T.~Ward, \emph{Towards a
+P\'olya--Carlson dichotomy for algebraic dynamics}, arXiv:1307.2369.
+The introduction states the classical integer-coefficient radius-one theorem.
+\bibitem{duverney} D.~Duverney, \emph{Arithmetical functions and irrationality
+of Lambert series}, author manuscript, Eq.~(10), p.~3.
+\url{https://danielduverney.fr/documents/theorie-des-nombres/TokyoNT.pdf}.
+\end{thebibliography}
+\end{document}

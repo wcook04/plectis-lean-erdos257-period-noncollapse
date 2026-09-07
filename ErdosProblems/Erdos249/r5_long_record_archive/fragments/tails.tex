@@ -1,0 +1,106 @@
+\section{The actual series and the remaining residue gap}\label{sec:carry-rank}
+Write
+\[
+ S=\sum_{n\ge1}\ph(n)2^{-n},\qquad
+ R_N=\sum_{j\ge1}\ph(N+j)2^{-j},\qquad
+ \Delta_h(N)=R_{N+h}-R_N.
+\]
+The prefix identity $2^NS=\Phi_N+R_N$, with
+$\Phi_N=\sum_{n=1}^N\ph(n)2^{N-n}\in\Z$, gives
+\begin{equation}\label{eq:tail-phase}
+ \Delta_h(N)\equiv2^N(2^h-1)S\pmod\Z.
+\end{equation}
+In particular a nonintegral tail difference is a precise arithmetic
+statement about $S$.
+
+\subsection{One seed removes the full-depth restriction}
+For $h,N,L\in\N$, let
+\[
+ D_{h,N,L}=\sum_{j=0}^{L-1}
+   \bigl(\ph(N+h+1+j)-\ph(N+1+j)\bigr)2^{L-1-j},
+ \qquad B=N+h+L+2.
+\]
+Write $K(h,N,L)$ for
+\[
+ B<D_{h,N,L}\bmod2^L<2^L-B.
+\]
+The exact truncation and $\ph(n)\le n$ give
+\begin{equation}\label{eq:tail-error}
+ |2^L\Delta_h(N)-D_{h,N,L}|\le B.
+\end{equation}
+Thus some $L$ satisfies $K(h,N,L)$ exactly when $\Delta_h(N)\notin\Z$:
+necessity follows from the strict inequalities; sufficiency follows by
+choosing $L$ with $2^L\|\Delta_h(N)\|_{\R/\Z}>2B$.
+
+\begin{theorem}[Full-depth amplification]\label{res:fulldepth}
+Fix $d\ge1$ and $N\ge0$. If $\Delta_d(N)\notin\Z$, then every sufficiently
+late pair $\{t,t+1\}$ contains an $m$ such that $K(md,N,md)$ holds.
+Consequently
+\[
+ \exists t\ge1:\ K(td,N,td)
+ \quad\Longleftrightarrow\quad\Delta_d(N)\notin\Z.
+\]
+Requiring this for every $d\ge1,N\ge0$ is equivalent to $S\notin\Q$.
+\end{theorem}
+\begin{proof}
+Set $F_t=\Delta_{td}(N)$. Equation~\eqref{eq:tail-phase} yields
+$F_{t+1}\equiv2^dF_t+F_1\pmod\Z$. If $K(td,N,td)$ fails,
+\eqref{eq:tail-error} gives
+\[
+ \|F_t\|_{\R/\Z}\le\epsilon_t,
+ \qquad \epsilon_t=2(N+2td+2)2^{-td}.
+\]
+Two adjacent failures would imply
+$\|F_1\|\le2^d\epsilon_t+\epsilon_{t+1}$, impossible for all sufficiently
+large $t$ because the left side is positive and the right side tends to zero.
+Conversely, if $F_1$ is integral, then every $F_t$ is integral by the same
+recurrence, so no certificate exists. Finally, \eqref{eq:tail-phase} is
+nonintegral for every $d,N$ when $S$ is irrational. If
+$S=a/(2^cv)$ with $v$ odd, take $N=c$ and $d=\ph(v)$ to make it integral.
+\end{proof}
+For instance $D_{1,12,16}=-143140$, with residue $53468$ modulo $2^{16}$
+and $B=31$, supplies a seed. The amplifier produces infinitely many
+full-depth certificates from this finite fact; it does not provide seeds
+for all $d,N$.
+
+\subsection{A single canonical endpoint}\label{sec:frontier}
+For $c\ge0$, odd $v\ge1$ and a positive multiple $H$ of $\ph(v)$, put
+\[
+ M=\frac{2^H-1}{v},\qquad
+ B_{H,c}=\sum_{j=0}^{H-1}\ph(c+1+j)2^{H-1-j},\qquad K=c+H+1.
+\]
+Euler's theorem makes $M$ integral.
+
+\begin{equivform}[Canonical Mersenne gap]\label{res:canonicalmersenne}
+The series $S$ is irrational if and only if, for every $c\ge0$ and odd
+$v\ge1$, some positive multiple $H$ of $\ph(v)$ satisfies
+\begin{equation}\label{eq:canonical-gap}
+ K<(-B_{H,c})\bmod M<M-K.
+\end{equation}
+\end{equivform}
+\begin{proof}
+The identity
+\[
+ B_{H,c}=2^HR_c-R_{c+H}=M(vR_c)-\Delta_H(c)
+\]
+is exact. For $H\ge1$, $|\Delta_H(c)|<c+H+1=K$. Indeed $R_N\le N+1$
+for $N\ge1$ and $0<R_0\le3/2$; the strict inequalities follow by subtracting
+a positive tail. If $S=a/(2^cv)$, then $vR_c\in\Z$ and
+$\Delta_H(c)\in\Z$. The residue of $-B_{H,c}$ is therefore within distance
+less than $K$ of $0\pmod M$, so \eqref{eq:canonical-gap} fails.
+
+If $S$ is irrational, fix $c,v$. Then $vR_c$ is nonintegral. As $H$ tends
+to infinity through positive multiples of $\ph(v)$,
+$\Delta_H(c)/M\to0$ and $K/M\to0$. Hence the fractional part of
+$-B_{H,c}/M=-vR_c+\Delta_H(c)/M$ stays away from both endpoints of $[0,1]$,
+which gives \eqref{eq:canonical-gap} for all sufficiently large such $H$.
+\end{proof}
+This proof identifies the equivalent missing quantifier. It does not supply
+$H$ arithmetically without assuming the desired irrationality.
+The finite residues also satisfy
+\[
+ \rho_{H,N+1,M}=
+ \bigl(2\rho_{H,N,M}-\ph(N+H+1)+\ph(N+1)\bigr)\bmod M,
+ \quad \rho_{H,N,M}=(-B_{H,N})\bmod M,
+\]
+which is an exact recurrence for searches directed at \eqref{eq:canonical-gap}.

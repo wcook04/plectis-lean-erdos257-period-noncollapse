@@ -1,0 +1,14 @@
+{
+  "status": "all exact assertions passed; no infinite analytic or Lean certification",
+  "theta_lower_bound_from_J0_and_pi_gt_157_over_50": "2359630009523263/5820307922172744",
+  "theta_margin_above_81_over_200": "30066263041271/72753849027159300",
+  "omega_cells_checked": 48,
+  "gcd_gram_matrices_checked": 210,
+  "mixed_derivative_Taylor_columns": 39,
+  "Taylor_coefficients_through": 350,
+  "Taylor_rank_mod_1000003": 39,
+  "mobius_inversion_coefficients_checked": 350,
+  "finite_binning_cases": 192,
+  "applicable_binning_cases": 128,
+  "G_1_2_3_determinant": "2"
+}

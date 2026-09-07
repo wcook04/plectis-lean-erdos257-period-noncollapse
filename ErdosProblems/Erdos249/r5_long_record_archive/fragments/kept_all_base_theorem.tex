@@ -1,0 +1,22 @@
+\begin{theorem}[exact rank of every totient $k$-kernel truncation]
+\label{thm:kkernelrank}
+Let $k\ge2$ and $e\ge1$ be integers, write $F^{(k)}_{j,r}(n)=\ph(k^jn+r)$, and put
+\[
+ V_{k,e}=\operatorname{span}_{\Q}
+ \{\,F^{(k)}_{j,r}:0\le j\le e,\ 0\le r<k^j\,\}.
+\]
+Then $\dim_{\Q}V_{k,e}=k^e+1$, and
+\[
+ \mathcal B_{k,e}
+ =\{F^{(k)}_{0,0},F^{(k)}_{1,0}\}
+ \cup\{\,F^{(k)}_{j,r}:1\le j\le e,\ 1\le r<k^j,\ k\nmid r\,\}
+\]
+is a basis.  Every omitted section reduces to a basis element by an explicit
+scalar: $F^{(k)}_{j,0}=k^{j-1}F^{(k)}_{1,0}$ for $j\ge1$, and if $r=k^tu$ with
+$t=\max\{s:k^s\mid r\}\ge1$ and $k\nmid u$, then
+\[
+ F^{(k)}_{j,r}=C_k(t,u)\,F^{(k)}_{j-t,u},
+ \qquad
+ C_k(t,u)=k^t\prod_{\substack{p\mid k\\ p\nmid u}}\Bigl(1-\tfrac1p\Bigr).
+\]
+\end{theorem}

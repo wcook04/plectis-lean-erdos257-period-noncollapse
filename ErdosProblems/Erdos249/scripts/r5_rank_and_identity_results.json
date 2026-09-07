@@ -1,0 +1,398 @@
+{
+  "evidence": "Exact finite checks; no all-depth inference from samples.",
+  "primes": [
+    1000003,
+    1000033
+  ],
+  "cases": [
+    {
+      "function": "sigma",
+      "base": 2,
+      "depth": 1,
+      "total_channels": 3,
+      "evaluation_rows": 9,
+      "predicted_rank": 3,
+      "all_channel_ranks": {
+        "1000003": 3,
+        "1000033": 3
+      },
+      "candidate_basis_ranks": {
+        "1000003": 3,
+        "1000033": 3
+      },
+      "matched": true
+    },
+    {
+      "function": "tau",
+      "base": 2,
+      "depth": 1,
+      "total_channels": 3,
+      "evaluation_rows": 9,
+      "predicted_rank": 3,
+      "all_channel_ranks": {
+        "1000003": 3,
+        "1000033": 3
+      },
+      "candidate_basis_ranks": {
+        "1000003": 3,
+        "1000033": 3
+      },
+      "matched": true
+    },
+    {
+      "function": "sigma",
+      "base": 2,
+      "depth": 4,
+      "total_channels": 31,
+      "evaluation_rows": 51,
+      "predicted_rank": 17,
+      "all_channel_ranks": {
+        "1000003": 17,
+        "1000033": 17
+      },
+      "candidate_basis_ranks": {
+        "1000003": 17,
+        "1000033": 17
+      },
+      "matched": true
+    },
+    {
+      "function": "tau",
+      "base": 2,
+      "depth": 4,
+      "total_channels": 31,
+      "evaluation_rows": 51,
+      "predicted_rank": 17,
+      "all_channel_ranks": {
+        "1000003": 17,
+        "1000033": 17
+      },
+      "candidate_basis_ranks": {
+        "1000003": 17,
+        "1000033": 17
+      },
+      "matched": true
+    },
+    {
+      "function": "sigma",
+      "base": 4,
+      "depth": 3,
+      "total_channels": 85,
+      "evaluation_rows": 195,
+      "predicted_rank": 65,
+      "all_channel_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "candidate_basis_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "matched": true
+    },
+    {
+      "function": "tau",
+      "base": 4,
+      "depth": 3,
+      "total_channels": 85,
+      "evaluation_rows": 195,
+      "predicted_rank": 65,
+      "all_channel_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "candidate_basis_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "matched": true
+    },
+    {
+      "function": "sigma",
+      "base": 6,
+      "depth": 1,
+      "total_channels": 7,
+      "evaluation_rows": 21,
+      "predicted_rank": 7,
+      "all_channel_ranks": {
+        "1000003": 7,
+        "1000033": 7
+      },
+      "candidate_basis_ranks": {
+        "1000003": 7,
+        "1000033": 7
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 7
+    },
+    {
+      "function": "tau",
+      "base": 6,
+      "depth": 1,
+      "total_channels": 7,
+      "evaluation_rows": 21,
+      "predicted_rank": 7,
+      "all_channel_ranks": {
+        "1000003": 7,
+        "1000033": 7
+      },
+      "candidate_basis_ranks": {
+        "1000003": 7,
+        "1000033": 7
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 7
+    },
+    {
+      "function": "sigma",
+      "base": 6,
+      "depth": 2,
+      "total_channels": 43,
+      "evaluation_rows": 123,
+      "predicted_rank": 41,
+      "all_channel_ranks": {
+        "1000003": 41,
+        "1000033": 41
+      },
+      "candidate_basis_ranks": {
+        "1000003": 41,
+        "1000033": 41
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 41
+    },
+    {
+      "function": "tau",
+      "base": 6,
+      "depth": 2,
+      "total_channels": 43,
+      "evaluation_rows": 123,
+      "predicted_rank": 41,
+      "all_channel_ranks": {
+        "1000003": 41,
+        "1000033": 41
+      },
+      "candidate_basis_ranks": {
+        "1000003": 41,
+        "1000033": 41
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 41
+    },
+    {
+      "function": "sigma",
+      "base": 6,
+      "depth": 3,
+      "total_channels": 259,
+      "evaluation_rows": 690,
+      "predicted_rank": 230,
+      "all_channel_ranks": {
+        "1000003": 230,
+        "1000033": 230
+      },
+      "candidate_basis_ranks": {
+        "1000003": 230,
+        "1000033": 230
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 230
+    },
+    {
+      "function": "tau",
+      "base": 6,
+      "depth": 3,
+      "total_channels": 259,
+      "evaluation_rows": 687,
+      "predicted_rank": 229,
+      "all_channel_ranks": {
+        "1000003": 229,
+        "1000033": 229
+      },
+      "candidate_basis_ranks": {
+        "1000003": 229,
+        "1000033": 229
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 229
+    },
+    {
+      "function": "sigma",
+      "base": 8,
+      "depth": 2,
+      "total_channels": 73,
+      "evaluation_rows": 195,
+      "predicted_rank": 65,
+      "all_channel_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "candidate_basis_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "matched": true
+    },
+    {
+      "function": "tau",
+      "base": 8,
+      "depth": 2,
+      "total_channels": 73,
+      "evaluation_rows": 195,
+      "predicted_rank": 65,
+      "all_channel_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "candidate_basis_ranks": {
+        "1000003": 65,
+        "1000033": 65
+      },
+      "matched": true
+    },
+    {
+      "function": "sigma",
+      "base": 10,
+      "depth": 2,
+      "total_channels": 111,
+      "evaluation_rows": 321,
+      "predicted_rank": 107,
+      "all_channel_ranks": {
+        "1000003": 107,
+        "1000033": 107
+      },
+      "candidate_basis_ranks": {
+        "1000003": 107,
+        "1000033": 107
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 107
+    },
+    {
+      "function": "tau",
+      "base": 10,
+      "depth": 2,
+      "total_channels": 111,
+      "evaluation_rows": 321,
+      "predicted_rank": 107,
+      "all_channel_ranks": {
+        "1000003": 107,
+        "1000033": 107
+      },
+      "candidate_basis_ranks": {
+        "1000003": 107,
+        "1000033": 107
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 107
+    },
+    {
+      "function": "sigma",
+      "base": 12,
+      "depth": 2,
+      "total_channels": 157,
+      "evaluation_rows": 453,
+      "predicted_rank": 151,
+      "all_channel_ranks": {
+        "1000003": 151,
+        "1000033": 151
+      },
+      "candidate_basis_ranks": {
+        "1000003": 151,
+        "1000033": 151
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 151
+    },
+    {
+      "function": "tau",
+      "base": 12,
+      "depth": 2,
+      "total_channels": 157,
+      "evaluation_rows": 453,
+      "predicted_rank": 151,
+      "all_channel_ranks": {
+        "1000003": 151,
+        "1000033": 151
+      },
+      "candidate_basis_ranks": {
+        "1000003": 151,
+        "1000033": 151
+      },
+      "matched": true,
+      "two_prime_factor_closed_form": 151
+    },
+    {
+      "function": "sigma",
+      "base": 30,
+      "depth": 1,
+      "total_channels": 31,
+      "evaluation_rows": 93,
+      "predicted_rank": 31,
+      "all_channel_ranks": {
+        "1000003": 31,
+        "1000033": 31
+      },
+      "candidate_basis_ranks": {
+        "1000003": 31,
+        "1000033": 31
+      },
+      "matched": true
+    },
+    {
+      "function": "tau",
+      "base": 30,
+      "depth": 1,
+      "total_channels": 31,
+      "evaluation_rows": 93,
+      "predicted_rank": 31,
+      "all_channel_ranks": {
+        "1000003": 31,
+        "1000033": 31
+      },
+      "candidate_basis_ranks": {
+        "1000003": 31,
+        "1000033": 31
+      },
+      "matched": true
+    }
+  ],
+  "boolean_inverse_checks": [
+    {
+      "primes": [
+        2
+      ],
+      "dimension": 2,
+      "inverse_exact": true
+    },
+    {
+      "primes": [
+        2,
+        3
+      ],
+      "dimension": 4,
+      "inverse_exact": true
+    },
+    {
+      "primes": [
+        2,
+        3,
+        5
+      ],
+      "dimension": 8,
+      "inverse_exact": true
+    },
+    {
+      "primes": [
+        3,
+        5,
+        7,
+        11
+      ],
+      "dimension": 16,
+      "inverse_exact": true
+    }
+  ],
+  "dilation_coefficient_checks": 450,
+  "rank_generating_function_checks": 56,
+  "all_passed": true
+}

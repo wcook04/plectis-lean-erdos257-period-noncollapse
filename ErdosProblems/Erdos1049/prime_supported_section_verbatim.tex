@@ -1,0 +1,189 @@
+\section{Prime-supported rational gaps and two-row escape}
+\label{sec:prime-support}
+
+A second strand concerns the arithmetic conclusion of a rational linear-form
+argument.  Let \(a,q,A,B\in\Z\) with \(q>0\), and
+write
+\[
+  \Lambda_{A,B}(a/q)=B\frac aq-A .
+\]
+Here \(q\) is the denominator used to present the rational target, whereas
+\(B\) is a coefficient of an integral approximation row.  They play different
+roles.
+
+\begin{theorem}[prime-supported two-row gap]
+\label{res:prime-supported-two-selector-gap}
+Let \(\ell\) be prime and let
+\((A_1,B_1),(A_2,B_2)\in\Z^2\).  Suppose
+\[
+ \ell\nmid q,\qquad
+ \ell\mid B_1,\quad \ell\mid B_2,\qquad
+ \ell^2\nmid A_1B_2-A_2B_1 .
+\]
+Then
+\[
+ \left|\Lambda_{A_1,B_1}(a/q)\right|\ge\frac1q
+ \quad\hbox{or}\quad
+ \left|\Lambda_{A_2,B_2}(a/q)\right|\ge\frac1q .
+\]
+The constant \(1/q\) cannot be increased uniformly.
+\end{theorem}
+
+\begin{proof}
+If \(\ell\) divided both \(A_1\) and \(A_2\), then \(\ell^2\) would divide
+both \(A_1B_2\) and \(A_2B_1\), contrary to the determinant hypothesis.
+Choose \(i\in\{1,2\}\) with \(\ell\nmid A_i\).  If
+\(B_i a-A_iq=0\), primality and \(\ell\mid B_i\) would force
+\(\ell\mid A_i\) or \(\ell\mid q\), again a contradiction.  Hence the
+integer \(B_i a-A_iq\) is nonzero, and
+\[
+ \left|\Lambda_{A_i,B_i}(a/q)\right|
+ =\frac{|B_i a-A_iq|}{q}\ge\frac1q .
+\]
+For sharpness take \(a=1\), \(q=2\), \(\ell=3\),
+\((A_1,B_1)=(1,3)\), and \((A_2,B_2)=(2,3)\).  The determinant is \(-3\),
+while both absolute remainders are \(1/2\).
+\end{proof}
+
+\begin{corollary}[rational two-row no-double-decay]
+\label{res:rational-two-selector-no-double-decay}
+Let \((A_{1,n},B_{1,n})\) and \((A_{2,n},B_{2,n})\) be sequences of integral
+rows satisfying
+\[
+ A_{1,n}B_{2,n}-A_{2,n}B_{1,n}\ne0
+ \qquad\hbox{for every }n .
+\]
+Then the two sequences
+\[
+ \Lambda_{A_{1,n},B_{1,n}}(a/q),
+ \qquad
+ \Lambda_{A_{2,n},B_{2,n}}(a/q)
+\]
+cannot both tend to zero.
+\end{corollary}
+
+\begin{proof}
+At each \(n\), the nonzero exterior determinant prevents both rational linear
+forms from vanishing.  Every nonzero integral linear form at \(a/q\) has
+absolute value at least \(1/q\).  If both sequences tended to zero, then
+eventually both absolute values would be strictly smaller than \(1/q\), a
+contradiction.
+\end{proof}
+
+This corollary is an obstruction at rational targets, not an irrationality
+theorem.  An application must still construct noncollinear rows whose two
+analytic remainders tend to zero under the contrary rationality hypothesis.
+
+\begin{proposition}[one-row prime-supported gap]
+\label{res:prime-supported-one-row-gap}
+Let \(\ell\) be prime, \(\ell\mid B\), \(\ell\nmid A\), and
+\(\ell\nmid q\).  Then
+\[
+ \left|\Lambda_{A,B}(a/q)\right|\ge\frac1q .
+\]
+The constant is sharp.
+\end{proposition}
+
+\begin{proof}
+The numerator \(Ba-Aq\) cannot vanish: otherwise \(\ell\mid Aq\), and
+primality would contradict \(\ell\nmid A\) and \(\ell\nmid q\).  Its
+absolute value is therefore at least one.  Equality is attained by
+\(a=1,q=2,\ell=3,A=1,B=3\).
+\end{proof}
+
+\begin{corollary}[one-row prime-power-supported gap]
+\label{res:prime-power-supported-one-row-gap}
+Let \(\ell\) be prime, let \(r\ge1\), and suppose
+\(\ell^r\mid B\), \(\ell\nmid A\), and \(\ell\nmid q\).  Then
+\[
+ \left|\Lambda_{A,B}(a/q)\right|\ge\frac1q .
+\]
+\end{corollary}
+
+\begin{proof}
+Since \(r\ge1\), the prime \(\ell\) divides \(B\), and
+Proposition~\ref{res:prime-supported-one-row-gap} applies.
+\end{proof}
+
+The prime-power hypothesis records stronger denominator data but does not
+improve the sharp \(1/q\) conclusion.
+
+\begin{proposition}[real unit-determinant height--decay tradeoff]
+\label{res:unit-determinant-height-decay}
+Let \(F\in\R\), let \((A_1,B_1),(A_2,B_2)\in\R^2\), and let
+\(u,v,w,z\in\R\) satisfy \(|uz-vw|=1\).  Define the recombined rows by
+\[
+ (A'_1,B'_1)=u(A_1,B_1)+v(A_2,B_2),\qquad
+ (A'_2,B'_2)=w(A_1,B_1)+z(A_2,B_2).
+\]
+Suppose
+\[
+ |u|,|v|,|w|,|z|\le H
+\]
+and both recombined linear forms have absolute value at most
+\(\varepsilon\ge0\).  Then
+\[
+ |A_1B_2-A_2B_1|
+ \le 2H\varepsilon\bigl(|B_1|+|B_2|\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Writing \(e_i=B'_iF-A'_i\), cancellation of the \(F\)-terms gives
+\[
+ A'_1B'_2-A'_2B'_1=e_2B'_1-e_1B'_2.
+\]
+Its absolute value is at most
+\(\varepsilon(|B'_1|+|B'_2|)\).  The determinant of the recombined rows is
+\((uz-vw)(A_1B_2-A_2B_1)\), so its absolute value equals that of the original
+determinant.  Finally each new denominator coordinate is at most
+\(H(|B_1|+|B_2|)\), giving the displayed bound.
+\end{proof}
+
+The transformation is real and has determinant of absolute value one;
+integer-unimodular changes of basis are a special case.  Thus the proposition
+quantifies a genuine coefficient-height cost: a change of basis cannot make
+both remainders small without paying in the size of its coefficients.
+
+\begin{proposition}[zero-denominator selector collision]
+\label{res:zero-denominator-selector-collision}
+Let \(N\ge1\) and \(w_i\in(\Z/N\Z)^2\) for \(i<k\).  If every second
+coordinate of \(w_i\) is zero and
+\[
+ N<2^k,
+\]
+then two distinct binary selectors have the same vector sum.
+\end{proposition}
+
+\begin{proof}
+Map a binary selector to the first coordinate of its sum.  There are \(2^k\)
+selectors and only \(N\) possible values, so two distinct selectors collide.
+Their second-coordinate sums are both zero by hypothesis.
+\end{proof}
+
+The threshold is \(N<2^k\), rather than the ambient two-coordinate condition
+\(N^2<2^k\), because the denominator coordinate has already collapsed.
+
+\paragraph{Exact Lean identities.}
+The six source-current declarations corresponding to the results above are,
+in theorem order:
+\begin{flushleft}\small
+\path{rational_twoSelector_gap_of_prime_tail_support}\\
+\path{rational_twoSelector_not_both_tendsto_zero}\\
+\path{rational_integerLinearForm_gap_of_prime_support}\\
+\path{rational_integerLinearForm_gap_of_prime_power_support}\\
+\path{twoSelector_unimodular_height_decay_tradeoff}\\
+\path{zmod_binary_collision_of_zero_denominator_coordinates}
+\end{flushleft}
+The formal statements have the same hypotheses and conclusions as the
+displayed results.
+
+\paragraph{Exact remaining hypotheses.}
+\label{bdry:prime-support-remaining-hypotheses}
+Nothing in this section proves that the actual \(q\)-Ap\'ery rows contain a
+suitable prime in their denominator coordinates cofinally, proves the
+first-power determinant condition for a cofinal pair of rows, or supplies the
+analytic remainder estimates needed to invoke
+Corollary~\ref{res:rational-two-selector-no-double-decay}.  These are the exact
+remaining hypotheses between the proved arithmetic consequences and an
+irrationality proof at \(3/2\).

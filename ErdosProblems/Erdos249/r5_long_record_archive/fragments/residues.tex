@@ -1,0 +1,54 @@
+\section{Bounded residues and rationality}\label{sec:family}
+The residue theorem uses the same separation principle: force neighbouring
+coefficients to vanish while retaining one central value.
+
+\begin{theorem}\label{res:residueseries}
+For every $m\ge3$,
+\[
+ A_m=\sum_{n\ge1}\frac{\ph(n)\bmod m}{2^n}\notin\Q.
+\]
+For $k\ge1$ and $f:\Z/2^k\Z\to\Q$, the series
+$\sum_{n\ge1}f(\ph(n)\bmod2^k)2^{-n}$ is rational exactly when $f$ is
+constant on the even residue classes. If that constant is $c$, its value is
+$3f(1)/4+c/4$.
+\end{theorem}
+
+\begin{lemma}[A bounded isolated pulse]\label{lem:bounded-pulse}
+Let $a_n\in\Z$ satisfy $|a_n|\le C$. Suppose that for arbitrarily large $L$
+there is $N>L$ such that $a_N\ne0$ and
+$a_{N+t}=0$ for $0<|t|\le L$. Then $\sum_{n\ge1}a_n2^{-n}$ is irrational.
+\end{lemma}
+\begin{proof}
+If the sum has denominator $q$, every scaled tail
+$T_j=\sum_{t\ge1}a_{j+t}2^{-t}$ belongs to $q^{-1}\Z$.
+Choose $L$ so large that $C2^{-L}<1/q$.
+The right zero block gives $|T_N|\le C2^{-L}<1/q$, hence $T_N=0$.
+The left zero block now gives
+$T_{N-L-1}=a_N2^{-L-1}$, a nonzero element of $q^{-1}\Z$ with absolute
+value less than $1/q$, a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{res:residueseries}]
+Fix a unit $s\pmod m$ and a block length $L$. For each nonzero
+$t\in[-L,L]$, choose a distinct prime $q_t\equiv1\pmod m$ larger than $L$
+and outside the prime divisors of $m$. Prescribe
+\[
+ p\equiv s\pmod m,\qquad p\equiv-t\pmod{q_t}.
+\]
+This is a reduced progression, because each $q_t>|t|$. Dirichlet supplies
+arbitrarily large primes $p$ in it. Then $m\mid\ph(p+t)$ for every
+$0<|t|\le L$, whereas $\ph(p)\equiv s-1\pmod m$.
+
+Subtract $f(0)$ from the observable and clear its denominators. Whenever
+$f(s-1)\ne f(0)$, the preceding construction gives arbitrarily long bounded
+isolated pulses, so Lemma~\ref{lem:bounded-pulse} applies. For the
+least-residue map choose $s=-1$: its central residue is $m-2\ne0$ when
+$m\ge3$. For $m=2^k$, every even residue $r$ has $r+1$ a unit, so a
+nonconstant restriction to the even residues supplies such a pulse.
+Conversely, $\ph(n)$ is even for every $n\ge3$. Constancy on the even
+classes therefore makes all terms after $n=2$ constant, giving the stated
+rational value. This converse requires no recurrent-support theorem.
+\end{proof}
+Fixed bounded observables do not recover the unbounded coefficients of
+$S$. In the pulse proof, the coefficient bound is fixed before the zero
+block is chosen; allowing the modulus to grow changes that bound.

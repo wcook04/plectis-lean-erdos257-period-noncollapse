@@ -1,0 +1,79 @@
+\section{Information that does not force the gap}\label{sec:nogo}
+The kernel theorem supplies a coordinate system for the coefficient sequence.
+A rationality argument must use more than growth and an infinite-dimensional
+carry sequence. The rational control discussed in the long record has
+$c(n)=\ph(n)$ for odd $n$, $|c(n)-\ph(n)|\le2$ for even $n$, $0\le c(n)\le n$,
+and
+\[
+ \sum_{n\ge1}c(n)2^{-n}=\frac54.
+\]
+It has an integral tempered carry with dyadic rank at least $2^e-1$ at every
+level. Thus the same lower bound for a hypothetical totient carry is
+compatible with rationality. This control is not multiplicative. The exact
+even-argument arithmetic remains available to an argument that distinguishes
+it from $\ph$; equality of the full coefficient ranks at every level is not
+asserted for this control.
+
+A different obstruction concerns rational approximation. Put
+\[
+ \Theta_2=\sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}=S-\frac12,
+ \qquad
+ Q(e,Y)=\frac{\bigl(\sum_{d=1}^{Y}\mu(d)/(2^d-1)^{e+2}\bigr)^2}
+ {\sum_{d=1}^{Y}\mu(d)/(2^d-1)^{2e+2}}.
+\]
+The divisor-convolution identity gives the displayed value of $\Theta_2$,
+as recorded by Fan~\cite{fan2026totient}. The following exact extremum is
+stated in the long record as Theorem~\texttt{thm:rankonefloor}; its proof is
+\lword{Erdos249/RankOneSharpFloor.lean}{534}{rankOneSubrankQuotient_eq_one_five_iff}{the sharp-floor argument}
+in the linked source.
+
+\begin{theorem}[Positive rank-one floor]\label{res:rankonefloor}
+For $e\ge1$ and $Y\ge4$, the denominator of $Q(e,Y)$ is positive, and the
+unique minimiser is $(e,Y)=(1,5)$. Every admissible quotient and every
+nonempty finite positive weighted average of such quotients satisfies
+\[
+ Q-\Theta_2>\frac{21}{320}.
+\]
+The uniform bound $Q-\Theta_2>1/15$ is false already at $(1,5)$.
+\end{theorem}
+This theorem treats averages after the quotients are formed. Signed
+coefficients, coupling before the quotient, and higher-rank kernels require
+separate arguments. For any proposed rational approximants $p_j/q_j$ in
+lowest terms, a sufficient arithmetic target is
+\[
+ 0<q_j\left|\Theta_2-p_j/q_j\right|\longrightarrow0.
+\]
+Ordinary convergence and Hankel nonvanishing do not contain this denominator
+estimate. The canonical gap \eqref{eq:canonical-gap} remains the equivalent
+endpoint; the approximation estimate is one stronger sufficient route.
+
+\section{Antecedents and proof record}\label{sec:open}
+Allouche and Shallit introduced $k$-regular sequences~\cite{allouche-shallit}.
+Coons proved that $\ph$ is not $k$-regular for any $k\ge2$~\cite{coons}.
+Martin's stronger affine ordering theorem implies the independence used in
+Section~\ref{sec:rank}~\cite{martin-phi-inequalities}. The finite-level basis,
+scalar reductions and complete relation normal form are the conclusions
+established here from the explicit evaluation matrix. These conclusions do
+not require the irrationality of $S$. The original question is stated in
+Erd\H{o}s and Graham~\cite[p.~61]{erdosgraham1980}.
+
+The exact all-base basis and rank, residue-series irrationality, full-depth
+amplification, canonical equivalence and positive rank-one floor have
+proofs in the supplied Lean source snapshot:
+\mword{Erdos249257/AllBaseTotientKernel.lean}{1248}{allBaseTotientKernelBasis}{basis},
+\lword{Erdos249/ResidueClassTotientSeries.lean}{595}{residue_series_irrational}{residues},
+\lword{Erdos249/FullDepthRayAmplifier.lean}{364}{eventually_twoSyndetic_fullDepthKillMultipliers_of_seed}{amplification},
+\lword{Erdos249/CyclotomicAnchoredKill.lean}{3165}{fullMersenneCanonicalBasepointResidueGapSupply_iff_irrational}{canonical gap}, and
+\lword{Erdos249/RankOneSharpFloor.lean}{624}{rankOneSubrankQuotient_sub_theta_two_gt_twentyOne_div_threeTwenty}{rank-one floor}.
+The historical source links retain \texttt{\commitshort}; the all-base
+module requires a matching public source supplement.
+The integral normal form and periodic-coefficient corollary above are ordinary
+consequences, with their proofs displayed. The rational-control statement is
+proved in \texttt{ParityPerturbedRationalControl.lean}; its full evaluation
+rank was computed only at bounded depth, which is a different claim from the
+all-level carry lower bound used here.
+
+The long record contains the remaining criteria, counterexamples and finite
+computations. Its exact continued-fraction exclusion gives the separate
+bounds $q\ge2^{39989}$ and $q>10^{12038}$ under rationality. This computation
+is distinct from the Lean-checked Farey exclusion; neither gives the universal gap.

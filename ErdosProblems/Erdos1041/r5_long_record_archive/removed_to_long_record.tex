@@ -1,0 +1,1551 @@
+% Original passages replaced by round-five surgical edits.
+% Destination map is in 03_long_record_map.md. This file is an archive, not a manuscript.
+
+% A1 | abstract; sec:problem; sec:trinomial; glance and source blocks, lines 36–327
+\begin{abstract}
+\noindent
+Let $f(z)=\prod_i(z-z_i)$ be monic, with every root in the open unit disc.
+Erd\H{o}s, Herzog, and Piranian asked whether two roots can always be joined
+inside $\{|f|<1\}$ by a curve of length less than $2$.  The problem remains
+open.
+
+Every monic trinomial $z^n+az^m+b$, $1\le m<n$, with all zeros in the open
+unit disc has every origin-to-zero segment inside $\{|f|<1\}$.  The middle
+coefficient $a$ is unrestricted: the root equation eliminates it before any
+absolute value is taken, and Vieta supplies $\|b\|<1$.  Lean checks the
+radial inequalities and the length budget; concatenating the two segments is
+ordinary.  Four or more terms destroy the same prescribed spokes: an exact
+sextic family keeps every root inside the disc while the spoke to one root
+leaves $\{|f|<1\}$.
+
+The strongest parent-metric statement that applies to arbitrary geometry is
+the low-critical regime $\mu\le13/25$: two distinct roots of a squarefree
+monic $f$ are then joined inside $\{|f|<1\}$ by a curve of length strictly
+below $2$.  The proof is ordinary analysis closed by an exact rational
+certificate, replayable from the repository checker; it is not Lean-checked.
+Removing the threshold $\mu$ yields an unconditional constant-factor theorem:
+two zero occurrences are joined inside $\{|f|\le2\mu\}$ by a path of length
+at most $(71/10)\rho$, $\rho=\mu^{1/n}$.  If the roots lie in the unit disc
+and $\mu\le1/2$, the same construction lies in $\{|f|<1\}$ with length at
+most $5.7$.  First-merge arity and component-capacity cutoffs reach the
+target constant $2$ only as sufficient implications under $\mu\le1/2$; they
+do not cover the residual $\mu>13/25$, and low first-merge arity does not
+force a capacity gap.
+
+A separated critical value gives the parent conclusion in every degree
+$n\ge3$ once the other critical values lie outside a disk of radius $4/3$
+about a real centre.  The older coefficientwise cutoffs $S=4,3,2$ are
+superseded.  Collinear roots remain a complete sharp family.  No covering
+disjunction of critical-value separation two against first-merge arity or
+capacity holds: the cubic $z^3+(3/100)z-3/4$ has all roots inside,
+$\mu>13/25$, and neither critical value separated by two.  The one-root
+constant $\Gamma(1/4)^2/(2\sqrt{\pi})$ is likewise false.  No
+literature-priority claim is made.
+\end{abstract}
+
+\section{The problem}\label{sec:problem}
+
+\begin{problem}[Erd\H{o}s \#1041]\label{res:problem}
+Let $f(z)=\prod_{i=1}^{n}(z-z_i)$ be monic with $z_i\in\dbar$, the open unit
+disc.  Show that two of the roots can be joined by a curve of length less than
+$2$ lying in the open lemniscate $E=\{z\in\mathbb{C}:|f(z)|<1\}$.
+\end{problem}
+
+\noindent Numbering and current status follow Bloom's Erd\H{o}s problem
+catalogue \cite{bloom}.
+The problem is open.  The original source is Problem~5 on printed p.~139 of
+Erd\H{o}s--Herzog--Piranian \cite[p.~139]{ehp1958}; the preceding paragraph records the
+known input that one component of the lemniscate contains at least two zeros.
+
+Source pins and withdrawn-manuscript notes follow the glance table.
+
+\statusboundary
+
+\section{Monic trinomials, in every degree}
+\label{sec:trinomial}
+
+The cleanest proved all-degree connector that actually reaches length strictly
+below $2$ inside $\{|f|<1\}$ is a complete coefficient family, not a constant
+multiple of the target.
+
+\begin{theorem}[all-degree monic trinomials]
+\label{res:trinomial-all-degree}
+Let $1\le m<n$ and
+\[
+ f(z)=z^n+az^m+b,
+\]
+with every zero in the open unit disc.  For any zero $\zeta$, the entire
+segment $[0,\zeta]$ lies in $\{|f|<1\}$.  Distinct zeros $\zeta_1,\zeta_2$
+are therefore joined by the broken line $\zeta_1\to0\to\zeta_2$ of length
+$\|\zeta_1\|+\|\zeta_2\|<2$ inside the open unit lemniscate.
+\end{theorem}
+
+\begin{proof}
+The coefficient $a$ never appears after the first identity.  If
+$\zeta^n+a\zeta^m+b=0$, then for every scalar $t$,
+\[
+ f(t\zeta)=b(1-t^m)+\zeta^n(t^n-t^m).
+\]
+On $0\le t\le1$ the second difference $t^m-t^n$ is nonnegative.  Vieta and
+the root hypothesis give $\|b\|<1$, and $\|\zeta\|<1$, so
+\[
+ \|f(t\zeta)\|\le\|b\|(1-t^m)+\|\zeta\|^n(t^m-t^n)<1-t^n\le1,
+\]
+with a strict inequality for $t<1$, while $t=1$ is a zero.  The length bound
+is then immediate.  Lean checks the radial inequality, the Vieta step, and
+the sum-of-norms budget as
+\pdecl{trinomial\_erdos1041\_conclusion}; concatenating the two segments is
+ordinary.
+\end{proof}
+
+The same cancellation identity fails as soon as two intermediate modes are
+active.
+
+\begin{proposition}[prescribed-spoke guardrail]
+\label{res:sextic-spoke}
+There exist $r\in(0,1)$ for which every zero of
+\[
+ f_r(z)=z^6+\tfrac15 r^2 z^4-\tfrac15 r^4 z^2-r^6
+\]
+lies in the open unit disc, yet the radial spoke from the origin to the zero
+$r$ leaves $\{|f_r|<1\}$.
+\end{proposition}
+
+\noindent Lean checks this as \pdecl{sextic\_guardrail}.  It is not a
+counterexample to Erd\H{o}s~\#1041: only the prescribed radial construction
+fails.
+
+\subsection*{Main results at a glance}
+
+The problem remains open.  The table is ordered by mathematical consequence:
+sharp solved families and unconditional progress on the parent geometry come
+before auxiliary selectors and mechanism eliminations.
+Section~\ref{sec:evidence-ledger} gives the complete evidence and boundary
+ledger.
+
+{\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{0.29\linewidth}
+  >{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
+\toprule
+\textbf{Result} & \textbf{What is established} \\
+\midrule
+\textbf{All-degree monic trinomials} &
+Every origin-to-zero segment of $z^n+az^m+b$ lies in $\{|f|<1\}$, with $a$
+unrestricted.  \textsc{Lean-checked radial and metric inequalities; ordinary
+concatenation.} \\
+\addlinespace
+\textbf{Sharp collinear family} &
+The conjecture holds in every degree for collinear roots, with the sharp
+Chebyshev constant.  \textsc{Checked kernels; ordinary affine transport.} \\
+\addlinespace
+\textbf{Low-critical parent regime} &
+If $\mu\le13/25$, two distinct roots of a squarefree monic $f$ are joined
+inside $\{|f|<1\}$ by a curve of length strictly below $2$.
+\textsc{Ordinary exact proof; replayable rational certificate; not Lean
+checked.} \\
+\addlinespace
+\textbf{Global constant-factor theorem} &
+For arbitrary monic $f$, two zero occurrences are joined in
+$\{|f|\le2\mu\}$ by a path of length at most
+$(71/10)\mu^{1/n}$.  For unit-disc roots and $\mu\le1/2$, the path lies in
+$\{|f|<1\}$ and has length at most $5.7$.
+\textsc{Ordinary exact proof.} \\
+\addlinespace
+\textbf{Parent-theorem regimes under $\mu\le1/2$} &
+The target constant $2$ holds when $\mu\le1/2$ and the first-merge component
+has at least $17$ roots, or under an explicit arity-dependent
+component-capacity defect bound.  These are sufficient implications, not a
+cover of $\mu>13/25$.  \textsc{Ordinary exact proof.} \\
+\addlinespace
+\textbf{Critical-value separation regime} &
+A disk-family hypothesis on the critical spectrum gives the parent constant
+$2$ in every degree $n\ge3$ once the other critical values lie outside a
+disk of radius $4/3$ about a real centre.  The limiting cutoff is
+$\coth1$.  The older coefficientwise cutoffs $S=4,3,2$ are superseded.
+\textsc{Ordinary exact proof; Lean checks the uniform $4/3$ kernel.} \\
+\addlinespace
+\textbf{Critical-spectrum closure} &
+If the minimising critical point is unique and simple, or if a two-root
+component is imposed as a hypothesis, enough separation from the next
+critical-value modulus gives a join inside $K_\mu$.  A mere simple
+minimum does not force that window: see the tied-minimum quartic.
+The registered disk-family theorem remains the two-sheeted parent regime.
+\textsc{Ordinary exact proof; inference repaired 7 September 2026.} \\
+\addlinespace
+\textbf{Primitive sparse quintics} &
+Two exact tail-energy selectors give the conjectured path for the open-disc
+sparse-quintic family.  \textsc{Checked selectors; ordinary path assembly.} \\
+\addlinespace
+\textbf{Translated cubic quotient fibres} &
+The conjectured path exists for every $f(z)=P((z-h)^q)$ with $P$ monic cubic
+and $q\ge2$.  \textsc{Checked kernel; ordinary finite-fibre assembly.} \\
+\addlinespace
+\textbf{All-degree proximity theorem} &
+At every non-root critical point, two roots have total critical-point
+distance at most twice the geometric mean of all root distances.
+\textsc{Lean checked.} \\
+\addlinespace
+\textbf{Weighted free-point inequality} &
+Positive weights on the closed disc give $\sum w_j G(c_j)^2\le 1$ in every
+finite cardinality, already registered; $(S)_n$ follows in every degree.
+Not a path theorem. \textsc{Ordinary analytic proof.} \\
+\addlinespace
+\textbf{Straight-path obstructions} &
+Exact quintic and cubic families rule out the unique-nearest spoke and every
+pair of straight spokes as universal constructions.  \textsc{Lean checked.} \\
+\addlinespace
+\textbf{Exact covering obstructions} &
+The cubic $z^3+(3/100)z-3/4$ has $\mu>13/25$ and no critical value separated
+by two.  First-merge arity two can coexist with normalised capacity one.
+The one-root constant $\Gamma(1/4)^2/(2\sqrt{\pi})$ fails on
+$z^8-(3/2)z$.  None of these is a counterexample to the parent problem.
+\textsc{Ordinary exact proofs; Lean-checked rational cores.} \\
+\addlinespace
+\textbf{Current boundary} &
+The general problem is still open.  Inside $\mu\le1/2$, a counterexample
+must have first-merge arity at most $16$ and lie above the corresponding
+capacity-defect cutoff; those implications do not cover $\mu>13/25$.  The
+high-critical branch also remains. \\
+\bottomrule
+\end{tabular}}
+
+\subsection*{Sources and adjacent results}
+\label{sec:1041-sources}
+
+Two recent manuscripts are relevant.  The 48-page manuscript posted by
+\texttt{shtuka} on 24 March 2026
+\cite[Theorem~1, p.~1]{march2026} claimed the unrestricted
+statement.  Its Proposition~12 (p.~16, with proof continuing through p.~30)
+supplies the spanning-tree decomposition used in its final proof.  That
+manuscript has been withdrawn by its author, who wrote on the problem's
+discussion page on 26 March 2026 that the statement of Proposition~12, and not
+only its proof, is incorrect, after Tao identified an unjustified invocation of
+its Lemma~8 the previous day.  The file has not been revised since 24 March
+2026.  Section~\ref{sec:gap} gives an exact Cassini counterexample to
+Proposition~12's metric conclusion, reached independently; the same witness
+refutes Proposition~7 of an unattributed local revision, and the local
+three-ended saddle construction fails separately.  A second general-degree
+attempt circulated on 22 April 2026 and was broken on 27 April 2026.  No
+general-degree manuscript stands, and the problem page records the problem as
+open with no accepted proof claim.  Pendyala's independent June 2026
+preprint \cite[Thm.~1, p.~1]{june2026} proves the degree-four case through a
+finite four-point radial lemma and a short polygonal connector.  That is the
+one exactly comparable result.  It settles degree four completely and reaches
+no other degree.  Theorem~\ref{res:trinomial-all-degree} settles every monic
+trinomial in every degree at the target constant $2$.
+Theorem~\ref{res:low-critical-thirteen-twentyfifths} reaches the parent metric
+for arbitrary geometry once $\mu\le13/25$.
+Theorem~\ref{res:constant-factor-path} holds for every monic $f$ of degree
+$n\ge2$ with no root or threshold hypothesis, at the cost of the constant
+$71/10$ and the weaker containment level $K_{2\mu}$.
+Theorem~\ref{res:critical-value-separation} and its disk-family strengthening
+hold in every degree $n\ge3$ under a critical-spectrum hypothesis.  The quartic theorem does
+not close the problem.  An adjacent June 2026 paper by Pendyala
+\cite[Thm.~1.2, p.~2; introductory discussion, pp.~1--2]{pendyala2026shortest}
+proves $c\sqrt{\log n}\leq S(n)\leq\pi n$ for all sufficiently large $n$,
+where $S(n)$ measures the shortest path from $0$ to $\partial\mathbb D$ in
+the normalized set $\{|z|\leq1,\ |f(z)|\leq1\}$.  This is a different
+statement from the root-to-root problem here: it supplies important adjacent
+lemniscate-path context, but it is not evidence that Erd\H{o}s~\#1041 is
+solved or even a partial result for its root-pair conclusion.
+
+The two primary comparisons are pinned to downloaded PDFs.  The
+Erd\H{o}s--Herzog--Piranian source and digest are
+\begin{center}
+\footnotesize
+\path{annexes/erdos-herzog-piranian-1958-metric-properties-of-polynomials/source.pdf}\\
+SHA-256: \nolinkurl{bff39876de5e152b5a0d2b622eb6f9ca0c747d401ceea68146cfa2b2b5f28ce9}.
+\end{center}
+Its exact locator is printed p.~139 / PDF p.~15 / extracted lines 594--602,
+where the unit-disc setting, the two-zero component, and Problem~5 appear.
+It supports the historical problem statement only, not the local length--area
+estimate or the all-degree constant-factor result.  Pendyala's downloaded
+degree-four source and digest are
+\begin{center}
+\footnotesize
+\path{annexes/arxiv-2606-24875-pendyala-degree-four-lemniscate-path/source.pdf}\\
+SHA-256: \nolinkurl{337db0cc046023b1429d9131720d199843766629cd2ad8bf8b04a40168d7bcd8}.
+\end{center}
+Its abstract and Theorem~1 are on PDF p.~1, the four-point radial lemma is on
+PDF pp.~1--2, and the theorem proof runs through p.~3.  That proof's
+minimum-enclosing-disk/four-point mechanism is a genuine degree-four result,
+but it does not extend the all-degree claims or validate the Newton-flow
+decomposition below.
+
+The adjacent shortest-path comparison is likewise pinned to its downloaded
+primary source.  Pendyala's 34-page arXiv:2606.19178v1 PDF was downloaded from
+\url{https://arxiv.org/pdf/2606.19178v1}; the arXiv API record is
+\url{https://export.arxiv.org/api/query?id_list=2606.19178}.  Its digest is
+\begin{center}
+\footnotesize
+SHA-256: \nolinkurl{d7902a8bc37d2aad6dea52dffbbbaaf7ff23954ece5a0c4cbab108f58df4e6df}.
+\end{center}
+The abstract (printed p.~1, extracted lines 12--32) and Theorem~1.2 (printed
+pp.~3--4, extracted lines 97--113) support the bounds
+$c\sqrt{\log n}\leq S(n)\leq\pi n$.  The introduction's distinction from the
+root-to-root problem is on printed pp.~2--3 (extracted lines 51--78); the
+reciprocal-sweep and alternating-maze mechanisms are described in extracted
+lines 79--96.  These locators support only the neighboring marked-point result:
+they do not support a root-to-root path, a degree-free bound, or a transfer to
+the first-merge problem.
+
+Pendyala's Theorem~1 is a directly comparable degree-four result; it is not claimed unique in the literature.
+
+
+
+% A2 | sec:constant-factor; res:low-critical-thirteen-twentyfifths; res:constant-factor-path, lines 328–532
+\section{An unconditional all-degree constant-factor path theorem}
+\label{sec:constant-factor}
+
+The parent problem asks simultaneously for containment in the open unit
+sublevel and the sharp length $2$.  The following theorem keeps the same
+root-to-root path object for arbitrary geometry and arbitrary degree, while
+relaxing both constants in a controlled scale-invariant way.  For a monic
+degree-$n$ polynomial put
+\[
+ K_t=\{z:|f(z)|\le t\},\qquad
+ \mu=\min_{f'(c)=0}|f(c)|,\qquad \rho=\mu^{1/n}.
+\]
+
+\begin{theorem}[unconditional constant-factor path]
+\label{res:constant-factor-path}
+For every monic polynomial $f$ of degree $n\ge2$, two zero occurrences are
+joined by a possibly degenerate path of length at most
+\[
+ \frac{71}{10}\,\rho
+\]
+inside $K_{2\mu}$.  If $f$ is squarefree, their locations are distinct.
+If every root lies in the open unit disc and $\mu\le1/2$, the construction
+may be chosen inside $\{|f|<1\}$ with length at most $5.7$.
+\end{theorem}
+
+The constant is the rationally certified specialization of a two-parameter
+bound.  If the selected working component contains $k\ge2$ roots, then for
+every $r\in(0,1)$ and $\lambda>1$ the proof constructs a path in
+$K_{\lambda\mu}$ whose length is at most
+\[
+ \sqrt{\frac2k}\left(
+   \frac{\sqrt2\,r}{(1-r)^2}
+   +\lambda^{1/n}\left(
+      \sqrt{\log(\lambda/r)}+
+      \frac{\pi}{\sqrt{\log\lambda}}
+    \right)
+ \right)\rho.                                      \tag{CF}
+\]
+For $n\ge3$, the choice $\lambda=2$, $r=3/20$ makes the bracket less
+than $71/10$; degree two has the exact root-segment bound $2\rho$.
+
+\begin{proof}
+Write $K_t=\{|f|\le t\}$, $C_T$ for the component of $K_T$ containing a
+minimising critical point, and $A(\sigma)=\operatorname{Area}(K_\sigma\cap C_T)$.
+Degree two is the root segment of length $2\rho$ inside $K_\mu$; assume
+$n\ge3$.
+
+If a regular component $C'$ of $K_\sigma\cap C_T$ holds $k'$ roots, then
+$|dz|=\sigma\,d\varphi/|f'|$ on $\partial C'$ and $\int d\varphi=2\pi k'$.
+Cauchy--Schwarz and coarea give
+\[
+ \mathcal H^1(\partial C')^2
+ \le2\pi k'\,\sigma A'(\sigma).                     \tag{CF1}
+\]
+P\'olya's inequality $A(T)\le\pi T^{2/n}$ and the change of measure
+$d\sigma/\sigma$ on $[\mu,T]$, $T=\lambda\mu$, produce a non-critical level
+$t\in[\mu,T]$ with $t A'(t)\le\pi T^{2/n}/\log\lambda$.  The component
+$C_t\subseteq C_T$ still holds $k\ge2$ roots, and
+\[
+ \mathcal H^1(\partial C_t)
+ \le\pi\sqrt{2k/\log\lambda}\,T^{1/n}.
+\]
+The level $t$ is chosen from the mean of $\sigma A'(\sigma)$ \emph{before}
+any path is assembled.  That is the only device that removes the logarithmic
+divergence of $A'$ at a critical level.
+
+For arguments avoiding the finitely many critical-value rays, each root in
+$C_t$ lifts along a value-ray to $\partial C_t$.  Split every lift at level
+$r\mu$.  On a one-root lobe the inverse of $f/\mu$ is univalent, so Koebe
+distortion bounds the low pieces pointwise; the precritical identity
+\[
+ \sum_i\frac{\mu^2}{|f'(z_i)|^2}\le\rho^2          \tag{CF2}
+\]
+then aggregates them by Cauchy--Schwarz, paying $\sqrt{2/k}$ rather than
+once per root.  Coarea and~(CF1) bound the high pieces only after averaging
+in the argument.  Choose one argument realising that average, order the lift
+endpoints cyclically on $\partial C_t$, and hop along the shortest adjacent
+boundary arc.  Averaging the two lifts and the $k$ arcs over adjacent pairs
+gives~(CF).  When $\lambda\mu\le1$ the same mean-value choice may be taken
+strictly below the top of the window, so the path lies in $\{|f|<1\}$.
+\end{proof}
+
+The same estimate reaches the sharp target in explicit regions of the parent
+problem.  Let $k_0$ be the number of roots in the component of $K_\mu$
+containing the chosen minimising critical point.  Let $C$ be the corresponding
+component of $K_{2\mu}$ and put
+\[
+ \kappa=\frac{\operatorname{cap}(\overline C)}{(2\mu)^{1/n}}.
+\]
+Thus $\kappa=e^{-\Sigma/n}$, where $\Sigma$ is the total exterior Green
+defect of the roots excluded from $C$.
+
+\begin{theorem}[first-merge arity and capacity closures]
+\label{res:first-merge-capacity-closures}
+Assume all roots lie in the open unit disc and $\mu\le1/2$.
+
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item If $k_0\ge17$, two distinct roots are joined inside $\{|f|<1\}$ by a
+path of length strictly less than $2$.
+\item Put
+\[
+ A=\frac{283}{3610},\qquad B=\frac{52029}{9100},\qquad
+ \tau_k=\frac{\sqrt{2k}-A}{B}.
+\]
+If $\kappa\le\tau_{k_0}$, the same conclusion holds.  In particular,
+$\kappa\le1/3$ suffices for every $k_0\ge2$, while at $k_0=16$ the rational
+cutoff improves to $\kappa\le39/40$.
+\end{enumerate}
+\end{theorem}
+
+The second part retains the component root count and replaces the global area
+bound in~(CF1) by
+$\operatorname{Area}(C)\le\pi\operatorname{cap}(\overline C)^2$.
+Consequently a counterexample with $\mu\le1/2$ must have $k_0\le16$ and must
+lie above its arity-dependent capacity cutoff.  Smaller critical levels give
+stronger nested regions: $\mu\le1/4$ closes every $k_0\ge12$,
+$\mu\le1/8$ closes every $k_0\ge10$, and the $\mu\le1/64$ calculation raises
+the surviving $k_0=9$ capacity cutoff to $99/100$.
+
+There is a complementary closure criterion that spends separation in the
+critical spectrum instead of component capacity.  Suppose $f$ is squarefree and $c_*$ is the unique critical point attaining
+$\mu$, and is simple.  Let $T_*>\mu$ be the supremum of the levels for which
+the component born at $c_*$ contains exactly two roots.  Uniqueness, not
+simplicity, puts $T_*$ at least the next distinct critical-value modulus.
+The quartic $z^4-(4/15)z^3-(4/25)z^2+1/750$ has three simple critical points,
+tied minima of modulus $1/750$, all roots inside the disc, and first nontrivial
+component of degree three, so a simple minimum is not enough.
+
+\begin{theorem}[minimal-hub spectral window]
+\label{res:minimal-hub-window}
+Under these hypotheses, two roots are joined by a path inside $K_\mu$ of
+length at most
+\[
+ \Psi_n(T_*/\mu)\,\mu^{1/n},\qquad
+ \Psi_n(x)=x^{1/n}
+   \sqrt{2\log\frac{x+1}{x-1}}.                     \tag{SW}
+\]
+The function $\Psi_n$ is strictly decreasing on $(1,\infty)$.  Let
+$x_n^*$ be the unique solution of $\Psi_n(x)=2$ for $n\ge3$.  If the roots
+lie in a disk of radius $R$ and the second distinct critical-value modulus
+$\nu_2$ satisfies $\nu_2/\mu>x_n^*$, then the path has length less than
+$2R$ and proves the parent conclusion.  The first thresholds are
+\[
+ \begin{aligned}
+ x_3^*&=1.6064943\ldots,&
+ x_4^*&=1.4784372\ldots,\\
+ x_5^*&=1.4289343\ldots,&
+ x_{10}^*&=1.3598081\ldots .
+ \end{aligned}
+\]
+and $x_n^*$ decreases to $\coth 1$, not to $1$.
+\end{theorem}
+
+Indeed, the two-root descent-arc estimate at any $t\in(\mu,T_*)$ is
+\[
+ \operatorname{len}(\Gamma)
+ \le t^{1/n}\sqrt{2\log\frac{t+\mu}{t-\mu}},
+ \qquad \Gamma\subset K_\mu.
+\]
+Writing $x=\coth u$ gives
+$\Psi_n(x)^2=4u\coth(u)^{2/n}$ and proves strict decrease.  Taking the limit
+$t\uparrow T_*$ gives~(SW); the Fekete--Vandermonde bound
+$\mu\le R^n$ converts $\Psi_n(\nu_2/\mu)<2$ into the parent metric bound.
+The same criterion is stable under the compositional pullback
+$P((z-h)^q)$ after adjoining the hub value $|P(0)|$ to the critical spectrum.
+The complete proof and threshold certificates are in
+\path{ErdosProblems/Erdos1041/MinimalHubWindowJoin.md}.  This theorem is
+silent at a multiple minimising critical point and makes no priority claim.
+
+These statements are complete ordinary analytic proofs.  They are not Lean
+theorems and make no literature-priority claim.  Their full constant
+certificates, component-capacity tables, and local proofs are in
+\path{ErdosProblems/Erdos1041/UnconditionalConstantFactorBound.md}; the
+P\'olya input is the global area--capacity inequality, not the local
+winding--coarea estimate, reciprocal-derivative aggregation, or assembled
+path theorem.
+
+\begin{theorem}[low-critical parent regime]
+\label{res:low-critical-thirteen-twentyfifths}
+Let $f$ be squarefree and monic of degree $n\ge2$, and let $\mu$ be its least
+critical-value modulus.  If $\mu\le13/25$, then two distinct roots are joined
+inside $\{|f|<1\}$ by a rectifiable curve of length strictly less than $2$.
+\end{theorem}
+
+The proof is the comparison ODE of the earlier low-critical notes, with the
+arity floor taken as the maximum of the COVER floor, the ordered profile, the
+packing floor, and a circle-slice dual floor.  The dual table is generated at
+runtime by
+\path{ErdosProblems/Erdos1041/scripts/check_erdos1041_angular_budget_closure.py};
+full mode returns
+$X_{\mathrm{cert}}=635762889599/10^{12}$ and $(13/25)\exp(X_{\mathrm{cert}})<1$.
+There is no separate static $126$-row export: the checker is the certificate.
+The argument is not Lean-checked.  Details live in
+\path{ErdosProblems/Erdos1041/AngularBudgetLowCriticalClosure.md}.
+
+The arity and capacity cutoffs of
+Theorem~\ref{res:first-merge-capacity-closures} are sufficient implications
+inside $\mu\le1/2$.  They are not a cover of the complementary cell
+$13/25<\mu<1$.  Low first-merge arity does not force a capacity gap: the
+cubic $z^3-(3/400)z-3/32$ has all roots in the open disc, $\mu<1/2$, first-merge
+arity two, and normalised ancestor capacity one at level $2\mu$.  The cubic
+$z^3+(3/100)z-3/4$ has $\mu>13/25$ and no critical value separated by two.
+Neither example is a counterexample to Erd\H{o}s~\#1041; both are trinomials.
+The unrestricted constant $2$ and the high-critical residual remain open.
+
+
+
+% A3 | sec:freepoint; res:fp-weighted-all-degree; res:fp-to-s, lines 1283–1448
+\section{An all-degree weighted free-point theorem}
+\label{sec:freepoint}
+
+A second route isolates the algebraic critical-value estimate from the metric
+path construction.  For $c_1,\ldots,c_m\in\overline{\mathbb D}$ put
+\[
+ A_j=\prod_{k=1}^m |1-\overline{c_j}c_k|,
+ \qquad
+ S_m=\sum_{j=1}^m A_j^{1/m}.
+\]
+Write $\mathrm{FP}_m$ for the assertion $S_m\le m$ for every such tuple.
+The registered ordinary theorem
+\path{ErdosProblems/Erdos1041/FreePointQuadraticAllDegrees.md}
+already proves a stronger weighted statement in every finite cardinality;
+it is recorded here as catch-up, not as a new result of this note.
+
+\begin{theorem}[weighted free-point inequality in every degree]
+\label{res:fp-weighted-all-degree}
+Let $c_1,\ldots,c_m\in\overline{\mathbb D}$ and let $w_j>0$ satisfy
+$\sum_j w_j=1$.  Set
+\[
+ G(z)=\prod_k |1-\overline{c_k}z|^{w_k}.
+\]
+Then
+\[
+ \sum_j w_j G(c_j)^2\le 1,
+\]
+with equality if and only if every $c_j=0$.  Equal weights therefore give
+$\mathrm{FP}_m$ for every $m$.
+\end{theorem}
+
+The proof is the Poisson/Taylor identity already written in that note: the
+points determine a mixture of Poisson kernels whose circle integral expands
+in nonnegative Taylor weights.  It is ordinary analysis, not Lean-checked.
+The four-point theorem below remains a valid specialised proof; its
+claim-effect as an all-degree boundary is superseded.
+
+\begin{theorem}[four-point free-point inequality]\label{res:fp4}
+$\mathrm{FP}_4$ holds.  More precisely,
+\[
+ \sum_{j=1}^4
+   \left(\prod_{k=1}^4|1-\overline{c_j}c_k|\right)^{1/4}
+ \le4,
+\]
+with equality if and only if $c_1=c_2=c_3=c_4=0$.
+\end{theorem}
+
+The proof divides at $\max_j|c_j|^2=21/25$.  In the central region, the
+logarithmic identities $\sum_j h_j=-E$ and
+$\sum_j h_j^2\le E\,\operatorname{mean}_j L_j$ combine with an exact
+Bernstein-certified row envelope and rational exponential bounds.  In the
+outer region, a $K_4$ matching H\"older inequality reduces the estimate to a
+one-variable radical inequality with positive exact squared slack.  The two
+parts meet at the stated rational radius; neither is a numerical extrapolation
+from the other.
+
+The central argument has an all-degree form that is stronger than the uniform
+radius estimate used above.  Put
+\[
+ L_j=-\log(1-|c_j|^2),\qquad
+ M_j=\frac1m\sum_{k=1}^m-\log(1-|c_j||c_k|),
+\]
+and set $C(0)=1/2$ and
+\[
+ C(t)=\frac{e^t-1-t}{t^2}\quad(t>0).
+\]
+
+\begin{theorem}[adaptive all-degree central region]
+\label{res:fp-central-radius}
+For every $m\ge1$, the configuration-dependent condition
+\[
+ \frac1m\sum_{j=1}^m C(M_j)L_j\le1
+ \tag{\textsc{rowcert}}
+\]
+implies $S_m\le m$, with equality only when all $c_j=0$.  In particular,
+let $L_*>0$ be the unique positive solution of
+\[
+ e^{L_*}=1+2L_*,
+\]
+and put
+\[
+ \rho_*=(1-e^{-L_*})^{1/2}=0.8457729381\ldots .
+\]
+Then $S_m\le m$ for every $m$ whenever
+$\max_j|c_j|\le\rho_*$.
+\end{theorem}
+
+\begin{proof}[Proof spine]
+Write $q_r=\sum_kc_k^r$ and
+\[
+ h_j=\log A_j^{1/m},\qquad
+ E=\frac1m\sum_{r\ge1}\frac{|q_r|^2}{r}.
+\]
+The absolutely convergent logarithmic expansion gives
+\[
+ \sum_jh_j=-E,\qquad
+ h_j^2\le\frac EmL_j,\qquad |h_j|\le M_j.
+\]
+On $[-M,M]$ the sharp quadratic remainder bound is
+\[
+ e^h\le1+h+C(M)h^2.
+\]
+Summing this row by row yields
+\[
+ S_m\le m-E\left(1-\frac1m\sum_jC(M_j)L_j\right)\le m.
+\]
+Equality forces every $h_j$ and hence every power sum $q_r$ to vanish;
+Newton's identities then force all $c_j=0$.  If
+$R=\max_j|c_j|$ and $L=-\log(1-R^2)$, then
+$M_j,L_j\le L$ and $C(L)L\le1$ is exactly
+$e^L\le1+2L$.  This proves the uniform-radius consequence.
+\end{proof}
+
+Thus any counterexample to the older unweighted $\mathrm{FP}_m$ argument
+must leave the explicit ball $\max_j|c_j|\le\rho_*$ and must fail the
+sharper rowwise certificate.  That restriction is historical: the weighted
+quadratic theorem already closes $\mathrm{FP}_m$ with no radius cutoff.
+
+The free-point statement enters the polynomial problem through a separate
+all-degree implication.  Let $(S)_n$ denote the following assertion: if $f$ is
+monic of degree $n$, the minimum enclosing radius of its roots is $R$, and
+$c_1,\ldots,c_{n-1}$ are its critical points counted with multiplicity, then
+\[
+  \sum_{j=1}^{n-1}|f(c_j)|^{1/n}\le(n-1)R.
+\]
+
+\begin{theorem}[free-point to critical values]\label{res:fp-to-s}
+For every $n\ge2$, $\mathrm{FP}_{n-1}$ implies $(S)_n$.
+\end{theorem}
+
+\begin{proof}[Proof spine]
+After translating and scaling the minimum enclosing root disk, regard the
+left-hand side as a symmetric function of the roots in the closed unit
+polydisc.  The critical values give a continuous plurisubharmonic multiset
+sum: away from critical-point collisions this follows from local holomorphic
+branches, and local boundedness gives the extension across the collision
+locus.  Applying the one-variable maximum principle in each root coordinate
+moves the maximum to the distinguished torus.
+
+When all roots lie on the unit circle, the critical points satisfy the exact
+identity
+\[
+ |f(c_j)|=\prod_{k=1}^{n-1}|1-\overline{c_j}c_k|.
+\]
+Put $m=n-1$ and $y_j=|f(c_j)|^{1/m}$.  The hypothesis gives
+$\sum_jy_j\le m$, while the tangent inequality
+\[
+ y^{m/(m+1)}\le\frac{my+1}{m+1}\qquad(y\ge0)
+\]
+converts the exponent and yields $\sum_j|f(c_j)|^{1/n}\le m$.  Scaling back
+restores the factor $R$.
+\end{proof}
+
+The registered weighted quadratic theorem therefore establishes $(S)_n$
+in every degree $n\ge2$, via the same torus/plurisubharmonic reduction.
+Theorem~\ref{res:fp4} remains an independent specialised proof of
+$\mathrm{FP}_4$.  Lean checks scalar matching, stationary-point, and
+exponent-conversion kernels, but not the complete analytic argument,
+plurisubharmonic removability, or the torus identity.
+
+A registered polar-derivative comparison on the unit circle supplies
+$|f(c_j)|<\prod_l|1-\overline{c_l}c_j|$ at every critical point, and
+composes with the same quadratic theorem.  Neither estimate selects a
+root pair or bounds a path.  In particular, $(S)_n$ does not imply
+Problem~\ref{res:problem}.
+
+
+
+% A4 | sec:open, lines 1597–1912
+\section{Complements and further questions}\label{sec:open}
+
+The dependency chain has five separate gates.  A proof, a minimally corrected
+hypothesis set, or an explicit polynomial or planar counterexample is a
+decisive answer to any one of them.
+
+\subsection*{1. Repair or refute the saddle block}
+
+\begin{problem}[corrected local saddle assembly]\label{prob:saddle1041}
+Under the hypotheses of Proposition~12, replace the invalid three-ended local
+model by a four-pronged block or by a block formed after a specified annular
+cut.  Prove that for every $\eta>0$ its connector has total Euclidean length
+below $\eta$, uniformly over the selected attachment points, and that the
+corrected blocks assemble to an embedded tree satisfying
+\[
+ \operatorname{len}(G_\varepsilon)
+ \le\frac1{2\pi}\int_{2\alpha}^{\infty}P_V(t)\,dt+\varepsilon;
+\]
+or give a polynomial or harmonic planar counterexample to that statement.
+\end{problem}
+
+The Cassini family in \S\ref{sec:gap} answers this problem negatively as
+stated: the requested global estimate is smaller than the distance between its
+two roots.  What remains meaningful is a weaker one-pair assembly with a
+different metric budget; changing only the local saddle block cannot restore
+the coefficient in the displayed inequality.
+
+The full-disc model $x^2-y^2$, an annulus in which lower branches rejoin, two
+saddles joined by a separatrix and simultaneous saddle levels are mandatory
+tests.  Repeating the one-lower/two-upper assertion does not answer the
+problem.
+
+\subsection*{2. The compact ray-cut decomposition}
+
+Let $p$ have simple roots, simple nonzero critical points and let
+$u=-\log|p|$.  For regular values $c<T$, take
+\[
+ M_{c,T}=\overline{V\cap\{c<u<T\}},
+\]
+and assume explicitly that this is a compact genus-zero surface, its lower
+boundary is one smooth Jordan curve, its upper boundary consists of $m$ smooth
+root curves, all interior critical points are nondegenerate index-one saddles,
+the normalised gradient field
+\[
+ X=\frac{\nabla u}{|\nabla u|^2}=-\frac{p}{p'}
+\]
+is transverse to the level boundaries, and no maximal $X$-trajectory has two
+saddle endpoints.
+
+\begin{problem}[finite strip decomposition after ray cuts]\label{prob:reeb1041}
+For every $\eta>0$, construct disjoint Morse neighbourhoods $N_j$ with
+$\sum_j\operatorname{diam}N_j<\eta$ and a finite set of complete separatrix or
+regular-flow cuts so that every component of the complement is flow-diffeomorphic
+to a rectangle
+\[
+ [a_S,b_S]\times[0,1],\qquad u(\Phi_S(t,s))=t,
+\]
+with connected level sections and no uncut annular component.  Give an explicit
+finite bound $E(s,m)$ for the number of strips, or exhibit the minimal missing
+hypothesis or a counterexample.
+\end{problem}
+
+No particular formula such as $2s+1$ is presumed.  Boundary tangencies,
+simultaneous levels, branch reunion through an annulus and non-Hausdorff orbit
+spaces must be handled rather than suppressed.
+
+\subsection*{3. Metric fan-in without losing the coefficient}
+
+For a strip $S$, write
+\[
+ \Gamma_t^S=S\cap\{u=t\},\qquad
+ P_S(t)=\mathcal H^1(\Gamma_t^S),
+\]
+and let $k_S$ be its number of root ends.  The flux identity
+\[
+ \int_{\Gamma_t^S}|\nabla u|\,ds=2\pi k_S
+\]
+gives the average trajectory estimate
+\[
+ \int_{\Gamma_{t_0}^S}\operatorname{len}(\gamma_x)\,d\mu_{t_0}(x)
+ =
+ \frac1{2\pi k_S}\int_{a_S}^{b_S}P_S(t)\,dt.
+\]
+
+\begin{problem}[additive-error strip gluing]\label{prob:metric1041}
+Assuming Problem~\ref{prob:reeb1041}, select trajectories in all strips and
+connect them through the saddle and root neighbourhoods so that, for every
+$\eta>0$, the resulting embedded tree contains all $m$ roots and obeys
+\[
+ \operatorname{len}(G)
+ \le\frac1{2\pi}\int_{2\alpha}^{\infty}P_V(t)\,dt+\eta.
+\tag{6.1}\label{eq:metric-fanin1041}
+\]
+The total saddle, annular-cut and root-cap cost must be below $\eta$ without a
+multiplicative loss in $1/(2\pi)$.
+\end{problem}
+
+For the final strict inequality, use the actual collar slack
+\[
+ q=\frac1{2\pi}\int_{\alpha}^{2\alpha}P_V(t)\,dt>0
+\]
+and give budgets that keep the perturbation, tree error and transfer cost below
+fixed fractions of $q$.  Independently choosing a shortest trajectory in each
+strip is not enough.  Theorems~\ref{res:orlicz-currency} and
+\ref{res:orlicz-selector} identify the exact missing control: a linear
+lifetime charge is impossible, while an upper bound on one internal
+merge-ratio product would select two young roots before the attachment age
+fragments across many edges.
+
+\subsection*{4. Coefficient perturbation and stability}
+
+The constant-translation stage is no longer open.  Once a finite critical-value
+family is injective, Lean proves an arbitrarily small translation making every
+value nonzero and pairwise positive-ray separated
+(\pdecl{exists_small_translation_separating_arguments}).  It also proves the
+explicit root-retention estimate; a shift below $\varepsilon$ keeps all roots
+in the unit disc when
+\[
+ ((n+1)\varepsilon)^{1/n}+\rho<1
+\]
+(\pdecl{constant_perturbation_roots_in_unitDisk}).  A constant translation
+cannot separate initially equal critical values.
+
+\begin{proposition}[a one-parameter critical-value genericity lemma]
+\label{prop:linear-genericity1041}
+Let $f\in\mathbb C[z]$ have degree at least $2$.  There is a finite set
+$E\subset\mathbb C$ such that, for every $\lambda\notin E$, the polynomial
+$f+\lambda z$ has only simple critical points and its critical values are
+pairwise distinct.  In particular, such $\lambda$ occur arbitrarily close to
+$0$.
+\end{proposition}
+
+\begin{proof}
+Write $d=\deg f$ and let $a$ be the leading coefficient.  A multiple critical
+point of $f+\lambda z$ satisfies
+\[
+ f'(u)+\lambda=0,\qquad f''(u)=0.
+\]
+Since $f''$ is not the zero polynomial, this excludes only finitely many
+values $\lambda=-f'(u)$.
+
+For distinct critical points $u,v$ with equal critical values, eliminating
+$\lambda$ gives the two polynomial equations
+\[
+ A(u,v):=\frac{f'(u)-f'(v)}{u-v}=0,
+ \qquad
+ B(u,v):=\frac{f(u)-f(v)}{u-v}-f'(u)=0,
+\tag{4.1}\label{eq:critical-collision}
+\]
+and then $\lambda=-f'(u)$.  These two equations have only finitely many
+solutions.  Indeed, their top homogeneous parts are
+\[
+ A_{d-2}=da\,(u^{d-2}+u^{d-3}v+\cdots+v^{d-2}),
+\]
+and
+\[
+ B_{d-1}=a\,(u^{d-1}+u^{d-2}v+\cdots+v^{d-1}-d u^{d-1}).
+\]
+They have no common projective zero at infinity.  For $u\ne0$, putting
+$r=v/u$, the first equation gives
+$1+r+\cdots+r^{d-2}=0$, hence $r^{d-1}=1$ and $r\ne1$; the second expression,
+divided by $a u^{d-1}$, is then $1-d\ne0$.  If $u=0$, the first expression is
+nonzero (and for $d=2$ it is already a nonzero constant).  Thus $A$ and $B$
+have no common curve component: any such affine component would have a point
+at infinity.  Their common zero set is finite, so the associated values
+$-f'(u)$ form a finite exceptional set.  Avoiding its union with the first
+finite set proves the claim.
+\end{proof}
+
+\begin{proposition}[compact barrier stability]\label{prop:compact-barrier1041}
+Let $C,H\subset\mathbb C$ be compact, let $D_1,\ldots,D_m$ be pairwise
+disjoint closed discs, and let $T\subset\mathbb R_{>0}$ be finite.  Suppose
+that $C$ and $H$ are nonempty, that $m\geq1$, that $T$ is nonempty,
+that $f'$ has no zero on $C$, that $f$ has no zero on any $\partial D_i$, and
+that $|f(z)|\ne t$ for every $z\in H$ and $t\in T$.  Put
+\[
+ c_C=\min_C|f'|,\qquad
+ c_D=\min_i\min_{\partial D_i}|f|,\qquad
+ c_H=\min_{t\in T}\min_H\bigl||f|-t\bigr|,
+\]
+and
+\[
+ R=\max\bigl\{|z|:z\in H\cup\partial D_1\cup\cdots\cup\partial D_m\bigr\}.
+\]
+Then $c_C,c_D,c_H>0$.  If
+\[
+ |\lambda|<c_C,
+ \qquad
+ R|\lambda|+|\beta|<\min(c_D,c_H),
+\tag{4.2}\label{eq:compact-barrier-budget}
+\]
+then $g_{\lambda,\beta}=f+\lambda z+\beta$ has no critical point in $C$,
+has the same number of zeros as $f$ in every $D_i$ (with multiplicity), and
+lies on the same side of every level $t\in T$ as $f$ at every point of $H$.
+\end{proposition}
+
+\begin{proof}
+Compactness and the hypotheses give the three positive minima.  Since
+$g'_{\lambda,\beta}=f'+\lambda$, the first inequality in
+\eqref{eq:compact-barrier-budget} gives
+\[
+ |g'_{\lambda,\beta}(z)|\ge |f'(z)|-|\lambda|>0
+ \qquad(z\in C).
+\]
+On every $\partial D_i$ the second inequality gives
+\[
+ |\lambda z+\beta|\le R|\lambda|+|\beta|<|f(z)|,
+\]
+so Rouch\'e's theorem preserves the zero count in $D_i$.  Finally,
+\[
+ \bigl||g_{\lambda,\beta}(z)|-|f(z)|\bigr|
+ \le |\lambda z+\beta|<\bigl||f(z)|-t\bigr|
+ \qquad(z\in H,\ t\in T),
+\]
+which preserves the sign of $|f(z)|-t$.
+\end{proof}
+
+\noindent This compact estimate separates several local requirements that
+were previously bundled into ``stability'': protected collars and truncation
+boundaries remain free of critical points, prescribed root discs retain their
+zeros, and finite level barriers retain their chosen side.  It does not assert
+that a selected sublevel component remains connected or nested, and it gives
+no continuity statement for the coarea slack $q$.
+The first, protected-set noncriticality implication is separately Lean-checked
+in \texttt{noncritical\_on\_of\_norm\_lt\_uniform\_lower\_bound} and is
+targeted by the external Comparator interface.  The Rouch\'e root-count and
+level-side implications in this proposition remain ordinary paper proofs.
+
+\begin{problem}[two-stage generic perturbation with remaining global stability]\label{prob:perturb1041}
+For fixed root discs, compact collar $K$, regular levels
+$\alpha/2,\alpha,2\alpha,5\alpha/2$ and collar slack $q>0$, prove that an
+arbitrarily small
+\[
+ g_{\lambda,\beta}(z)=f(z)+\lambda z+\beta
+\]
+can be chosen so that:
+
+\begin{enumerate}
+\item $f+\lambda z$ has simple relevant critical points and injective complex
+critical values;
+\item the checked constant translation $\beta$ makes those values nonzero and
+pairwise ray-separated;
+\item the relevant component remains in $K$, contains exactly the corresponding
+perturbed roots and has slack $q_g>q/2$; and
+\item root displacement and straight-line transfer back to the original roots
+consume less than a prescribed fraction of $q/m$.
+\end{enumerate}
+
+Proposition~\ref{prop:linear-genericity1041} proves the first item, with an
+arbitrarily small one-coefficient perturbation.  Proposition~\ref{prop:compact-barrier1041}
+supplies the local collar, truncation, root-disc and finite-level controls once
+their compact margins have been fixed.  The remaining issue is global component
+and strict-slack stability, followed by the quantified root-transfer budget.
+\end{problem}
+
+Finite planar avoidance and the subsequent constant translation must not be
+relisted as missing.  Critical-value genericity and compact barrier control are
+now elementary inputs.  The remaining metric question on the closed root-disc
+class $\mathcal K_n$ is already registered: $\Lambda$ is lower semicontinuous,
+$\Lambda(z^n-1)=2$, so a dense generic proof of $\Lambda(f)\le 2$ yields the
+closed-class bound, and the open-disc problem is equivalent to that inequality.
+The canonical-arc minimum $\min L_f(c)$ is sufficient for $\Lambda\le 2$, not
+equivalent to it.  Collar-preserving forward perturbation is not required.
+
+\subsection*{5. The global Newton-flow claim ceiling}
+
+\paragraph{What the constant-factor theorem leaves open.}
+Theorems~\ref{res:constant-factor-path} and
+\ref{res:first-merge-capacity-closures} remove the former absence of any
+unconditional global path bound.  They also close substantial parent regimes.
+They do not prove the sharp constant $2$ on the remaining low-arity,
+high-component-capacity cells or on the high-critical branch.  The Newton-flow
+programme below is therefore no longer needed to obtain a finite global
+constant; its purpose is to recover sharp containment and sharp metric
+allocation on precisely those residual cells.  P\'olya's primary theorem
+supplies only the global area--capacity input used in
+Section~\ref{sec:constant-factor}; no priority claim is inferred for the
+source-specific local estimates or assembled paths.
+
+\begin{problem}[relative global Newton-flow theorem]\label{prob:globalflow1041}
+On a compact regular band
+\[
+ M_{a,b}=\{z:a\le-\log|p(z)|\le b\},
+\]
+prove real-time existence and the identities
+\[
+ p(z(t))=e^{-(t-t_0)}p(z(t_0)),\qquad
+ u(z(t))=u(z(t_0))+t-t_0
+\]
+throughout every maximal orbit; classify both limiting endpoints among the
+regular boundary, root ends and finite saddle set; and exclude recurrent,
+accumulating and non-Hausdorff orbit phenomena.  Under pairwise ray separation
+of the critical values, decide whether the flow is Morse--Smale relative to the
+boundary or whether the strongest valid conclusion is only absence of
+saddle-to-saddle connections.
+\end{problem}
+
+The checked algebra proves the pointwise value equation and the endpoint-ray
+consumer.  It does not supply global solution theory or an orbit-space graph.
+A positive stronger theorem must give the graph and a finite edge bound; a
+negative answer should exhibit the simplest ray-separated polynomial carrying
+the remaining pathology.
+
+The auxiliary free-point route is no longer a degree-five boundary.
+Theorem~\ref{res:fp-weighted-all-degree} is the registered all-degree
+weighted quadratic theorem; Theorem~\ref{res:fp-to-s} therefore yields
+$(S)_n$ in every degree.  What remains is a metric or selection theorem
+that converts critical-value control into the short root-to-root path.
+
+Erd\H{o}s~\#1041 remains open.  The closed-class question is
+$\Lambda(f)\le\Lambda(z^n-1)=2$ on $\mathcal K_n$, by the registered
+lower-semicontinuity reduction; genericity is not an unresolved remaining
+producer.  The Newton kernel, finite ray avoidance, and compact-barrier
+controls remain as recorded.  A metric selector on admissible canonical arcs
+is sufficient, not equivalent, for that inequality.
+
+
+
+% A5 | sec:evidence-ledger, lines 1913–2091
+\section{Evidence and boundary ledger}
+\label{sec:evidence-ledger}
+
+This ledger separates proved statements, checked kernels, computations, and
+open steps.  Each entry states both the evidence and the limit of the claim.
+
+{\small
+\renewcommand{\arraystretch}{1.16}
+\begin{longtable}{@{}
+  >{\raggedright\arraybackslash}p{0.28\linewidth}
+  >{\raggedright\arraybackslash}p{0.66\linewidth}@{}}
+\toprule
+\textbf{Result or mechanism} & \textbf{Evidence and exact boundary} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Result or mechanism} & \textbf{Evidence and exact boundary} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{2}{r@{}}{\footnotesize\itshape Continued on the next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{2}{@{}p{0.94\linewidth}@{}}{\textbf{Principal results}} \\
+\addlinespace
+Critical two-root proximity &
+\textsc{Lean checked.}  At every non-root critical point, two distinct roots
+have total critical-point distance at most twice the geometric mean of all
+root distances.  The theorem selects a metric pair; it does not prove that a
+short connecting path stays in the lemniscate. \\
+\addlinespace
+Straight-path obstructions &
+\textsc{Lean-checked counterexamples.}  Exact families rule out both the
+unique-nearest spoke and every pair of straight spokes through the critical
+point as universal constructions. \\
+\addlinespace
+Translated cubic quotient fibres &
+\textsc{Checked cubic kernel; ordinary finite-fibre assembly.}  This gives a
+complete solved family $f(z)=P((z-h)^q)$.  Lean proves the safe cubic spoke;
+the root-of-unity assembly is an ordinary proof. \\
+\addlinespace
+Primitive sparse quintics &
+\textsc{Checked selector kernels; ordinary path assembly.}  Two tail-energy
+selectors give the solved open-disc family.  The moment-to-path transport is
+an ordinary proof. \\
+\addlinespace
+Sharp collinear family &
+\textsc{Checked kernels; ordinary affine transport.}  This is a complete
+all-degree family with the sharp Chebyshev constant. \\
+\midrule
+\multicolumn{2}{@{}p{0.94\linewidth}@{}}{\textbf{Critical-value and free-point route}} \\
+\addlinespace
+Newton identities &
+\textsc{Lean checked.}  Away from critical points, a trajectory tangent to
+$-f/f'$ satisfies $w'=-w$ and
+$\frac{d}{dt}(e^t f(z(t)))=0$. \\
+\addlinespace
+Critical-value rays &
+\textsc{Lean checked, consumer form.}  Values at the endpoints of a finite connection share
+one oriented ray in the value plane, so distinct value-rays exclude a connection.  For a pair of
+critical values, collision occurs on
+$\beta=(ra-b)/(1-r)$ with $r>0$ and $r\ne1$. \\
+\addlinespace
+Quartic case &
+\textsc{Cited theorem.}  The degree-four result is proved in
+\cite[Thm.~1, p.~1]{june2026}.  It does not extend to arbitrary degree. \\
+\addlinespace
+Weighted free-point inequality &
+\textsc{Ordinary exact proof, already registered.}  Positive weights on the
+closed disc give $\sum w_j G(c_j)^2\le 1$ in every finite cardinality.
+Equal weights close $\mathrm{FP}_m$ for every $m$.  Not a path theorem. \\
+\addlinespace
+$\mathrm{FP}_4$ &
+\textsc{Ordinary exact specialised proof.}  Independent of the weighted
+theorem; superseded as an all-degree boundary.  Lean checks scalar kernels,
+not the full analytic proof. \\
+\addlinespace
+All-degree central region &
+\textsc{Ordinary historical certificate.}  The adaptive rowwise bound and
+uniform radius $\rho_*$ remain valid sufficient conditions, not the live
+all-degree boundary. \\
+\addlinespace
+$\mathrm{FP}_{n-1}\Rightarrow(S)_n$ &
+\textsc{Ordinary exact proof; deterministic replay.}  The proof uses a
+plurisubharmonic reduction to the root torus.  Composed with the weighted
+theorem it yields $(S)_n$ in every degree. \\
+\addlinespace
+Critical-value inequality $(S)_n$ &
+\textsc{Ordinary, all degrees.}  Closed by the registered weighted quadratic
+theorem.  This auxiliary inequality alone does not produce a root-to-root
+path. \\
+\midrule
+\multicolumn{2}{@{}p{0.94\linewidth}@{}}{\textbf{Attachment-time and local-transfer route}} \\
+\addlinespace
+Attachment-age currency &
+\textsc{Ordinary exact proof; checked scalar consumers.}
+$I_k(r)=k\Phi(k^{-1}\log(1/r))$, and weighted Jensen bounds hold.  No
+positive uniform linear age charge can hold. \\
+\addlinespace
+Two-young-root selector &
+\textsc{Ordinary exact proof; finite regression.}  Subtree-size denominators
+cancel exactly, and two roots meet the sharp total-age threshold.  The result
+does not supply a merge-product or geometric compatibility bound. \\
+\addlinespace
+Reciprocal Newton expansion &
+\textsc{Ordinary exact proof; checked finite kernels.}  The expansion has
+coefficient-rational Taylor coordinates and explicit $C^0$, $C^1$, and $C^2$
+tails.  It retains the anchored nonlinear remainder coefficientwise. \\
+\addlinespace
+Staple and quadratic contact &
+\textsc{Ordinary exact proof; checked scalar kernels.}  The staple spends no
+length margin.  Completing the square gives a sharp quadratic-majorant bound
+and a sufficient negativity criterion for the underlying contact.  A global
+stratified transfer theorem remains open. \\
+\addlinespace
+All-degree monic trinomials &
+\textsc{Lean-checked radial and metric inequalities.}  Every origin spoke of
+$z^n+az^m+b$ lies in $\{|f|<1\}$.  Four-term prescribed spokes fail on an
+exact sextic. \\
+\addlinespace
+Low-critical parent regime &
+\textsc{Ordinary exact proof; replayable rational certificate.}  The
+threshold $\mu\le13/25$ is closed by
+\path{ErdosProblems/Erdos1041/scripts/check_erdos1041_angular_budget_closure.py}.
+Not Lean-checked. \\
+\addlinespace
+Global constant-factor path &
+\textsc{Ordinary exact proof; finite regression only.}  Two zero occurrences
+admit a path of length at most $(71/10)\mu^{1/n}$ in $K_{2\mu}$; when
+$\mu\le1/2$, the length is at most $5.7$ in $\{|f|<1\}$.  This result has no
+Lean or independent-review claim. \\
+\addlinespace
+First-merge parent regimes &
+\textsc{Ordinary exact proof.}  The target constant $2$ holds at
+$\mu\le1/2$ for first-merge arity at least $17$, and under the explicit
+arity-dependent component-capacity cutoffs of
+Theorem~\ref{res:first-merge-capacity-closures}.  These implications do not
+cover $\mu>13/25$, and low arity does not force a capacity gap. \\
+\addlinespace
+Disk-family separation &
+\textsc{Ordinary exact proof; Lean-checked $4/3$ kernel.}  Uniform radius
+$4/3$ in every degree $n\ge3$; limiting cutoff $\coth1$.  The older
+cutoffs $S=4,3,2$ are superseded. \\
+\addlinespace
+Covering obstructions &
+\textsc{Ordinary exact proofs; Lean-checked rational cores.}  No
+separation-or covering, no one-root gamma bound, and no arity-to-capacity
+implication.  None refutes the parent problem. \\
+\midrule
+\multicolumn{2}{@{}p{0.94\linewidth}@{}}{\textbf{Genericity, failed mechanisms, and open steps}} \\
+\addlinespace
+March 2026 proof mechanism &
+\textsc{Refuted.}  A Cassini witness refutes the tree budget in
+\cite[Prop.~12]{march2026}; the local saddle block also fails independently. \\
+\addlinespace
+Constant translation &
+\textsc{Lean checked.}  Critical-value injectivity permits arbitrarily small
+ray avoidance while retaining an explicit unit-disc root margin. \\
+\addlinespace
+Coefficient perturbation &
+\textsc{Partly formalised.}  The note proves finite-exceptional genericity;
+Lean checks protected-set noncriticality.  Root-disc and level-barrier control
+remain ordinary arguments.  Lower semicontinuity of $\Lambda$ already reduces
+the closed class to a dense generic bound $\Lambda\le 2$; forward collar
+stability is not the remaining producer. \\
+\addlinespace
+Reeb decomposition and length fan-in &
+\textsc{Open.}  These are the two remaining producers in the Newton-flow
+route. \\
+\addlinespace
+Random search through degree $10$ &
+\textsc{Verified finite instances.}  The computations give upper bounds only
+for the sampled configurations. \\
+\addlinespace
+Erd\H{o}s \#1041 &
+\textsc{Open.}  No proof of the general conjecture is claimed. \\
+\end{longtable}}
+
+
+
+% A9 | sec:reciprocal; res:reciprocal-expansion; res:reciprocal-rationality; res:staple-contact, lines 886–1084
+\section{Exact reciprocal coordinates and zero-margin transfer}
+\label{sec:reciprocal}
+
+The local near-polygon analysis becomes substantially cleaner when its
+nonlinear terms are retained as coordinates.  Assume throughout this section
+that
+\[
+ f(z)=\prod_{j=1}^n(z-a_j),\qquad 0<|a_j|<1,
+\]
+and put
+\[
+ r=\min_j|a_j|,\qquad p_m=\sum_{j=1}^n a_j^{-m}\quad(m\ge1).
+\]
+
+\begin{theorem}[exact reciprocal Newton expansion with $C^2$ tails]
+\label{res:reciprocal-expansion}
+For $|z|<r$,
+\[
+ \log|f(z)|
+ =\log|f(0)|-\Re\sum_{m\ge1}\frac{p_m}{m}z^m,          \tag{R1}
+\]
+and the series is absolutely convergent.  Write $q=|z|/r<1$ and
+\[
+ T_N(z)=\sum_{m>N}\frac{p_m}{m}z^m.
+\]
+Then
+\begin{align*}
+ |T_N(z)|
+ &\le \frac{nq^{N+1}}{(N+1)(1-q)},                     \tag{R2}\\
+ |T_N'(z)|
+ &\le \frac nr\frac{q^N}{1-q},                         \tag{R3}\\
+ |T_N''(z)|
+ &\le \frac n{r^2}q^{N-1}
+       \left(\frac N{1-q}+\frac q{(1-q)^2}\right).     \tag{R4}
+\end{align*}
+The derivative bounds are read for $N\ge1$; the value bound holds for
+$N\ge0$.
+\end{theorem}
+
+\begin{proof}
+Factorwise real logarithms avoid any global choice of a complex logarithm.
+The factorisation
+\[
+ \frac{f(z)}{f(0)}=\prod_j\left(1-\frac z{a_j}\right)
+\]
+and the absolutely convergent scalar series give
+\[
+ \log|f(z)|-\log|f(0)|
+ =\sum_j\log\left|1-\frac z{a_j}\right|
+ =-\Re\sum_j\sum_{m\ge1}\frac1m
+       \left(\frac z{a_j}\right)^m
+ =-\Re\sum_{m\ge1}\frac{p_m}{m}z^m.
+\]
+This proves (R1).  Since $|p_m|\le nr^{-m}$, summing the geometric majorant
+gives (R2).  Termwise differentiation and the identities for the first two
+differentiated geometric tails give (R3)--(R4).
+\end{proof}
+
+The $C^2$ endpoint is load-bearing: moving quadratic contacts are invisible
+to a mere uniform-value estimate.  Moreover, the coordinates $p_m$ do not
+depend on a labelling choice and are rational in the polynomial
+coefficients.
+
+\begin{proposition}[coefficient rationality and the exact near-Fekete bridge]
+\label{res:reciprocal-rationality}
+Write $f(z)=\sum_{k=0}^n c_kz^k$, $c_n=1$, $c_0\ne0$, and
+$\widehat c_k=c_k/c_0$, extended by zero for $k>n$.  Then
+$\widehat c_0=1$ and, for every $m\ge1$,
+\[
+ p_m=-m\widehat c_m-
+      \sum_{j=1}^{m-1}\widehat c_jp_{m-j}.              \tag{R5}
+\]
+Thus every reciprocal coordinate is a rational function of the coefficients
+of $f$, with denominator a power of $f(0)$.
+
+Now write a near-regular $n$-gon as
+\[
+ a_k=\omega^k(1+e_k),\qquad
+ \omega=e^{2\pi i/n},\qquad \eta=\max_k|e_k|<1,
+\]
+and put $E_m^{(j)}=\sum_ke_k^j\omega^{-km}$ and
+$E_m=E_m^{(1)}$.  For $1\le m\le n-1$,
+\[
+ -\frac{p_m}{m}
+ =E_m-\frac{m+1}{2}E_m^{(2)}
+   +\frac{(m+1)(m+2)}6E_m^{(3)}-\cdots,                \tag{R6}
+\]
+whose $j$th term is
+\[
+ (-1)^{j-1}\frac1m\binom{m+j-1}{j}E_m^{(j)}.
+\]
+In particular,
+\[
+ \left|-\frac{p_m}{m}-E_m\right|
+ \le \frac{n(m+1)\eta^2}{2(1-\eta)^{m+2}}.             \tag{R7}
+\]
+\end{proposition}
+
+\begin{proof}[Proof spine]
+Newton's identity for the roots $a_j^{-1}$ of the reversed polynomial gives
+(R5) after using
+$e_k(a^{-1})=(-1)^k\widehat c_k$.  For (R6), expand
+$(1+e_k)^{-m}$ by the binomial series.  The constant term cancels because
+$\sum_k\omega^{-km}=0$ for $1\le m<n$; the remaining terms are exactly those
+displayed.  Taylor's formula with integral remainder for
+$(1+e)^{-m}$ gives (R7).
+\end{proof}
+
+The conceptual point is stronger than the $O(\eta^2)$ estimate: the
+``anchored nonlinear remainder'' is the second and higher part of the exact
+coefficient $-p_m/m$.  It is not discarded error.  This matters precisely at
+a tied Newton face, where a quadratic correction can have the same weight as
+a nominally active linear mode.  The reciprocal chart retains both.
+
+The coefficient-rational coordinates also give a compact local scale, but the
+normalisation is not itself rational or semialgebraic: it includes the real
+logarithm below and a local root branch.  Near the regular $n$-gon, on a
+neighbourhood where $p_n\ne0$, choose a continuous nonzero branch
+$\lambda^n=p_n/n$, put
+\[
+ b_m=(p_m/m)\lambda^{-m},\qquad
+ d=-\log|f(0)|,
+\]
+and set
+\[
+ \rho=\max\left\{d^{1/n},
+   \max_{1\le m<n}|b_m|^{1/(n-m)}\right\},
+ \quad A_0=d/\rho^n,
+ \quad A_m=b_m/\rho^{n-m}.
+\]
+Then $0\le A_0\le1$, $|A_m|\le1$, and at least one coordinate lies on the
+boundary.  After $z=\rho\lambda^{-1}\zeta$, retaining terms through any
+$N\ge n$ leaves, for each fixed $M$ and all sufficiently small $\rho$ with
+$\rho M/(r|\lambda|)<1$, a $C^2$ error of order
+$O_{n,N,M}(\rho^{N+1-n})$ on $|\zeta|\le M$.  Hence the unmodelled tail can
+be pushed beyond any prescribed finite contact order.  The chart does not
+itself prove that every limiting face transfers.  In the present open-disc
+setting $d>0$ and hence $\rho>0$; the closure point $\rho=0$, corresponding
+to the regular polygon after normalisation, is handled separately rather than
+by dividing by the scale.
+
+Two exact elementary consequences close the local zero-margin bookkeeping.
+
+\begin{proposition}[staple identity and contact discriminant]
+\label{res:staple-contact}
+For distinct roots $a_i,a_j$, put $u_k=a_k/|a_k|$.  If
+$0\le s\le\min(|a_i|,|a_j|)$, the equal-radius staple
+\[
+ [a_i,su_i]+[su_i,su_j]+[su_j,a_j]
+\]
+has length
+\[
+ L=|a_i|+|a_j|-s\bigl(2-|u_i-u_j|\bigr)
+ \le |a_i|+|a_j|<2.                                    \tag{R8}
+\]
+The strict inequality holds for every admissible $s$, including $s=0$,
+whenever the roots lie in the open unit disc.
+
+If $\kappa>0$ and
+\[
+ F(x)\le-\kappa x^2+B|x|+V+\varepsilon,
+\]
+then
+\[
+ F(x)\le V+\varepsilon+
+   \frac{\max\{B,0\}^2}{4\kappa}.                    \tag{R9}
+\]
+Consequently the contact remains strictly negative whenever
+$V+\varepsilon+\max\{B,0\}^2/(4\kappa)<0$.
+\end{proposition}
+
+\begin{proof}
+The two radial arms of the staple have lengths $|a_i|-s$ and $|a_j|-s$,
+while its chord has length $s|u_i-u_j|$, proving (R8); use
+$|u_i-u_j|\le2$.  Completing the square in
+$-\kappa x^2+B|x|$ gives the exact supremum
+$\max\{B,0\}^2/(4\kappa)$ and proves (R9).  When $B\ge0$ this is the familiar
+$B^2/(4\kappa)$ formula.
+\end{proof}
+
+Proposition~\ref{res:staple-contact} rules out two recurrent false moves:
+root-direction changes need not spend a polynomial-independent length margin,
+and uniform convergence to a nonpositive quadratic-contact model is not
+enough.  The local transverse jet and curvature must satisfy the displayed
+sufficient negativity test.  Because $F$ is only bounded above by the
+quadratic majorant, this test is not asserted to be necessary for contact
+survival.
+
+Theorem~\ref{res:reciprocal-expansion} and
+Propositions~\ref{res:reciprocal-rationality}--\ref{res:staple-contact} are
+ordinary exact theorems.  Lean checks the reciprocal power-sum majorant, the
+geometric tail, the solved Newton recursion, the staple equality and strict
+length consequence, and the completed-square bound and negativity consumer.
+It does not formalise the complex logarithmic series, the full $C^2$ tail,
+the near-Fekete bridge, the compact normalisation, or the general stratified
+transfer theorem.  The classical expansion and Newton identity carry no
+novelty claim; the paper contribution here is the exact identification (R6)
+and the resulting coordinate choice at the transfer frontier.
+
+
+
+% A10 | sec:orlicz; res:orlicz-currency; res:orlicz-selector, lines 1449–1596
+\section{The exact nonlinear lifetime currency}
+\label{sec:orlicz}
+
+The merge-tree route has its own exact theorem.  For each nontrivial child
+component $u$, let $k_u$ be its number of roots and let
+$r_u=\beta_u/\beta_{\operatorname{parent}(u)}\in(0,1]$ be its merge-scale
+ratio.  Its contribution to the attachment age of each descendant root is
+\[
+ x_u=\frac1{k_u}\log\frac1{r_u}.
+\]
+The edge lifetime is written
+\[
+ \lambda_k(q)=\log\frac{1+q^{2/k}}{1-q^{2/k}},
+ \qquad
+ I_k(r)=\int_r^1\frac{dq}{q\lambda_k(q)}.
+\]
+
+\begin{theorem}[exact attachment-age/lifetime currency]
+\label{res:orlicz-currency}
+Define
+\[
+ \Phi(x)=\int_0^x\frac{dt}{\log(\coth t)}\qquad(x\ge0).
+\]
+At $t=0$ the integrand is understood by its continuous limiting value $0$
+(equivalently, the integral is improper at that endpoint).
+For every integer $k\ge1$ and $0<r\le1$, with
+$x=k^{-1}\log(1/r)$,
+\[
+ I_k(r)=k\Phi(x).                                      \tag{O1}
+\]
+The function $\Phi$ is increasing and strictly convex on $(0,\infty)$, and
+\[
+ \frac{\Phi(x)}x\longrightarrow0\qquad(x\downarrow0). \tag{O2}
+\]
+Consequently, for every fixed $k\ge1$ and every $c>0$, some $0<r<1$
+satisfies
+\[
+ I_k(r)<c\,\frac1k\log\frac1r.                        \tag{O3}
+\]
+In particular, there is no positive universal linear conversion from
+attachment age to lifetime.
+\end{theorem}
+
+\begin{proof}
+Set $q=e^{-kt}$.  Then $dq/q=-k\,dt$, the endpoints $q=1,r$ become
+$t=0,x$, and
+\[
+ \frac{1+e^{-2t}}{1-e^{-2t}}=\coth t,
+\]
+which proves (O1).  Since $\coth t$, and hence $\log(\coth t)$, is strictly
+decreasing, the positive integrand $1/\log(\coth t)$ is strictly increasing.
+This proves monotonicity and strict convexity.  Moreover
+\[
+ 0\le\frac{\Phi(x)}x\le\frac1{\log(\coth x)}\longrightarrow0,
+\]
+which gives (O2); taking $r=e^{-kx}$ gives (O3).
+\end{proof}
+
+The same monotonicity gives a useful non-linear lower bound that the no-linear
+floor does not erase.  For $x>0$,
+\[
+ \Phi(x)\ge\int_{x/2}^x\frac{dt}{\log(\coth(x/2))}
+ =\frac{x}{2\log(\coth(x/2))},
+\]
+and therefore
+\[
+ I_k(r)\ge
+ \frac{kx}{2\log(\coth(x/2))}.                       \tag{O3$'$}
+\]
+The point is distribution-sensitive curvature, not a uniform positive linear
+coefficient at the origin.
+
+This identity retains the complete distribution of edge ages.  If a root
+chain has edges $u=1,\ldots,m$, set
+\[
+ A=\sum_u x_u,\qquad K=\sum_u k_u,\qquad
+ L=\sum_u I_{k_u}(r_u).
+\]
+Then the exact chain ledger and weighted Jensen inequality give
+\[
+L=\sum_u k_u\Phi(x_u)
+ \ge K\Phi\!\left(\frac{\sum_u k_ux_u}{K}\right)
+ \ge K\Phi\!\left(\frac{2A}{K}\right),                \tag{O4}
+\]
+where the last inequality uses $k_u\ge2$ for ancestor edges.  Separately,
+unweighted Jensen and the same inequality $k_u\ge2$ give the
+cardinality form
+\[
+ L\ge2\sum_u\Phi(x_u)\ge2m\Phi(A/m).                  \tag{O4$'$}
+\]
+It is not obtained by weakening the weighted $K$-bound: it records different
+data.  For a strict component chain below an $n$-root top one also has the
+exact combinatorial ceilings
+\[
+ m\le n-2,
+ \qquad
+ K\le2+3+\cdots+(n-1)=\frac{n(n-1)}2-1.
+\]
+These estimates are
+degree-dependent by design: splitting a fixed age among many very rapid
+mergers is exactly the regime in which a linear estimate loses all force.
+
+The stronger global fact comes from summing across roots instead of following
+one root at a time.  Fix an internal component $v$ with root set $S_v$, and
+let $A_i(v)$ be the sum of the increments $x_u$ along the path from root $i$
+to $v$.  Let $u\preceq v$ range over the nontrivial proper descendant
+components whose parent still lies below or equals $v$.
+
+\begin{theorem}[root-summed identity and two-young-root selector]
+\label{res:orlicz-selector}
+One has the exact identity
+\[
+ \sum_{i\in S_v}A_i(v)
+ =\sum_{u\preceq v}\log\frac1{r_u}
+ =\log\prod_{u\preceq v}\frac1{r_u}.                  \tag{O5}
+\]
+If $|S_v|\ge2$, there are distinct $i,j\in S_v$ such that
+\[
+ \max\{A_i(v),A_j(v)\}
+ \le
+ \frac{\sum_{u\preceq v}\log(1/r_u)}{|S_v|-1}.       \tag{O6}
+\]
+The constant $1/(|S_v|-1)$ is sharp for the underlying ordered-age
+inequality.
+\end{theorem}
+
+\begin{proof}
+The edge $u\to\operatorname{parent}(u)$ contributes
+$k_u^{-1}\log(1/r_u)$ to exactly the $k_u$ roots below it.  Its coefficient
+after summing over roots is therefore one, proving the first equality in
+(O5); the second is the logarithm product law.  Order the nonnegative ages as
+$a_1\le a_2\le\cdots\le a_{|S_v|}$.  The largest $|S_v|-1$ entries are at
+least $a_2$, so
+$(|S_v|-1)a_2\le\sum_i a_i$.  Choosing the first two roots proves (O6).
+For arbitrary nonnegative age data the limiting vector $(0,c,\ldots,c)$
+shows sharpness of this ordered-age step.
+\end{proof}
+
+The theorem is an unconditional attachment-compatible pair selector and an
+exact diagnosis of the metric frontier.  It does \emph{not} upper-bound the
+internal product $\prod_{u\preceq v}1/r_u$, show that the selected roots are
+compatible with one short embedded path, or perform the saddle and annular
+gluing.  Those are the actual remaining producers.  The source note proves
+the substitution, Jensen, and double-counting arguments and supplies bounded
+deterministic replay; Lean checks only the lifetime-to-Orlicz division, the
+weighted-chain order transfer, the abstract no-linear-floor implication, and
+the final second-age division.
+
+
+
+% A12 | sec:finite, lines 1146–1168
+\section{Finite evidence}\label{sec:finite}
+
+A search was run over random monic polynomials with roots in the unit disc.  For
+each sample the region $\{|f|<1\}$ was rasterised and shortest grid paths were
+computed between every pair of roots.  The best upper bounds obtained were
+\[
+  \begin{array}{lrr}
+    \text{degree } 5, & 500 \text{ trials}: & 1.1052648928\\
+    \text{degree } 6, & 1500 \text{ trials}: & 0.8450414343\\
+    \text{degree } 8, & 1500 \text{ trials}: & 0.6203916714\\
+    \text{degree } 10, & 1500 \text{ trials}: & 0.4303640486 .
+  \end{array}
+\]
+No counterexample candidate was found, and the measured values sit well below
+the threshold $2$.  These are grid distances for the sampled configurations:
+upper bounds on those samples, not bounds over the family.  The apparent
+decrease with degree is a property of the sample, and we draw no conjecture from
+it.
+Future searches should target named failure modes: near-degenerate saddles,
+thin necks, boundary-critical configurations and almost-connected
+separatrices---and report those diagnostics.  Raster paths remain candidate
+finders, never continuous certificates.
