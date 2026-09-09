@@ -1,62 +1,65 @@
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Documentation guide
+# Reading and working with the research
 
-The repository separates mathematical explanation, verification records, and
-agent instructions. Choose the section that matches what you are trying to do.
+Choose a problem, read its short paper, then follow the argument into the
+longer record or the supporting source. All eight original Erdős problems
+remain open. You can contribute a correction, explanation, counterexample or
+useful failed approach without solving one.
 
-## Read the mathematics
+## Read
 
-1. Start with the root [README](../README.md) for the scope and the eight-paper
-   portfolio.
-2. Read [Results and open boundaries](RESULTS.md) for a problem-by-problem
-   account of what is checked and what remains unresolved.
-3. Open the relevant paper from [The papers](papers/README.md). The eight
-   problem papers are the main mathematical reading objects; specialist
-   companions follow them.
-4. Use [Related problems](RELATED_PROBLEMS.md) for the complete portfolio map
-   and [Prior art](PRIOR_ART.md) for attribution and antecedents.
+- [The papers](papers/README.md): the eight problems and their papers.
+- [Results and open questions](RESULTS.md): the stated progress and its limits.
+- [Prior work](PRIOR_ART.md): antecedents, attribution and comparisons.
+- [Related problems](RELATED_PROBLEMS.md): connections across the collection.
 
-The canonical order of mathematical attention is the Palomar ranking in
-[`PALOMAR_RESULT_SHOWCASE.json`](PALOMAR_RESULT_SHOWCASE.json). Human pages may
-summarise that order but do not maintain a second ranking.
+The short papers explain the main ideas. The long records retain more detail,
+attempts and unresolved steps. Each result's own evidence boundary matters:
+an ordinary mathematical argument and a Lean-checked declaration are different
+kinds of evidence.
 
-## Verify a claim
+## Check
 
-- [`claims.json`](claims.json) records public statements, statuses, Lean
-  declarations, and exact remaining-open propositions.
-- [External verification](EXTERNAL_VERIFICATION.md) presents the configured
-  Comparator interfaces and their boundaries.
-- [Source map](SOURCE_MAP.md) maps each problem, paper, and result family to
-  Lean source.
-- [Methodology](../METHODOLOGY.md) explains what Lean acceptance, repository
-  checks, and mathematical review do and do not establish.
-- [Reproducibility](REPRODUCIBILITY.md) gives the build and release checks.
+Start with the [source map](SOURCE_MAP.md) to locate the evidence for a result.
+[Reproducibility](REPRODUCIBILITY.md) gives the checkout and verification
+commands. [External verification](EXTERNAL_VERIFICATION.md) explains the
+selected Comparator interfaces and their limits.
 
-Lean source checked by the pinned Lean kernel is formal proof authority.
-Generated documentation, JSON indices, and papers are navigation or
-exposition; they do not strengthen a theorem.
+The [claim record](claims.json) binds statements to their status and supporting
+artifacts. [Methodology](../METHODOLOGY.md) explains the separate roles of Lean,
+repository checks and mathematical review. A navigation page or a successful
+repository check does not establish a stronger mathematical statement.
 
-## Work on the repository
+## Contribute
 
-Agents and contributors should begin with the root
-[`AGENTS.override.md`](../AGENTS.override.md), then use
-[Agent workbench](AGENT_WORKBENCH.md) for corpus queries, claim handles, source
-navigation, and focused builds. [Architecture](../ARCHITECTURE.md) explains the
-repository layout and authority order.
+[Contributing](../CONTRIBUTING.md) explains how to send an observation or a
+focused pull request. [Credit and stewardship](research-commons/CREDIT_POLICY.md)
+explains how accepted work is attributed, including negative results and
+corrections. The [research commons](research-commons/README.md) describes how
+another researcher can resume and return a longer investigation.
 
-The generated [Corpus orientation](ORIENTATION.md) and its machine source
-[`orientation.json`](orientation.json) are technical navigation surfaces. They
-are useful after a reader has chosen a problem or claim; they are not the
-human introduction to the mathematics.
+For an AI-assisted session, use [the research-shift guide](FRONTIER_RELAY.md).
+Coding agents start at [the agent entry](../AGENTS.override.md); the
+[agent workbench](AGENT_WORKBENCH.md) documents the detailed tools.
 
-## Archive and provenance
+## Where things live
 
-The eight problem-specific papers listed in the root README are the canonical
-public mathematical starting points. The combined
-[`claim-faithful-publication-systems-paper.pdf`](../claim-faithful-publication-systems-paper.pdf)
-is retained for archive and provenance. The
-[`cold-clone-to-proof-receipt.pdf`](../cold-clone-to-proof-receipt.pdf) explains
-the verification and navigation system. Neither adds another mathematical
-problem or changes the claim registry.
+| Location | Purpose |
+|---|---|
+| [`paper/`](../paper/README.md) | Manuscript sources and rendered PDFs. |
+| [`docs/papers/`](papers/README.md) | Reading pages and indexes derived from the manuscripts. |
+| [Source map](SOURCE_MAP.md) | Routes into the Lean libraries, grouped by mathematical problem. |
+| [`docs/claims.json`](claims.json) | Authored public claims, evidence links and status. |
+| [Corpus orientation](ORIENTATION.md) | Generated technical navigation after choosing a problem. |
+| [Research commons](research-commons/README.md) | Contribution, review and attribution records. |
+
+[How the repository works](../ARCHITECTURE.md) explains source ownership,
+generated files and the release process. The research-system papers have a
+separate role from the eight mathematical problem papers; find both through
+[the paper catalogue](papers/README.md).
+
+The [earlier joint #249/#257 manuscript](../erdos249-257-main-paper.pdf)
+is retained as historical context. Start with the current individual problem
+papers instead.

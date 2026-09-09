@@ -36,17 +36,17 @@ status:
     subsidiary theorems, formalises selected known results, verifies finite
     instances, and records conditional reductions and method barriers.
   proof_corpus_sorry_count: 0
-  sorry_count: 5
+  sorry_count: 8
   sorry_in_definitions: 0
-  trusted_challenge_sorry_count: 5
-  sorry_boundary: "Every sorry is a trusted proposition package in one of the statement-isolated Comparator challenge fixtures (ExternalVerification/Challenge.lean; ExternalVerification1041SolvedFamilies/Challenge.lean; ExternalVerification1049/Challenge.lean). Each is the fixture against which Comparator checks the proof-bearing solution; the proof corpus and every solution wrapper have sorry_count 0."
+  trusted_challenge_sorry_count: 8
+  sorry_boundary: "Every sorry is a trusted proposition package in one of the statement-isolated Comparator challenge fixtures (ExternalVerification/Challenge.lean; ExternalVerification1041SolvedFamilies/Challenge.lean; ExternalVerification1049/Challenge.lean; ExternalVerification249TotientKernelBasis/Challenge.lean). Each is the fixture against which Comparator checks the proof-bearing solution; the proof corpus and every solution wrapper have sorry_count 0."
   axioms:
     - "propext"
     - "Quot.sound"
     - "Classical.choice"
   main_results:
     - declaration: "ErdosProblems.Erdos68.irrational_factorialGapSeries_iff_cofinal_strictFacTopRat_misses"
-      file: "ErdosProblems/Erdos68/FactorialZeroPlateau.lean"
+      file: "ErdosProblems/Erdos68/FactorialGapPlateauCore.lean"
       sorry_count: 0
       axioms:
         - "propext"
@@ -62,7 +62,7 @@ status:
       comparator_declaration: "Erdos249257.ExternalVerification.irrational_factorialGapSeries_iff_cofinal_strictFacTopRat_misses"
       literature_dependencies: []
     - declaration: "ErdosProblems.Erdos68.irrational_factorialGapSeries_iff_cofinal_nonunit_carries"
-      file: "ErdosProblems/Erdos68/FactorialZeroPlateau.lean"
+      file: "ErdosProblems/Erdos68/FactorialGapPlateauCore.lean"
       sorry_count: 0
       axioms:
         - "propext"
@@ -157,10 +157,10 @@ status:
       boundary: "This does not prove irrationality of the totient series."
       comparator_declaration: "Erdos249257.ExternalVerification.finrank_totientKernelThroughLevelFamily_eq"
       literature_dependencies:
-        - "paper/erdos-249-binary-totient-series.tex"
-        - "docs/PRIOR_ART.md"
-        - "https://doi.org/10.1017/S0305004108001665"
-        - "https://doi.org/10.1007/s11139-004-4633-4"
+        - source: "paper/erdos-249-binary-totient-series.tex"
+        - source: "docs/PRIOR_ART.md"
+        - source: "https://doi.org/10.1017/S0305004108001665"
+        - source: "https://doi.org/10.1007/s11139-004-4633-4"
       source_statement: "Coons proved that Euler's totient sequence is not k-regular for every integer k at least 2, while Martin's affine-totient ordering theorem implies linear independence of every finite family of pairwise nonproportional positive-slope affine totient sections."
       source_mapping: "The dyadic Lean development gives an independent constructive finite-level basis and rank proof. Its full-kernel infinite-dimensionality corollary is kernel-checked here but is not an independent contribution: for integer-valued sequence modules it is equivalent to Coons's non-k-regularity result. The all-base Lean modules check the zero-channel identity, the exact composite-base scalar reduction, residue coordinates, index cardinality k^e+1, and unconditional spanning by the canonical family. Lean also checks the exact-rank conclusion under an explicit linear-independence hypothesis. Martin remains the external authority for that hypothesis, so the unconditional all-base basis and rank theorem remains a paper conclusion rather than a Lean theorem without assumptions."
       historical_attribution: "Coons for non-k-regularity of Euler's totient sequence; Martin for the positive-density affine ordering theorem from which the paper's finite-family independence step follows."
@@ -181,10 +181,10 @@ status:
       boundary: "The declaration is kernel-checked locally, but full-kernel infinite-dimensionality is not an independent contribution of this release; no rationality-to-finite-rank bridge is proved."
       comparator_declaration: "Erdos249257.ExternalVerification.not_finiteDimensional_span_fullTotientKernel"
       literature_dependencies:
-        - "paper/erdos-249-binary-totient-series.tex"
-        - "docs/PRIOR_ART.md"
-        - "https://doi.org/10.1017/S0305004108001665"
-        - "https://doi.org/10.1007/s11139-004-4633-4"
+        - source: "paper/erdos-249-binary-totient-series.tex"
+        - source: "docs/PRIOR_ART.md"
+        - source: "https://doi.org/10.1017/S0305004108001665"
+        - source: "https://doi.org/10.1007/s11139-004-4633-4"
       source_statement: "Coons proved that Euler's totient sequence is not k-regular for every integer k at least 2, while Martin's affine-totient ordering theorem implies linear independence of every finite family of pairwise nonproportional positive-slope affine totient sections."
       source_mapping: "The dyadic Lean development gives an independent constructive finite-level basis and rank proof. Its full-kernel infinite-dimensionality corollary is kernel-checked here but is not an independent contribution: for integer-valued sequence modules it is equivalent to Coons's non-k-regularity result. The all-base Lean modules check the zero-channel identity, the exact composite-base scalar reduction, residue coordinates, index cardinality k^e+1, and unconditional spanning by the canonical family. Lean also checks the exact-rank conclusion under an explicit linear-independence hypothesis. Martin remains the external authority for that hypothesis, so the unconditional all-base basis and rank theorem remains a paper conclusion rather than a Lean theorem without assumptions."
       historical_attribution: "Coons for non-k-regularity of Euler's totient sequence; Martin for the positive-density affine ordering theorem from which the paper's finite-family independence step follows."
@@ -413,8 +413,8 @@ status:
       boundary: "Unbounded coefficients alone do not force irrationality."
       comparator_declaration: "Erdos249257.ExternalVerification.exists_primeGap0_gt"
       literature_dependencies:
-        - "docs/PRIOR_ART.md#expansion-note-principal-sources-68-243-251-269-1041-1049"
-        - "paper/erdos-251-prime-gap-dyadic-series.tex"
+        - source: "docs/PRIOR_ART.md#expansion-note-principal-sources-68-243-251-269-1041-1049"
+        - source: "paper/erdos-251-prime-gap-dyadic-series.tex"
       source_statement: "The gaps between consecutive primes are unbounded; the elementary factorial construction gives arbitrarily long prime-free intervals."
       source_mapping: "The local theorem uses the zero-based consecutive-prime gap sequence and proves that for every bound B some indexed gap exceeds B. This is the same unboundedness statement after the repository's indexing convention is unfolded."
       historical_attribution: "Classical elementary factorial prime-free interval argument; modern large-gap theorems in the paper are contextual and strictly stronger."
@@ -499,9 +499,9 @@ status:
       boundary: "This does not decide whether every infinite-support sum is irrational."
       comparator_declaration: "Erdos249257.ExternalVerification.volume_mersenneAchievementSet"
       literature_dependencies:
-        - "https://doi.org/10.11429/ptmps1907.7.14_250"
-        - "https://doi.org/10.1007/s10474-025-01528-0"
-        - "docs/PRIOR_ART.md"
+        - source: "https://doi.org/10.11429/ptmps1907.7.14_250"
+        - source: "https://doi.org/10.1007/s10474-025-01528-0"
+        - source: "docs/PRIOR_ART.md"
       source_statement: "Kakeya's strict-tail criterion places rapidly decreasing subsum sets in the Cantor-set regime; for the fixed-base Mersenne sequence, Kovač--Tao verify the strict-tail inequality and distinct subsums."
       source_mapping: "At base 2 the local development formalises compactness, perfection, total disconnectedness, nowhere density, and measure one. The strict-tail Cantor geometry aligns with the cited antecedents; the measure-one clause is locally derived and carries no novelty assertion."
       historical_attribution: "Kakeya (1914) for the strict-tail subsum-set criterion and Kovač--Tao (2025), Remark 4.1, for the fixed-base Mersenne antecedent."
@@ -522,9 +522,9 @@ status:
       boundary: "This is the classical full-support theorem, not universal Erdos #257."
       comparator_declaration: "Erdos249257.ExternalVerification.irrational_erdosSum_full_support"
       literature_dependencies:
-        - "https://users.renyi.hu/~p_erdos/1948-04.pdf"
-        - "docs/PRIOR_ART.md"
-        - "paper/erdos-257-mersenne-support-subseries.tex"
+        - source: "https://users.renyi.hu/~p_erdos/1948-04.pdf"
+        - source: "docs/PRIOR_ART.md"
+        - source: "paper/erdos-257-mersenne-support-subseries.tex"
       source_statement: "For every integer b at least 2, the full-support Lambert--Mersenne series sum over n at least 1 of 1/(b^n-1) is irrational."
       source_mapping: "The local theorem uses Nat indexing with exponent k+1, which is exactly the source sum after reindexing n=k+1; the base assumption is the same integer condition b at least 2."
       historical_attribution: "Erdos, On arithmetical properties of Lambert series (1948), theorem on p. 63 as recorded in the repository's prior-art ledger."
@@ -545,9 +545,9 @@ status:
       boundary: "This is the pairwise-coprime support theorem, not universal Erdos #257; the infinitude, pairwise-coprimality, and summable-reciprocal hypotheses remain explicit."
       comparator_declaration: "Erdos249257.ExternalVerification.irrational_erdosSupportSeries_pairwise_coprime"
       literature_dependencies:
-        - "https://users.renyi.hu/~p_erdos/1969-09.pdf"
-        - "docs/PRIOR_ART.md"
-        - "paper/erdos-257-mersenne-support-subseries.tex"
+        - source: "https://users.renyi.hu/~p_erdos/1969-09.pdf"
+        - source: "docs/PRIOR_ART.md"
+        - source: "paper/erdos-257-mersenne-support-subseries.tex"
       source_statement: "For every integer base b at least 2 and every infinite pairwise-coprime support A with summable reciprocal mass, the support-restricted Mersenne reciprocal series is irrational."
       source_mapping: "The local theorem keeps the base, infinitude, pairwise-coprimality, and summable-reciprocal hypotheses explicit and concludes irrationality of erdosSupportSeries b A. At base 2 this is exactly the pairwise-coprime support subfamily of Erdős #257; it is a separate non-dilation representative from the full-support row."
       historical_attribution: "Erdos (1968), as recorded in the repository's prior-art ledger and the #257 problem note."
@@ -916,12 +916,12 @@ alignment:
   statements:
     - source: "Irrationality is equivalent to cofinally many strict-successor divisibility failures."
       lean: "ErdosProblems.Erdos68.irrational_factorialGapSeries_iff_cofinal_strictFacTopRat_misses"
-      module: "ErdosProblems/Erdos68/FactorialZeroPlateau.lean"
+      module: "ErdosProblems/Erdos68/FactorialGapPlateauCore.lean"
       status: "proved"
       note: "The equivalence does not prove that the cofinal failures occur."
     - source: "Irrationality is equivalent to cofinally many non-unit carries."
       lean: "ErdosProblems.Erdos68.irrational_factorialGapSeries_iff_cofinal_nonunit_carries"
-      module: "ErdosProblems/Erdos68/FactorialZeroPlateau.lean"
+      module: "ErdosProblems/Erdos68/FactorialGapPlateauCore.lean"
       status: "proved"
       note: "The equivalence does not supply a cofinal carry producer."
     - source: "Normalised vanishing and bounded rise exclude a cofinally bounded negative part."
@@ -1614,11 +1614,10 @@ claim_review_matrix:
         comparator_disposition: "targeted"
         summary: "For the explicit rectangular two-function exponent model, the cleared gap is nonpositive throughout rho >= 0 and 1 + rho <= sigma, and the threshold is at most 1/2 - 1/pi^2 with equality exactly at rho = 0, sigma = 1. The gap sign and unique-zero mechanism support this sharp threshold no-go within the wider height-and-Padé arithmetic family."
         boundary: "This is a sharp no-go only for the explicit rectangular two-function exponent model under the stated real hypotheses; it constructs no approximating polynomials or remainders and is not a universal Padé or Hermite-Padé no-go. It proves no irrationality at 3/2 or any general rational-base endpoint, and the analytic remainder/nonvanishing input remains untreated. No novelty, priority, significance, external-review, or endpoint claim is made; Erdős #1049 remains open."
-acknowledgements: null
 external_verification:
   owner: "docs/claims.json::external_verification_packet"
   problem_index: "docs/problems.json"
-  problem_index_digest: "sha256:32c3f1e3370889fd022cc360e7a0b4a587058c7ae63afff074a08d8ff38a13f2"
+  problem_index_digest: "sha256:8c579cac1aaadf39bd07bd8ad5514e741786a27a3d2a7f0b92aa62266fe2da53"
   problem_count: 8
   problems:
     - id: "erdos_68"
@@ -1649,7 +1648,7 @@ external_verification:
       erdos_number: 257
       status: "open"
       checked_frontier: "That the strict Mersenne tail inequality is hereditary under deleting an arbitrary collection of future weights."
-      open_frontier: "The universal irrationality problem, or irrationality for any new infinite support."
+      open_frontier: "The universal irrationality problem for arbitrary infinite supports beyond the reciprocal-summable and other registered structured families."
       claim_registry_status: "not_registered; the claim registry does not carry these declarations and kernel checking them does not promote them into reviewed public claims"
     - id: "erdos_269"
       erdos_number: 269
@@ -1684,8 +1683,8 @@ external_verification:
       erdos_number: 1049
       status: "open"
       checked_frontier: "That a literal coordinatewise transfer of the integer-base clearing argument forces a power-versus-linear inequality, and that this inequality is impossible at base three halves."
-      open_frontier: "Irrationality at base three halves, or for any rational base."
+      open_frontier: "Lean does not check irrationality at base three halves or the paper's ordinary irrationality theorem for F(31/4) and its positive integer powers."
       claim_registry_status: "not_registered; the claim registry does not carry these declarations and kernel checking them does not promote them into reviewed public claims"
-  trusted_challenge_holes: 5
+  trusted_challenge_holes: 8
   packet: "docs/EXTERNAL_VERIFICATION.md"
   receipt_contract: "docs/external_verification_packet.json::receipt_contract"

@@ -179,6 +179,39 @@ theorem isCoprime_of_isUnit_left {R : Type*} [CommRing R] {a b : R} (ha : IsUnit
 theorem isCoprime_of_isUnit_right {R : Type*} [CommRing R] {a b : R} (hb : IsUnit b) :
     IsCoprime a b := (isCoprime_of_isUnit_left (a := b) (b := a) hb).symm
 
+/-- **Unimodular adjacent-to-tail propagation.**  If every row is unimodular,
+vanishing of every adjacent minor forces vanishing of every
+pairwise minor.  Thus a local divisor shared by all adjacent minors really does
+compress the full tail after reduction modulo that divisor; checking only one
+attractive adjacent determinant is not enough.
+
+The proof is algebraic, not asymptotic: each next row is a scalar multiple of
+the preceding row, so induction places the whole sequence on the first row's
+line. -/
+theorem adjacent_det_zero_forces_all_det_zero_of_isCoprime {R : Type*} [CommRing R]
+    (w : ℕ → R × R) (hcoprime : ∀ n, IsCoprime (w n).1 (w n).2)
+    (hadj : ∀ n, (w n).1 * (w (n + 1)).2 - (w n).2 * (w (n + 1)).1 = 0) :
+    ∀ i j, (w i).1 * (w j).2 - (w i).2 * (w j).1 = 0 := by
+  have hspan : ∀ n, ∃ c : R, (w n).1 = c * (w 0).1 ∧ (w n).2 = c * (w 0).2 := by
+    intro n
+    induction n with
+    | zero => exact ⟨1, by simp, by simp⟩
+    | succ n ih =>
+        obtain ⟨c, hc₁, hc₂⟩ := ih
+        obtain ⟨d, hd₁, hd₂⟩ := exists_scalar_eq_of_det_eq_zero
+          (hcoprime n) (by simpa [Nat.add_comm] using hadj n)
+        refine ⟨d * c, ?_, ?_⟩
+        · rw [hd₁, hc₁]
+          ring
+        · rw [hd₂, hc₂]
+          ring
+  intro i j
+  obtain ⟨c, hi₁, hi₂⟩ := hspan i
+  obtain ⟨d, hj₁, hj₂⟩ := hspan j
+  rw [hi₁, hi₂, hj₁, hj₂]
+  ring
+
+
 /-- **Adjacent-to-tail propagation.**  For a sequence whose second coordinate
 is always a unit, vanishing of every adjacent minor forces vanishing of every
 pairwise minor.  Thus a local divisor shared by all adjacent minors really does
@@ -262,6 +295,49 @@ theorem zmod_binary_tail_collision_of_two_three_depth {R S k : ℕ}
     _ = 2 ^ (S + 2 * R) := by
       rw [show (4 : ℕ) = 2 ^ 2 by norm_num, ← pow_mul, ← pow_add]
     _ ≤ 2 ^ k := Nat.pow_le_pow_right (by norm_num) hrank
+
+/-- **Moving-tail selector collision.**  An arbitrarily long modular tail with
+unimodular rows and zero adjacent minors admits a nontrivial binary
+selector collision as soon as the tail width exceeds the modulus cardinality
+threshold.  This composes adjacent-to-tail propagation with the exact
+Bézout--Plücker image collapse; it still says nothing about escape from an
+analytic-remainder nullspace. -/
+theorem zmod_binary_tail_collision_of_adjacent_det_zero_of_isCoprime {N k : ℕ} [NeZero N]
+    (w : ℕ → ZMod N × ZMod N) (hcoprime : ∀ n, IsCoprime (w n).1 (w n).2)
+    (hadj : ∀ n, (w n).1 * (w (n + 1)).2 - (w n).2 * (w (n + 1)).1 = 0)
+    (hcard : N < 2 ^ k) :
+    ∃ s t : Fin k → Bool, s ≠ t ∧
+      (∑ i, if s i then w i else 0) = ∑ i, if t i then w i else 0 := by
+  let u : Fin k → ZMod N × ZMod N := fun i => w i
+  have hall := adjacent_det_zero_forces_all_det_zero_of_isCoprime w hcoprime hadj
+  have hanchor : ∀ i, (w 0).1 * (u i).2 - (w 0).2 * (u i).1 = 0 := by
+    intro i
+    exact hall 0 i
+  have hcard' : Fintype.card (ZMod N) < 2 ^ Fintype.card (Fin k) := by
+    simpa using hcard
+  exact binary_row_collision_of_anchor_det_zero u
+    (hcoprime 0) hanchor hcard'
+
+/-- The explicit `2`/`3` local-depth threshold.  A tail collapsed modulo
+`2^S 3^R` needs only `S+2R` binary rows, rather than the ambient two-channel
+threshold `2S+4R`, because `3^R<2^(2R)` for positive `R`. -/
+theorem zmod_binary_tail_collision_of_two_three_depth_of_isCoprime {R S k : ℕ}
+    [NeZero (2 ^ S * 3 ^ R)]
+    (w : ℕ → ZMod (2 ^ S * 3 ^ R) × ZMod (2 ^ S * 3 ^ R))
+    (hcoprime : ∀ n, IsCoprime (w n).1 (w n).2)
+    (hadj : ∀ n, (w n).1 * (w (n + 1)).2 - (w n).2 * (w (n + 1)).1 = 0)
+    (hR : 0 < R) (hrank : S + 2 * R ≤ k) :
+    ∃ s t : Fin k → Bool, s ≠ t ∧
+      (∑ i, if s i then w i else 0) = ∑ i, if t i then w i else 0 := by
+  apply zmod_binary_tail_collision_of_adjacent_det_zero_of_isCoprime w hcoprime hadj
+  have hthree : 3 ^ R < 4 ^ R := Nat.pow_lt_pow_left (by omega) hR.ne'
+  have htwo : 0 < (2 : ℕ) ^ S := Nat.pow_pos (by norm_num)
+  calc
+    2 ^ S * 3 ^ R < 2 ^ S * 4 ^ R := (Nat.mul_lt_mul_left htwo).mpr hthree
+    _ = 2 ^ (S + 2 * R) := by
+      rw [show (4 : ℕ) = 2 ^ 2 by norm_num, ← pow_mul, ← pow_add]
+    _ ≤ 2 ^ k := Nat.pow_le_pow_right (by norm_num) hrank
+
 
 /-- **Endpoint-jet collapse at a modulus.**  With a unit anchor coordinate and
 every anchor minor vanishing, `card (ZMod N)` selectors — not `card (ZMod N)²`

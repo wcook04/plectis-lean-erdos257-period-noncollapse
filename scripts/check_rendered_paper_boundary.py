@@ -78,7 +78,7 @@ FIRST_MINUTE_CONTRACT = {
     "claim-faithful-publication-systems-paper.pdf": {
         (1, 3): (
             "problem-sized lean worlds",
-            "among the systems compared in this paper, none spans this complete chain",
+            "the contribution is an implemented architecture that connects research state",
             "six things that are commonly collapsed",
             "more reasoning cannot buy a write lease",
             "lean verifies that a proof establishes the formal statement written in the source",
@@ -104,7 +104,7 @@ FIRST_MINUTE_CONTRACT = {
         # position did.
         (11, 12): (
             "comparator: an exact-statement firewall",
-            "palomar: selecting what deserves review",
+            "review selection, and what the palomar registry is not",
             "proof generation, verification, exposition, publication and community digestion",
             "natural friction",
             "paper authoring itself participates in this loop",

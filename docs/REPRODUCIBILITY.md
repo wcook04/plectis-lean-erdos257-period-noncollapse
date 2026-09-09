@@ -4,7 +4,7 @@
 # Reproduce the public release
 
 This page is the clean-clone runbook for the standalone
-[`plectis-lean-erdos249-257`](https://github.com/wcook04/plectis-lean-erdos249-257)
+[`plectis-erdos`](https://github.com/wcook04/plectis-erdos)
 repository. It uses only files in this checkout and ordinary public tools. The
 private `ai_workflow` repository, a sibling checkout, an inherited shell state,
 and a pre-existing build cache are not prerequisites.
@@ -17,8 +17,8 @@ insufficient history; `verify_claims.py` reports that condition separately
 and exits `2` rather than presenting it as a mathematical failure.
 
 ```sh
-git clone --filter=blob:none https://github.com/wcook04/plectis-lean-erdos249-257.git
-cd plectis-lean-erdos249-257
+git clone --filter=blob:none https://github.com/wcook04/plectis-erdos.git
+cd plectis-erdos
 git fetch --tags --force
 git status --short
 ```

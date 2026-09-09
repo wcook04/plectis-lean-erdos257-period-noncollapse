@@ -1,13 +1,13 @@
 {
   "builder_schema": "erdos249257-semantic-corpus/1",
-  "input_fingerprint": "sha256:df94c0c3457a9eac5ebed875bc60728f2eb07e44c3e3af37fe7bb33901953b78",
-  "output_digest": "sha256:0607277d5bbb7e75898eccae2451b4158b346963ce60807366a26f173185e1c1",
+  "input_fingerprint": "sha256:d8d35734e2d3cf87843d3ee9fbcf54f7cb3445247be050dfc583054351f43590",
+  "output_digest": "sha256:85a15f8fb1934b244c68629c3b996e4dd2aa6cef61d69e5c13847c1bd5d05da4",
   "schema": "erdos249257-semantic-corpus-check/1",
   "summary": {
-    "declarations": 153671,
+    "declarations": 155274,
     "orphan_count": 0,
     "public_semantic_census": {
-      "authored_statement_node_count": 1115,
+      "authored_statement_node_count": 1125,
       "bare_equivalences": {
         "1041": 0,
         "1049": 0,
@@ -22,16 +22,16 @@
         "total": 32
       },
       "by_logical_class": {
-        "barrier_no_go": 73,
+        "barrier_no_go": 76,
         "classical_formalised": 44,
-        "conditional_implication": 161,
-        "equivalence_or_classification": 106,
-        "finite_instance": 85,
+        "conditional_implication": 164,
+        "equivalence_or_classification": 107,
+        "finite_instance": 87,
         "generated_certificate_instance": 4,
-        "infrastructure": 5278,
+        "infrastructure": 6520,
         "reduction_or_transport": 94,
         "representation_normalisation": 161,
-        "unconditional_object_theorem": 358
+        "unconditional_object_theorem": 359
       },
       "classical": {
         "1041": 0,
@@ -73,35 +73,35 @@
         "1041": 0,
         "1049": 5,
         "243": 3,
-        "249": 89,
+        "249": 90,
         "251": 0,
         "257": 168,
         "269": 0,
         "68": 0,
         "both": 0,
-        "shared_substrate": 19,
-        "total": 284
+        "shared_substrate": 20,
+        "total": 286
       },
       "nonrecurring_by_logical_class": {
-        "barrier_no_go": 55,
+        "barrier_no_go": 56,
         "reduction_or_transport": 46,
-        "unconditional_object_theorem": 183
+        "unconditional_object_theorem": 184
       },
-      "nonrecurring_prior_art_not_assessed_count": 229,
+      "nonrecurring_prior_art_not_assessed_count": 231,
       "open_antecedent_cluster_count": 52,
       "open_antecedent_endpoint_equivalent_count": 10,
       "prior_art_not_assessed": {
-        "1041": 118,
+        "1041": 605,
         "1049": 58,
-        "243": 70,
-        "249": 277,
-        "251": 42,
+        "243": 183,
+        "249": 334,
+        "251": 145,
         "257": 313,
-        "269": 39,
-        "68": 694,
+        "269": 310,
+        "68": 852,
         "both": 0,
-        "shared_substrate": 4169,
-        "total": 5780
+        "shared_substrate": 4230,
+        "total": 7030
       },
       "prior_art_review_queue": {
         "1041": 0,
@@ -122,15 +122,15 @@
         "257": 6
       },
       "reviewed_frontier_shortlist_count": 11,
-      "source_structural_family_node_count": 5246
+      "source_structural_family_node_count": 6488
     },
-    "statement_nodes": 6364
+    "statement_nodes": 7616
   },
   "surface_digests": {
-    "docs/RESULTS.md": "sha256:6bcee146c31a5acce818a3ee1f3289d3ec230654f2ec7a6423e25d2085517868",
-    "docs/TRUTH_AUDIT.md": "sha256:8d70f9488a3f6e47a5a978e1423873dac17ad92b91ea9fd984d4671131d851aa",
-    "paper/claim-faithful-publication-systems-paper.tex": "sha256:36431013833c1100758194e835e7bced30d4d8fc5dcd7e9b57e17956aa9d8414",
-    "paper/cold-clone-to-proof-receipt.tex": "sha256:af53dce269a5911fddd4b2406dcb2425c0373b5aa489f114d90d84525f9ec4ea"
+    "docs/RESULTS.md": "sha256:f941cd24ba83229fd795f0a853be0fce68e4129c2a8b8202904ed5388b83abc6",
+    "docs/TRUTH_AUDIT.md": "sha256:cc64cc329df17e95f2b0fadfe96fe9fb507ece149dae9dc4e35fdff51d53f44c",
+    "paper/claim-faithful-publication-systems-paper.tex": "sha256:5a761e78c6d08fdaff11d0191cf97500dd18e0630a0e8606f9964453ab9a7716",
+    "paper/cold-clone-to-proof-receipt.tex": "sha256:12db2bdc40dcb6d4d1887a5907700fa53b40f27e559931c4b98340bb664bf9b0"
   },
   "verification_posture": "content_addressed_generated_corpus_and_public_census_surfaces_matched_a_full_builder_run"
 }

@@ -83,7 +83,7 @@ def main() -> int:
 
     checker.validate_guide(guide)
     checker.validate_systems_paper(systems_paper)
-    checker.validate_entry_links(readme, agents, paper_readme)
+    checker.validate_entry_links(readme, agents, paper_readme, guide)
     checks = 3
 
     contract = checker.json.loads(
@@ -212,11 +212,12 @@ def main() -> int:
     try:
         checker.validate_entry_links(
             readme.replace(
-                "[architecture and repository guide](ARCHITECTURE.md)",
+                "[ARCHITECTURE](ARCHITECTURE.md)",
                 "architecture notes",
             ),
             agents,
             paper_readme,
+            guide,
         )
     except AssertionError:
         checks += 1
@@ -231,6 +232,7 @@ def main() -> int:
             ),
             agents,
             paper_readme,
+            guide,
         )
     except AssertionError:
         checks += 1
@@ -242,14 +244,43 @@ def main() -> int:
             readme,
             agents,
             paper_readme.replace(
-                "architecture\nand access guide",
+                "repository layout, sources of truth, build path, and release\n"
+                "infrastructure",
                 "specialist systems case study",
             ),
+            guide,
         )
     except AssertionError:
         checks += 1
     else:
         raise AssertionError("paper architecture-role deletion escaped")
+
+    try:
+        checker.validate_entry_links(
+            readme,
+            agents,
+            paper_readme,
+            guide.replace(
+                "](claim-faithful-publication-systems-paper.pdf)",
+                "](systems-paper.pdf)",
+            ),
+        )
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("architecture systems-paper link deletion escaped")
+
+    try:
+        checker.validate_entry_links(
+            readme,
+            agents,
+            paper_readme,
+            guide.replace("You do not need to know Lean", "Start by learning Lean"),
+        )
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("architecture no-Lean entry boundary deletion escaped")
 
     print(f"architecture guide tests: {checks} checks passed")
     return 0

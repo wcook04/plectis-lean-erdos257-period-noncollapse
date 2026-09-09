@@ -1,0 +1,233 @@
+version: v0.4
+project:
+  name: 'Erdős #249: all-base totient kernel dimension, canonical basis and relation
+    module'
+  description: 'For every integer base k >= 2 and every depth e >= 1 the span of the
+    base-k sections n -> phi(k^j n + r), j <= e, r < k^j, has dimension exactly k^e
+    + 1. The canonical index takes the two zero-residue channels together with one
+    channel per residue 1 <= r < k^j with k not dividing r at each level 1 <= j <=
+    e; that family is linearly independent, spans the whole level-e kernel, and carries
+    an explicit basis of the span. The module of Q-linear relations among the 1 +
+    k + ... + k^e unreduced channels has dimension exactly k + k^2 + ... + k^(e-1).
+    The separation input is an all-slope affine independence theorem with no parity,
+    primitivity or coprimality hypothesis. These are unconditional theorems about
+    Nat.totient; they prove nothing about the binary totient series and do not solve
+    Erdős #249.'
+  authors:
+  - Will Cook
+  license: Apache-2.0
+  responsible_maintainers:
+  - Will Cook
+classification:
+  arxiv:
+  - math.NT
+  msc2020:
+  - 11A25
+  - 11B83
+sources:
+- title: 'The all-base k-kernel structure of Euler''s totient: exact dimension, canonical
+    basis and relation module'
+  authors:
+  - Will Cook
+  type: original-proof
+  relationship: other
+  note: The spanning half is the zero-residue relation phi(k^(j+1) n) = k^j phi(k
+    n) together with the composite-residue step, whose scalar is phi(k) * gcd(k,u)
+    / phi(gcd(k,u)); this is why the canonical residue condition is k not dividing
+    r rather than gcd(k,r) = 1. The independence half restricts to the progression
+    n = k m + 1 and applies the all-slope auxiliary-prime row. The relation-module
+    dimension is rank-nullity against the exact rank.
+  license: Apache-2.0
+  author_endorsement: participated
+- title: Simultaneous inequalities among values of the Euler phi-function
+  authors:
+  - Greg Martin
+  id: https://arxiv.org/abs/math/0603053
+  type: preprint
+  relationship: background
+  note: Theorem 1 already subsumes the linear-independence conclusion for positive
+    pairwise non-proportional affine forms. The affine-forms declaration in this package
+    must be read as a Lean-checked restatement of a consequence of Martin's theorem,
+    not as a new independence result. The exact rank formula, the canonical index,
+    the basis and the relation-module dimension have no located antecedent; the search
+    was not exhaustive.
+  license: unknown
+  author_endorsement: not-contacted
+- title: (Non)Automaticity of number theoretic functions
+  authors:
+  - Michael Coons
+  id: https://doi.org/10.5802/jtnb.719
+  type: journal article
+  relationship: background
+  note: Theorem 3.2 owns non-k-regularity of phi. That statement must never be claimed
+    here. The infinite-dimensionality of the full kernel is Coons; what this package
+    adds is the exact bounded-depth dimension, index and relation normal form.
+  license: unknown
+  author_endorsement: not-contacted
+- title: 'Erdős Problem #249'
+  authors:
+  - Thomas F. Bloom
+  id: https://www.erdosproblems.com/249
+  type: web discussion
+  relationship: background
+  note: The catalogue supplies the problem statement, numbering, references and open
+    status; the kernel structure theorem is not attributed to the catalogue and does
+    not bear on the problem's resolution.
+  license: unknown
+  author_endorsement: not-contacted
+- title: Mathlib
+  authors:
+  - The mathlib contributors
+  id: https://github.com/leanprover-community/mathlib4
+  relationship: background
+  license: Apache-2.0
+  author_endorsement: n/a
+status:
+  scope: Three compared theorems. The first is the all-slope affine independence input.
+    The second packages canonical independence, the span normal form, existence of
+    a basis on the canonical index, the exact rank k^e + 1, and the exact relation-module
+    dimension. The third gives an integral coordinate basis and an elementary two-term
+    relation basis with exact rank. Challenge.lean has three intentional specification
+    sorries.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  proof_corpus_sorry_count: 0
+  trusted_challenge_sorry_count: 3
+  sorry_boundary: The only deliberate placeholders are the three trusted theorem bodies
+    in Challenge.lean. They are excluded from the proof-corpus count.
+  axiom_audit_status: pending_transport_elaboration_source_declarations_audited_clean_2026_09_05
+  permitted_axiom_budget:
+  - propext
+  - Quot.sound
+  - Classical.choice
+  main_results:
+  - declaration: Erdos249257.ExternalVerification249TotientKernelBasis.allBaseIntegralCoordinateAndRelationBasis
+    file: Solutions/ExternalVerification249TotientKernelBasis.lean
+    sorry_count: 0
+    comparator_config: ExternalVerification249TotientKernelBasis/comparator.json
+    canonical_claim_status: source_build_pass_transport_and_axiom_audit_pending
+    local_proof_provenance: ErdosProblems.Erdos249.PaperCompleteR8.displayed_integral_normal_form
+    statement: For k >= 2 and e >= 1, the canonical channels form an integral basis
+      of the channel span. Omitted channels index a basis of the evaluation kernel,
+      each equal to E_i - a E_j for a natural scalar a and retained channel j. The
+      integral relation rank is the sum of k^j for 1 <= j < e.
+  - declaration: Erdos249257.ExternalVerification249TotientKernelBasis.allSlopeAffineTotientFormsLinearIndependent
+    file: Solutions/ExternalVerification249TotientKernelBasis.lean
+    sorry_count: 0
+    comparator_config: ExternalVerification249TotientKernelBasis/comparator.json
+    canonical_claim_status: source_transport_pending_elaboration
+    local_proof_provenance: Erdos249257.linearIndependent_totientAffineForms
+      in Erdos249257/AllBaseTotientKernel.lean.
+    novelty_status: subsumed_by_martin_2006_theorem_1
+    contribution_class: Lean-checked restatement of a consequence of a published theorem
+    statement: For positive, pairwise non-proportional affine forms a i * n + b i,
+      the sequences n -> phi(a i n + b i) are Q-linearly independent. There is no
+      parity, primitivity or coprimality hypothesis on the slopes.
+    boundary: Martin's Theorem 1 already gives this conclusion. The value here is
+      that it is kernel-checked and that it removes the odd-slope restriction the
+      earlier 2-adic parity argument needed; it is not an independence result new
+      to the literature.
+    literature_dependencies:
+    - statement: linear independence of totient values along positive pairwise non-proportional
+        affine forms
+      source: G. Martin, Simultaneous inequalities among values of the Euler phi-function,
+        arXiv:math/0603053, Theorem 1
+  - declaration: Erdos249257.ExternalVerification249TotientKernelBasis.allBaseTotientKernelBasisRankAndRelationDimension
+    file: Solutions/ExternalVerification249TotientKernelBasis.lean
+    sorry_count: 0
+    comparator_config: ExternalVerification249TotientKernelBasis/comparator.json
+    canonical_claim_status: source_transport_pending_elaboration
+    local_proof_provenance: Source declarations linearIndependent_allBaseCanonicalFamily,
+      span_allBaseThroughLevelFamily_eq, allBaseTotientKernelBasis, finrank_allBaseThroughLevelFamily_eq
+      and finrank_allBaseRelationModule_eq in Erdos249257/AllBaseTotientKernel.lean;
+      exact source commit and content digest will be pinned after terminal Lean validation
+      of this package.
+    novelty_status: unassessed
+    contribution_class: exact bounded-depth rank formula, explicit basis and relation-module
+      dimension at every base
+    statement: For every k >= 2 and e >= 1 the canonical family is linearly independent,
+      spans the complete level-e base-k kernel, indexes a basis of that span, the
+      span has dimension exactly k^e + 1, and the relation module of the 1 + k + ...
+      + k^e unreduced channels has dimension exactly k + k^2 + ... + k^(e-1).
+    boundary: 'Nothing here bears on Erdős #249, which asks for irrationality of sum
+      phi(n)/2^n; this is a rank, basis and relation statement about the k-kernel
+      span. Reading it as parent progress is the error this boundary exists to block.
+      The relation-module statement gives the dimension only: the named zero-residue
+      and composite-residue syzygies are proved to lie in the relation module, but
+      they are not proved to generate it, and that spanning claim is deliberately
+      absent from the compared statement. The k^e + 1 formula is specific to the totient
+      and its n^q phi^m class; the receipt at public-source-redacted://state/erdos249/all_base_multiplicative_kernel_rank_receipt.json
+      shows sigma and tau reach rank 41 rather than 37 at k = 6, e = 2, so it does
+      not generalise to multiplicative functions.'
+    literature_dependencies:
+    - statement: the affine independence input to the canonical-family independence
+        half
+      source: G. Martin, Simultaneous inequalities among values of the Euler phi-function,
+        arXiv:math/0603053, Theorem 1
+    - statement: non-k-regularity of phi, equivalently infinite dimensionality of
+        the full kernel span; owned by Coons and not claimed here
+      source: M. Coons, (Non)Automaticity of number theoretic functions, J. Theor.
+        Nombres Bordeaux 22 (2010) 339-352, Theorem 3.2
+automation:
+  methods:
+  - method: manual
+    models: []
+    framework: Mathematical interpretation and claim-boundary review
+    tool_setup: Human-directed scope and significance review
+  - method: agent
+    models:
+    - Anthropic Claude
+    - OpenAI Codex
+    framework: Lean 4 and Mathlib
+    tool_setup: AI-assisted formalization, verification packaging, and exposition
+    cost:
+      wall_time: not tracked
+      spend_usd: subscription-based
+      hardware: local machine
+      prompting_notes: n/a
+  - method: other
+    models: []
+    framework: Comparator with NanoDa and Landrun
+    tool_setup: Positive acceptance and deliberate-negative mismatch rejection on
+      a supported runner; no terminal replay receipt is recorded here.
+  - method: other
+    models: []
+    framework: Lean kernel
+    tool_setup: The source module was checked with the pinned toolchain (focused build
+      exit 0 over 3518 jobs, seven headline declarations audited clean). The transport
+      modules in this package have not been elaborated.
+  notes: Human mathematical review remains separate from Lean checking, Comparator
+    preparation and any future Palomar editorial review.
+fidelity:
+  divergences: The compared structure theorem conjoins five source-current endpoints
+    into their natural basis-rank-relation statement, and replaces the source's explicit
+    Basis definition with Nonempty of the same Basis type so that the Challenge can
+    state existence without reproducing the construction. It adds no consequence for
+    the binary totient series.
+review:
+  status: self-assessed
+  reviewers: []
+  notes: The source theorem family, the k-does-not-divide-r canonical residue condition,
+    the rank-nullity derivation of the relation dimension, the Martin subsumption
+    of the independence half and the Coons ownership of non-k-regularity were reviewed.
+    Elaboration of this package's transport, axiom audit and Comparator replay remain
+    distinct gates.
+alignment:
+  namespace: Erdos249257.ExternalVerification249TotientKernelBasis
+  statements:
+  - source: Erdos249257.linearIndependent_totientAffineForms
+    lean: Erdos249257.ExternalVerification249TotientKernelBasis.allSlopeAffineTotientFormsLinearIndependent
+    module: ExternalVerification249TotientKernelBasis/Challenge.lean
+    status: verbatim-transport-pending-check
+    note: The source statement is already in pure Mathlib vocabulary, so the Challenge
+      repeats it unchanged.
+  - source: Erdos249257.linearIndependent_allBaseCanonicalFamily, span_allBaseThroughLevelFamily_eq,
+      allBaseTotientKernelBasis, finrank_allBaseThroughLevelFamily_eq, and finrank_allBaseRelationModule_eq.
+    lean: Erdos249257.ExternalVerification249TotientKernelBasis.allBaseTotientKernelBasisRankAndRelationDimension
+    module: ExternalVerification249TotientKernelBasis/Challenge.lean
+    status: exact-composite-transport-pending-check
+    note: The Challenge redefines the kernel channel, the canonical index and residue,
+      the through-level family and the relation map in Mathlib-only vocabulary; Solution.lean
+      identifies each with its source counterpart definitionally and applies the source
+      theorems.
+acknowledgements: Mathlib contributors; Thomas F. Bloom for the Erdős Problems catalogue.

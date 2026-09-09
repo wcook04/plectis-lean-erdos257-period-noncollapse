@@ -2144,13 +2144,26 @@ has four sectors: two components of $u>\mu$ and two components of $u<\mu$.
 A global component argument cannot delete one local sector from a disc already
 contained in $V$.
 
-This diagnoses a proof step, not the proposition's statement.  A repair might
-cut an adjoining regular annulus along a separatrix or regular flow arc before
-forming the block, retain a four-pronged saddle neighbourhood and change the
-assembly, or replace the local construction by the ray-cut decomposition
-proposed below.  Any repair must prove that its connector cost can be made
-arbitrarily small uniformly in the attachment points and that the repaired
-blocks still assemble to an embedded tree satisfying~\eqref{eq:prop12-bound}.
+There is also a self-contained obstruction to the displayed unrestricted
+budget.  For $f_a(z)=z^2-a^2$, $a=9/10$, let
+\[
+ B_R=\frac1{2\pi}\int_{|f_a(z)|<R}\left|\frac{f'_a(z)}{f_a(z)}\right|\,dA(z).
+\]
+Changing variables through both inverse branches gives
+$B_R\le4(\sqrt{a^2+R}-a)$.  At $R=1$ this is less than
+$223/125<9/5$, whereas every connected rectifiable tree containing the roots
+$\pm a$ has length at least $9/5$.  Coarea identifies $B_1$ with the full
+level-length budget, so no nonnegative cutoff can repair the estimate without
+an added attachment cost.  This does not refute Erd\H{o}s~\#1041: the segment
+$[-a,a]$ itself lies in $\{|f_a|<1\}$ and has length $9/5<2$.
+
+Applying this obstruction to a numbered historical proposition requires its
+complete archived hypotheses, which were not recovered in the return.  A
+repair might cut an adjoining regular annulus along a separatrix or regular
+flow arc before forming the block, retain a four-pronged saddle neighbourhood
+and change the assembly, or replace the local construction by the ray-cut
+decomposition proposed below.  Any repair must pay the missing attachment
+cost or prove a different metric estimate.
 The shorter descriptions of the same three-ended block do not repair the
 four-sector topology.
 
@@ -2408,8 +2421,11 @@ core is the Newton value equation, the exponential first integral, the consumer
 form of ray separation, the finite planar-avoidance theorem, quantitative
 constant-translation root retention, and the ray-collision parameterisation.  The
 decomposition and length statements of \S\ref{sec:open} are not proved.  The
-diagnosis of Proposition~12 in \S\ref{sec:gap} concerns its printed local
-saddle construction; it does not refute the proposition's statement.  The
+diagnosis in \S\ref{sec:gap} concerns the printed local saddle construction,
+while the Cassini calculation refutes the displayed unrestricted tree-budget
+estimate as an ordinary mathematical argument.  Attribution to a numbered
+historical proposition remains conditional on its complete archived
+hypotheses.  The
 search results of \S\ref{sec:finite} are computations.
 
 \appendix

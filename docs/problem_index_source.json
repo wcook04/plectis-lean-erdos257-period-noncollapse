@@ -57,11 +57,11 @@
       "note_artifact_id": "erdos_68_note",
       "required_note_declarations": [
         {
-          "module": "ErdosProblems.Erdos68.FactorialZeroPlateau",
+          "module": "ErdosProblems.Erdos68.FactorialGapPlateauCore",
           "declaration": "irrational_factorialGapSeries_iff_cofinal_strictFacTopRat_misses"
         },
         {
-          "module": "ErdosProblems.Erdos68.FactorialZeroPlateau",
+          "module": "ErdosProblems.Erdos68.FactorialGapPlateauCore",
           "declaration": "irrational_factorialGapSeries_of_cofinal_nonunit_carries"
         },
         {
@@ -391,7 +391,7 @@
       "what_is_checked": [
         "The finite summation-by-parts identity relating the prime dyadic partial sums to the prime-gap dyadic partial sums, with an exact endpoint term and no convergence premise.",
         "The factor-of-two normalisation between the two displayed indexings, at every finite horizon.",
-        "Conditional on summability of the prime dyadic series, the exact infinite prime-gap identity and the equivalence of irrationality of the prime and prime-gap series.",
+        "The unconditional exact infinite prime-gap identity and the equivalence of irrationality of the prime and prime-gap series, using the Lean-checked summability supplied by an elementary polynomial prime bound.",
         "For an abstract integer-digit dyadic tail recurrence: the exact block identity, and that a shift of fixed length is integral exactly when an explicit scaled state is.",
         "That one integral shift propagates to every later index.",
         "That repeated doubling removes the power-of-two denominator, so every rational-valued dyadic recurrence has one fixed positive shift integral at all sufficiently late indices.",
@@ -403,7 +403,6 @@
       ],
       "what_is_not_checked": [
         "The target irrationality.",
-        "The definition and recurrence of the concrete prime-gap tail as Lean infinite sums; the note supplies these at paper level. Summability of the concrete prime series is Lean-checked unconditionally via an elementary polynomial prime bound.",
         "A theorem supplying cofinally many adjacent actual-prime-gap tail shifts in the open unit interval with the required gap mismatch.",
         "Any theorem forcing periodicity or automaticity of the prime gaps from rationality; the free-carry identity disconfirms that route."
       ],
@@ -415,14 +414,11 @@
         {
           "id": "cofinal_adjacent_small_mismatch",
           "statement": "For every fixed h >= 1 and every N0, find N >= N0 such that both adjacent full tail shifts have absolute value less than 1 and g_{N+h+1} != g_{N+1}. The checked local consumer then excludes eventual integrality of the h-shift."
-        },
-        {
-          "id": "actual_prime_gap_tail_formal_bridge",
-          "statement": "Formalise summability of the actual prime and prime-gap dyadic series and identify the concrete infinite prime-gap tail with the checked real/rational dyadic recurrence, so the local consumer reaches the target series without a paper-only analytic bridge."
         }
       ],
       "finite_search": null,
-      "note_coverage_floor": 0.55
+      "note_coverage_floor": 0.53,
+      "note_coverage_rationale": "The long note links 64 theorem-level declarations across the complete current 120-declaration cited source family. Exporting the final twelve-declaration polynomial countermodel block lowered the raw linked fraction from 59% to 53% without removing any link; 0.53 records that larger honest denominator while named source links and required headline declarations remain mandatory."
     },
     {
       "problem_id": "erdos_257",
@@ -451,10 +447,12 @@
       "what_is_checked": [
         "That the strict Mersenne tail inequality is hereditary under deleting an arbitrary collection of future weights.",
         "That binary digit strings restricted to any chosen support retain unique Mersenne coding.",
-        "Restricted sets are compact and nowhere dense; infinite-support sets are perfect; finite-complement measure is 2^(-|F|), otherwise zero."
+        "Restricted sets are compact and nowhere dense; infinite-support sets are perfect; finite-complement measure is 2^(-|F|), otherwise zero.",
+        "For every integer base b >= 2, every infinite positive-exponent support with summable reciprocal mass has an irrational support-restricted Mersenne series; the note links the exact kernel-checked statement in its pinned source snapshot.",
+        "Registered structured families include full support, multiples, residue classes, odd exponents, eventually periodic supports, and infinite pairwise-coprime supports under their stated hypotheses."
       ],
       "what_is_not_checked": [
-        "The universal irrationality problem, or irrationality for any new infinite support.",
+        "The universal irrationality problem for arbitrary infinite supports beyond the reciprocal-summable and other registered structured families.",
         "Fair-bit laws, finer singularity results, and periodic-stride dimensions.",
         "Any bridge from geometric uniqueness or measure rigidity to arithmetic irrationality."
       ],
@@ -592,6 +590,7 @@
         "A quadratic bound on the cardinality of the actual filtered exponent shell.",
         "That each dyadic block contains at most one internal pure power from each non-dyadic channel, so the compressed {2,3,5} block radix belongs to the exact alphabet {2,6,10,30} and in particular lies between 2 and 30.",
         "That the smallest {2,3,5} kernel rectangle has determinant exactly -1/15, so its two-by-two matrix has rank two over the rationals and no rank-one separation exists.",
+        "For three distinct primes, uniformly in the third exponent, there are nonsingular running-LCM kernel minors of every order; consequently the kernel has no finite separated representation of the displayed form.",
         "The canonical least-positive-residue interval and congruence facts, including the zero-residue representative.",
         "The exact local-window identity for an integral carry.",
         "A denominator-dependent CofinalLocalWindowEscape proposition and the full theorem that it rules out every positive reduced integral carry satisfying the matching bound.",
@@ -842,7 +841,7 @@
         "At n = 0, the Amdeberhan-Zeilberger q-Apery operator applied to Van Assche's moving diagonal has residual -p(p-1)^2(p+1)(p^5+2p^4+2p^3+2p^2+2), which is strictly negative and nonzero for every real p > 1."
       ],
       "what_is_not_checked": [
-        "Irrationality at base three halves, or for any rational base.",
+        "Lean does not check irrationality at base three halves or the paper's ordinary irrationality theorem for F(31/4) and its positive integer powers.",
         "The published analytic height theorem, which is cited and used as an external result and is not formalised here.",
         "The all-scale Heine-Zudilin coefficient construction at rational base three halves; the primary source assumes an integer base.",
         "The source analytic irrationality theorem inside the 81/200 height region; only its elementary parameter specialisations are formalised.",

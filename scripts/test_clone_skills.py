@@ -46,6 +46,14 @@ def local_skill_references(source: str) -> set[str]:
     return result
 
 
+def links_to(source: str, target: str) -> bool:
+    """Accept any human label while requiring the exact clone-local target."""
+    return any(
+        destination.split("#", 1)[0].strip() == target
+        for destination in re.findall(r"\[[^]]+\]\(([^)]+)\)", source)
+    )
+
+
 def advertised_python_commands(source: str) -> list[tuple[str, str | None, set[str]]]:
     """Extract tracked Python CLIs and options from runnable documentation."""
     joined = re.sub(r"\\\s*\n\s*", " ", source)
@@ -153,7 +161,9 @@ def main() -> int:
     validate_advertised_python_commands(command_documents)
 
     assert "[`AGENTS.override.md`](AGENTS.override.md)" in readme
-    assert "[`CONTRIBUTING.md`](CONTRIBUTING.md)" in readme
+    assert links_to(readme, "CONTRIBUTING.md")
+    assert links_to("[Contribute](CONTRIBUTING.md)", "CONTRIBUTING.md")
+    assert not links_to("[Contribute](docs/CONTRIBUTING.md)", "CONTRIBUTING.md")
     assert 'agent_entry.py --entry "<task in ordinary language>"' in entry
     assert "agent_entry.py --skills" in entry
 

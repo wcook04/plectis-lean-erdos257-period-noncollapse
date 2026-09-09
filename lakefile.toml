@@ -97,3 +97,19 @@ srcDir = "residualbench"
 [[lean_lib]]
 name = "ExternalVerification1041SolvedFamilies"
 globs = ["ExternalVerification1041SolvedFamilies.*"]
+
+# Statement-isolated interface for the checked Erdős #249 all-base totient
+# kernel basis and relation-module theorem.  Challenge carries the independent
+# statements; the proof-bearing and deliberate-negative modules are separate
+# libraries so Comparator can compare them without widening a default build.
+[[lean_lib]]
+name = "ExternalVerification249TotientKernelBasis"
+globs = ["ExternalVerification249TotientKernelBasis.+"]
+
+[[lean_lib]]
+name = "Solutions"
+globs = ["Solutions.+"]
+
+[[lean_lib]]
+name = "NegativeSolutions"
+globs = ["NegativeSolutions.+"]

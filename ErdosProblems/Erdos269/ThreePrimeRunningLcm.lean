@@ -3,6 +3,7 @@ import Mathlib.Data.Nat.Prime.Basic
 import Mathlib.Data.Nat.Prime.Int
 import Mathlib.Algebra.GCDMonoid.Finset
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Algebra.Ring.Parity
 import Mathlib.Data.Finset.Card
 import Mathlib.Data.Finset.Prod
 import Mathlib.Tactic.Linarith
@@ -682,6 +683,68 @@ theorem dyadicInternalPower_exponent_unique
   · simpa using Nat.le_of_lt hf.1
   · simpa using hf.2
 
+/-- Across one dyadic block, a logarithm in any base at least two increases
+by at most one. -/
+theorem log_dyadic_succ_le
+    {p a : ℕ} (hp : 2 ≤ p) :
+    Nat.log p (2 ^ (a + 1)) ≤ Nat.log p (2 ^ a) + 1 := by
+  calc
+    Nat.log p (2 ^ (a + 1)) ≤ Nat.log p (2 ^ a * p) := by
+      apply Nat.log_mono_right
+      rw [pow_succ]
+      exact Nat.mul_le_mul_left (2 ^ a) hp
+    _ = Nat.log p (2 ^ a) + 1 := by
+      exact Nat.log_mul_base (by omega) (by positivity)
+
+/-- For an odd base larger than two, its logarithm advances across a dyadic
+block exactly when one base power lies strictly inside that block. -/
+theorem exists_dyadicInternalPower_iff_log_succ
+    {p a : ℕ} (hp : 2 < p) (hpOdd : Odd p) :
+    (∃ e, DyadicInternalPower p a e) ↔
+      Nat.log p (2 ^ (a + 1)) = Nat.log p (2 ^ a) + 1 := by
+  have hpOne : 1 < p := by omega
+  constructor
+  · rintro ⟨e, heLower, heUpper⟩
+    have hLower : Nat.log p (2 ^ a) < e :=
+      (Nat.log_lt_iff_lt_pow hpOne (by positivity)).2 heLower
+    have hUpper : e ≤ Nat.log p (2 ^ (a + 1)) :=
+      Nat.le_log_of_pow_le hpOne heUpper.le
+    have hStep := log_dyadic_succ_le (a := a) (Nat.le_of_lt hp)
+    omega
+  · intro hStep
+    let e := Nat.log p (2 ^ (a + 1))
+    refine ⟨e, ?_, ?_⟩
+    · dsimp [e]
+      simpa only [Nat.succ_eq_add_one, hStep] using
+        Nat.lt_pow_succ_log_self hpOne (2 ^ a)
+    · dsimp [e]
+      have hLe :
+          p ^ Nat.log p (2 ^ (a + 1)) ≤ 2 ^ (a + 1) :=
+        Nat.pow_log_le_self p (by positivity)
+      have hOdd : Odd (p ^ Nat.log p (2 ^ (a + 1))) := hpOdd.pow
+      have hEven : Even (2 ^ (a + 1)) :=
+        even_two.pow_of_ne_zero (by omega)
+      have hNe : p ^ Nat.log p (2 ^ (a + 1)) ≠ 2 ^ (a + 1) := by
+        intro hEq
+        exact (Nat.not_even_iff_odd.mpr hOdd) (by simpa [hEq] using hEven)
+      exact lt_of_le_of_ne hLe hNe
+
+/-- If no odd-base power occurs inside a dyadic block, the corresponding
+logarithmic coordinate stays fixed. -/
+theorem log_dyadic_succ_eq_of_no_internalPower
+    {p a : ℕ} (hp : 2 < p) (hpOdd : Odd p)
+    (hNo : ¬ ∃ e, DyadicInternalPower p a e) :
+    Nat.log p (2 ^ (a + 1)) = Nat.log p (2 ^ a) := by
+  have hMono : Nat.log p (2 ^ a) ≤ Nat.log p (2 ^ (a + 1)) := by
+    apply Nat.log_mono_right
+    exact Nat.pow_le_pow_right (by norm_num) (Nat.le_succ a)
+  have hStep := log_dyadic_succ_le (a := a) (by omega : 2 ≤ p)
+  have hNotSucc :
+      Nat.log p (2 ^ (a + 1)) ≠ Nat.log p (2 ^ a) + 1 := by
+    intro hEq
+    exact hNo ((exists_dyadicInternalPower_iff_log_succ hp hpOdd).2 hEq)
+  omega
+
 /-- The exact radix of the dyadic block after compressing all internal
 `3`- and `5`-power jumps.  Each internal channel contributes its prime once,
 and the terminal dyadic jump contributes the factor `2`. -/
@@ -712,6 +775,49 @@ theorem dyadicBlockBase235_mem_interval (a : ℕ) :
     2 ≤ dyadicBlockBase235 a ∧ dyadicBlockBase235 a ≤ 30 := by
   rcases dyadicBlockBase235_cases a with h | h | h | h <;>
     simp [h]
+
+/-- The synthetic four-symbol radix is the exact successive-height ratio on
+the actual dyadic `{2,3,5}` orbit. -/
+theorem threePrimeHeight_dyadicBlock_succ (a : ℕ) :
+    threePrimeHeight 2 3 5 (2 ^ (a + 1)) =
+      dyadicBlockBase235 a * threePrimeHeight 2 3 5 (2 ^ a) := by
+  classical
+  have h2 : Nat.log 2 (2 ^ (a + 1)) = Nat.log 2 (2 ^ a) + 1 := by
+    simp
+  by_cases h3 : ∃ e, DyadicInternalPower 3 a e
+  · have h3Log :=
+      (exists_dyadicInternalPower_iff_log_succ
+        (p := 3) (a := a) (by norm_num) (by exact ⟨1, by norm_num⟩)).1 h3
+    by_cases h5 : ∃ e, DyadicInternalPower 5 a e
+    · have h5Log :=
+        (exists_dyadicInternalPower_iff_log_succ
+          (p := 5) (a := a) (by norm_num) (by exact ⟨2, by norm_num⟩)).1 h5
+      simp only [threePrimeHeight]
+      rw [h2, h3Log, h5Log]
+      simp [dyadicBlockBase235, h3, h5]
+      ring
+    · have h5Log := log_dyadic_succ_eq_of_no_internalPower
+        (p := 5) (a := a) (by norm_num) (by exact ⟨2, by norm_num⟩) h5
+      simp only [threePrimeHeight]
+      rw [h2, h3Log, h5Log]
+      simp [dyadicBlockBase235, h3, h5]
+      ring
+  · have h3Log := log_dyadic_succ_eq_of_no_internalPower
+      (p := 3) (a := a) (by norm_num) (by exact ⟨1, by norm_num⟩) h3
+    by_cases h5 : ∃ e, DyadicInternalPower 5 a e
+    · have h5Log :=
+        (exists_dyadicInternalPower_iff_log_succ
+          (p := 5) (a := a) (by norm_num) (by exact ⟨2, by norm_num⟩)).1 h5
+      simp only [threePrimeHeight]
+      rw [h2, h3Log, h5Log]
+      simp [dyadicBlockBase235, h3, h5]
+      ring
+    · have h5Log := log_dyadic_succ_eq_of_no_internalPower
+        (p := 5) (a := a) (by norm_num) (by exact ⟨2, by norm_num⟩) h5
+      simp only [threePrimeHeight]
+      rw [h2, h3Log, h5Log]
+      simp [dyadicBlockBase235, h3, h5]
+      ring
 
 /-! ## Exact rank-two certificate -/
 

@@ -304,39 +304,12 @@ HUMAN_SURFACE_BUDGET_BYTES = {
         ]),
     ),
 }
-# This prefix window is the actual newcomer contract: later growth cannot move
-# the problem statements, authority boundary, or semantic routes off the first
-# screen.
-# 2026-08-11: 16_000 -> 17_000, tracking the whole-file raise above. The status
-# verdict, eight-problem card, and #269 priority credit must all remain inside
-# this window without pushing the agent/verify routes out of first contact.
-# 2026-08-15: 17_000 -> 17_800. Naming the external-verification mechanism on
-# the first screen pushed the no-build navigation route past the window, which
-# the assertion below caught. The window still fails on a runaway projection.
-# 2026-08-16: 17_800 -> 18_600. Naming `verify_claims.py` as the first entry
-# under "Read or run it" pushed the no-build navigation route 63 bytes past the
-# window, which this assertion caught for the second release running. The new
-# route belongs in front of the others precisely because it is the one that
-# returns a result rather than a reading list, so the window grew to keep both
-# rather than trading one first-contact route for another. Funded with slack:
-# the anchor now sits about 700 bytes inside the window, and it still fails on
-# a runaway projection.
-# 2026-08-16, later: 18_600 -> 19_400, funding the runnable command in the
-# opening. Two cheaper repairs were tried first and both were wrong. Deleting
-# the paragraph that introduced the command 15,000 bytes down reclaimed enough
-# for the whole file but not for this window. Reordering the routes so the
-# no-build tour came first only moved which anchor fell out — `AGENTS.md`
-# instead of `every indexed declaration` — which is the tell that the window,
-# not the ordering, was the binding constraint. A first-contact window that
-# cannot hold a runnable command is mis-sized for what it claims to protect.
-# 2026-08-31: 19_400 -> 21_000, tracking the whole-file raise above. The
-# operator-requested wider-system map sits between the opening and the problem
-# table, which moved every pinned section down by about 1.3 kB; the author's
-# note went to the tail instead, so the window pays only for the map. A
-# first-contact window that cannot hold where the rest of the estate lives is
-# mis-sized for a reader deciding whether to look at all. Funded with slack,
-# and it still fails on a runaway projection.
-README_FIRST_CONTACT_BUDGET_BYTES = 21_000
+# The compact README is the newcomer contract. It must fit the mathematical
+# identity, the eight-paper index, the evidence boundary, and direct routes to
+# contribution and reproducibility without turning the front page into a
+# setup runbook. Detailed checkout variants are validated at their routed
+# owner below.
+README_FIRST_CONTACT_BUDGET_BYTES = 12_000
 SUMMARY_PACKET_BUDGET_BYTES = 32_256
 # Sized when the corpus indexed six problems. #68 and #1041 bring their own
 # vocabulary routes, so the dictionary packet grew past it. Raised rather than
@@ -353,7 +326,12 @@ OPEN_PROPOSITION_PACKET_BYTES = 400
 # Documents the README names on its first screen and whose content a cold reader
 # following it therefore reaches. They carry the recoverable detail the front
 # page used to hold itself.
-FIRST_CONTACT_ROUTED_SURFACES = ("docs/RESULTS.md", "docs/AGENT_WORKBENCH.md")
+FIRST_CONTACT_ROUTED_SURFACES = (
+    "docs/RESULTS.md",
+    "docs/AGENT_WORKBENCH.md",
+    "docs/REPRODUCIBILITY.md",
+    "CONTRIBUTING.md",
+)
 PACKET_BUDGET_BYTES = (
     20_480 + OPEN_PROPOSITION_PACKET_BYTES * REMAINING_OPEN_PROPOSITION_COUNT
 )
@@ -944,31 +922,23 @@ def validate_incremental_build_contract(surfaces: dict[str, str]) -> None:
     ):
         require(normalized(token) in readme_flat, f"README lost incremental-build contract: {token}")
 
-    # A newcomer meets the build wrapper before they ever meet Lean. Until
-    # 2026-08-16 the README opened on a raw `lake exe cache get` and the string
-    # "elan" appeared nowhere in this repository's documentation. The wrapper
-    # now owns cache acquisition as well as build deduplication, but it still
-    # needs the toolchain installed before the first invocation.
-    #
-    # This is deliberately a positional contract rather than a keyword one: a
-    # prerequisite named eighteen lines below the command it is a prerequisite
-    # for is not a prerequisite, and the previous README did carry a toolchain
-    # sentence — just underneath the command that needed it.
-    first_contact = surfaces["README.md"]
-    toolchain_guide = first_contact.find(
+    # The detailed build contract belongs to the reproducibility runbook. Keep
+    # its prerequisite before its first build command without forcing those
+    # commands above the paper index on the repository front page.
+    toolchain_guide = runbook.find(
         "https://leanprover-community.github.io/get_started.html"
     )
-    first_build_command = first_contact.find("python3 scripts/lean_fast_build.py --jobs 2")
-    require(toolchain_guide >= 0, "README no longer tells a reader where the Lean toolchain comes from")
-    require(first_build_command >= 0, "README lost its coordinated Lean build command")
-    require(toolchain_guide < first_build_command, "README names the Lean setup guide only after the first build command; "
+    first_build_command = runbook.find("python3 scripts/lean_fast_build.py --jobs 2")
+    require(toolchain_guide >= 0, "reproducibility runbook no longer tells a reader where the Lean toolchain comes from")
+    require(first_build_command >= 0, "reproducibility runbook lost its coordinated Lean build command")
+    require(toolchain_guide < first_build_command, "reproducibility runbook names the Lean setup guide only after the first build command; "
         "a reader without elan hits `command not found` before they reach it")
-    first_build_block_end = first_contact.find("```", first_build_command)
+    first_build_block_end = runbook.find("```", first_build_command)
     require(
         first_build_block_end > first_build_command
         and "ErdosProblems.Erdos249.PeriodMultipleEscape"
-        in first_contact[first_build_command:first_build_block_end],
-        "README makes a full-corpus build the first Lean success path",
+        in runbook[first_build_command:first_build_block_end],
+        "reproducibility runbook makes a full-corpus build the first Lean success path",
     )
     require("elan" in readme, "README no longer names Lean's toolchain manager")
     require(
@@ -1124,97 +1094,62 @@ def validate_human_first_contact(
     check_architecture_guide.validate_guide(surfaces["ARCHITECTURE.md"])
 
     readme_prefix = first_bytes(surfaces["README.md"], README_FIRST_CONTACT_BUDGET_BYTES)
-    lean_clone_command = (
-        "git clone --depth=1 --filter=blob:none --single-branch --no-checkout "
-        "https://github.com/wcook04/plectis-erdos.git"
-    )
-    lean_sparse_command = (
-        "git -C plectis-erdos cat-file -e HEAD:scripts/lean-sparse-checkout && "
-        "git -C plectis-erdos show HEAD:scripts/lean-sparse-checkout | "
-        "git -C plectis-erdos sparse-checkout set --no-cone --stdin"
-    )
-    lean_checkout_command = "git -C plectis-erdos checkout"
-    lean_build_command = "python3 scripts/lean_fast_build.py --jobs 2"
-    reader_sparse_command = (
-        "git -C plectis-erdos cat-file -e HEAD:scripts/reader-sparse-checkout && "
-        "git -C plectis-erdos show HEAD:scripts/reader-sparse-checkout | "
-        "git -C plectis-erdos sparse-checkout set --no-cone --stdin"
-    )
-    full_clone_command = (
-        "git clone --depth=1 --filter=blob:none --single-branch "
-        "https://github.com/wcook04/plectis-erdos.git"
-    )
-    full_history_clone_command = (
-        "git clone --filter=blob:none --single-branch "
-        "https://github.com/wcook04/plectis-erdos.git"
+    reproducibility = safe_read_text("docs/REPRODUCIBILITY.md")
+    contribution_guide = safe_read_text("CONTRIBUTING.md")
+    require(
+        "[REPRODUCIBILITY](docs/REPRODUCIBILITY.md)" in readme_prefix,
+        "README no longer routes detailed clone and build work to REPRODUCIBILITY",
     )
     require(
-        lean_clone_command in readme_prefix
-        and lean_sparse_command in readme_prefix
-        and lean_checkout_command in readme_prefix,
-        "README must expose the Lean-only partial/sparse clone commands before "
-        "a newcomer downloads the generated-document tree",
+        "[CONTRIBUTING](CONTRIBUTING.md)" in readme_prefix,
+        "README no longer routes corrections and returned work to CONTRIBUTING",
     )
+    for command in (
+        "git clone --filter=blob:none",
+        "python3 scripts/lean_fast_build.py --jobs 2",
+        "python3 scripts/check_cold_clone_comprehension.py --quick",
+    ):
+        require(
+            command in reproducibility,
+            f"reproducibility runbook lost executable route {command!r}",
+        )
     require(
-        lean_build_command in readme_prefix,
-        "README's Lean-only checkout must include and invoke its bounded build wrapper",
+        "plain-language research-progress" in contribution_guide
+        and "open a pull request" in contribution_guide,
+        "contribution guide lost its no-patch and focused-patch return routes",
     )
-    require(
-        reader_sparse_command in readme_prefix,
-        "README must expose the bounded human-reader sparse checkout before the full corpus",
-    )
-    require(
-        full_clone_command in readme_prefix,
-        "README must expose a shallow current-document checkout before "
-        "a newcomer downloads historical revisions",
-    )
-    require(
-        full_history_clone_command in readme_prefix,
-        "README must retain a blobless full-history checkout for release validation",
-    )
-    require(
-        readme_prefix.find(lean_clone_command)
-        < readme_prefix.find(reader_sparse_command)
-        < readme_prefix.find(full_clone_command)
-        < readme_prefix.find(full_history_clone_command),
-        "README must order Lean-only, current full, then release-history checkouts",
-    )
-    # Retargeted when the README was cut to its human front-door word budget.
-    # The order is the same reading order: what the eight papers are, what the
-    # checks do and do not establish, then how to read or run it. The open
-    # boundary is no longer a separate section because each problem now carries
-    # its own open obligation in the line that names its paper.
+
+    # The front page should answer what the project contains before asking a
+    # mathematician to choose a checkout. Operational detail stays directly
+    # reachable through the runbook and is tested there above.
     section_order = (
         "## Problem papers",
         "## What the checks establish",
-        "## Read or run it",
+        "## Contribute",
+        "## Read or verify locally",
     )
     positions = [readme_prefix.find(heading) for heading in section_order]
     require(all(position >= 0 for position in positions), f"README first-contact surface lost section sequence {section_order}")
     require(positions == sorted(positions), "README first-contact sections are out of order")
 
-    # The four sections above are the mathematician's reading order and they are
-    # correct as an order. What they cannot do is answer "is any of this real?"
-    # for someone who has not yet decided to read. Until 2026-08-16 the first
-    # command in this README appeared at byte 15,345 — after the eight problem
-    # papers, the external-verification account, the formal-results table, the
-    # open-wall section and the corpus census — so every route that returned a
-    # result was priced behind four screens of inventory.
-    #
-    # Positional, not keyword: `verify_claims.py` was already named under "Read
-    # or run it" when this was written, and being named there did not put it in
-    # front of anyone. The contract is that the cheapest runnable verb precedes
-    # the first section heading, i.e. it is inside the opening a reader always
-    # sees. Raising a byte budget to fund a new section must not quietly buy
-    # that back.
-    first_section = readme_prefix.find("\n## ")
-    first_command = readme_prefix.find("python3 scripts/")
-    require(first_command >= 0, "README first-contact surface no longer contains a runnable command")
-    require(first_section >= 0, "README first-contact surface lost its section headings")
-    require(first_command < first_section, f"README puts its first runnable command at byte {first_command}, below the "
-        f"first section heading at byte {first_section}; a reader deciding whether "
-        "this repository is worth their time meets an inventory before they meet "
-        "anything they can run")
+    first_command_block = readme_prefix.find("```")
+    last_problem = readme_prefix.find("**#1049**", positions[0])
+    require(first_command_block >= 0, "README first-contact surface lost its bounded local check")
+    require(
+        last_problem >= positions[0] and first_command_block > last_problem,
+        "README asks for a shell decision before exposing all eight papers",
+    )
+    require(
+        "![Eight open problems:" in readme_prefix[:positions[0]]
+        and "](.github/system-map.png)" in readme_prefix[:positions[0]],
+        "README opening lost the mathematical research-record banner",
+    )
+    require(
+        "#257" in readme_prefix[:last_problem]
+        and "#249" in readme_prefix[:last_problem]
+        and "For a first look" in readme_prefix[:last_problem],
+        "README no longer recommends a concrete first paper",
+    )
     validate_first_command_keeps_its_promise(readme_prefix)
 
     require("[agent-navigation paper](cold-clone-to-proof-receipt.pdf)"

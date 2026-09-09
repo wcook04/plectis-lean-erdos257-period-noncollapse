@@ -2383,4 +2383,37 @@ theorem eventuallyBoundedNegativePart_eventually_zero
   have hKk : K ≤ k := by omega
   simpa [hNk] using hK k hKk
 
+/-- Bounded negative part plus normalized vanishing forces the eventual Sylvester recurrence. -/
+theorem boundedNegativePart_sylvesterNext_eventually
+    (a C D : ℕ → ℕ) (E : ℕ → ℤ)
+    (ha : ∀ n, 1 < a n)
+    (hCpos : ∀ n, 0 < C n)
+    (hC : ∀ n, C (n + 1) + D n = a n * C n)
+    (hD : ∀ n, D (n + 1) = a n * D n)
+    (hE : ∀ n, E n = centeredState (a n : ℤ) (D n : ℤ) (C n : ℤ))
+    (hbound : ∃ N B : ℕ, ∀ n, N ≤ n → -(B : ℤ) ≤ E n)
+    (hvanish : ∀ K, ∃ N, ∀ n, N ≤ n →
+      K * Int.natAbs (E n) < C n) :
+    ∃ N, ∀ n, N ≤ n →
+      (a (n + 1) : ℤ) = sylvesterNext (a n : ℤ) := by
+  have hcentered : ∃ N, ∀ n, N ≤ n → Int.natAbs (E n) < C n := by
+    obtain ⟨N, hN⟩ := hvanish 1
+    exact ⟨N, fun n hn => by simpa only [one_mul] using hN n hn⟩
+  have hzero : ∃ N, ∀ n, N ≤ n → E n = 0 :=
+    eventuallyBoundedNegativePart_eventually_zero
+      a C D E ha hCpos hC hD hE hcentered hbound hvanish
+  apply sylvesterNext_eventually_of_centered_zero
+    (fun n ↦ (a n : ℤ)) (fun n ↦ (D n : ℤ)) (fun n ↦ (C n : ℤ))
+  · intro n
+    exact natDen_eq_nextDenState a D hD n
+  · intro n
+    exact natTail_eq_nextTailState a C D hC n
+  · obtain ⟨N, hN⟩ := hzero
+    refine ⟨N, fun n hn ↦ ?_⟩
+    have hn0 := hN n hn
+    rw [hE n] at hn0
+    exact hn0
+  · refine ⟨0, fun n _hn ↦ ?_⟩
+    exact_mod_cast (Nat.ne_of_gt (hCpos (n + 1)))
+
 end ErdosProblems.Erdos243

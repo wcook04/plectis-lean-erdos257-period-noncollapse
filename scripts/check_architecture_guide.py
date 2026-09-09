@@ -433,22 +433,27 @@ def validate_systems_paper(text: str) -> None:
     require(SYSTEMS_PDF.is_file(), "rendered systems architecture PDF is missing")
 
 
-def validate_entry_links(readme: str, agents: str, paper_readme: str) -> None:
+def validate_entry_links(
+    readme: str,
+    agents: str,
+    paper_readme: str,
+    guide: str,
+) -> None:
     readme_first_impression = (
         readme.encode("utf-8")[:6_000].decode("utf-8", errors="ignore")
     )
-    require("[architecture and repository guide](ARCHITECTURE.md)" in readme,
+    require("](ARCHITECTURE.md)" in readme,
             "README lost the architecture guide entry link")
     require(
-        "[printable PDF](claim-faithful-publication-systems-paper.pdf)"
-        in readme
-    , "README lost the printable architecture PDF entry link")
-    # The promise is what matters, not the pronoun in front of it. The README
-    # now makes it for the guide and its printable PDF together, so the verb is
-    # plural and the pinned singular sentence stopped matching a rewording that
-    # kept the boundary intact.
-    require("no Lean or project history" in normalise(readme),
-            "README lost the no-history architecture boundary")
+        "](claim-faithful-publication-systems-paper.pdf)" in guide,
+        "architecture guide lost the printable systems-paper route",
+    )
+    compact_guide = normalise(guide).casefold()
+    require(
+        "you do not need to know lean" in compact_guide
+        and "project history" in compact_guide,
+        "architecture guide lost the no-Lean/no-history entry boundary",
+    )
     for phrase in (
         "conditional producer",
         "unbounded or cofinal supply",
@@ -464,13 +469,21 @@ def validate_entry_links(readme: str, agents: str, paper_readme: str) -> None:
     compact_paper_readme = normalise(paper_readme)
     require("[`ARCHITECTURE.md`](../ARCHITECTURE.md)" in paper_readme,
             "paper README lost the architecture guide route")
-    require("authored papers with narrower jobs" in compact_paper_readme,
-            "paper README lost the authored-paper boundary")
-    require("architecture and access guide" in compact_paper_readme,
-            "paper README lost the architecture role")
-    require("historical checker example appears only after the architecture" in (
-        compact_paper_readme
-    ), "paper README moved the historical example ahead of architecture")
+    require(
+        "short first-read paper" in compact_paper_readme
+        and "longer complete reasoning record" in compact_paper_readme,
+        "paper README lost the short-paper/reasoning-record boundary",
+    )
+    require(
+        "repository layout, sources of truth, build path, and release infrastructure"
+        in compact_paper_readme,
+        "paper README lost the architecture-guide role",
+    )
+    require(
+        "older joint #249/#257 paper is retained for provenance" in compact_paper_readme
+        and "not the entry point for either problem" in compact_paper_readme,
+        "paper README lost the maintained-versus-historical route boundary",
+    )
     for manuscript in (
         "erdos249-257-main-paper.tex",
         "claim-faithful-publication-systems-paper.tex",
@@ -486,6 +499,7 @@ def main() -> int:
         safe_architecture_text(README),
         safe_architecture_text(AGENTS),
         safe_architecture_text(PAPER_README),
+        safe_architecture_text(GUIDE),
     )
     print("architecture guide: first-principles structure and entry links verified")
     return 0

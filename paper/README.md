@@ -5,57 +5,40 @@
 
 For the repository layout, sources of truth, build path, and release
 infrastructure, start with the plain-language
-[`ARCHITECTURE.md`](../ARCHITECTURE.md) at the repository root. The files in
-this directory are authored papers with narrower jobs.
+[`ARCHITECTURE.md`](../ARCHITECTURE.md) at the repository root.
 
-Each covered Erdős problem has its own canonical short problem note. Problems
-#249 and #257 also have longer working-record papers, and
-`erdos249-257-main-paper.tex` is retained as an archived joint record of those
-two lanes. The joint record is legacy provenance, not an active gateway or the
-canonical exposition route; readers should begin with the individual note for
-the problem they are asking about.
+Each of the eight covered Erdős problems has a short first-read paper and a
+longer complete reasoning record. All eight problems remain open. The papers
+report partial results, failed or equivalent routes, finite evidence, and the
+exact obligations that survive.
 
-Every formal statement links to the exact source
-line on GitHub, pinned to the formal-source checkpoint named in
-`docs/claims.json`, so a reader can go from a sentence of prose to the checked
-proof in one click. The visible link text is theorem-specific: important
-anchors use short authored mathematical labels, while the default links turn
-the exact declaration name into a spaced, lower-case phrase. The file, line,
-and declaration remain in each link target and are verified against the
-released source by `scripts/check_release.py`. The document adds no mathematics
-beyond what the Lean sources contain; the proofs are the sources it links to.
+These papers are mathematical exposition. Some results are checked in Lean;
+others are ordinary mathematical arguments or applications of cited external
+theorems. Each paper states the boundary for its own claims. Lean files are
+proof authority only for the exact declarations they check, and
+[`docs/claims.json`](../docs/claims.json) records the selected public claim
+interfaces.
 
-The manuscript layer (this `.tex` and the rendered PDF) is licensed CC-BY-4.0;
-see `REUSE.toml` at the repository root.
+The manuscript layer (the `.tex` sources and rendered PDFs) is licensed
+CC-BY-4.0; see [`REUSE.toml`](../REUSE.toml) at the repository root.
 
-The joint exposition is preserved for provenance and historical context, but
-it is not a current integration gateway, canonical exposition authority, or
-default mathematical recommendation. The eight individual problem notes are
-the canonical paper layer. The #249 and #257 notes repeat the context, exact
-status boundary, negative results, and surviving producers needed by a reader
-who arrives through one problem; the other six notes are likewise standalone
-routes and should not be assembled through the archived joint record.
+## Problem papers
 
-## Erdős Problem Notes
+| Problem | Short paper | Complete reasoning record |
+|---|---|---|
+| #68 | [Two Incomparable Denominator Exclusions for ∑ₙ≥₂ 1/(n!−1)](../erdos-68-factorial-denominator-irrationality.pdf) ([source](erdos-68-factorial-denominator-irrationality.tex)) | [The Factorial-Denominator Series: Complete Reasoning Record](../erdos68-factorial-reasoning-surface.pdf) ([source](erdos68-factorial-reasoning-surface.tex)) |
+| #243 | [Excluding the Bounded Negative Part](../erdos-243-reciprocal-tail-rigidity.pdf) ([source](erdos-243-reciprocal-tail-rigidity.tex)) | [Reciprocal-Tail Rigidity: Complete Reasoning Record](../erdos243-reciprocal-tail-reasoning-surface.pdf) ([source](erdos243-reciprocal-tail-reasoning-surface.tex)) |
+| #249 | [A Basis for the 2-Kernel of Euler's Totient](../erdos-249-binary-totient-series.pdf) ([source](erdos-249-binary-totient-series.tex)) | [The Binary Totient Series](../erdos249-totient-reasoning-surface.pdf) ([source](erdos249-totient-reasoning-surface.tex)) |
+| #251 | [A Countermodel for Growth-and-Parity Arguments on the Prime-Gap Dyadic Series](../erdos-251-prime-gap-dyadic-series.pdf) ([source](erdos-251-prime-gap-dyadic-series.tex)) | [Prime Gaps and Dyadic Tails: Complete Reasoning Record](../erdos251-prime-gap-reasoning-surface.pdf) ([source](erdos251-prime-gap-reasoning-surface.tex)) |
+| #257 | [Reciprocal-Summable Support Irrationality at Every Integer Base](../erdos-257-mersenne-support-subseries.pdf) ([source](erdos-257-mersenne-support-subseries.tex)) | [Reciprocal Mersenne Subseries](../erdos257-mersenne-reasoning-surface.pdf) ([source](erdos257-mersenne-reasoning-surface.tex)) |
+| #269 | [No Finite Separable Representation at Three Prime Generators](../erdos-269-three-prime-running-lcm.pdf) ([source](erdos-269-three-prime-running-lcm.tex)) | [The Three-Prime Running LCM: Complete Reasoning Record](../erdos269-running-lcm-reasoning-surface.pdf) ([source](erdos269-running-lcm-reasoning-surface.tex)) |
+| #1041 | [Sharp Solved Families and Constant-Factor Paths in Polynomial Lemniscates](../erdos-1041-lemniscate-newton-flow.pdf) ([source](erdos-1041-lemniscate-newton-flow.tex)) | [Lemniscates and Newton Flow: Complete Reasoning Record](../erdos1041-lemniscate-reasoning-surface.pdf) ([source](erdos1041-lemniscate-reasoning-surface.tex)) |
+| #1049 | [Irrationality of F(31/4) and the Exact Normalized Hankel Order](../erdos-1049-rational-base-lambert.pdf) ([source](erdos-1049-rational-base-lambert.tex)) | [Rational-Base Lambert Series: Complete Reasoning Record](../erdos1049-rational-base-lambert-reasoning-surface.pdf) ([source](erdos1049-rational-base-lambert-reasoning-surface.tex)) |
 
-The eight standalone notes
-
-- `erdos-249-binary-totient-series.tex`
-- `erdos-257-mersenne-support-subseries.tex`
-- `erdos-68-factorial-denominator-irrationality.tex`
-- `erdos-243-reciprocal-tail-rigidity.tex`
-- `erdos-251-prime-gap-dyadic-series.tex`
-- `erdos-269-three-prime-running-lcm.tex`
-- `erdos-1041-lemniscate-newton-flow.tex`
-- `erdos-1049-rational-base-lambert.tex`
-
-are the problem-owned series. One note owns one Erdős problem, and each covers
-the modules for that problem in the `ErdosProblems` expansion library.  The
-#249 and #257 notes additionally point back to the reviewed gateway spine while
-keeping the newer research interfaces explicitly unpromoted. A reader who
-arrives at a single problem gets its statement, its checked results, its
-negative results, and its surviving obligation without assembling them from the
-gateway; deliberate repetition of shared context across notes is the design.
+The short paper is the first read. The complete reasoning record preserves the
+wider working context, including routes that failed, finite experiments, and
+open obligations. The older joint #249/#257 paper is retained for provenance;
+it is not the entry point for either problem.
 
 ### Returning from a problem note to checked evidence
 
@@ -77,26 +60,18 @@ use the route-memory command in the last column.
 | #1041 | `python3 scripts/query_corpus.py --route erdos_1041` | `python3 scripts/query_route_memory.py --problem 1041` |
 | #1049 | `python3 scripts/query_corpus.py --route erdos_1049` | `python3 scripts/query_route_memory.py --problem 1049` |
 
-## Full Reasoning Records
+## What the two paper forms do
 
-Two additional papers retain the complete working context for the original
-reviewed problem lanes:
+The eight short papers are the reader entry points. The eight complete
+reasoning records preserve the wider working context and are neither proof
+authority nor substitutes for the shorter papers.
 
-- `erdos249-totient-reasoning-surface.tex`
-- `erdos257-mersenne-reasoning-surface.tex`
-
-They are separate rendered papers, not hidden source appendices and not
-substitutes for the shorter problem notes. Each records checked premises,
-finite evidence, failed and equivalent routes, and the obligations that remain.
-
-These working records are not the canonical paper layer or an active gateway.
-Declarations not selected as reviewed public claims live in a different
-library; selected interfaces are registered in `docs/claims.json`, while the
-Lean files remain their source authority. Kernel checking `ErdosProblems.lean`
-does not promote an unregistered declaration into a reviewed claim. The
-individual notes may restate reviewed claims, but their exact authority stays
-in the registry. Every note states this, and the registry records it as
-`publication_architecture.problem_series_boundary`.
+Lean files are proof authority only for the exact declarations they check;
+[`docs/claims.json`](../docs/claims.json) records selected public claim
+interfaces. Kernel checking a root module does not promote every declaration
+into a reviewed public claim. The papers also contain ordinary mathematical
+reasoning and explicitly attributed external results, with their verification
+limits stated locally.
 
 The notes share `problem-note-preamble.tex`, which fixes the house macros and
 the one pinned source revision every link resolves against. Links are validated
@@ -144,33 +119,20 @@ its row to `publication_architecture.problem_series` in `docs/claims.json`, and
 add its problem to `docs/problem_index_source.json`. The contract checker fails
 if any of those five are missing.
 
-`claim-faithful-publication-systems-paper.tex` is the printable architecture
-and access guide. It names the real source files, reviewed records, generated
-views, release commands, CI jobs, and human trust boundary, then follows one
-claim from Lean proof to public page. The historical checker example appears
-only after the architecture and illustrates its coverage limit; it is not a
-score and adds no mathematical result.
+## Systems and historical papers
 
-That architecture paper remains a maintained draft. Its revision target and
-cold-reader loop are recorded in
-`claim-faithful-publication-systems-revision-brief.md`.
+| Role | Paper |
+|---|---|
+| Publication architecture | [Problem-Sized Lean Worlds](../claim-faithful-publication-systems-paper.pdf) ([source](claim-faithful-publication-systems-paper.tex)) |
+| Agent navigation and validation | [From a Cold Clone to a Proof Receipt](../cold-clone-to-proof-receipt.pdf) ([source](cold-clone-to-proof-receipt.tex)) |
+| Open participation and credit | [From Spare Compute to Cumulative Mathematics](../open-source-mathematics-strategy.pdf) ([source](open-source-mathematics-strategy.tex)) |
+| Retired joint #249/#257 record | [Tail Certificates and Achievement-Set Geometry for Erdős Problems 249 and 257](../erdos249-257-main-paper.pdf) ([source](erdos249-257-main-paper.tex)) |
 
-`cold-clone-to-proof-receipt.tex` is the agent-native navigation and
-incremental-validation guide. It explains how a fresh checkout exposes the
-whole mathematical option surface without compiling Lean, how an inhabiting
-agent crosses from advisory navigation into a kernel-authored receipt, and how
-focused builds and exact cache receipts avoid repeating unchanged work. Its
-dogfood session is evidence of acceptance and replay, not a proof of optimal
-reasoning or external novelty.
-
-`open-source-mathematics-strategy.tex` is the open-participation strategy. It
-explains how mathematicians, formalisation contributors, compute donors, agent
-builders, infrastructure contributors, and reviewers can share one public
-problem corpus without sharing proof authority. Its candidate-to-attention
-funnel routes mature formal work toward Comparator and Palomar and relevant
-mathematical work toward the Erdős Problems community, while leaving novelty,
-peer review, and community acceptance outside the repository. It reports no
-solved endpoint or measured discovery-rate improvement.
+The three systems papers explain the repository architecture, cold-clone path,
+and contribution model. They make no claim of a solved endpoint, peer review,
+community acceptance, or measured improvement in mathematical discovery. The
+joint #249/#257 record remains available for provenance, while the individual
+problem papers above are the maintained reader routes.
 
 ## Build
 
@@ -185,9 +147,12 @@ pdflatex erdos249-257-main-paper.tex && pdflatex erdos249-257-main-paper.tex
 make
 ```
 
-The outputs include every stem in `PAPERS`: the three repository-level papers,
-the two full reasoning records, and all eight problem notes. `make` also
-synchronises every tracked reader-facing PDF to the repository root.
+The outputs include all 20 native manuscripts registered in
+[`docs/publication_contract.json`](../docs/publication_contract.json): eight
+short papers, eight complete reasoning records, the retired joint paper, and
+three repository-level papers. `make` currently synchronises every rendered
+PDF to the repository root; the publication contract and public links presently
+depend on that location.
 
 ## Contents
 

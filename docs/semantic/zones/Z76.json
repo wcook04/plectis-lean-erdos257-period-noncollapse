@@ -50,17 +50,17 @@
         {
           "declaration": "rawNext_coprime_currentNumerator",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 15
+          "line": 17
         },
         {
           "declaration": "rawNext_gcd_eq_gcd_sq",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 33
+          "line": 35
         },
         {
           "declaration": "rawNext_gcd_exact_overlap",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 68
+          "line": 70
         }
       ]
     },
@@ -85,27 +85,27 @@
         {
           "declaration": "gcd_scaled_square_eq",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 136
+          "line": 138
         },
         {
           "declaration": "cancellationOverlap_normalForm_explicit",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 159
+          "line": 161
         },
         {
           "declaration": "cancellation_denominator_transport_explicit",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 184
+          "line": 186
         },
         {
           "declaration": "deletedFactor_eq_oldDenominator_div_gcd",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 212
+          "line": 214
         },
         {
           "declaration": "lcm_eq_overlap_mul_nextDenominator",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 225
+          "line": 227
         }
       ]
     },
@@ -130,17 +130,17 @@
         {
           "declaration": "reducedStep_consecutiveNumerator_coprime",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 243
+          "line": 245
         },
         {
           "declaration": "reducedStep_cancellationFactor_eq_square",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 254
+          "line": 256
         },
         {
           "declaration": "reducedStep_secondOrder",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 268
+          "line": 270
         }
       ]
     },
@@ -165,22 +165,22 @@
         {
           "declaration": "cancellationFree_dualRemainder",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 291
+          "line": 293
         },
         {
           "declaration": "cancellationFree_curvature_square",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 307
+          "line": 309
         },
         {
           "declaration": "excursionMatrix_det_square",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 322
+          "line": 324
         },
         {
           "declaration": "primitiveMatrix_gcd_eq_det_gcd",
           "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-          "line": 335
+          "line": 337
         }
       ]
     }
@@ -189,105 +189,105 @@
     {
       "declaration": "rawNext_coprime_currentNumerator",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 15,
+      "line": 17,
       "role": "statement",
       "statement_node": "primitive_raw_steps_have_exact_square_control_of_removed_content"
     },
     {
       "declaration": "rawNext_gcd_eq_gcd_sq",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 33,
+      "line": 35,
       "role": "engine",
       "statement_node": "primitive_raw_steps_have_exact_square_control_of_removed_content"
     },
     {
       "declaration": "rawNext_gcd_exact_overlap",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 68,
+      "line": 70,
       "role": "statement",
       "statement_node": "primitive_raw_steps_have_exact_square_control_of_removed_content"
     },
     {
       "declaration": "gcd_scaled_square_eq",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 136,
+      "line": 138,
       "role": "engine",
       "statement_node": "square_overlap_has_an_explicit_denominator_deletion_normal_form"
     },
     {
       "declaration": "cancellationOverlap_normalForm_explicit",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 159,
+      "line": 161,
       "role": "statement",
       "statement_node": "square_overlap_has_an_explicit_denominator_deletion_normal_form"
     },
     {
       "declaration": "cancellation_denominator_transport_explicit",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 184,
+      "line": 186,
       "role": "engine",
       "statement_node": "square_overlap_has_an_explicit_denominator_deletion_normal_form"
     },
     {
       "declaration": "deletedFactor_eq_oldDenominator_div_gcd",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 212,
+      "line": 214,
       "role": "statement",
       "statement_node": "square_overlap_has_an_explicit_denominator_deletion_normal_form"
     },
     {
       "declaration": "lcm_eq_overlap_mul_nextDenominator",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 225,
+      "line": 227,
       "role": "representation",
       "statement_node": "square_overlap_has_an_explicit_denominator_deletion_normal_form"
     },
     {
       "declaration": "reducedStep_consecutiveNumerator_coprime",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 243,
+      "line": 245,
       "role": "statement",
       "statement_node": "consecutive_primitive_steps_satisfy_an_exact_second_order_recurrence"
     },
     {
       "declaration": "reducedStep_cancellationFactor_eq_square",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 254,
+      "line": 256,
       "role": "engine",
       "statement_node": "consecutive_primitive_steps_satisfy_an_exact_second_order_recurrence"
     },
     {
       "declaration": "reducedStep_secondOrder",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 268,
+      "line": 270,
       "role": "statement",
       "statement_node": "consecutive_primitive_steps_satisfy_an_exact_second_order_recurrence"
     },
     {
       "declaration": "cancellationFree_dualRemainder",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 291,
+      "line": 293,
       "role": "representation",
       "statement_node": "cancellation_free_steps_expose_dual_remainders_curvature_and_square_determinants"
     },
     {
       "declaration": "cancellationFree_curvature_square",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 307,
+      "line": 309,
       "role": "statement",
       "statement_node": "cancellation_free_steps_expose_dual_remainders_curvature_and_square_determinants"
     },
     {
       "declaration": "excursionMatrix_det_square",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 322,
+      "line": 324,
       "role": "engine",
       "statement_node": "cancellation_free_steps_expose_dual_remainders_curvature_and_square_determinants"
     },
     {
       "declaration": "primitiveMatrix_gcd_eq_det_gcd",
       "module": "ErdosProblems/Erdos243/DynamicCancellation.lean",
-      "line": 335,
+      "line": 337,
       "role": "statement",
       "statement_node": "cancellation_free_steps_expose_dual_remainders_curvature_and_square_determinants"
     }

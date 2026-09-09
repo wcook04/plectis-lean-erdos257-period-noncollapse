@@ -1581,4 +1581,85 @@ theorem irrational_initial_iff_cofinalNonintegralTailShifts
         hirr h hh N₀
   · exact irrational_initial_of_cofinalNonintegralTailShifts hrec
 
+/-! ## Polynomial-gap countermodel to coarse prime-gap inputs -/
+
+/-- A positive even polynomial gap word.  It is not the actual prime-gap word;
+it is an exact stress test for attempts using only coarse gap properties. -/
+def polynomialGapWord (n : ℕ) : ℤ :=
+  (2 * (n ^ 2 + 4 * n + 2) : ℕ)
+
+/-- The rational polynomial tail orbit paired with `polynomialGapWord`. -/
+def polynomialTailOrbit (n : ℕ) : ℚ :=
+  (2 * (n + 4) ^ 2 : ℕ)
+
+/-- The polynomial word and orbit obey the exact dyadic tail recurrence. -/
+theorem polynomialTailOrbit_recurrence :
+    DyadicTailRecurrence polynomialGapWord polynomialTailOrbit := by
+  intro N
+  simp only [polynomialGapWord, polynomialTailOrbit]
+  push_cast
+  ring
+
+/-- Every polynomial countermodel gap is positive. -/
+theorem polynomialGapWord_pos (n : ℕ) : 0 < polynomialGapWord n := by
+  simp [polynomialGapWord]
+  positivity
+
+/-- Every polynomial countermodel gap is even. -/
+theorem polynomialGapWord_even (n : ℕ) : ∃ k : ℤ, polynomialGapWord n = 2 * k := by
+  refine ⟨(n ^ 2 + 4 * n + 2 : ℕ), ?_⟩
+  simp [polynomialGapWord]
+
+/-- Adjacent differences grow linearly and in particular never equal `±2`. -/
+theorem polynomialGapWord_succ_sub (n : ℕ) :
+    polynomialGapWord (n + 1) - polynomialGapWord n = ((4 * n + 10 : ℕ) : ℤ) := by
+  simp only [polynomialGapWord]
+  push_cast
+  ring
+
+theorem polynomialGapWord_adjacent_difference_ne_two (n : ℕ) :
+    polynomialGapWord (n + 1) - polynomialGapWord n ≠ 2 := by
+  rw [polynomialGapWord_succ_sub]
+  omega
+
+theorem polynomialGapWord_adjacent_difference_ne_neg_two (n : ℕ) :
+    polynomialGapWord (n + 1) - polynomialGapWord n ≠ -2 := by
+  rw [polynomialGapWord_succ_sub]
+  omega
+
+/-- The word is strictly increasing, hence unbounded and not eventually
+periodic; this is stronger than merely inserting isolated large gaps. -/
+theorem polynomialGapWord_strictMono : StrictMono polynomialGapWord := by
+  exact strictMono_nat_of_lt_succ fun n => by
+    have h := polynomialGapWord_succ_sub n
+    omega
+
+/-- Every tail state is integral, so every fixed tail shift is integral. -/
+theorem polynomialTailOrbit_integral (n : ℕ) : RatIntegral (polynomialTailOrbit n) := by
+  refine ⟨(2 * (n + 4) ^ 2 : ℕ), ?_⟩
+  simp [polynomialTailOrbit]
+
+/-- The `h=1` digit required by an adjacent small-mismatch certificate is
+never `±2` in this rational, positive, even, polynomially growing orbit. -/
+theorem polynomialGapWord_no_adjacent_two_digit (N : ℕ) :
+    polynomialGapWord (N + 2) - polynomialGapWord (N + 1) ≠ 2 ∧
+      polynomialGapWord (N + 2) - polynomialGapWord (N + 1) ≠ -2 := by
+  constructor
+  · simpa [Nat.add_assoc] using polynomialGapWord_adjacent_difference_ne_two (N + 1)
+  · simpa [Nat.add_assoc] using polynomialGapWord_adjacent_difference_ne_neg_two (N + 1)
+
+/-- Every fixed tail shift of the polynomial countermodel is integral.  This
+is the consumer-ready obstruction: positivity, evenness, strict growth, and
+the dyadic recurrence do not force a nonintegral shift. -/
+theorem polynomialTailOrbit_shift_integral (h N : ℕ) :
+    RatIntegral (tailShift polynomialTailOrbit h N) := by
+  rw [tailShift_integral_iff_scaledTail polynomialTailOrbit_recurrence]
+  rcases polynomialTailOrbit_integral N with ⟨z, hz⟩
+  refine ⟨(2 ^ h - 1) * z, ?_⟩
+  rw [hz]
+  push_cast
+  ring
+
+#print axioms polynomialTailOrbit_shift_integral
+
 end ErdosProblems.Erdos251

@@ -15,6 +15,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import validation_singleflight as singleflight
+from check_release import readme_open_boundary_present
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -191,8 +192,8 @@ def boundary_errors(
     ):
         if flowed(phrase) not in flowed_scope:
             errors.append(f"scope lost public-boundary phrase: {phrase}")
-    if "do not infer results from private or unreleased work" not in flowed_readme:
-        errors.append("README lost private-or-unreleased inference boundary")
+    if not readme_open_boundary_present(readme, len(PUBLIC_PROBLEM_IDS)):
+        errors.append("README lost the global open-problem boundary")
 
     non_claims = {row["id"] for row in claims["non_claims"]}
     required_non_claims = {
@@ -364,6 +365,20 @@ def main() -> int:
         not boundary_errors(agents, scope, readme, claims, methodology, summary),
         "live first-contact boundary contract is invalid",
     )
+    open_boundary_fixtures = (
+        ("All eight problems remain open.", True),
+        ("All eight\nproblems remain open.", True),
+        ("All 8 problems remain open.", True),
+        ("All seven problems remain open.", False),
+        ("Some problems remain open.", False),
+        ("All 8 problems are solved.", False),
+        ("This repository does not solve these problems.", True),
+    )
+    for fixture, expected in open_boundary_fixtures:
+        require(
+            readme_open_boundary_present(fixture, len(PUBLIC_PROBLEM_IDS)) is expected,
+            f"README open-boundary fixture was misclassified: {fixture!r}",
+        )
     require(not prior_art_errors(prior_art), "live prior-art boundary contract is invalid")
     require(
         not related_problem_errors(related),

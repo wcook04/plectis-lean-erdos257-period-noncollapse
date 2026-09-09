@@ -1,0 +1,291 @@
+{
+  "schema": "public_erdos249_v8_validation_export_v1",
+  "generated_at": "2026-09-09",
+  "problem": 249,
+  "status": "PASS_PUBLIC_SOURCE_CURRENT_COMPILE_AND_PERMITTED_AXIOMS",
+  "evidence_class": "public_source_current_Lean_PASS_plus_exact_public_namespace_compatibility_transform_and_freshly_validated_12_file_import_closure",
+  "public_checkout_base_before_export": "520e049172a7e54ad71641e5483c84e6ad6e6b29",
+  "authority_source_commit": "509772f2eb683c0d91a18f991b6e8a018558e907",
+  "authority_receipt": {
+    "private_path": "work/erdos_release_readiness_r8_20260908/returned_authoring_r11/lean_build_coordinator/erdos249_v8_validation_20260909.json",
+    "sha256": "b972961f4742df92be4902c38ba05fd195ac9875b8586686bc73553516614d70",
+    "status": "PASS_SOURCE_CURRENT_COMPILE_AND_PERMITTED_AXIOMS",
+    "target": "ErdosProblems.Erdos249.TypeBReturnV8.Audit",
+    "command": "repo-python scripts/lean_fast_build.py --jobs 1 ErdosProblems.Erdos249.TypeBReturnV8.Audit",
+    "exit_code": 0,
+    "authority_output_sha256": "04d20191db6112868a9f454a6122e428033806fee537626c4bc003e8d1d55cfe",
+    "named_axiom_target_count": 27,
+    "axiom_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "permitted_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "unexpected_axioms": [],
+    "scope_boundary": "The private audit validates the 27 named returned declarations and their conditional interfaces. It does not prove the remaining Erdos 249 irrationality supplier."
+  },
+  "public_adaptation": {
+    "rule": "Replace only the dependency namespace token Erdos257PeriodNoncollapse with the established public dependency namespace Erdos249257 in the six introduced modules.",
+    "six_introduced_modules_exact_after_single_token_substitution": true,
+    "existing_dependency_compatibility": {
+      "five_modules": "After the same namespace-token normalization, CarrySurvivorExtinction, FirstHarmonicGap, LcmConeFlatness, LcmDiagonalReduction, and TotientTailPeriodKiller are byte-identical to authority.",
+      "FirstHarmonicPivot": "After namespace normalization, the only difference is the existing public proof repair replacing three native_decide uses inside supplierPrime_not_globally_isolated_counterexample; the theorem statement and every interface consumed by V8 are unchanged."
+    },
+    "reason": "Reuses the source-current public #249 dependency family, preserves all existing public interfaces, and avoids duplicating an isomorphic six-module dependency tree under a private namespace."
+  },
+  "audit": {
+    "module": "ErdosProblems.Erdos249.TypeBReturnV8.Audit",
+    "path": "ErdosProblems/Erdos249/TypeBReturnV8/Audit.lean",
+    "sha256": "4ed0d38002cb732795cbb7d6d3eb54c9872faca5db417ed06b0a493c09082abe",
+    "named_declarations": [
+      "ErdosProblems.Erdos249.TypeBReturnV8.card_pivotFiber_eq_card_supplierPrimes",
+      "ErdosProblems.Erdos249.TypeBReturnV8.dtw_of_eventual_peripheral_and_cofinal_centered",
+      "ErdosProblems.Erdos249.TypeBReturnV8.irrational_of_eventual_peripheral_and_cofinal_centered",
+      "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_4_9",
+      "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_5_9",
+      "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_6_9",
+      "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_7_9",
+      "ErdosProblems.Erdos249.TypeBReturnV8.finite_room",
+      "ErdosProblems.Erdos249.TypeBReturnV8.four_certified_kills",
+      "ErdosProblems.Erdos249.TypeBReturnV8.farey_denominator_bound",
+      "ErdosProblems.Erdos249.TypeBReturnV8.run_length_counterexample",
+      "ErdosProblems.Erdos249.TypeBReturnV8.run_threshold_iff",
+      "ErdosProblems.Erdos249.TypeBReturnV8.twoPhase_unit",
+      "ErdosProblems.Erdos249.TypeBReturnV8.twoMean_zero",
+      "ErdosProblems.Erdos249.TypeBReturnV8.twoCentered_eq_two",
+      "ErdosProblems.Erdos249.TypeBReturnV8.twoMeanContribution_zero",
+      "ErdosProblems.Erdos249.TypeBReturnV8.three_peripheral_zero_do_not_force_centered_budget",
+      "ErdosProblems.Erdos249.TypeBReturnV8.finite_first_harmonic_norm_gap",
+      "ErdosProblems.Erdos249.TypeBReturnV8.one_unconditional_norm_gap_instance",
+      "Erdos249257.TotientTailPeriodKiller.norm_pivotPhaseAt",
+      "Erdos249257.TotientTailPeriodKiller.norm_pivotResidualAt_v8",
+      "Erdos249257.TotientTailPeriodKiller.norm_pivotBadContribution_le_card",
+      "Erdos249257.TotientTailPeriodKiller.norm_pivotNonSupplierContribution_le_card",
+      "Erdos249257.TotientTailPeriodKiller.pivotGoodBases_subset_Ico",
+      "Erdos249257.TotientTailPeriodKiller.card_pivotGoodBases_le",
+      "Erdos249257.TotientTailPeriodKiller.norm_pivotFiberMeanContribution_le_of_uniform",
+      "Erdos249257.TotientTailPeriodKiller.pivotBudgetAt_of_peripheral_estimates"
+    ]
+  },
+  "public_recursive_local_import_closure": [
+    {
+      "path": "Erdos249257/CarrySurvivorExtinction.lean",
+      "sha256": "6baa1dc557dec8babc2635af8dcd461e4af8742313a21f00959219f439bee644",
+      "authority_sha256": "421bf284eaffe56a213c5a3e462142a8dc97126f46097a5d9631cc4b6840d92d",
+      "bytes": 26663,
+      "source_relation": "existing_public_namespace_variant_statement_identical",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "Erdos249257/FirstHarmonicGap.lean",
+      "sha256": "531854ad0191b4405bc6e55ecf60770cd5a2aa7e72ed0ba68a2d105b025b2bd1",
+      "authority_sha256": "e40d06f5a80d8ab936ba5040aa37ed1c4c39bfae8b211954d534239ec14eb30d",
+      "bytes": 6041,
+      "source_relation": "existing_public_namespace_variant_statement_identical",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "Erdos249257/FirstHarmonicPivot.lean",
+      "sha256": "9c8efb7ecf565dec2c5c01581be64fe23593e741dbaf26fafdb2ea993f71c43c",
+      "authority_sha256": "ca96c1611e17e1e02c20bd15a6e24d22c846ce8a8f9824c498e381a117c261d9",
+      "bytes": 25955,
+      "source_relation": "existing_public_namespace_variant_with_native_decide_free_proof_repair",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "Erdos249257/LcmConeFlatness.lean",
+      "sha256": "977b61323d775a8f4305691ae966c851a3b752f544a4f3f9293a5b7ee2fc0347",
+      "authority_sha256": "6adf024fd1a78d5a5aa1040742a79e8d9cefa462650bb295ce0371f4f9098d7d",
+      "bytes": 32083,
+      "source_relation": "existing_public_namespace_variant_statement_identical",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "Erdos249257/LcmDiagonalReduction.lean",
+      "sha256": "1c87948ec072687e0516e4f603f11e0938c692588cfb9bf3e459d7e91c80d801",
+      "authority_sha256": "0f2424578c1241151dbc60d2bc334542373d881540aeab69e7f08a928d437411",
+      "bytes": 12899,
+      "source_relation": "existing_public_namespace_variant_statement_identical",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "Erdos249257/TotientTailPeriodKiller.lean",
+      "sha256": "1e30899a37d017c8b83d54b61e101be920a86d9ae01e612c31ffce1dd6217b8f",
+      "authority_sha256": "e1a7fb6d2f9506cbc4f84af293f64fdca420e3d2fea7b7c75bb6735dcacec841",
+      "bytes": 20604,
+      "source_relation": "existing_public_namespace_variant_statement_identical",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos249/TypeBReturnV8/Audit.lean",
+      "sha256": "4ed0d38002cb732795cbb7d6d3eb54c9872faca5db417ed06b0a493c09082abe",
+      "authority_sha256": "b0012b70994cdc3bcb803887dff270cb469e0b8aada60d53ae5a21f3ca1c636c",
+      "bytes": 2403,
+      "source_relation": "public_dependency_namespace_compatibility_variant",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos249/TypeBReturnV8/CenteringCounterexample.lean",
+      "sha256": "7472ff5352c65939b1e2c4a14143b223ba3d96b7a70dc3dd975721c448574a90",
+      "authority_sha256": "7472ff5352c65939b1e2c4a14143b223ba3d96b7a70dc3dd975721c448574a90",
+      "bytes": 1241,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos249/TypeBReturnV8/FiniteArithmetic.lean",
+      "sha256": "eba862f5a0376e1a5e570f8b697ed5523de378eeea852bde618b805dcabee38c",
+      "authority_sha256": "82de0e0ab5e99c99f5cf8ede4544581d69f9cce3f12d2ae45d2e4b9aa392a526",
+      "bytes": 2279,
+      "source_relation": "public_dependency_namespace_compatibility_variant",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos249/TypeBReturnV8/FiniteFirstHarmonic.lean",
+      "sha256": "c789b97e20ac1f3cc4fb43bbdb618ea40d514693feafb4c03893a6fb18659451",
+      "authority_sha256": "783be638eb1e8814112eca96c14751e20f0817af4a77654e78157e8473ac37c4",
+      "bytes": 3292,
+      "source_relation": "public_dependency_namespace_compatibility_variant",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos249/TypeBReturnV8/PeripheralAssembly.lean",
+      "sha256": "93d6deb7a838ec2205440c35f8f0e26408445a99f14085cfbbbb35145ee6042f",
+      "authority_sha256": "11bd397b8193b1834451472085a3cc5cc662015d9b574d0730a8cc9b7c560a1c",
+      "bytes": 3101,
+      "source_relation": "public_dependency_namespace_compatibility_variant",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos249/TypeBReturnV8/PeripheralFiniteBridge.lean",
+      "sha256": "a4dadada3be2b7d76d06e22348682b1532283d0e21e98630fc9c2608f70d91fb",
+      "authority_sha256": "cd0918599d73fee2a0816516404ee9813765581eae17e23ae33aa254905d66f2",
+      "bytes": 4887,
+      "source_relation": "public_dependency_namespace_compatibility_variant",
+      "introduced_by_this_export": true
+    }
+  ],
+  "static_checks": {
+    "introduced_module_count": 6,
+    "closure_file_count": 12,
+    "all_12_local_import_paths_resolve": true,
+    "all_6_introduced_paths_were_absent": true,
+    "all_6_introduced_modules_exact_after_namespace_transform": true,
+    "five_existing_dependencies_normalized_byte_exact": true,
+    "FirstHarmonicPivot_statement_preserving_public_proof_variant": true,
+    "audit_has_27_unique_named_prints": true,
+    "forbidden_sorry_admit_axiom_unbounded_heartbeat_in_introduced_modules": false,
+    "lean_launched_during_public_source_export": false,
+    "all_12_closure_pins_validated_at_public_replay_commit": true,
+    "public_kernel_replay_passed": true,
+    "public_replay_unexpected_axioms": []
+  },
+  "claim_families": [
+    {
+      "id": "conditional_peripheral_assembly",
+      "declarations": [
+        "ErdosProblems.Erdos249.TypeBReturnV8.card_pivotFiber_eq_card_supplierPrimes",
+        "ErdosProblems.Erdos249.TypeBReturnV8.dtw_of_eventual_peripheral_and_cofinal_centered",
+        "ErdosProblems.Erdos249.TypeBReturnV8.irrational_of_eventual_peripheral_and_cofinal_centered"
+      ],
+      "disposition": "PUBLIC_REPLAY_PASS_CONDITIONAL_BRIDGE",
+      "boundary": "Both eventual peripheral estimates and the cofinal centered estimate at one shared depth function remain explicit hypotheses; no analytic supplier and no unconditional irrationality follow."
+    },
+    {
+      "id": "finite_arithmetic_and_threshold",
+      "declarations": [
+        "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_4_9",
+        "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_5_9",
+        "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_6_9",
+        "ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_7_9",
+        "ErdosProblems.Erdos249.TypeBReturnV8.finite_room",
+        "ErdosProblems.Erdos249.TypeBReturnV8.four_certified_kills",
+        "ErdosProblems.Erdos249.TypeBReturnV8.farey_denominator_bound",
+        "ErdosProblems.Erdos249.TypeBReturnV8.run_length_counterexample",
+        "ErdosProblems.Erdos249.TypeBReturnV8.run_threshold_iff"
+      ],
+      "disposition": "PUBLIC_REPLAY_PASS_FINITE_EXACT_FACTS",
+      "boundary": "One finite parameter tuple plus an exact Farey denominator lemma and corrected finite run threshold; no cofinal certificate producer follows."
+    },
+    {
+      "id": "generic_centering_countermodel",
+      "declarations": [
+        "ErdosProblems.Erdos249.TypeBReturnV8.twoPhase_unit",
+        "ErdosProblems.Erdos249.TypeBReturnV8.twoMean_zero",
+        "ErdosProblems.Erdos249.TypeBReturnV8.twoCentered_eq_two",
+        "ErdosProblems.Erdos249.TypeBReturnV8.twoMeanContribution_zero",
+        "ErdosProblems.Erdos249.TypeBReturnV8.three_peripheral_zero_do_not_force_centered_budget"
+      ],
+      "disposition": "PUBLIC_REPLAY_PASS_GENERIC_NEGATIVE_BOUNDARY",
+      "boundary": "A two-point complex countermodel to an inference; it is not a counterexample to the arithmetic totient-centered predicate."
+    },
+    {
+      "id": "one_finite_first_harmonic_instance",
+      "declarations": [
+        "ErdosProblems.Erdos249.TypeBReturnV8.finite_first_harmonic_norm_gap",
+        "ErdosProblems.Erdos249.TypeBReturnV8.one_unconditional_norm_gap_instance"
+      ],
+      "disposition": "PUBLIC_REPLAY_PASS_SINGLE_FINITE_INSTANCE",
+      "boundary": "Only (h,X,L)=(1,4,9) with bound 21X/25; no DTWFirstHarmonicNormGap or cofinal statement."
+    },
+    {
+      "id": "peripheral_finite_budget_bridge",
+      "declarations": [
+        "Erdos249257.TotientTailPeriodKiller.norm_pivotPhaseAt",
+        "Erdos249257.TotientTailPeriodKiller.norm_pivotResidualAt_v8",
+        "Erdos249257.TotientTailPeriodKiller.norm_pivotBadContribution_le_card",
+        "Erdos249257.TotientTailPeriodKiller.norm_pivotNonSupplierContribution_le_card",
+        "Erdos249257.TotientTailPeriodKiller.pivotGoodBases_subset_Ico",
+        "Erdos249257.TotientTailPeriodKiller.card_pivotGoodBases_le",
+        "Erdos249257.TotientTailPeriodKiller.norm_pivotFiberMeanContribution_le_of_uniform",
+        "Erdos249257.TotientTailPeriodKiller.pivotBudgetAt_of_peripheral_estimates"
+      ],
+      "disposition": "PUBLIC_REPLAY_PASS_FINITE_COMPOSITION",
+      "boundary": "Assembles explicit cardinal and norm estimates into PivotBudgetAt; it proves neither the prime-distribution estimates nor the centered estimate."
+    }
+  ],
+  "excluded_promotions": [
+    "unconditional Erdos 249 irrationality",
+    "either analytic supplier hypothesis",
+    "DTWFirstHarmonicNormGap or any cofinal harmonic gap",
+    "a counterexample to the arithmetic totient-centered predicate",
+    "novelty, priority, or external-review claims"
+  ],
+  "next_public_action": {
+    "owner": "claim and projection metadata owner",
+    "action": "Completed in public commit 3d2dae3102af7c7e2869048dd01808b1eaea50f8: the five bounded families are bound and generated projections were refreshed; later formal-source advances preserve these bindings.",
+    "guard": "Do not promote any item in excluded_promotions or turn a conditional supplier hypothesis into an unconditional endpoint."
+  },
+  "public_replay_commit": "dff128c604b246fe48feb79379d2f9c2f5117543",
+  "public_recursive_local_import_closure_commit": "dff128c604b246fe48feb79379d2f9c2f5117543",
+  "public_kernel_replay": {
+    "receipt_private_path": "work/erdos_release_readiness_r8_20260908/returned_authoring_r11/lean_build_coordinator/erdos249_public_v8_validation_20260909.json",
+    "receipt_sha256": "a5bf94c8731a5309fa0d6b6c4b8199af87264fe09af085b127ecdacb78ab1091",
+    "status": "PASS_PUBLIC_SOURCE_CURRENT_COMPILE_AND_PERMITTED_AXIOMS",
+    "target": "ErdosProblems.Erdos249.TypeBReturnV8.Audit",
+    "wrapper_command": "repo-python scripts/lean_fast_build.py --jobs 1 ErdosProblems.Erdos249.TypeBReturnV8.Audit",
+    "wrapper_exit_code": 0,
+    "wrapper_log_sha256": "0f25eb58777166ed347ae19af8bc2f15448a6770a609c8acbab53e0d8e999a40",
+    "authority_command": "lake_command_guard.py env lean --tstack=65536 ErdosProblems/Erdos249/TypeBReturnV8/Audit.lean",
+    "authority_exit_code": 0,
+    "authority_log_sha256": "909346771faff221d1a417167958a17cfdfb1af6ff8134176834c118d97c5cb7",
+    "closure_module_count": 12,
+    "named_declaration_count": 27,
+    "axiom_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "permitted_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "unexpected_axioms": [],
+    "scope_boundary": "This validates the 27 V8 declarations in the public namespace variant, including the existing native_decide-free FirstHarmonicPivot proof. It does not prove the remaining Erdos 249 irrationality supplier."
+  }
+}

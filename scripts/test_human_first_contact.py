@@ -103,7 +103,7 @@ def main() -> None:
         "AGENTS.override.md" in readme and "docs/AGENT_WORKBENCH.md" in readme,
         "README must route agents to the separate workbench",
     )
-    first_screen = readme.split("## What is here", 1)[0]
+    first_screen = readme.split("## Problem papers", 1)[0]
     require(
         "[A reader's way in](HUMAN_ENTRY.md)" in first_screen,
         "README does not lead human readers to the prose-first entry",
@@ -112,6 +112,20 @@ def main() -> None:
         not re.search(r"(?m)^\|.+\|$", first_screen),
         "README first screen uses a routing table instead of prose",
     )
+    require("```" not in first_screen and "git clone" not in first_screen,
+        "README asks a cold reader to choose a checkout before showing the papers")
+    require(
+        "![Eight open problems:" in first_screen
+        and "](.github/system-map.png)" in first_screen,
+        "README opening lost the mathematical research-record banner",
+    )
+    for token in (
+        "routes that stopped",
+        "later models",
+        "human judgement",
+        "independent, AI-assisted prototype",
+    ):
+        require(token in first_screen, f"README opening lost its project-purpose boundary: {token}")
     require(
         "query_semantic.py" not in readme and "--publication-architecture" not in readme,
         "README exposes machine drilldowns that belong in agent documentation",
@@ -180,6 +194,13 @@ def main() -> None:
             f"missing Markdown paper for {slug}",
         )
 
+    first_command_block = readme.find("```")
+    last_short_paper = max(readme.find(f"{slug}.pdf") for slug in paper_slugs)
+    require(
+        first_command_block > last_short_paper,
+        "README puts a command block before the complete eight-paper index",
+    )
+
     details_at = results.find("<details>")
     guide_at = results.find("### Problem-by-problem guide")
     require(guide_at >= 0 and details_at > guide_at, "RESULTS does not lead with the human guide")
@@ -195,14 +216,14 @@ def main() -> None:
     )
 
     for heading in (
-        "## Read the mathematics",
-        "## Verify a claim",
-        "## Work on the repository",
-        "## Archive and provenance",
+        "## Read",
+        "## Check",
+        "## Contribute",
+        "## Where things live",
     ):
         require(heading in docs_index, f"documentation guide omits {heading}")
     require(
-        "technical navigation surfaces" in docs_index,
+        "Generated technical navigation" in docs_index,
         "documentation guide does not classify generated orientation correctly",
     )
 

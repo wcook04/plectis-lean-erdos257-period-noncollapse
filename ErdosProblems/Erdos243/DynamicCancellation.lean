@@ -1,5 +1,7 @@
 import ErdosProblems.Erdos243.ReciprocalTailRigidity
 
+open scoped BigOperators
+
 /-!
 # Erdős 243: exact dynamic cancellation
 
@@ -395,5 +397,228 @@ theorem primitiveMatrix_gcd_eq_det_gcd
         _ = U * (r * R + s * S) := by ring
         _ = U := by rw [← hbez]; ring
     · exact Int.gcd_dvd_right det V
+
+/-- Exact cancellation payment for a normalized excursion block.  After the
+common matrix content `σ` is removed, primitivity of the second row and of
+both endpoint states turns the transfer scale into the square-determinant gcd
+predicted by `primitiveMatrix_gcd_eq_det_gcd`.  The signed coordinate
+`K0 * u - B0 * e` is the reduced terminal tail state. -/
+theorem blockCancellationPayment_explicit
+    {σ : ℕ} {Λ A0 B0 K0 α0 β0 e u eStop uStop : ℤ}
+    (hinput : Int.gcd e u = 1)
+    (houtput : Int.gcd eStop uStop = 1)
+    (hrow : Int.gcd (-B0) K0 = 1)
+    (hdet : α0 * K0 + β0 * B0 = A0 ^ 2)
+    (he : Λ * eStop = (σ : ℤ) * (α0 * e + β0 * u))
+    (hu : Λ * uStop = (σ : ℤ) * ((-B0) * e + K0 * u)) :
+    Λ.natAbs = σ * Int.gcd (A0 ^ 2) (K0 * u - B0 * e) := by
+  have hdet' : α0 * K0 - β0 * (-B0) = A0 ^ 2 := by
+    calc
+      α0 * K0 - β0 * (-B0) = α0 * K0 + β0 * B0 := by ring
+      _ = A0 ^ 2 := hdet
+  have hmatrix :
+      Int.gcd (α0 * e + β0 * u) ((-B0) * e + K0 * u) =
+        Int.gcd (A0 ^ 2) ((-B0) * e + K0 * u) := by
+    calc
+      Int.gcd (α0 * e + β0 * u) ((-B0) * e + K0 * u) =
+          Int.gcd (α0 * K0 - β0 * (-B0)) ((-B0) * e + K0 * u) :=
+        primitiveMatrix_gcd_eq_det_gcd hrow hinput
+      _ = Int.gcd (A0 ^ 2) ((-B0) * e + K0 * u) := by rw [hdet']
+  calc
+    Λ.natAbs = Int.gcd (Λ * eStop) (Λ * uStop) := by
+      rw [Int.gcd_mul_left, houtput, mul_one]
+    _ = Int.gcd ((σ : ℤ) * (α0 * e + β0 * u))
+          ((σ : ℤ) * ((-B0) * e + K0 * u)) := by rw [he, hu]
+    _ = σ * Int.gcd (α0 * e + β0 * u) ((-B0) * e + K0 * u) := by
+      simpa using Int.gcd_mul_left (σ : ℤ) (α0 * e + β0 * u)
+        ((-B0) * e + K0 * u)
+    _ = σ * Int.gcd (A0 ^ 2) ((-B0) * e + K0 * u) := by rw [hmatrix]
+    _ = σ * Int.gcd (A0 ^ 2) (K0 * u - B0 * e) := by ring_nf
+
+/-- Quotient form of the exact excursion payment.  Here `σ = gcd(A,B)` is
+constructed from the unnormalised block data.  The excursion formulas imply
+`gcd(B,K)=σ`, so dividing the second row by `σ` makes it primitive; the
+square determinant then gives the literal payment
+`|Λ| = σ * gcd((A/σ)^2, (K*u-B*e)/σ)`. -/
+theorem excursionCancellationPayment
+    {σ : ℕ} {Λ A B aStart aStop K α β e u eStop uStop : ℤ}
+    (hσ : σ = Int.gcd A B) (hσpos : 0 < σ)
+    (hK : K = A - (aStart - 1) * B)
+    (hα : α = A + (aStop - 1) * B)
+    (hβ : β = A * (aStart - 1) - (aStop - 1) * K)
+    (hinput : Int.gcd e u = 1)
+    (houtput : Int.gcd eStop uStop = 1)
+    (he : Λ * eStop = α * e + β * u)
+    (hu : Λ * uStop = (-B) * e + K * u) :
+    Λ.natAbs = σ * Int.gcd ((A / (σ : ℤ)) ^ 2)
+      ((K * u - B * e) / (σ : ℤ)) := by
+  let A0 := A / (σ : ℤ)
+  let B0 := B / (σ : ℤ)
+  let K0 := K / (σ : ℤ)
+  let α0 := α / (σ : ℤ)
+  let β0 := β / (σ : ℤ)
+  have hσne : (σ : ℤ) ≠ 0 := by exact_mod_cast (Nat.ne_of_gt hσpos)
+  have hAdiv : (σ : ℤ) ∣ A := by
+    rw [hσ]
+    exact Int.gcd_dvd_left A B
+  have hBdiv : (σ : ℤ) ∣ B := by
+    rw [hσ]
+    exact Int.gcd_dvd_right A B
+  have hKdiv : (σ : ℤ) ∣ K := by
+    rw [hK]
+    exact Int.dvd_sub hAdiv
+      (dvd_mul_of_dvd_right hBdiv (aStart - 1))
+  have hαdiv : (σ : ℤ) ∣ α := by
+    rw [hα]
+    exact Int.dvd_add hAdiv
+      (dvd_mul_of_dvd_right hBdiv (aStop - 1))
+  have hβdiv : (σ : ℤ) ∣ β := by
+    rw [hβ]
+    exact Int.dvd_sub (dvd_mul_of_dvd_left hAdiv (aStart - 1))
+      (dvd_mul_of_dvd_right hKdiv (aStop - 1))
+  have hBK : Int.gcd B K = Int.gcd A B := by
+    apply Nat.dvd_antisymm
+    · apply Int.dvd_gcd
+      · have hA : A = K + (aStart - 1) * B := by rw [hK]; ring
+        rw [hA]
+        exact Int.dvd_add (Int.gcd_dvd_right B K)
+          (dvd_mul_of_dvd_right (Int.gcd_dvd_left B K) (aStart - 1))
+      · exact Int.gcd_dvd_left B K
+    · apply Int.dvd_gcd
+      · exact Int.gcd_dvd_right A B
+      · rw [hK]
+        exact Int.dvd_sub (Int.gcd_dvd_left A B)
+          (dvd_mul_of_dvd_right (Int.gcd_dvd_right A B) (aStart - 1))
+  have hBKσ : Int.gcd B K = σ := hBK.trans hσ.symm
+  have hBKpos : 0 < Int.gcd B K := by rw [hBKσ]; exact hσpos
+  have hrowPos : Int.gcd B0 K0 = 1 := by
+    dsimp [B0, K0]
+    simpa [hBKσ] using
+      (Int.gcd_div_gcd_div_gcd (i := B) (j := K) hBKpos)
+  have hrow : Int.gcd (-B0) K0 = 1 := by simpa using hrowPos
+  have hAfac : A = (σ : ℤ) * A0 := by
+    dsimp [A0]
+    rw [mul_comm]
+    exact (Int.ediv_mul_cancel hAdiv).symm
+  have hBfac : B = (σ : ℤ) * B0 := by
+    dsimp [B0]
+    rw [mul_comm]
+    exact (Int.ediv_mul_cancel hBdiv).symm
+  have hKfac : K = (σ : ℤ) * K0 := by
+    dsimp [K0]
+    rw [mul_comm]
+    exact (Int.ediv_mul_cancel hKdiv).symm
+  have hαfac : α = (σ : ℤ) * α0 := by
+    dsimp [α0]
+    rw [mul_comm]
+    exact (Int.ediv_mul_cancel hαdiv).symm
+  have hβfac : β = (σ : ℤ) * β0 := by
+    dsimp [β0]
+    rw [mul_comm]
+    exact (Int.ediv_mul_cancel hβdiv).symm
+  have hdetFull : α * K + β * B = A ^ 2 :=
+    excursionMatrix_det_square hK hα hβ
+  have hdet : α0 * K0 + β0 * B0 = A0 ^ 2 := by
+    apply mul_left_cancel₀ (pow_ne_zero 2 hσne)
+    calc
+      (σ : ℤ) ^ 2 * (α0 * K0 + β0 * B0) = α * K + β * B := by
+        rw [hαfac, hKfac, hβfac, hBfac]
+        ring
+      _ = A ^ 2 := hdetFull
+      _ = (σ : ℤ) ^ 2 * A0 ^ 2 := by rw [hAfac]; ring
+  have he0 : Λ * eStop = (σ : ℤ) * (α0 * e + β0 * u) := by
+    rw [he, hαfac, hβfac]
+    ring
+  have hu0 : Λ * uStop = (σ : ℤ) * ((-B0) * e + K0 * u) := by
+    rw [hu, hBfac, hKfac]
+    ring
+  have hpayment := blockCancellationPayment_explicit
+    (σ := σ) (Λ := Λ) (A0 := A0) (B0 := B0) (K0 := K0)
+    (α0 := α0) (β0 := β0) hinput houtput hrow hdet he0 hu0
+  have hcoord :
+      (K * u - B * e) / (σ : ℤ) = K0 * u - B0 * e := by
+    calc
+      (K * u - B * e) / (σ : ℤ) =
+          ((σ : ℤ) * (K0 * u - B0 * e)) / (σ : ℤ) := by
+            rw [hKfac, hBfac]
+            ring
+      _ = K0 * u - B0 * e := Int.mul_ediv_cancel_left _ hσne
+  dsimp [A0, K0, B0] at hpayment ⊢
+  rw [hcoord]
+  exact hpayment
+
+/-- Exact telescoping for a sequence of excursion scales.  The endpoint
+equations alone force the product of all block payments to be the total gcd
+scale growth; no independence assumption on the intervening prime factors is
+needed. -/
+theorem blockScale_product_telescopes
+    (G t Λ : ℕ → ℕ)
+    (hscale : ∀ i, Λ i * G (t i) = G (t (i + 1))) :
+    ∀ m, (∏ i ∈ Finset.range m, Λ i) * G (t 0) = G (t m) := by
+  intro m
+  induction m with
+  | zero => simp
+  | succ m ih =>
+      rw [Finset.prod_range_succ]
+      calc
+        ((∏ i ∈ Finset.range m, Λ i) * Λ m) * G (t 0) =
+            Λ m * ((∏ i ∈ Finset.range m, Λ i) * G (t 0)) := by ring
+        _ = Λ m * G (t m) := by rw [ih]
+        _ = G (t (m + 1)) := hscale m
+
+/-- Multiplicative form of the logarithmic cancellation-mass budget.  If the
+ambient tail state is subexponential in physical time, then the product of
+all exact excursion payments is subexponential at the corresponding endpoint.
+This is the honest global accumulation supplied by the gcd budget; it does
+not by itself exclude arbitrarily sparse large payments. -/
+theorem blockScale_product_subexponential
+    (G C t Λ : ℕ → ℕ)
+    (hGpos : ∀ n, 0 < G n)
+    (hGleC : ∀ n, G n ≤ C n)
+    (hscale : ∀ i, Λ i * G (t i) = G (t (i + 1)))
+    (hCsubexp : ∀ K, 0 < K → ∃ N, ∀ n, N ≤ n → C n ^ K < 2 ^ n) :
+    ∀ K, 0 < K → ∃ N, ∀ m, N ≤ t m →
+      (∏ i ∈ Finset.range m, Λ i) ^ K < 2 ^ (t m) := by
+  intro K hK
+  obtain ⟨N, hN⟩ := hCsubexp K hK
+  refine ⟨N, fun m hm ↦ ?_⟩
+  have htel := blockScale_product_telescopes G t Λ hscale m
+  have hprodLeG : (∏ i ∈ Finset.range m, Λ i) ≤ G (t m) := by
+    have hbase : (∏ i ∈ Finset.range m, Λ i) ≤
+        (∏ i ∈ Finset.range m, Λ i) * G (t 0) :=
+      Nat.le_mul_of_pos_right _ (hGpos (t 0))
+    rw [htel] at hbase
+    exact hbase
+  exact (Nat.pow_le_pow_left (hprodLeG.trans (hGleC (t m))) K).trans_lt
+    (hN (t m) hm)
+
+/-- A new scale-weighted record must be paid for by the intervening gcd scale.
+This is the order-theoretic half of the record-payment corollary, separated
+from the determinantal computation of that scale. -/
+theorem scaledRecord_forces_payment
+    {GStart GStop Λ mStart mStop : ℕ}
+    (hGStart : 0 < GStart)
+    (hscale : GStop = Λ * GStart)
+    (hrecord : GStart * mStart < GStop * mStop) :
+    mStart < Λ * mStop := by
+  apply (Nat.mul_lt_mul_left hGStart).mp
+  calc
+    GStart * mStart < GStop * mStop := hrecord
+    _ = GStart * (Λ * mStop) := by rw [hscale]; ring
+
+/-- Record-payment corollary in the square-residue coordinates supplied by
+`excursionCancellationPayment`.  If the primitive magnitude does not itself
+account for a new scale-weighted record, the exact `σ * gcd(A0²,z)` payment
+does. -/
+theorem squareResiduePayment_of_scaledRecord
+    {GStart GStop Λ mStart mStop σ : ℕ} {A0 z : ℤ}
+    (hGStart : 0 < GStart)
+    (hscale : GStop = Λ * GStart)
+    (hrecord : GStart * mStart < GStop * mStop)
+    (hpayment : Λ = σ * Int.gcd (A0 ^ 2) z) :
+    mStart < σ * Int.gcd (A0 ^ 2) z * mStop := by
+  have hpaid := scaledRecord_forces_payment hGStart hscale hrecord
+  rw [hpayment] at hpaid
+  exact hpaid
 
 end ErdosProblems.Erdos243

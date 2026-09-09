@@ -93,7 +93,8 @@ def main() -> int:
     for note in NOTES:
         text = source(note)
         require("\\input{problem-note-preamble}" in text, f"{note} bypasses shared paper links")
-        require("\\statusboundary" in text, f"{note} does not emit shared paper links")
+        require("\\companionpapercontext" in text,
+                f"{note} does not emit shared paper links independently")
 
     for link in core_links | note_links:
         require(link in target_owner, f"cross-paper link has no declared destination: {link}")

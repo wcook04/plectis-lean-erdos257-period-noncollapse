@@ -6,8 +6,8 @@
 % This flat manuscript is generated from reviewable parts below.
 \documentclass[11pt]{article}
 \input{problem-note-preamble}
-\renewcommand{\commit}{1da2a504f8d8aa3cdc2cf686ec48bc8a67457984}
-\renewcommand{\commitshort}{1da2a504f8d8}
+\renewcommand{\commit}{85054358cdca543531b473684e9c9d1c0ece6dd7}
+\renewcommand{\commitshort}{85054358cdca}
 \usepackage{longtable}
 \hypersetup{
   pdftitle={The Factorial-Denominator Series: complete reasoning record for Erdős Problem 68},
@@ -128,8 +128,9 @@ stated condition.
 The criterion decides the survival of the full exponent $e$.  A zero residue
 gives $v_p(\den(H_M))<e$, and further congruences are needed to determine the
 surviving exponent.  The proof uses no property of factorials beyond the
-displayed denominators, so it applies to any finite sum of reciprocals; its
-general antecedent is unassessed.  What is specific here is the behaviour of
+displayed denominators, so it applies to any finite sum of reciprocals.
+It is the first valuation layer of the reciprocal-sum formula of Louwsma
+and Martino \cite[Lemma~4.1, p.~10]{louwsma-martino}.  What is specific here is the behaviour of
 the actual family $d_n=n!-1$, and that behaviour is not generic.
 
 \paragraph{Two complete cancellations.}
@@ -280,8 +281,9 @@ ingredients are Lemmas~\ref{long68:res:product-lcm} and~\ref{long68:res:gap-gcd}
 needs no factorial-congruence multiplicity theorem.  A weaker exponent
 $4/3$ follows instead from Theorem~12 of Garaev, Luca and Shparlinski
 \cite[arXiv v1, Thm.~12, p.~16]{garaev-luca-shparlinski}, which bounds by
-$O(N^{2/3})$ the number of solutions of $n!\equiv a\pmod r$ in an interval of
-length $N<r$; that deduction is recorded in the complete reasoning record and
+$O(N^{2/3})$ the number of solutions of $n!\equiv a\pmod r$ with
+$r$ prime, $a\not\equiv0\pmod r$, and $H+1\le n\le H+N$ where
+$0\le H<H+N<r$; that deduction is recorded in the complete reasoning record and
 is superseded here.  No antecedent for a lower bound on the least common
 multiple of the numbers $n!-1$ was located, and the searches were for
 factorial values shifted by one; least common multiples of consecutive
@@ -910,11 +912,14 @@ $q\nmid299999!$ and in particular $q\ge300000$.  The receipt is
 \path{erdos68_strict_successor_exact_interval_v1}, payload digest
 \path{2974e8629f5959bdfa2814b63a9522cc9bf46e9e6ab99aaff28a8e980e1a1ee0},
 recording the parameters above, the digests of the driver and backend used on
-its own run, the event-trace digest and the final enclosure.  The driver
+its own run, the event-trace digest and the final enclosure.  A later supplied
+provenance record matches the receipt and both current driver hashes, so the
+previously outstanding source-current regeneration check is discharged at
+that exact scope; the census was not rerun as part of the present paper review.
+The driver
 \path{scripts/check_erdos68_strict_successor.py} and the backend
 \path{scripts/check_erdos68_strict_successor_gmp.cpp} accompany it, and their
-current digests postdate that run, so a byte-identical regeneration of the
-$300000$ receipt is outstanding.  The same driver replayed independently at
+current hashes match the supplied provenance.  The same driver replayed independently at
 $m\le4000$ reproduces the unit-carry prefix $52,591,1030,1407,1438,2164$ with
 a non-unit carry at the endpoint, which gives $q\ge4000$ on its own.  The
 census is a separate computation from the Lean development, and the
@@ -940,8 +945,12 @@ denominators
 satisfy $Q_{23448}\ge2^{39990}$.  Every rational in the open enclosure shares
 this initial segment, so its reduced denominator is at least $Q_{23448}$; the
 argument is about a common prefix and does not require the last convergent to
-lie inside the enclosure.  The integer comparison $2^{39990}>10^{12038}$
-closes \eqref{long68:eq:finite-bounds}.  The
+lie inside the enclosure.  A newer exact width-$7056$ Farey certificate places
+the enclosure between neighbours with denominator sum $B+E$, and checks
+$B+E>10^{12040}$.  This separate denominator-sum comparison supplies the
+strict decimal bound in \eqref{long68:eq:finite-bounds}; it does not follow
+from $2^{39990}$.  The older width-$7053$ computation described here remains
+a distinct historical certificate.  The
 \href{https://github.com/wcook04/plectis-erdos/blob/cd3bd6fe245867a435e15d503ccedd699c5d02e2/scripts/check_erdos68_continued_fraction.py}{integer
 replay} and its
 \href{https://github.com/wcook04/plectis-erdos/blob/cd3bd6fe245867a435e15d503ccedd699c5d02e2/verification/erdos68-continued-fraction.json}{receipt}
@@ -1060,8 +1069,9 @@ and its connection to the displayed residual.
 \paragraph{Criteria from the literature that do not apply.}
 Duverney's fast-series criteria assume two-sided quadratic denominator growth
 $cu_n^2\le u_{n+1}\le c'u_n^2$, whereas $u_{n+1}/u_n^2\to0$ for
-$u_n=n!-1$, and his all-positive specialisation additionally requires
-$\sum_n|u_{n+1}/u_n^2-1|<\infty$, whose summands tend to one here
+$u_n=n!-1$.  His printed Corollary~3.2 displays the signed series
+$\sum_n(u_{n+1}/u_n^2-1)$, without absolute values; its summands tend to
+$-1$ here, so it does not converge to a finite value
 \cite[pp.~275, 285--287]{duverney}.  The theorem of Barreto, Kang, Kim,
 Kova\v{c} and Zhang proves irrationality of $\sum_n1/a_n$ under a
 rapid-growth hypothesis that fails for $a_n=n!-1$, since
@@ -1177,9 +1187,10 @@ the form recorded by Galambos \cite[Ch.~1]{galambos1976}; the additions here
 are the telescope $C=\Ser-e+2$, the identification of the digit value $m-2$,
 and the transport to the shifted family.  The multiplicity bound is Garaev,
 Luca and Shparlinski's \cite{garaev-luca-shparlinski}, and the lcm deduction
-from it is not theirs.  For the survival criterion, the Wilson cofinality
-packaging, the finite radius bound and Theorem~\ref{long68:res:lcm-growth}, no
-antecedent was located, which is a negative search result, and no priority
+from it is not theirs.  The survival criterion is a specialisation of
+Louwsma and Martino's valuation formula \cite[Lemma~4.1]{louwsma-martino}.
+For the Wilson cofinality packaging, the finite radius bound and
+Theorem~\ref{long68:res:lcm-growth}, no antecedent was located, which is a negative search result, and no priority
 is claimed.
 
 
@@ -1320,10 +1331,10 @@ cancellation is another form of the present denominator problem.
 
 Duverney's Theorem~3.1 assumes two-sided quadratic denominator growth
 $cu_n^2\le u_{n+1}\le c'u_n^2$, while $u_{n+1}/u_n^2\to0$ for $u_n=n!-1$
-\cite[pp.~275, 285--286]{duverney}; his all-positive Corollary~3.2
-additionally requires $\sum_n|u_{n+1}/u_n^2-1|<\infty$, whereas those
-summands tend to one \cite[Cor.~3.2, p.~287]{duverney}.  Both the ratio limit
-and the nonsummability are kernel-checked.  The ratio proof divides numerator
+\cite[pp.~275, 285--286]{duverney}; his printed Corollary~3.2 displays the
+signed series $\sum_n(u_{n+1}/u_n^2-1)$, without absolute values.  Its
+summands tend to $-1$ here, so it does not converge to a finite value
+\cite[Cor.~3.2, p.~287]{duverney}.  The ratio proof divides numerator
 and denominator by $(n!)^2$; the resulting terms tend to zero while
 $(1-1/n!)^2$ tends to one.
 
@@ -1637,7 +1648,6 @@ The specific target $c_m=E_m/m$ is useful because it translates into finite
 predecessor-gap conditions.  The smallness of the target alone establishes no
 metric, measure or equidistribution theorem for this orbit, and none is
 claimed.
-
 % ---- part family_catalogue ----
 \clearpage
 \section{Complete result-family map}\label{sec:erdos-68-complete-family-map}
@@ -1761,6 +1771,11 @@ Lean checks small exact misses; a hash-bound GMP scan reaches index 300000 and y
   {10.1017/CBO9780511897184.009}.
 \bibitem{bloom} T.~F. Bloom, \emph{Erd\H{o}s Problem \#68}.
   \url{https://www.erdosproblems.com/68}, accessed 28 July 2026.
+\bibitem{louwsma-martino}
+  J.~Louwsma and J.~Martino,
+  \emph{Rational numbers with odd greedy expansion of fixed length},
+  arXiv:\href{https://arxiv.org/abs/2309.07280v1}{2309.07280v1}, 2023,
+  Lemma~4.1, p.~10.
 \bibitem{cantor1869}
   G.~Cantor,
   \emph{\"Uber die einfachen Zahlensysteme},

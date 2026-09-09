@@ -195,6 +195,11 @@ of consecutive integers~\cite[\S7]{erdospomerance1978}; our prime numerators
 and gaps are unbounded.  The detailed historical comparisons and their
 hypotheses belong to the companion reasoning record.  No priority claim
 is made for the elementary identities or constructions in this note.
+Land has proved irrationality conditionally on Kuperberg's uniform
+Hardy--Littlewood prime-tuples conjecture; the required pattern has length of
+order $\log\log X$ and the proof also controls the unprescribed tail.  The
+fixed-block and $o(\log\log X)$ perturbation results here neither supply that
+uniform hypothesis nor obstruct that conditional argument~\cite{land2026}.
 
 \paragraph{Notation and organisation.}
 Write $\N=\{0,1,\ldots\}$, $\Z$ for the integers,
@@ -1323,6 +1328,11 @@ cofinal irrationality classifier & \lrefx{Erdos251/PrimeGapDyadicTail.lean}{1572
   \href{https://doi.org/10.1007/s10474-025-01528-0}{\emph{On several
   irrationality problems for Ahmes series}}, Acta Math. Hungar. \textbf{175}
   (2025), 572--608.
+\bibitem{land2026} J.~Land,
+  \href{https://github.com/beetree/math_erdos_251}{\emph{A conditional proof of
+  the irrationality of $\sum_{n\ge1}p_n2^{-n}$ under a uniform
+  Hardy--Littlewood prime-tuples conjecture}}, research draft, 5 September 2026,
+  with an accompanying Lean formalisation of the conditional argument.
 \bibitem{lean4} L.~de Moura and S.~Ullrich,
   \href{https://doi.org/10.1007/978-3-030-79876-5_37}
   {\emph{The Lean~4 theorem prover and programming language}},
@@ -1372,5 +1382,7 @@ cofinal irrationality classifier & \lrefx{Erdos251/PrimeGapDyadicTail.lean}{1572
   {\emph{FormalConjectures.ErdosProblems.\texttt{251}}},
   Lean source at commit \texttt{f776d2f}, 2025, accessed 28 July 2026.
 \end{thebibliography}
+
+\companionpapercontext
 
 \end{document}

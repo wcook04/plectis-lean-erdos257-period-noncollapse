@@ -1,0 +1,32 @@
+import ErdosProblems.Erdos249.TypeBReturnV8.PeripheralAssembly
+import ErdosProblems.Erdos249.TypeBReturnV8.FiniteFirstHarmonic
+import ErdosProblems.Erdos249.TypeBReturnV8.CenteringCounterexample
+
+/-! UNRUN audit target. These commands are not an axiom receipt until executed. -/
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.card_pivotFiber_eq_card_supplierPrimes
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.dtw_of_eventual_peripheral_and_cofinal_centered
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.irrational_of_eventual_peripheral_and_cofinal_centered
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_4_9
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_5_9
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_6_9
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.discrepancy_1_7_9
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.finite_room
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.four_certified_kills
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.farey_denominator_bound
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.run_length_counterexample
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.run_threshold_iff
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.twoPhase_unit
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.twoMean_zero
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.twoCentered_eq_two
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.twoMeanContribution_zero
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.three_peripheral_zero_do_not_force_centered_budget
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.finite_first_harmonic_norm_gap
+#print axioms ErdosProblems.Erdos249.TypeBReturnV8.one_unconditional_norm_gap_instance
+#print axioms Erdos249257.TotientTailPeriodKiller.norm_pivotPhaseAt
+#print axioms Erdos249257.TotientTailPeriodKiller.norm_pivotResidualAt_v8
+#print axioms Erdos249257.TotientTailPeriodKiller.norm_pivotBadContribution_le_card
+#print axioms Erdos249257.TotientTailPeriodKiller.norm_pivotNonSupplierContribution_le_card
+#print axioms Erdos249257.TotientTailPeriodKiller.pivotGoodBases_subset_Ico
+#print axioms Erdos249257.TotientTailPeriodKiller.card_pivotGoodBases_le
+#print axioms Erdos249257.TotientTailPeriodKiller.norm_pivotFiberMeanContribution_le_of_uniform
+#print axioms Erdos249257.TotientTailPeriodKiller.pivotBudgetAt_of_peripheral_estimates

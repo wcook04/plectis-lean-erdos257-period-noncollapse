@@ -1474,22 +1474,26 @@ $l+1$ and coefficient exactly $-6$, is
 and the two closed forms $6\operatorname{ord}=N(N-1)(2N-1)$ and
 $2^{N}\mathrm{lc}=(N!)^{2}(N+1)!$ are assembled in
 \lword{Erdos1049/AdelicHeightBridge.lean}{1753}{zudilinSharpHankelOrderAndCoeff_algebraicAssembly}{one
-checked theorem}.  The initial-monomial theorem for rows $j\ge2$ is outside this
-library; row $j=2$, with initial monomial $18q^{2l+3}$, is checked in a module
-of the external-verification cut, and rows $j\ge3$ are open, so the Lean
-identification of $V_N^{*}$ itself with the assembled leading matrix stays
-conditional on a row hypothesis.  Independently of the proof, the order and the
+checked theorem}.  In the current public, kernel-checked library, row $j=2$,
+with initial monomial $18q^{2l+3}$, is checked in a module of the
+external-verification cut, while rows $j\ge3$ are not kernel verified.  A later
+all-row Lean source candidate removes the row hypothesis at source level, but
+its focused build and axiom audit are marked \textsc{unrun}, and it is not
+included in this public release.  The Lean identification of $V_N^{*}$ itself
+with the assembled leading matrix therefore stays conditional on a row
+hypothesis here.  Independently of the proof, the order and the
 leading coefficient were computed exactly for $1\le N\le7$, giving orders
 $0,1,5,14,30,55,91$ and leading coefficients
 $1,6,108,4320,324000,40824000,8001504000$, each matching the closed forms.
 
 \paragraph{Attribution and remaining obligation.}
 The antecedent is the inequality of \cite[Sec.~4]{zudilin2016}; the equality and
-the leading coefficient are proved here.  The remaining obligation is a formal
-one.  Lemma~\ref{long1049:res:allrowinitial} and~\eqref{long1049:eq:row-initial} give the initial monomial of every row, and the Lean
-formalisation of that identity stops at $j=2$, so the Lean statement about
-$V_N^{*}$ retains a row hypothesis that the proof above discharges.  Nothing in
-this subsection decides the arithmetic nature of $F(3/2)$.
+the leading coefficient are proved here.  Lemma~\ref{long1049:res:allrowinitial}
+and~\eqref{long1049:eq:row-initial} give the initial monomial of every row.  The
+later all-row Lean source is an unrun candidate rather than verification
+authority, so the current public Lean statement about $V_N^{*}$ retains a row
+hypothesis that the proof above discharges.  Nothing in this subsection decides
+the arithmetic nature of $F(3/2)$.
 
 \section{Integer scalar content is neutral}\label{long1049:sec:primitive}
 
@@ -2660,11 +2664,13 @@ function.  That contradicts Rivin's periodic-coefficient corollary
 
 The proposition uses no property of the point $2/3$: the obstruction is
 functional and appears before regularity at a particular point is considered.
-It closes the simultaneous route only.  It says nothing about a single
-$k$-Mahler system, about $q$-difference or Mahler-type arguments that do not
-require stability under two multiplicatively independent substitutions, or about
-special-value theorems reached by other means.  Neither ingredient is proved
-here; both are cited.
+Bell and Smertnig have since proved the stronger single-base conclusion that
+the divisor-function generating series is not $k$-Mahler for any $k\ge2$
+\cite{bellsmertnig2026}; thus their result subsumes this simultaneous
+$2$-and-$3$ obstruction.  These statements are functional: they do not by
+themselves decide the arithmetic nature of the special value
+$\mathcal L(2/3)$, nor do they exclude approximation methods outside the
+Mahler framework.  The external ingredients are cited rather than proved here.
 
 \subsection{The quantitative height limitation}
 
@@ -2834,4 +2840,3 @@ suffices,
 \lword{Erdos1049/BezoutPluckerJets.lean}{299}{zmod_binary_tail_collision_of_two_three_depth_of_isCoprime}{two-three
 depth collision}.  Neither coordinate must be a unit; $(2,3)$ modulo six is an
 example.
-

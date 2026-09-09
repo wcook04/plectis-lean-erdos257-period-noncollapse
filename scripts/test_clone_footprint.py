@@ -25,9 +25,15 @@ class CloneFootprintTests(unittest.TestCase):
         quick_manifest = footprint.QUICK_LEAN_SPARSE_MANIFEST_PATH.read_text(
             encoding="utf-8"
         )
+        reproducibility = footprint.REPRODUCIBILITY_PATH.read_text(encoding="utf-8")
         self.assertEqual(
             footprint.contract_errors(
-                report, readme, manifest, reader_manifest, quick_manifest
+                report,
+                readme,
+                manifest,
+                reader_manifest,
+                quick_manifest,
+                reproducibility,
             ),
             [],
         )
@@ -57,7 +63,9 @@ class CloneFootprintTests(unittest.TestCase):
             {"path": "docs/generated.json", "size_bytes": 271 * footprint.MIB},
         ]
         report = footprint.build_report(entries)
-        errors = footprint.contract_errors(report, self.valid_readme())
+        errors = footprint.contract_errors(
+            report, self.valid_readme(), reproducibility=self.valid_runbook()
+        )
         self.assertTrue(any("full checkout" in error for error in errors))
 
     def test_oversized_lean_checkout_is_rejected(self) -> None:
@@ -66,56 +74,48 @@ class CloneFootprintTests(unittest.TestCase):
             {"path": "docs/generated.json", "size_bytes": 200 * footprint.MIB},
         ]
         report = footprint.build_report(entries)
-        errors = footprint.contract_errors(report, self.valid_readme())
+        errors = footprint.contract_errors(
+            report, self.valid_readme(), reproducibility=self.valid_runbook()
+        )
         self.assertTrue(any("Lean sparse checkout" in error for error in errors))
 
-    def test_readme_cannot_drop_sparse_clone_route(self) -> None:
+    def test_readme_cannot_drop_reproducibility_route(self) -> None:
         report = footprint.build_report(
             [
                 {"path": "Erdos249257/A.lean", "size_bytes": 1},
                 {"path": "docs/generated.json", "size_bytes": 2},
             ]
         )
-        errors = footprint.contract_errors(report, footprint.FULL_CLONE_COMMAND)
-        self.assertTrue(any("--no-checkout" in error for error in errors))
-
-    def test_sparse_commands_preflight_the_manifest_object(self) -> None:
-        for command in (
-            footprint.QUICK_LEAN_SPARSE_COMMAND,
-            footprint.LEAN_SPARSE_COMMAND,
-            footprint.READER_SPARSE_COMMAND,
-        ):
-            self.assertIn("cat-file -e HEAD:scripts/", command)
-            self.assertIn(" && git -C ", command)
-
-    def test_readme_cannot_restore_all_branch_clone(self) -> None:
-        entries = [
-            {"path": "Erdos249257/A.lean", "size_bytes": 1},
-            {"path": "docs/generated.json", "size_bytes": 2},
-        ]
-        readme = self.valid_readme().replace("--single-branch ", "", 1)
-        errors = footprint.contract_errors(footprint.build_report(entries), readme)
-        self.assertTrue(any("optimized clone command" in error for error in errors))
-
-    def test_readme_cannot_restore_full_history_for_proof_only_clone(self) -> None:
-        entries = [
-            {"path": "Erdos249257/A.lean", "size_bytes": 1},
-            {"path": "docs/generated.json", "size_bytes": 2},
-        ]
-        readme = self.valid_readme().replace("--depth=1 ", "", 1)
-        errors = footprint.contract_errors(footprint.build_report(entries), readme)
-        self.assertTrue(any("optimized clone command" in error for error in errors))
-
-    def test_claim_verification_keeps_the_pinned_history_fetch(self) -> None:
-        entries = [
-            {"path": "Erdos249257/A.lean", "size_bytes": 1},
-            {"path": "docs/generated.json", "size_bytes": 2},
-        ]
-        readme = self.valid_readme().replace(
-            footprint.PINNED_HISTORY_FETCH_COMMAND, "", 1
+        errors = footprint.contract_errors(
+            report, "# README\n", reproducibility=self.valid_runbook()
         )
-        errors = footprint.contract_errors(footprint.build_report(entries), readme)
-        self.assertTrue(any("optimized clone command" in error for error in errors))
+        self.assertTrue(any("reproducibility-runbook link" in error for error in errors))
+
+    def test_runbook_keeps_blob_filtered_clone(self) -> None:
+        entries = [
+            {"path": "Erdos249257/A.lean", "size_bytes": 1},
+            {"path": "docs/generated.json", "size_bytes": 2},
+        ]
+        runbook = self.valid_runbook().replace("--filter=blob:none ", "", 1)
+        errors = footprint.contract_errors(
+            footprint.build_report(entries),
+            self.valid_readme(),
+            reproducibility=runbook,
+        )
+        self.assertTrue(any("blob:none" in error for error in errors))
+
+    def test_runbook_keeps_history_fetch(self) -> None:
+        entries = [
+            {"path": "Erdos249257/A.lean", "size_bytes": 1},
+            {"path": "docs/generated.json", "size_bytes": 2},
+        ]
+        runbook = self.valid_runbook().replace(footprint.RUNBOOK_FETCH_COMMAND, "")
+        errors = footprint.contract_errors(
+            footprint.build_report(entries),
+            self.valid_readme(),
+            reproducibility=runbook,
+        )
+        self.assertTrue(any("fetch --tags --force" in error for error in errors))
 
     def test_lean_sparse_checkout_keeps_its_build_wrapper(self) -> None:
         entries = [
@@ -125,13 +125,33 @@ class CloneFootprintTests(unittest.TestCase):
         ]
         report = footprint.build_report(entries)
         self.assertEqual(report["lean_sparse_checkout_bytes"], 30)
-        readme = self.valid_readme().replace(footprint.LEAN_BUILD_COMMAND, "")
+        runbook = self.valid_runbook().replace(footprint.LEAN_BUILD_COMMAND, "")
         self.assertTrue(
             any(
                 footprint.LEAN_BUILD_COMMAND in error
-                for error in footprint.contract_errors(report, readme)
+                for error in footprint.contract_errors(
+                    report,
+                    self.valid_readme(),
+                    reproducibility=runbook,
+                )
             )
         )
+
+    def test_runbook_orders_lightweight_check_before_lean_build(self) -> None:
+        entries = [{"path": "Erdos249257/A.lean", "size_bytes": 1}]
+        runbook = self.valid_runbook().replace(
+            footprint.RUNBOOK_QUICK_CHECK_COMMAND,
+            "placeholder",
+        ).replace(
+            footprint.LEAN_BUILD_COMMAND,
+            footprint.RUNBOOK_QUICK_CHECK_COMMAND,
+        ).replace("placeholder", footprint.LEAN_BUILD_COMMAND)
+        errors = footprint.contract_errors(
+            footprint.build_report(entries),
+            self.valid_readme(),
+            reproducibility=runbook,
+        )
+        self.assertTrue(any("must order" in error for error in errors))
 
     def test_lean_sparse_checkout_omits_unneeded_scripts_and_root_pdfs(self) -> None:
         entries = [
@@ -154,7 +174,12 @@ class CloneFootprintTests(unittest.TestCase):
         report = footprint.build_report(
             [{"path": "Erdos249257/A.lean", "size_bytes": 1}]
         )
-        errors = footprint.contract_errors(report, self.valid_readme(), "/README.md\n")
+        errors = footprint.contract_errors(
+            report,
+            self.valid_readme(),
+            "/README.md\n",
+            reproducibility=self.valid_runbook(),
+        )
         self.assertTrue(any("manifest has drifted" in error for error in errors))
 
     def test_reader_sparse_checkout_omits_machine_scale_corpora(self) -> None:
@@ -169,17 +194,17 @@ class CloneFootprintTests(unittest.TestCase):
 
     @staticmethod
     def valid_readme() -> str:
+        return "[Reproduce the release](docs/REPRODUCIBILITY.md)\n"
+
+    @staticmethod
+    def valid_runbook() -> str:
         return "\n".join(
             (
-                footprint.LEAN_CLONE_COMMAND,
-                footprint.QUICK_LEAN_SPARSE_COMMAND,
-                footprint.LEAN_SPARSE_COMMAND,
-                footprint.LEAN_CHECKOUT_COMMAND,
+                footprint.RUNBOOK_CLONE_COMMAND,
+                footprint.RUNBOOK_CD_COMMAND,
+                footprint.RUNBOOK_FETCH_COMMAND,
+                footprint.RUNBOOK_QUICK_CHECK_COMMAND,
                 footprint.LEAN_BUILD_COMMAND,
-                footprint.READER_SPARSE_COMMAND,
-                footprint.FULL_CLONE_COMMAND,
-                footprint.PINNED_HISTORY_FETCH_COMMAND,
-                footprint.FULL_HISTORY_CLONE_COMMAND,
             )
         )
 

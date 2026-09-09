@@ -1,0 +1,552 @@
+{
+  "schema": "public_erdos269_wavea_validation_export_v1",
+  "generated_at": "2026-09-09",
+  "problem": 269,
+  "status": "PASS_PUBLIC_SOURCE_CURRENT_COMPILE_AND_PERMITTED_AXIOMS",
+  "evidence_class": "public_source_current_Lean_PASS_plus_freshly_restamped_37_file_import_closure_and_exact_four_family_paper_mapping",
+  "public_checkout_base_before_export": "41298352677c19a6491acc4294a2dcdc916fda8e",
+  "authority_receipt": {
+    "private_path": "work/erdos_release_readiness_r8_20260908/returned_authoring_r11/lean_build_coordinator/erdos269_wavea_validation_20260909.json",
+    "sha256": "c1a6d91963884cdbda274739caee77aa73ff43272077f2f6b3c378185dc5f07e",
+    "target": "ErdosProblems.Erdos269.PaperR12WaveAAxiomAudit",
+    "command": "../../repo-python scripts/lean_fast_build.py --jobs 1 ErdosProblems.Erdos269.PaperR12WaveAAxiomAudit",
+    "exit_code": 0,
+    "source_hashes": {
+      "formal_math/erdos257_period_noncollapse/ErdosProblems/Erdos269/CertificateRangeR11.lean": "5581b1e19ea4f3148948089a6207c2ce452e9713b38b01ad134ecd6f5d9ef829",
+      "formal_math/erdos257_period_noncollapse/ErdosProblems/Erdos269/CertificateSafetyR12.lean": "d16c98fb547152b7d7ec980be32682ac2a4cb386de9096030940586e594c1451",
+      "formal_math/erdos257_period_noncollapse/ErdosProblems/Erdos269/R12/ExactModulus.lean": "3568b1f292807a4d72a53bd8b61eba998793abe7e975d311f83ad63006407139",
+      "formal_math/erdos257_period_noncollapse/ErdosProblems/Erdos269/R12/OcticWindowBand.lean": "14c8faf01c67bea8efb3b5320584754c0e79a08b02ea67d230215e8367b60fdd",
+      "formal_math/erdos257_period_noncollapse/ErdosProblems/Erdos269/R12/PrefixExtension.lean": "1aaa237f6e27db42f868c3ad5517590239a41e37cf65bf7cc2ad0bc3c50e5bd5",
+      "formal_math/erdos257_period_noncollapse/ErdosProblems/Erdos269/PaperR12WaveAAxiomAudit.lean": "1a6d6e3470a7a86e73d2858ac7d059f7abf94b3ec53ba470b221161a7eaf331f"
+    },
+    "build_output_sha256": "45d09bb184039e1fd3a1f47be6820e65fd8dad5b18c66a100a179fa425882163",
+    "named_declaration_count_expected": 25,
+    "named_axiom_report_count_observed_raw": 50,
+    "named_axiom_report_count_observed_unique": 25,
+    "duplicate_report_reason": "The fast wrapper performs a prebuild and a final serialized Lake authority replay.",
+    "permitted_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "unexpected_axioms": [],
+    "statement_preserving_repairs": [
+      "CertificateRangeR11: Bool.and_eq_true_iff compatibility",
+      "CertificateSafetyR12: Bool conjunction API and explicit range predicate",
+      "R12/PrefixExtension: terminal arithmetic normalization and explicit integer cast target"
+    ]
+  },
+  "audit": {
+    "module": "ErdosProblems.Erdos269.PaperR12WaveAAxiomAudit",
+    "path": "ErdosProblems/Erdos269/PaperR12WaveAAxiomAudit.lean",
+    "sha256": "1a6d6e3470a7a86e73d2858ac7d059f7abf94b3ec53ba470b221161a7eaf331f",
+    "named_declarations": [
+      "ErdosProblems.Erdos269.PaperR12.nonintegral_has_integer_gap",
+      "ErdosProblems.Erdos269.PaperR12.exact_modulus_pinning",
+      "ErdosProblems.Erdos269.PaperR12.eventual_escape_of_exact_decay",
+      "ErdosProblems.Erdos269.PaperR12.actual_exact_modulus_pinning",
+      "ErdosProblems.Erdos269.PaperR12.escape_of_irrational_of_exact_beating",
+      "ErdosProblems.Erdos269.PaperR12.octic_cap_is_exactly_beaten",
+      "ErdosProblems.Erdos269.PaperR12.octic_window_band",
+      "ErdosProblems.Erdos269.PaperR12.reverseRationalState",
+      "ErdosProblems.Erdos269.PaperR12.completedBase",
+      "ErdosProblems.Erdos269.PaperR12.completedDigit",
+      "ErdosProblems.Erdos269.PaperR12.completedState",
+      "ErdosProblems.Erdos269.PaperR12.reverseRationalState_pos",
+      "ErdosProblems.Erdos269.PaperR12.completedState_pos",
+      "ErdosProblems.Erdos269.PaperR12.completedState_recurrence",
+      "ErdosProblems.Erdos269.PaperR12.finite_prefix_has_positive_rational_completion",
+      "ErdosProblems.Erdos269.PaperR12.actual_prefix_has_abstract_rational_completion",
+      "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12",
+      "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12_sound",
+      "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12_actual",
+      "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12_append",
+      "ErdosProblems.Erdos269.PaperR12.cumulativeCheckBoundedR12",
+      "ErdosProblems.Erdos269.PaperR12.cumulativeCheckBoundedR12_sound",
+      "ErdosProblems.Erdos269.PaperR12.width_shape_regressions_R12",
+      "ErdosProblems.Erdos269.PaperR12.factor_two_cannot_be_cancelled_R12",
+      "ErdosProblems.Erdos269.PaperR12.finite_coverage_not_cofinal_R12"
+    ]
+  },
+  "public_recursive_local_import_closure": [
+    {
+      "path": "ErdosProblems/Erdos269/ActualSharpTailMajorantR10.lean",
+      "module": "ErdosProblems.Erdos269.ActualSharpTailMajorantR10",
+      "sha256": "ad0ce74da91735a7466c6e4f01cc9655c80c42de12e55b6aff796504732a12f9",
+      "authority_sha256": "ad0ce74da91735a7466c6e4f01cc9655c80c42de12e55b6aff796504732a12f9",
+      "bytes": 14995,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/BlockMassEngines.lean",
+      "module": "ErdosProblems.Erdos269.BlockMassEngines",
+      "sha256": "f7fac792bced7515f9f2e50810953f18a9896e897d352611466d4f716cf435af",
+      "authority_sha256": "f7fac792bced7515f9f2e50810953f18a9896e897d352611466d4f716cf435af",
+      "bytes": 5610,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/BoundedRadixTailEscape.lean",
+      "module": "ErdosProblems.Erdos269.BoundedRadixTailEscape",
+      "sha256": "a3e8b3b5e9723a8de2ea1bc3a3dd4635a1cb06c4d563e0d4d9d55aec947f2c61",
+      "authority_sha256": "a3e8b3b5e9723a8de2ea1bc3a3dd4635a1cb06c4d563e0d4d9d55aec947f2c61",
+      "bytes": 7797,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/CertificateRangeR11.lean",
+      "module": "ErdosProblems.Erdos269.CertificateRangeR11",
+      "sha256": "5581b1e19ea4f3148948089a6207c2ce452e9713b38b01ad134ecd6f5d9ef829",
+      "authority_sha256": "5581b1e19ea4f3148948089a6207c2ce452e9713b38b01ad134ecd6f5d9ef829",
+      "bytes": 3724,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/CertificateSafetyR12.lean",
+      "module": "ErdosProblems.Erdos269.CertificateSafetyR12",
+      "sha256": "d16c98fb547152b7d7ec980be32682ac2a4cb386de9096030940586e594c1451",
+      "authority_sha256": "d16c98fb547152b7d7ec980be32682ac2a4cb386de9096030940586e594c1451",
+      "bytes": 4034,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/CofinalWindowEscapeEquivalence.lean",
+      "module": "ErdosProblems.Erdos269.CofinalWindowEscapeEquivalence",
+      "sha256": "15b722f85d9972ab2a4564add23ff4e4478280116d1dc71a99310fab44432f04",
+      "authority_sha256": "15b722f85d9972ab2a4564add23ff4e4478280116d1dc71a99310fab44432f04",
+      "bytes": 20057,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/DyadicBlockMassIdentity.lean",
+      "module": "ErdosProblems.Erdos269.DyadicBlockMassIdentity",
+      "sha256": "aa8a13d21f911f5ac181e6af049b83794b37b5e8633bfe387addde18a01b789d",
+      "authority_sha256": "aa8a13d21f911f5ac181e6af049b83794b37b5e8633bfe387addde18a01b789d",
+      "bytes": 8990,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/DyadicBlockThresholdPartition.lean",
+      "module": "ErdosProblems.Erdos269.DyadicBlockThresholdPartition",
+      "sha256": "0db1ce6438fc4eeb85854bd174849f3fa51ce33c0757a72518d28a5ccf0e9f2b",
+      "authority_sha256": "0db1ce6438fc4eeb85854bd174849f3fa51ce33c0757a72518d28a5ccf0e9f2b",
+      "bytes": 7557,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/DyadicOrderedTailRecurrence.lean",
+      "module": "ErdosProblems.Erdos269.DyadicOrderedTailRecurrence",
+      "sha256": "b591d5f23c6d6bb8c486f2a3390a41ee03ff90e2d9da2cd2165e79d9755bf06a",
+      "authority_sha256": "b591d5f23c6d6bb8c486f2a3390a41ee03ff90e2d9da2cd2165e79d9755bf06a",
+      "bytes": 5272,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/DyadicRadixTailEscape.lean",
+      "module": "ErdosProblems.Erdos269.DyadicRadixTailEscape",
+      "sha256": "d8b6c181c8af288f270986b0d2d0e9adcf2c237b5c8491eab176791ff937d4a9",
+      "authority_sha256": "d8b6c181c8af288f270986b0d2d0e9adcf2c237b5c8491eab176791ff937d4a9",
+      "bytes": 1535,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/DyadicShellSummability.lean",
+      "module": "ErdosProblems.Erdos269.DyadicShellSummability",
+      "sha256": "42455b1fe8f36dfc2e83d58c469b0fd8268c3d7928b71843022dd308fd6f69ad",
+      "authority_sha256": "42455b1fe8f36dfc2e83d58c469b0fd8268c3d7928b71843022dd308fd6f69ad",
+      "bytes": 8918,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/IntegralBranchExtinction.lean",
+      "module": "ErdosProblems.Erdos269.IntegralBranchExtinction",
+      "sha256": "3c6bc417ae44e7fc80db7893ac3f33626a9ef954d60fe424ea93e102d7b57e3f",
+      "authority_sha256": "3c6bc417ae44e7fc80db7893ac3f33626a9ef954d60fe424ea93e102d7b57e3f",
+      "bytes": 16326,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/IntegralBranchWidth.lean",
+      "module": "ErdosProblems.Erdos269.IntegralBranchWidth",
+      "sha256": "e0559afe20c5855469b9441db3943c37e93f541b6e230d4a873935c2fbf7d7cb",
+      "authority_sha256": "e0559afe20c5855469b9441db3943c37e93f541b6e230d4a873935c2fbf7d7cb",
+      "bytes": 3300,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/JumpConstraintMajorant.lean",
+      "module": "ErdosProblems.Erdos269.JumpConstraintMajorant",
+      "sha256": "4141c29210a2b4a10d8ebecef83cac213342bdf6d4421ebedf8de55b2db41923",
+      "authority_sha256": "4141c29210a2b4a10d8ebecef83cac213342bdf6d4421ebedf8de55b2db41923",
+      "bytes": 5029,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/KernelCarryRank.lean",
+      "module": "ErdosProblems.Erdos269.KernelCarryRank",
+      "sha256": "8b32ea2f9583cbea2d5c31c53da1f76400a4f3312a888bea0598016c16044839",
+      "authority_sha256": "8b32ea2f9583cbea2d5c31c53da1f76400a4f3312a888bea0598016c16044839",
+      "bytes": 28103,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/LongWindowCapR11.lean",
+      "module": "ErdosProblems.Erdos269.LongWindowCapR11",
+      "sha256": "386800c38d615c25d6b6e78f425f7614bc406d40ea74ef906b429945cd5a64ff",
+      "authority_sha256": "386800c38d615c25d6b6e78f425f7614bc406d40ea74ef906b429945cd5a64ff",
+      "bytes": 4158,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/NormalizedStateWidth.lean",
+      "module": "ErdosProblems.Erdos269.NormalizedStateWidth",
+      "sha256": "b49f4fa065ffb17cea01ca92f71a4a8c1c7fa4f7067afe430f72c76512951566",
+      "authority_sha256": "b49f4fa065ffb17cea01ca92f71a4a8c1c7fa4f7067afe430f72c76512951566",
+      "bytes": 10359,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR12WaveAAxiomAudit.lean",
+      "module": "ErdosProblems.Erdos269.PaperR12WaveAAxiomAudit",
+      "sha256": "1a6d6e3470a7a86e73d2858ac7d059f7abf94b3ec53ba470b221161a7eaf331f",
+      "authority_sha256": "1a6d6e3470a7a86e73d2858ac7d059f7abf94b3ec53ba470b221161a7eaf331f",
+      "bytes": 2596,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR7ActualOrbit.lean",
+      "module": "ErdosProblems.Erdos269.PaperR7ActualOrbit",
+      "sha256": "6153f9ca22bde343b366fb8e33850a3bc4eb9771284b305d4e241b9e3c9723f4",
+      "authority_sha256": "6153f9ca22bde343b366fb8e33850a3bc4eb9771284b305d4e241b9e3c9723f4",
+      "bytes": 7778,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR7BasicAssembly.lean",
+      "module": "ErdosProblems.Erdos269.PaperR7BasicAssembly",
+      "sha256": "b8c9250cdac7d3d09cc3e7d91217d9becd247a357ca826fe39921811d717b8cb",
+      "authority_sha256": "b8c9250cdac7d3d09cc3e7d91217d9becd247a357ca826fe39921811d717b8cb",
+      "bytes": 9908,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR7RationalBridge.lean",
+      "module": "ErdosProblems.Erdos269.PaperR7RationalBridge",
+      "sha256": "b511b03bce9f7965c44f03336805766f3d4a01da552ba823c8fb73475a6e2035",
+      "authority_sha256": "b511b03bce9f7965c44f03336805766f3d4a01da552ba823c8fb73475a6e2035",
+      "bytes": 10181,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR7SeriesIdentification.lean",
+      "module": "ErdosProblems.Erdos269.PaperR7SeriesIdentification",
+      "sha256": "07bacd61c97f4d15a7e30962c25611fcc8235b045568fb4da289eb8b87d1020e",
+      "authority_sha256": "07bacd61c97f4d15a7e30962c25611fcc8235b045568fb4da289eb8b87d1020e",
+      "bytes": 9619,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR7SharpShellBound.lean",
+      "module": "ErdosProblems.Erdos269.PaperR7SharpShellBound",
+      "sha256": "13b534b9e5df5fe1f532dfe416d1e6f24b4522fffcb3e2e064e7f7f3f3bf63ef",
+      "authority_sha256": "13b534b9e5df5fe1f532dfe416d1e6f24b4522fffcb3e2e064e7f7f3f3bf63ef",
+      "bytes": 7529,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR7WindowResults.lean",
+      "module": "ErdosProblems.Erdos269.PaperR7WindowResults",
+      "sha256": "fe82190b7523bcc9b47d622cfe373299ab09b0912030d4247f518d746fb6d456",
+      "authority_sha256": "fe82190b7523bcc9b47d622cfe373299ab09b0912030d4247f518d746fb6d456",
+      "bytes": 13177,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR8RankMajorant.lean",
+      "module": "ErdosProblems.Erdos269.PaperR8RankMajorant",
+      "sha256": "f7c614ef17a54a3e3471fab7e5d27cdc5fa4a3d024f32f286d2fab1ced3736ca",
+      "authority_sha256": "f7c614ef17a54a3e3471fab7e5d27cdc5fa4a3d024f32f286d2fab1ced3736ca",
+      "bytes": 16264,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR9SourceCounts.lean",
+      "module": "ErdosProblems.Erdos269.PaperR9SourceCounts",
+      "sha256": "ad9fb330bcec24bb38c025a9bf7f3e23e8120bfc331902ad78f2015b26f22b08",
+      "authority_sha256": "ad9fb330bcec24bb38c025a9bf7f3e23e8120bfc331902ad78f2015b26f22b08",
+      "bytes": 15588,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/PaperR9WidthData.lean",
+      "module": "ErdosProblems.Erdos269.PaperR9WidthData",
+      "sha256": "db7e2951eb3adae520d52f2ebda3b204cc60d5eaffe2dedc4e57612f5d275e09",
+      "authority_sha256": "3a275b604642fdede203553c22397ae4d127fb47d16df75a53a0ec4d731c9842",
+      "bytes": 897702,
+      "source_relation": "finite_heartbeat_public_variant",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/R12/ExactModulus.lean",
+      "module": "ErdosProblems.Erdos269.R12.ExactModulus",
+      "sha256": "3568b1f292807a4d72a53bd8b61eba998793abe7e975d311f83ad63006407139",
+      "authority_sha256": "3568b1f292807a4d72a53bd8b61eba998793abe7e975d311f83ad63006407139",
+      "bytes": 7234,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/R12/OcticWindowBand.lean",
+      "module": "ErdosProblems.Erdos269.R12.OcticWindowBand",
+      "sha256": "14c8faf01c67bea8efb3b5320584754c0e79a08b02ea67d230215e8367b60fdd",
+      "authority_sha256": "14c8faf01c67bea8efb3b5320584754c0e79a08b02ea67d230215e8367b60fdd",
+      "bytes": 4015,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/R12/PrefixExtension.lean",
+      "module": "ErdosProblems.Erdos269.R12.PrefixExtension",
+      "sha256": "1aaa237f6e27db42f868c3ad5517590239a41e37cf65bf7cc2ad0bc3c50e5bd5",
+      "authority_sha256": "1aaa237f6e27db42f868c3ad5517590239a41e37cf65bf7cc2ad0bc3c50e5bd5",
+      "bytes": 5333,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/RationalLatticeReduction.lean",
+      "module": "ErdosProblems.Erdos269.RationalLatticeReduction",
+      "sha256": "e9eed3065bb7e93cf784f8c412b1c9eeb1e29383e9ceaa1665bb0ea5076aa24d",
+      "authority_sha256": "e9eed3065bb7e93cf784f8c412b1c9eeb1e29383e9ceaa1665bb0ea5076aa24d",
+      "bytes": 14849,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/RationalityCarryBridge.lean",
+      "module": "ErdosProblems.Erdos269.RationalityCarryBridge",
+      "sha256": "9abe5bfcb4423e19f123e002eab0ff762c63f86b9715663d5b7ff5e36c4f44a8",
+      "authority_sha256": "9abe5bfcb4423e19f123e002eab0ff762c63f86b9715663d5b7ff5e36c4f44a8",
+      "bytes": 21872,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/ResidueEscape.lean",
+      "module": "ErdosProblems.Erdos269.ResidueEscape",
+      "sha256": "826a3dd901c86f1876c7e03011447dafef8d3cb139a673227e921bef3a9dfe87",
+      "authority_sha256": "a9ecacf70d358918e3135c39eb9e6c5c3587d99bc46b8726daba4fc8dd315e7e",
+      "bytes": 6586,
+      "source_relation": "preexisting_public_variant",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/RestrictedFloorSum.lean",
+      "module": "ErdosProblems.Erdos269.RestrictedFloorSum",
+      "sha256": "7369d105e5cb014188e31fa44fdccb03b2c40bdfe4719f6e227555c1c30b0bd3",
+      "authority_sha256": "7369d105e5cb014188e31fa44fdccb03b2c40bdfe4719f6e227555c1c30b0bd3",
+      "bytes": 30438,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Erdos269/SharpWindowCapR10.lean",
+      "module": "ErdosProblems.Erdos269.SharpWindowCapR10",
+      "sha256": "2e77317820309f9c2ccb93b4b0985331dd49e3d693c11c518774b3b4fec2200a",
+      "authority_sha256": "2e77317820309f9c2ccb93b4b0985331dd49e3d693c11c518774b3b4fec2200a",
+      "bytes": 7885,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": true
+    },
+    {
+      "path": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
+      "module": "ErdosProblems.Erdos269.ThreePrimeRunningLcm",
+      "sha256": "9a158ddc272a2c59d87aaefcd84352ffa6197d6bed95f965f0de59a119a8b34e",
+      "authority_sha256": "769d80481465f4fd8655d5d62c5eb3e372c80c39b0722e80659bf4e150c6c036",
+      "bytes": 36918,
+      "source_relation": "minimal_additive_public_variant",
+      "introduced_by_this_export": false
+    },
+    {
+      "path": "ErdosProblems/Shared/IrrationalRotationStaircase.lean",
+      "module": "ErdosProblems.Shared.IrrationalRotationStaircase",
+      "sha256": "c3c2013d856ecedc3751e6fb0a4ac237e3ea397aa96fd475c76811137a74ba71",
+      "authority_sha256": "c3c2013d856ecedc3751e6fb0a4ac237e3ea397aa96fd475c76811137a74ba71",
+      "bytes": 19200,
+      "source_relation": "byte_exact_authority_source",
+      "introduced_by_this_export": false
+    }
+  ],
+  "public_variant_compatibility": {
+    "ThreePrimeRunningLcm.lean": {
+      "before_sha256": "b3279ce084c98e4e7521e0bb94d3e366de010a30548fab0b326390da16ff6c3c",
+      "after_sha256": "9a158ddc272a2c59d87aaefcd84352ffa6197d6bed95f965f0de59a119a8b34e",
+      "change": "added exact authority bodies for log_dyadic_succ_le, exists_dyadicInternalPower_iff_log_succ, log_dyadic_succ_eq_of_no_internalPower, and threePrimeHeight_dyadicBlock_succ plus required parity import; all preexisting declarations preserved",
+      "omitted_authority_declaration": "smoothPrefixLcm235_dyadicBlock_succ is unused by the Wave A recursive closure"
+    },
+    "ResidueEscape.lean": {
+      "public_sha256": "826a3dd901c86f1876c7e03011447dafef8d3cb139a673227e921bef3a9dfe87",
+      "authority_sha256": "a9ecacf70d358918e3135c39eb9e6c5c3587d99bc46b8726daba4fc8dd315e7e",
+      "change": "none",
+      "reason": "authority-only affineCylinder_step_nested is unused by the Wave A recursive closure; all imported ResidueEscape declarations required by Wave A already exist publicly"
+    },
+    "PaperR9WidthData.lean": {
+      "authority_sha256": "3a275b604642fdede203553c22397ae4d127fb47d16df75a53a0ec4d731c9842",
+      "public_sha256": "db7e2951eb3adae520d52f2ebda3b204cc60d5eaffe2dedc4e57612f5d275e09",
+      "change": "set_option maxHeartbeats 0 replaced by set_option maxHeartbeats 100000000",
+      "reason": "finite project-standard heartbeat bound required by public release policy; all table bytes and declarations preserved"
+    }
+  },
+  "static_checks": {
+    "closure_file_count": 37,
+    "introduced_absent_file_count": 20,
+    "all_37_local_import_paths_resolve": true,
+    "all_20_introduced_sources_byte_exact_to_authority": false,
+    "audit_has_25_unique_named_prints": true,
+    "no_preexisting_declaration_removed": true,
+    "all_19_unmodified_introduced_sources_byte_exact_to_authority": true,
+    "introduced_finite_heartbeat_public_variant_count": 1,
+    "all_37_closure_pins_restamped_at_public_replay_commit": true,
+    "public_kernel_replay_passed": true,
+    "public_replay_unexpected_axioms": [],
+    "lean_launched_during_source_export": false,
+    "public_kernel_replay_launched_by_sole_owner": true
+  },
+  "current_authoring_papers": [
+    {
+      "path": "paper/erdos269-running-lcm-reasoning-surface.tex",
+      "sha256": "13356a2fa6063b3fd9924dbe1644ff0489f2fc0f03af5156839cc5950b606008",
+      "bytes": 120795
+    },
+    {
+      "path": "paper/erdos-269-three-prime-running-lcm.tex",
+      "sha256": "c32fca1ce7894f66acb77255a854a81a1ec284a50909c7df2d2df3c43e59e80c",
+      "bytes": 40479
+    }
+  ],
+  "retained_occurrence_mapping": [
+    {
+      "claim_family": "exact_modulus_pinning",
+      "declarations": [
+        "ErdosProblems.Erdos269.PaperR12.exact_modulus_pinning",
+        "ErdosProblems.Erdos269.PaperR12.actual_exact_modulus_pinning"
+      ],
+      "paper_occurrences": [
+        "long L1209-L1223, reverse implication inside long269:res:actual-escape-endpoint",
+        "short L462-L478, reverse implication inside res:windowconsumer"
+      ],
+      "disposition": "VERIFIED_SUPPORTING_LEMMA_ONLY",
+      "boundary": "single exact window; no nonintegrality, cofinal escape, or endpoint"
+    },
+    {
+      "claim_family": "octic_equivalence_band",
+      "declarations": [
+        "ErdosProblems.Erdos269.PaperR12.octic_cap_is_exactly_beaten",
+        "ErdosProblems.Erdos269.PaperR12.octic_window_band"
+      ],
+      "paper_occurrences": [
+        "long L1177-L1248 equivalence band; current text has narrower o(2^a) premise"
+      ],
+      "disposition": "VERIFIED_STRONGER_CONDITIONAL_REPLACEMENT_CANDIDATE",
+      "boundary": "paper wording may be strengthened to o(8^a) only with longPaperCap <= G and per-B little-o hypotheses explicit; equivalence does not prove either side"
+    },
+    {
+      "claim_family": "finite_prefix_rational_completion",
+      "declarations": [
+        "ErdosProblems.Erdos269.PaperR12.finite_prefix_has_positive_rational_completion",
+        "ErdosProblems.Erdos269.PaperR12.actual_prefix_has_abstract_rational_completion"
+      ],
+      "paper_occurrences": [
+        "long L1360-L1366 finite evidence leaves cofinal quantifier open",
+        "short L480-L500 source-specific exclusion remains open"
+      ],
+      "disposition": "VERIFIED_NEGATIVE_BOUNDARY_SUPPORT",
+      "boundary": "only first N actual transitions preserved; altered continuation b=2,d=1,X=1 is not the actual infinite series"
+    },
+    {
+      "claim_family": "bounded_certificate_array_safety",
+      "declarations": [
+        "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12_sound",
+        "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12_actual",
+        "ErdosProblems.Erdos269.PaperR12.widthCheckBoundedR12_append",
+        "ErdosProblems.Erdos269.PaperR12.cumulativeCheckBoundedR12_sound",
+        "ErdosProblems.Erdos269.PaperR12.width_shape_regressions_R12",
+        "ErdosProblems.Erdos269.PaperR12.factor_two_cannot_be_cancelled_R12",
+        "ErdosProblems.Erdos269.PaperR12.finite_coverage_not_cofinal_R12"
+      ],
+      "paper_occurrences": [
+        "long L1332-L1366 finite dyadic-window evidence and bounded scope",
+        "long L1381-L1394 block-certificate normalization/proof-authority boundary"
+      ],
+      "disposition": "VERIFIED_CHECKER_SAFETY_AND_NEGATIVE_BOUNDARIES_ONLY",
+      "boundary": "conditional on bounded Boolean checks returning true; does not run or validate any paper numerical scan/block/CF certificate"
+    }
+  ],
+  "excluded_promotions": [
+    "actual cofinal local-window escape",
+    "three-prime irrationality/transcendence",
+    "unconditional two-prime external theorem",
+    "finite numerical results not named by this audit"
+  ],
+  "next_public_action": {
+    "owner": "claim and projection metadata owner",
+    "action": "Completed in public commit 3d2dae3102af7c7e2869048dd01808b1eaea50f8: the four retained occurrence families are bound and generated projections were refreshed; later formal-source advances preserve these bindings.",
+    "guard": "Do not promote any item in excluded_promotions and do not widen a family beyond its recorded boundary."
+  },
+  "public_replay_commit": "6ae229ee5cd4b3b1970f68d96ddc44b9082e1306",
+  "public_recursive_local_import_closure_commit": "6ae229ee5cd4b3b1970f68d96ddc44b9082e1306",
+  "public_kernel_replay": {
+    "receipt_private_path": "work/erdos_release_readiness_r8_20260908/returned_authoring_r11/lean_build_coordinator/erdos269_public_wavea_validation_20260909.json",
+    "receipt_sha256": "273bfa15f2759983f61a7ccc5f9044846b3cb1d5827e3e0dcd376c434bfa0472",
+    "status": "PASS_PUBLIC_SOURCE_CURRENT_COMPILE_AND_PERMITTED_AXIOMS",
+    "target": "ErdosProblems.Erdos269.PaperR12WaveAAxiomAudit",
+    "wrapper_command": "repo-python scripts/lean_fast_build.py --jobs 1 ErdosProblems.Erdos269.PaperR12WaveAAxiomAudit",
+    "wrapper_exit_code": 0,
+    "wrapper_log_sha256": "8a5ca7e1a55fb05e69f21fcface63ca277d3198097a761e1405ab955c4255fd2",
+    "authority_command": "lake_command_guard.py env lean --tstack=65536 ErdosProblems/Erdos269/PaperR12WaveAAxiomAudit.lean",
+    "authority_exit_code": 0,
+    "authority_log_sha256": "8c9c2c0e367e4d997ce7c8680bc63625b51b6f9183951de81f9f0f4f66b8a84c",
+    "closure_module_count": 37,
+    "named_declaration_count": 25,
+    "axiom_dependency_report_count": 22,
+    "axiom_free_declaration_count": 3,
+    "axiom_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "permitted_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "unexpected_axioms": [],
+    "scope_boundary": "This validates the 25 Wave A declarations at the pinned public commit. It does not establish full Erdos 269 coverage or the larger B-E chains."
+  }
+}

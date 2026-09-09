@@ -314,6 +314,7 @@ jobs:
               Erdos249257.lean 'Erdos249257/**' \
               ErdosProblems.lean 'ErdosProblems/**' \
               ExternalVerification ExternalVerification1049 \
+              ExternalVerification249TotientKernelBasis Solutions NegativeSolutions \
               ExternalVerification1041SolvedFamilies 'verification/**' \
               lakefile.toml lakefile.lean lake-manifest.json lean-toolchain \
               docs/claims.json docs/problem_index_source.json docs/problems.json \
@@ -372,6 +373,8 @@ jobs:
           python3 -O scripts/test_external_verification.py
           python3 scripts/test_external_verification_release.py
           python3 -O scripts/test_external_verification_release.py
+          python3 scripts/test_erdos249_totient_kernel_comparator.py
+          python3 -O scripts/test_erdos249_totient_kernel_comparator.py
       - name: Build pinned Comparator toolchain
         if: steps.external-inputs.outputs.changed == 'true'
         id: tools
@@ -445,14 +448,24 @@ jobs:
           run_comparator verification/comparator-1049-numerical-height-negative-mismatch.json \
             > artifacts-1049-negative.log 2>&1
           local_1049_negative_exit=$?
+          run_comparator ExternalVerification249TotientKernelBasis/comparator.json \
+            > artifacts-249-totient-kernel-positive.log 2>&1
+          totient_kernel_positive_exit=$?
+          run_comparator ExternalVerification249TotientKernelBasis/comparator-negative-mismatch.json \
+            > artifacts-249-totient-kernel-negative.log 2>&1
+          totient_kernel_negative_exit=$?
           echo "positive_exit=$positive_exit" >> "$GITHUB_OUTPUT"
           echo "negative_exit=$negative_exit" >> "$GITHUB_OUTPUT"
           echo "local_1049_positive_exit=$local_1049_positive_exit" >> "$GITHUB_OUTPUT"
           echo "local_1049_negative_exit=$local_1049_negative_exit" >> "$GITHUB_OUTPUT"
+          echo "totient_kernel_positive_exit=$totient_kernel_positive_exit" >> "$GITHUB_OUTPUT"
+          echo "totient_kernel_negative_exit=$totient_kernel_negative_exit" >> "$GITHUB_OUTPUT"
           cat artifacts-positive.log
           cat artifacts-negative.log
           cat artifacts-1049-positive.log
           cat artifacts-1049-negative.log
+          cat artifacts-249-totient-kernel-positive.log
+          cat artifacts-249-totient-kernel-negative.log
           exit 0
       - name: Write and enforce commit-bound verification receipt
         if: ${{ always() && !cancelled() && steps.external-inputs.outputs.changed == 'true' }}
@@ -490,6 +503,26 @@ jobs:
           test '${{ steps.comparator.outputs.local_1049_positive_exit }}' = 0
           test '${{ steps.comparator.outputs.local_1049_negative_exit }}' != 0
           grep -q 'statement do not match' artifacts-1049-negative.log
+      - name: "Enforce the dedicated #249 all-base totient-kernel packet"
+        if: ${{ always() && !cancelled() && steps.external-inputs.outputs.changed == 'true' }}
+        run: |
+          positive_exit='${{ steps.comparator.outputs.totient_kernel_positive_exit }}'
+          negative_exit='${{ steps.comparator.outputs.totient_kernel_negative_exit }}'
+          [[ -n "$positive_exit" ]] || positive_exit=-999
+          [[ -n "$negative_exit" ]] || negative_exit=-999
+          python3 scripts/write_erdos249_totient_kernel_comparator_receipt.py \
+            --expected-commit '${{ github.event.pull_request.head.sha || github.sha }}' \
+            --positive-exit "$positive_exit" \
+            --negative-exit "$negative_exit" \
+            --positive-log artifacts-249-totient-kernel-positive.log \
+            --negative-log artifacts-249-totient-kernel-negative.log \
+            --comparator-rev '${{ steps.tools.outputs.comparator_rev }}' \
+            --lean4export-rev '${{ steps.tools.outputs.lean4export_rev }}' \
+            --landrun-rev '${{ steps.tools.outputs.landrun_rev }}' \
+            --sandbox-mode '${{ steps.comparator.outputs.sandbox_mode }}' \
+            --comparator-bin "$RUNNER_TEMP/comparator/.lake/build/bin/comparator" \
+            --lean4export-bin "$RUNNER_TEMP/lean4export/.lake/build/bin/lean4export" \
+            --landrun-bin "$RUNNER_TEMP/landrun"
       # This step used to be `lake build <module>.AxiomAudit`, which was a gate
       # that could not fail: `#print axioms` prints and never errors, nothing
       # parsed the output, and on a warm `.lake` the module is cached so the
@@ -543,7 +576,9 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: external-verification-receipt-${{ github.event.pull_request.head.sha || github.sha }}
-          path: artifacts/external-verification-receipt.json
+          path: |
+            artifacts/external-verification-receipt.json
+            artifacts/erdos249-totient-kernel-comparator-receipt.json
           if-no-files-found: error
 
   first-contact:

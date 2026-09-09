@@ -64,7 +64,7 @@ boundary of that relationship.
 
   **Pairwise-coprime support theorem.** Printed p. 222 states that if `n_1 < n_2 < ...` are pairwise coprime and `Σ 1/n_i < ∞`, then `Σ_i 1/(t^(n_i)-1)` is irrational for every integer `t ≥ 2`; the proof occupies printed pp. 223–225.
 
-  **Boundary.** Printed p. 222 says the pairwise-coprimality condition can be removed only by more complicated arguments and gives no details; printed p. 226 also says the all-primes case is not handled. The source therefore does not support the coprimality-free extension, universal #257, the release's Lean/Comparator claims, or any novelty or priority claim.
+  **Boundary.** Printed p. 222 explicitly states that the pairwise-coprimality condition can be removed, but gives no proof of that extension; printed p. 226 also says the all-primes case is not handled. The source therefore supports attribution of the coprimality-free statement, but it does not supply the omitted argument, solve universal #257, validate the release's Lean/Comparator claims, or support any novelty or priority claim.
 
 - D. Duverney and Y. Tachiya, [*Refinement of the Chowla–Erdős method and linear independence of certain Lambert series* (2019)](https://doi.org/10.1515/forum-2018-0299) ([author preprint](https://danielduverney.fr/documents/theorie-des-nombres/DuverneyTachiya190522.pdf); [read source closure](primary-sources/reciprocal-tail/duverney-tachiya-2019-source-closure.md))
 

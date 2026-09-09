@@ -3309,6 +3309,53 @@ theorem prime_succ_not_dvd_factorial_sub_one
     Nat.le_of_dvd (by norm_num) hsuccDvdTwo
   omega
 
+/-- A prefix-private Wilson endpoint is globally private, not merely private
+inside one chosen block.  If `q - 2` is the first index whose factorial is
+one modulo the prime `q`, then it is also the last: Wilson excludes `q - 1`,
+while every factorial from `q` onward is zero modulo `q`.
+
+This feeds the terminal-owner computational probe.  Two primes satisfying
+this hypothesis at comparable scales give two factorial-gap support channels
+which can never later enter a collision core. -/
+theorem prime_terminal_factorialGap_hit_iff
+    {q k : ℕ}
+    (hq : q.Prime)
+    (hq5 : 5 ≤ q)
+    (hprefix :
+      ∀ j : ℕ, 2 ≤ j → j < q - 2 →
+        Nat.Coprime q (j.factorial - 1))
+    (hk2 : 2 ≤ k) :
+    q ∣ k.factorial - 1 ↔ k = q - 2 := by
+  constructor
+  · intro hqk
+    by_cases hlt : k < q - 2
+    · exact False.elim
+        ((hq.coprime_iff_not_dvd.mp (hprefix k hk2 hlt)) hqk)
+    by_cases heq : k = q - 2
+    · exact heq
+    have hgt : q - 2 < k := by omega
+    by_cases hpred : k = q - 1
+    · subst k
+      have hsucc : q - 1 + 1 = q := by omega
+      have hnotRaw :=
+        prime_succ_not_dvd_factorial_sub_one
+          (n := q - 1) (by omega) (by rw [hsucc]; exact hq)
+      have hnot : ¬q ∣ (q - 1).factorial - 1 := by
+        simpa only [hsucc] using hnotRaw
+      exact False.elim (hnot hqk)
+    have hqkLe : q ≤ k := by omega
+    have hqFac : q ∣ k.factorial :=
+      Nat.dvd_factorial hq.pos hqkLe
+    have hfacCoprime : Nat.Coprime k.factorial (k.factorial - 1) :=
+      (Nat.coprime_self_sub_right (Nat.factorial_pos k)).2
+        (Nat.coprime_one_right k.factorial)
+    have hqCoprime : Nat.Coprime q (k.factorial - 1) :=
+      hfacCoprime.of_dvd_left hqFac
+    exact False.elim ((hq.coprime_iff_not_dvd.mp hqCoprime) hqk)
+  · intro hk
+    subst k
+    exact prime_dvd_factorial_two_before_sub_one hq hq5
+
 /-- Consequently every prime in the unselected birth cofactor is repeat
 support from a strictly earlier factorial gap. -/
 theorem prime_dvd_unselectedBirthCofactor_repeat

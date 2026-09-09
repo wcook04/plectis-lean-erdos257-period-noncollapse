@@ -742,6 +742,144 @@ theorem three_mul_choose_two_mul_add_one_le_four_mul_cube (t : ℕ) :
       norm_num [Nat.descFactorial, Nat.factorial, hsub] at hdesc
       nlinarith
 
+/-- Exact cubic formula for the collision exponent on the square-subsequence
+window.  The additive form avoids natural-number subtraction. -/
+theorem three_mul_choose_two_mul_add_one_add_self_eq_four_mul_cube (t : ℕ) :
+    3 * (2 * t + 1).choose 3 + t = 4 * t ^ 3 := by
+  cases t with
+  | zero => norm_num [Nat.choose]
+  | succ t =>
+      have hdesc :=
+        Nat.descFactorial_eq_factorial_mul_choose (2 * (t + 1) + 1) 3
+      have hsub : 2 * (t + 1) + 1 - 2 = 2 * t + 1 := by omega
+      norm_num [Nat.descFactorial, Nat.factorial, hsub] at hdesc
+      nlinarith
+
+/-- **Sharp-constant boundary of the one-kernel logarithmic constraint.**
+If the putative radius lies exactly on the asymptotically optimized boundary
+`R+1 = (16/9)t³`, then the existing finite logarithmic constraint is already
+satisfied.  Consequently that constraint alone cannot force a strict lower
+bound at the sharp constant; only subcritical constants (or a stronger finite
+input) remain available. -/
+theorem sharp_radius_satisfies_square_log_constraint
+    {t R : ℕ} (ht : 4 ≤ t) (hsharp : 9 * (R + 1) = 16 * t ^ 3) :
+    (2 * t : ℝ) *
+          (((2 * t ^ 2 + 1 - 2 * t : ℕ) : ℝ) *
+              Real.log ((2 * t ^ 2 + 1 - 2 * t : ℕ) : ℝ) -
+            (2 * t ^ 2 + 1 - 2 * t : ℕ) - Real.log 2) <
+        ((R + 1 : ℕ) : ℝ) * Real.log (R + 1 : ℝ) +
+          (((2 * t + 1).choose 3 : ℕ) : ℝ) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) := by
+  let n : ℕ := 2 * t ^ 2 + 1 - 2 * t
+  have htpos : 0 < t := by omega
+  have htone : 1 ≤ t := by omega
+  have hnpos : 0 < n := by
+    dsimp [n]
+    have : 2 * t ≤ t ^ 2 := by nlinarith
+    omega
+  have hnleNat : n ≤ 2 * t ^ 2 := by
+    dsimp [n]
+    omega
+  have hnEq : n + 2 * t = 2 * t ^ 2 + 1 := by
+    dsimp [n]
+    omega
+  have hnCast : (n : ℝ) = 2 * (t : ℝ) ^ 2 - 2 * (t : ℝ) + 1 := by
+    have hcast := congrArg (fun m : ℕ => (m : ℝ)) hnEq
+    norm_num [Nat.cast_add, Nat.cast_mul, Nat.cast_pow] at hcast ⊢
+    nlinarith
+  have hnMass : 3 * (t : ℝ) ^ 3 ≤ 2 * (t : ℝ) * (n : ℝ) := by
+    rw [hnCast]
+    have htReal : (4 : ℝ) ≤ t := by exact_mod_cast ht
+    nlinarith
+  have hnle : (n : ℝ) ≤ ((2 * t ^ 2 : ℕ) : ℝ) := by
+    exact_mod_cast hnleNat
+  have hlognle :
+      Real.log (n : ℝ) ≤ Real.log ((2 * t ^ 2 : ℕ) : ℝ) :=
+    Real.log_le_log (by positivity) hnle
+  have hlogDnonneg : 0 ≤ Real.log ((2 * t ^ 2 : ℕ) : ℝ) := by
+    apply Real.log_nonneg
+    have hDone : 1 ≤ 2 * t ^ 2 := by nlinarith
+    exact_mod_cast hDone
+  have hchooseNat :=
+    three_mul_choose_two_mul_add_one_add_self_eq_four_mul_cube t
+  have hchoose :
+      (3 : ℝ) * (((2 * t + 1).choose 3 : ℕ) : ℝ) + (t : ℝ) =
+        4 * (t : ℝ) ^ 3 := by
+    exact_mod_cast hchooseNat
+  have hcoeff :
+      2 * (t : ℝ) * (n : ℝ) - (((2 * t + 1).choose 3 : ℕ) : ℝ) ≤
+        (8 : ℝ) / 3 * (t : ℝ) ^ 3 := by
+    rw [hnCast]
+    nlinarith [show (1 : ℝ) ≤ t by exact_mod_cast htone]
+  have hlogD :
+      Real.log ((2 * t ^ 2 : ℕ) : ℝ) =
+        Real.log 2 + 2 * Real.log (t : ℝ) := by
+    norm_num [Nat.cast_mul, Nat.cast_pow, Real.log_mul, Real.log_pow,
+      htpos.ne']
+  have hR :
+      ((R + 1 : ℕ) : ℝ) = (16 : ℝ) / 9 * (t : ℝ) ^ 3 := by
+    have hcast := congrArg (fun m : ℕ => (m : ℝ)) hsharp
+    norm_num [Nat.cast_add, Nat.cast_mul, Nat.cast_pow] at hcast ⊢
+    nlinarith
+  have hlogR :
+      Real.log (R + 1 : ℝ) =
+        Real.log ((16 : ℝ) / 9) + 3 * Real.log (t : ℝ) := by
+    have hR' : (R : ℝ) + 1 = (16 : ℝ) / 9 * (t : ℝ) ^ 3 := by
+      norm_num at hR ⊢
+      exact hR
+    rw [hR', Real.log_mul (by norm_num) (by positivity), Real.log_pow]
+    norm_num
+  have hlog2pos : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have hlog2hi : Real.log 2 < 1 := by
+    nlinarith [Real.log_lt_sub_one_of_pos (by norm_num : (0 : ℝ) < 2)
+      (by norm_num : (2 : ℝ) ≠ 1)]
+  have hlogRatioPos : 0 < Real.log ((16 : ℝ) / 9) :=
+    Real.log_pos (by norm_num)
+  have hconstant :
+      (8 : ℝ) / 3 * Real.log 2 - 3 <
+        (16 : ℝ) / 9 * Real.log ((16 : ℝ) / 9) := by
+    nlinarith
+  have htCubePos : 0 < (t : ℝ) ^ 3 := by positivity
+  have hconstantScaled := mul_lt_mul_of_pos_right hconstant htCubePos
+  have hcore :
+      ((8 : ℝ) / 3 * (t : ℝ) ^ 3) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) -
+          3 * (t : ℝ) ^ 3 <
+        ((R + 1 : ℕ) : ℝ) * Real.log (R + 1 : ℝ) := by
+    rw [hlogD, hR, hlogR]
+    nlinarith
+  have hcoeffLog := mul_le_mul_of_nonneg_right hcoeff hlogDnonneg
+  have hupper :
+      (2 * t : ℝ) *
+          ((n : ℝ) * Real.log ((2 * t ^ 2 : ℕ) : ℝ) - (n : ℝ)) ≤
+        (((8 : ℝ) / 3 * (t : ℝ) ^ 3) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) - 3 * (t : ℝ) ^ 3) +
+          (((2 * t + 1).choose 3 : ℕ) : ℝ) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) := by
+    norm_num [Nat.cast_mul] at hcoeffLog ⊢
+    nlinarith
+  change
+    (2 * t : ℝ) *
+          ((n : ℝ) * Real.log (n : ℝ) - (n : ℝ) - Real.log 2) < _
+  calc
+    (2 * t : ℝ) *
+          ((n : ℝ) * Real.log (n : ℝ) - (n : ℝ) - Real.log 2) <
+        (2 * t : ℝ) *
+          ((n : ℝ) * Real.log (n : ℝ) - (n : ℝ)) := by
+            have htwoT : 0 < (2 * t : ℝ) := by positivity
+            nlinarith [mul_pos htwoT hlog2pos]
+    _ ≤ (2 * t : ℝ) *
+          ((n : ℝ) * Real.log ((2 * t ^ 2 : ℕ) : ℝ) - (n : ℝ)) := by
+            gcongr
+    _ ≤ (((8 : ℝ) / 3 * (t : ℝ) ^ 3) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) - 3 * (t : ℝ) ^ 3) +
+          (((2 * t + 1).choose 3 : ℕ) : ℝ) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) := hupper
+    _ < ((R + 1 : ℕ) : ℝ) * Real.log (R + 1 : ℝ) +
+          (((2 * t + 1).choose 3 : ℕ) : ℝ) *
+            Real.log ((2 * t ^ 2 : ℕ) : ℝ) := by
+            linarith
+
 /-- On the exact square subsequence, the finite logarithmic constraint already
 forces a cubic radius.  The deliberately coarse constant keeps this implication
 fully explicit; no asymptotic notation is used. -/
@@ -1124,6 +1262,8 @@ theorem no_eventual_square_subsequence_three_halves_upper
 #print axioms factorialGapSegment_log_radius_constraint
 #print axioms factorialGapSegment_stirling_radius_constraint
 #print axioms optimized_stirling_radius_constraint
+#print axioms three_mul_choose_two_mul_add_one_add_self_eq_four_mul_cube
+#print axioms sharp_radius_satisfies_square_log_constraint
 #print axioms square_subsequence_radius_cubic_lower
 #print axioms no_eventual_square_subsequence_cubic_upper
 #print axioms not_isLittleO_square_subsequence_radius

@@ -105,42 +105,18 @@ READER_SPARSE_PATTERNS = (
     "/SCOPE.md",
 )
 READER_SPARSE_MANIFEST_TEXT = "\n".join(READER_SPARSE_PATTERNS) + "\n"
-LEAN_CLONE_COMMAND = (
-    "git clone --depth=1 --filter=blob:none --single-branch --no-checkout "
+REPRODUCIBILITY_PATH = ROOT / "docs" / "REPRODUCIBILITY.md"
+REPRODUCIBILITY_LINK_TARGET = "docs/REPRODUCIBILITY.md"
+RUNBOOK_CLONE_COMMAND = (
+    "git clone --filter=blob:none "
     "https://github.com/wcook04/plectis-erdos.git"
 )
-QUICK_LEAN_SPARSE_COMMAND = (
-    "git -C plectis-erdos cat-file -e HEAD:scripts/lean-quick-sparse-checkout && "
-    "git -C plectis-erdos show HEAD:scripts/lean-quick-sparse-checkout | "
-    "git -C plectis-erdos sparse-checkout set --no-cone --stdin"
+RUNBOOK_CD_COMMAND = "cd plectis-erdos"
+RUNBOOK_FETCH_COMMAND = "git fetch --tags --force"
+RUNBOOK_QUICK_CHECK_COMMAND = (
+    "python3 scripts/check_cold_clone_comprehension.py --quick"
 )
-LEAN_SPARSE_COMMAND = (
-    "git -C plectis-erdos cat-file -e HEAD:scripts/lean-sparse-checkout && "
-    "git -C plectis-erdos show HEAD:scripts/lean-sparse-checkout | "
-    "git -C plectis-erdos sparse-checkout set --no-cone --stdin"
-)
-LEAN_CHECKOUT_COMMAND = "git -C plectis-erdos checkout"
 LEAN_BUILD_COMMAND = "python3 scripts/lean_fast_build.py --jobs 2"
-READER_CLONE_COMMAND = (
-    "git clone --depth=1 --filter=blob:none --single-branch --no-checkout "
-    "https://github.com/wcook04/plectis-erdos.git"
-)
-READER_SPARSE_COMMAND = (
-    "git -C plectis-erdos cat-file -e HEAD:scripts/reader-sparse-checkout && "
-    "git -C plectis-erdos show HEAD:scripts/reader-sparse-checkout | "
-    "git -C plectis-erdos sparse-checkout set --no-cone --stdin"
-)
-FULL_CLONE_COMMAND = (
-    "git clone --depth=1 --filter=blob:none --single-branch "
-    "https://github.com/wcook04/plectis-erdos.git"
-)
-PINNED_HISTORY_FETCH_COMMAND = (
-    "git fetch --filter=blob:none --unshallow origin main"
-)
-FULL_HISTORY_CLONE_COMMAND = (
-    "git clone --filter=blob:none --single-branch "
-    "https://github.com/wcook04/plectis-erdos.git"
-)
 
 
 def quick_lean_sparse_patterns(root: Path = ROOT) -> tuple[str, ...]:
@@ -272,16 +248,17 @@ def contract_errors(
     sparse_manifest: str = LEAN_SPARSE_MANIFEST_TEXT,
     reader_sparse_manifest: str = READER_SPARSE_MANIFEST_TEXT,
     quick_sparse_manifest: str = QUICK_LEAN_SPARSE_MANIFEST_TEXT,
+    reproducibility: str = "",
 ) -> list[str]:
     errors: list[str] = []
     if int(report["full_checkout_bytes"]) > FULL_CHECKOUT_LIMIT_BYTES:
         errors.append("committed full checkout exceeds the 420 MiB clone budget")
     if int(report["quick_lean_sparse_checkout_bytes"]) > QUICK_LEAN_CHECKOUT_LIMIT_BYTES:
-        errors.append("advertised quick Lean checkout exceeds the 8 MiB budget")
+        errors.append("versioned quick Lean checkout exceeds the 8 MiB budget")
     if int(report["lean_sparse_checkout_bytes"]) > LEAN_CHECKOUT_LIMIT_BYTES:
-        errors.append("advertised Lean sparse checkout exceeds the 160 MiB budget")
+        errors.append("versioned Lean sparse checkout exceeds the 160 MiB budget")
     if int(report["reader_sparse_checkout_bytes"]) > READER_CHECKOUT_LIMIT_BYTES:
-        errors.append("advertised reader sparse checkout exceeds the 32 MiB budget")
+        errors.append("versioned reader sparse checkout exceeds the 32 MiB budget")
     largest = report.get("largest_blob")
     if isinstance(largest, dict) and int(largest["size_bytes"]) > SINGLE_BLOB_LIMIT_BYTES:
         errors.append(
@@ -289,57 +266,23 @@ def contract_errors(
         )
     if float(report["lean_sparse_reduction_fraction"]) < MINIMUM_LEAN_CHECKOUT_REDUCTION:
         errors.append("Lean sparse checkout no longer omits at least half the full tree")
-    for command in (
-        LEAN_CLONE_COMMAND,
-        QUICK_LEAN_SPARSE_COMMAND,
-        LEAN_SPARSE_COMMAND,
-        LEAN_CHECKOUT_COMMAND,
+    if f"]({REPRODUCIBILITY_LINK_TARGET})" not in readme:
+        errors.append("README is missing its local reproducibility-runbook link")
+    runbook_commands = (
+        RUNBOOK_CLONE_COMMAND,
+        RUNBOOK_CD_COMMAND,
+        RUNBOOK_FETCH_COMMAND,
+        RUNBOOK_QUICK_CHECK_COMMAND,
         LEAN_BUILD_COMMAND,
-        READER_CLONE_COMMAND,
-        READER_SPARSE_COMMAND,
-        FULL_CLONE_COMMAND,
-        PINNED_HISTORY_FETCH_COMMAND,
-        FULL_HISTORY_CLONE_COMMAND,
-    ):
-        if command not in readme:
-            errors.append(f"README is missing optimized clone command: {command}")
-    lean_position = readme.find(LEAN_CLONE_COMMAND)
-    quick_lean_sparse_position = readme.find(QUICK_LEAN_SPARSE_COMMAND, lean_position)
-    lean_sparse_position = readme.find(
-        LEAN_SPARSE_COMMAND, quick_lean_sparse_position + len(QUICK_LEAN_SPARSE_COMMAND)
     )
-    reader_sparse_position = readme.find(
-        READER_SPARSE_COMMAND, lean_sparse_position + len(LEAN_SPARSE_COMMAND)
-    )
-    full_position = readme.find(FULL_CLONE_COMMAND, lean_position + len(LEAN_CLONE_COMMAND))
-    pinned_history_position = readme.find(
-        PINNED_HISTORY_FETCH_COMMAND, full_position + len(FULL_CLONE_COMMAND)
-    )
-    history_position = readme.find(
-        FULL_HISTORY_CLONE_COMMAND,
-        pinned_history_position + len(PINNED_HISTORY_FETCH_COMMAND),
-    )
-    if (
-        lean_position < 0
-        or quick_lean_sparse_position < 0
-        or lean_sparse_position < 0
-        or reader_sparse_position < 0
-        or full_position < 0
-        or pinned_history_position < 0
-        or history_position < 0
-        or not (
-            lean_position
-            < quick_lean_sparse_position
-            < lean_sparse_position
-            < reader_sparse_position
-            < full_position
-            < pinned_history_position
-            < history_position
-        )
-    ):
+    for command in runbook_commands:
+        if command not in reproducibility:
+            errors.append(f"reproducibility runbook is missing required route: {command}")
+    positions = [reproducibility.find(command) for command in runbook_commands]
+    if any(position < 0 for position in positions) or positions != sorted(positions):
         errors.append(
-            "README must order quick proof, full Lean, reader, current full, "
-            "pinned-history fetch, then full-history checkouts"
+            "reproducibility runbook must order clone, repository entry, history "
+            "fetch, quick navigation check, then bounded Lean build"
         )
     if quick_sparse_manifest != QUICK_LEAN_SPARSE_MANIFEST_TEXT:
         errors.append("versioned quick Lean sparse manifest has drifted from its import cone")
@@ -362,6 +305,7 @@ def main(argv: list[str] | None = None) -> int:
         LEAN_SPARSE_MANIFEST_PATH.read_text(encoding="utf-8"),
         READER_SPARSE_MANIFEST_PATH.read_text(encoding="utf-8"),
         QUICK_LEAN_SPARSE_MANIFEST_PATH.read_text(encoding="utf-8"),
+        REPRODUCIBILITY_PATH.read_text(encoding="utf-8"),
     )
     report["status"] = "pass" if not errors else "fail"
     report["errors"] = errors

@@ -77,47 +77,47 @@
         {
           "declaration": "smooth3Val",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 31
+          "line": 32
         },
         {
           "declaration": "threePrimeHeight",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 36
+          "line": 37
         },
         {
           "declaration": "threePrimeKernelQ",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 40
+          "line": 41
         },
         {
           "declaration": "smoothPrefixExponents",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 46
+          "line": 47
         },
         {
           "declaration": "smoothPrefixLcm",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 53
+          "line": 54
         },
         {
           "declaration": "smooth3Val_dvd_threePrimeHeight_of_mem",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 59
+          "line": 60
         },
         {
           "declaration": "pureFirst_mem_smoothPrefixExponents",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 84
+          "line": 85
         },
         {
           "declaration": "pureSecond_mem_smoothPrefixExponents",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 97
+          "line": 98
         },
         {
           "declaration": "pureThird_mem_smoothPrefixExponents",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 110
+          "line": 111
         }
       ]
     },
@@ -142,7 +142,7 @@
         {
           "declaration": "SameThreePrimeLogCell",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 163
+          "line": 164
         }
       ]
     },
@@ -166,27 +166,27 @@
         {
           "declaration": "positivePrimePowers",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 204
+          "line": 205
         },
         {
           "declaration": "one_not_mem_positivePrimePowers",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 219
+          "line": 220
         },
         {
           "declaration": "positivePrimePowers_disjoint",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 229
+          "line": 230
         },
         {
           "declaration": "threePrimePositiveJumpSet",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 243
+          "line": 244
         },
         {
           "declaration": "threePrimeJumpSetWithOrigin",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 273
+          "line": 274
         }
       ]
     },
@@ -211,17 +211,17 @@
         {
           "declaration": "smoothExponentBox",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 368
+          "line": 369
         },
         {
           "declaration": "smoothPointHeight",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 373
+          "line": 374
         },
         {
           "declaration": "smoothHeightFiber",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 377
+          "line": 378
         }
       ]
     },
@@ -245,7 +245,7 @@
         {
           "declaration": "tailStateStep",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 487
+          "line": 488
         }
       ]
     },
@@ -270,7 +270,7 @@
         {
           "declaration": "smoothExponentShell",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 500
+          "line": 501
         }
       ]
     },
@@ -294,7 +294,7 @@
         {
           "declaration": "sorted_pair_quadratic",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 629
+          "line": 630
         }
       ]
     },
@@ -327,7 +327,7 @@
     {
       "declaration": "smooth3Val",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 31,
+      "line": 32,
       "role": "representation",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -337,7 +337,7 @@
     {
       "declaration": "threePrimeHeight",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 36,
+      "line": 37,
       "role": "representation",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -347,7 +347,7 @@
     {
       "declaration": "threePrimeKernelQ",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 40,
+      "line": 41,
       "role": "representation",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -357,7 +357,7 @@
     {
       "declaration": "smoothPrefixExponents",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 46,
+      "line": 47,
       "role": "representation",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -367,7 +367,7 @@
     {
       "declaration": "smoothPrefixLcm",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 53,
+      "line": 54,
       "role": "representation",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -377,7 +377,7 @@
     {
       "declaration": "smooth3Val_dvd_threePrimeHeight_of_mem",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 59,
+      "line": 60,
       "role": "statement",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -387,7 +387,7 @@
     {
       "declaration": "pureFirst_mem_smoothPrefixExponents",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 84,
+      "line": 85,
       "role": "statement",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -397,7 +397,7 @@
     {
       "declaration": "pureSecond_mem_smoothPrefixExponents",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 97,
+      "line": 98,
       "role": "statement",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -407,7 +407,7 @@
     {
       "declaration": "pureThird_mem_smoothPrefixExponents",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 110,
+      "line": 111,
       "role": "statement",
       "statement_node": "smooth_prefix_coordinates_carry_the_exact_extremal_divisibility_witnesses",
       "replaces_zone": "Z17",
@@ -417,7 +417,7 @@
     {
       "declaration": "SameThreePrimeLogCell",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 163,
+      "line": 164,
       "role": "concept",
       "statement_node": "same_three_prime_log_cell_is_exact_coordinate_equality",
       "replaces_zone": "Z17",
@@ -427,7 +427,7 @@
     {
       "declaration": "positivePrimePowers",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 204,
+      "line": 205,
       "role": "representation",
       "statement_node": "finite_prime_power_channels_are_disjoint_and_share_only_the_origin",
       "replaces_zone": "Z17",
@@ -437,7 +437,7 @@
     {
       "declaration": "one_not_mem_positivePrimePowers",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 219,
+      "line": 220,
       "role": "statement",
       "statement_node": "finite_prime_power_channels_are_disjoint_and_share_only_the_origin",
       "replaces_zone": "Z17",
@@ -447,7 +447,7 @@
     {
       "declaration": "positivePrimePowers_disjoint",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 229,
+      "line": 230,
       "role": "statement",
       "statement_node": "finite_prime_power_channels_are_disjoint_and_share_only_the_origin",
       "replaces_zone": "Z17",
@@ -457,7 +457,7 @@
     {
       "declaration": "threePrimePositiveJumpSet",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 243,
+      "line": 244,
       "role": "representation",
       "statement_node": "finite_prime_power_channels_are_disjoint_and_share_only_the_origin",
       "replaces_zone": "Z17",
@@ -467,7 +467,7 @@
     {
       "declaration": "threePrimeJumpSetWithOrigin",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 273,
+      "line": 274,
       "role": "representation",
       "statement_node": "finite_prime_power_channels_are_disjoint_and_share_only_the_origin",
       "replaces_zone": "Z17",
@@ -477,7 +477,7 @@
     {
       "declaration": "smoothExponentBox",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 368,
+      "line": 369,
       "role": "representation",
       "statement_node": "finite_height_fibres_are_the_exact_coordinates_for_regrouping_the_kernel",
       "replaces_zone": "Z17",
@@ -487,7 +487,7 @@
     {
       "declaration": "smoothPointHeight",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 373,
+      "line": 374,
       "role": "representation",
       "statement_node": "finite_height_fibres_are_the_exact_coordinates_for_regrouping_the_kernel",
       "replaces_zone": "Z17",
@@ -497,7 +497,7 @@
     {
       "declaration": "smoothHeightFiber",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 377,
+      "line": 378,
       "role": "representation",
       "statement_node": "finite_height_fibres_are_the_exact_coordinates_for_regrouping_the_kernel",
       "replaces_zone": "Z17",
@@ -507,7 +507,7 @@
     {
       "declaration": "tailStateStep",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 487,
+      "line": 488,
       "role": "representation",
       "statement_node": "tail_state_step_is_the_variable_base_integer_orbit_coordinate",
       "replaces_zone": "Z17",
@@ -517,7 +517,7 @@
     {
       "declaration": "smoothExponentShell",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 500,
+      "line": 501,
       "role": "representation",
       "statement_node": "smooth_exponent_shell_is_the_actual_interval_filtered_box",
       "replaces_zone": "Z17",
@@ -527,7 +527,7 @@
     {
       "declaration": "sorted_pair_quadratic",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 629,
+      "line": 630,
       "role": "statement",
       "statement_node": "sorted_three_coordinate_heights_obey_the_exact_quadratic_budget",
       "replaces_zone": "Z17",

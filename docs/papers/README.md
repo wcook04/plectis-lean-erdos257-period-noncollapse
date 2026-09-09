@@ -98,7 +98,7 @@ disposition-aware spine.
 
 **Paper route:** [erdos-68-factorial-denominator-irrationality](full-text/erdos-68-factorial-denominator-irrationality.md)
   **Checked interface:** `Erdos249257.ExternalVerification.irrational_factorialGapSeries_iff_cofinal_nonunit_carries`
-  **Source declaration:** `ErdosProblems.Erdos68.irrational_factorialGapSeries_iff_cofinal_nonunit_carries` via [Lean source](../../ErdosProblems/Erdos68/FactorialZeroPlateau.lean)
+  **Source declaration:** `ErdosProblems.Erdos68.irrational_factorialGapSeries_iff_cofinal_nonunit_carries` via [Lean source](../../ErdosProblems/Erdos68/FactorialGapPlateauCore.lean)
   **Result:** Maximal endpoint proximity for #68, but it does not prove the cofinal producer.
   **Hard mechanism:** The carry recurrence is the useful mechanism; the missing cofinal witness is the natural unresolved friction.
   **Evidence:** Exact committed source and Comparator transport are available.
@@ -277,7 +277,7 @@ This paper states no reading route. Its evidence boundary is in [A basis and all
 
 **The Binary Totient Series**
 
-[full text](full-text/erdos249-totient-reasoning-surface.md) · [PDF](../../erdos249-totient-reasoning-surface.pdf) · [LaTeX source](https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/paper/erdos249-totient-reasoning-surface.tex) · 149 sections · `erdos249-totient-reasoning-surface` · native to this repository
+[full text](full-text/erdos249-totient-reasoning-surface.md) · [PDF](../../erdos249-totient-reasoning-surface.pdf) · [LaTeX source](https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/paper/erdos249-totient-reasoning-surface.tex) · 150 sections · `erdos249-totient-reasoning-surface` · native to this repository
 
 This paper states no reading route. Its evidence boundary is in [The wall](full-text/erdos249-totient-reasoning-surface.md#sec:wall), [What the wall does not block](full-text/erdos249-totient-reasoning-surface.md#sec:survivors).
 

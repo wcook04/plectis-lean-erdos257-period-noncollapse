@@ -1,0 +1,15 @@
+{
+  "challenge_module": "ExternalVerification249TotientKernelBasis.Challenge",
+  "solution_module": "NegativeSolutions.ExternalVerification249TotientKernelBasis",
+  "theorem_names": [
+    "Erdos249257.ExternalVerification249TotientKernelBasis.allSlopeAffineTotientFormsLinearIndependent",
+    "Erdos249257.ExternalVerification249TotientKernelBasis.allBaseTotientKernelBasisRankAndRelationDimension",
+    "Erdos249257.ExternalVerification249TotientKernelBasis.allBaseIntegralCoordinateAndRelationBasis"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

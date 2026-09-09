@@ -69,10 +69,10 @@ cancellation is another form of the present denominator problem.
 
 Duverney's Theorem~3.1 assumes two-sided quadratic denominator growth
 $cu_n^2\le u_{n+1}\le c'u_n^2$, while $u_{n+1}/u_n^2\to0$ for $u_n=n!-1$
-\cite[pp.~275, 285--286]{duverney}; his all-positive Corollary~3.2
-additionally requires $\sum_n|u_{n+1}/u_n^2-1|<\infty$, whereas those
-summands tend to one \cite[Cor.~3.2, p.~287]{duverney}.  Both the ratio limit
-and the nonsummability are kernel-checked.  The ratio proof divides numerator
+\cite[pp.~275, 285--286]{duverney}; his printed Corollary~3.2 displays the
+signed series $\sum_n(u_{n+1}/u_n^2-1)$, without absolute values.  Its
+summands tend to $-1$ here, so it does not converge to a finite value
+\cite[Cor.~3.2, p.~287]{duverney}.  The ratio proof divides numerator
 and denominator by $(n!)^2$; the resulting terms tend to zero while
 $(1-1/n!)^2$ tends to one.
 
@@ -386,4 +386,3 @@ The specific target $c_m=E_m/m$ is useful because it translates into finite
 predecessor-gap conditions.  The smallness of the target alone establishes no
 metric, measure or equidistribution theorem for this orbit, and none is
 claimed.
-

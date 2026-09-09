@@ -74,7 +74,7 @@ This order projects Palomar's mathematical `candidate_ranking`; it is independen
    - **Reader tier.** exact reduction or structural result
    - **Consequence.** Maximal endpoint proximity for #68, but it does not prove the cofinal producer.
    - **Load-bearing mechanism.** The carry recurrence is the useful mechanism; the missing cofinal witness is the natural unresolved friction.
-   - **Source and evidence.** [Lean source](../ErdosProblems/Erdos68/FactorialZeroPlateau.lean); Exact committed source and Comparator transport are available.
+   - **Source and evidence.** [Lean source](../ErdosProblems/Erdos68/FactorialGapPlateauCore.lean); Exact committed source and Comparator transport are available.
    - **Boundary.** The equivalence does not supply a cofinal carry producer. **Overclaim risk.** High if the equivalence is mistaken for a cofinal carry proof.
 
 9. **Prime gap reformulation** (<code>Erdos249257.ExternalVerification.irrational_tsum_primeDyadicTerm_iff_primeGap</code>; `subordinate`)
@@ -203,7 +203,7 @@ All 70 source-current review families are accounted for here. The categories pre
 
 **Open boundary.** Irrationality of the factorial-denominator series.
 
-**Read.** [Programme paper](../erdos-68-factorial-denominator-irrationality.pdf) · [Lean source](../ErdosProblems/Erdos68/FactorialZeroPlateau.lean)
+**Read.** [Programme paper](../erdos-68-factorial-denominator-irrationality.pdf) · [Lean source](../ErdosProblems/Erdos68/FactorialGapPlateauCore.lean)
 
 <details>
 <summary>Representative checked declaration</summary>
@@ -218,7 +218,7 @@ This is Palomar's source-current reader order, not review-matrix or Comparator r
 
 1. **Factorial carry characterisation** (`factorial_carry_characterisation`; source-ranked frontier; global rank 8; source disposition `represented`)
    - **Why here.** Maximal endpoint proximity for #68, but it does not prove the cofinal producer.
-   - **Source.** <code>Erdos249257.ExternalVerification.irrational_factorialGapSeries_iff_cofinal_nonunit_carries</code> in [Lean](../ErdosProblems/Erdos68/FactorialZeroPlateau.lean)
+   - **Source.** <code>Erdos249257.ExternalVerification.irrational_factorialGapSeries_iff_cofinal_nonunit_carries</code> in [Lean](../ErdosProblems/Erdos68/FactorialGapPlateauCore.lean)
    - **Boundary.** The equivalence does not supply a cofinal carry producer.
    - **Relation.** `supports_without_producing` `factorial_channel_and_projection_rigidity`: Finite channel rigidity feeds the carry endpoint route but supplies no cofinal non-unit carry.
 
@@ -802,7 +802,7 @@ Exact registry keys and Comparator routing are listed separately.
 
 **Checked frontier.** That the strict Mersenne tail inequality is hereditary under deleting an arbitrary collection of future weights.
 
-**Open boundary.** The universal irrationality problem, or irrationality for any new infinite support.
+**Open boundary.** The universal irrationality problem for arbitrary infinite supports beyond the reciprocal-summable and other registered structured families.
 
 **Read.** [Programme paper](../erdos-257-mersenne-support-subseries.pdf) · [Lean source](../ErdosProblems/Erdos257/MersenneSubseriesRigidity.lean)
 
@@ -1279,7 +1279,7 @@ Exact registry keys and Comparator routing are listed separately.
 
 **Checked frontier.** That a literal coordinatewise transfer of the integer-base clearing argument forces a power-versus-linear inequality, and that this inequality is impossible at base three halves.
 
-**Open boundary.** Irrationality at base three halves, or for any rational base.
+**Open boundary.** Lean does not check irrationality at base three halves or the paper's ordinary irrationality theorem for F(31/4) and its positive integer powers.
 
 **Read.** [Programme paper](../erdos-1049-rational-base-lambert.pdf) · [Lean source](../ErdosProblems/Erdos1049/RationalBaseLambert.lean)
 

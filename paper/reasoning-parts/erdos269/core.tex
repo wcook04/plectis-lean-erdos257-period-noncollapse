@@ -160,8 +160,9 @@ used below.  For $b\in\{p,q,r\}$ the set of positive powers of $b$ is the
 The statement of Problem~\#269 has been formalised before, as a conjecture with
 an unfilled proof, in the \emph{Formal Conjectures}
 collection~\cite{formalconjectures269}.  That is a formal statement of the
-question up to a rational normalisation, since its Nat-indexed series includes
-the empty-prefix term, and its rational, irrational and infinite-prime
+question up to an initial constant: its Nat-indexed series includes the
+empty-prefix term, so its value is exactly \(1\) plus the conventional series.
+Its rational, irrational and infinite-prime
 assertions all end in \texttt{sorry}.  Kova\v{c} and Tao~\cite{kovactao2024}
 treat several irrationality problems of Erd\H{o}s for series of unit fractions
 by elementary means; nothing from that work is used here.
@@ -550,7 +551,7 @@ $1/60-1/12=-1/15$.
 \end{proof}
 
 \noindent Checked as the
-\lword{Erdos269/ThreePrimeRunningLcm.lean}{904}{kernel_235_minor_eq_neg_one_fifteen}{rank-two
+\lword{Erdos269/ThreePrimeRunningLcm.lean}{827}{kernel_235_minor_eq_neg_one_fifteen}{rank-two
 certificate} and the
 \lword{Erdos269/ThreePrimeRunningLcm.lean}{480}{kernel_235_not_rankOne}{non-separation
 witness}, over the four exact values, the
@@ -1443,15 +1444,15 @@ anywhere above.  The finite-observer formalisation isolates the precise
 faithfulness requirement: equality in a finite observer must imply equality
 after symbolic realisation, and a genuine finite-dimensional factorisation
 forces the realised symbolic span to be finite-dimensional
-(\lword{Erdos269/WeightedPhaseCarry.lean}{110}{carry_eq_residueDigit_add_coboundary}{residue-coboundary
+(\lword{Erdos269/WeightedPhaseCarry.lean}{109}{carry_eq_residueDigit_add_coboundary}{residue-coboundary
 form},
-\lword{Erdos269/WeightedPhaseCarry.lean}{294}{CartierRealisation}{symbolic
+\lword{Erdos269/WeightedPhaseCarry.lean}{293}{CartierRealisation}{symbolic
 realisation},
-\lword{Erdos269/WeightedPhaseCarry.lean}{335}{finite_realisedSpan_of_factorisation}{checked}),
+\lword{Erdos269/WeightedPhaseCarry.lean}{334}{finite_realisedSpan_of_factorisation}{checked}),
 with the carry residue and residue digit confined to their declared intervals
-(\lword{Erdos269/WeightedPhaseCarry.lean}{151}{carryResidue_mem_interval}{carry
+(\lword{Erdos269/WeightedPhaseCarry.lean}{150}{carryResidue_mem_interval}{carry
 interval},
-\lword{Erdos269/WeightedPhaseCarry.lean}{158}{residueDigit_mem_interval}{digit
+\lword{Erdos269/WeightedPhaseCarry.lean}{157}{residueDigit_mem_interval}{digit
 interval}).  No theorem here proves that the literal realised span is infinite.
 
 \subsection{Structural constraints already in place}
@@ -1560,4 +1561,3 @@ Fan.  The transcendence input is credited to Yann Bugeaud and Michel Laurent
 and to the earlier work of Loxton and van der Poorten cited by them.  The
 problem numbering and status follow the Erd\H{o}s Problems catalogue maintained
 by Thomas Bloom~\cite{erdosproblems}.
-

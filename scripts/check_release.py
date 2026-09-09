@@ -454,6 +454,27 @@ def flattened(text: str) -> str:
     return " ".join(text.split())
 
 
+def readme_open_boundary_present(readme: str, problem_count: int) -> bool:
+    """Accept an explicit global open boundary without prescribing one sentence."""
+    flat = flattened(readme).lower()
+    if "does not solve" in flat:
+        return True
+    if problem_count < 1:
+        return False
+    words = {
+        1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+        6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
+    }
+    alternatives = [str(problem_count)]
+    if problem_count in words:
+        alternatives.append(words[problem_count])
+    count = "|".join(re.escape(value) for value in alternatives)
+    return bool(re.search(
+        rf"\ball\s+(?:{count})\s+(?:original\s+)?(?:erd[őo]s\s+)?problems\s+remain\s+open\b",
+        flat,
+    ))
+
+
 def contributor_gate_posture_errors(contributing: str) -> list[str]:
     """Reject contributor guidance that understates cold-reader validation."""
     flat = " ".join(contributing.split())
@@ -1835,8 +1856,6 @@ def main(argv: list[str] | None = None) -> int:
     # --- 6. README ------------------------------------------------------------
     readme = read(ROOT / "README.md")
     check(tag in readme, f"README does not state the release tag {tag}")
-    check("does not solve" in flattened(readme),
-          "README must state the open boundary in plain language")
     check("METHODOLOGY.md" in readme and "SOURCE_MAP.md" in readme,
           "README must route readers to the methodology and source map")
     check(
@@ -1856,6 +1875,8 @@ def main(argv: list[str] | None = None) -> int:
         1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
         6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
     }
+    check(readme_open_boundary_present(readme, indexed_problem_count),
+          "README must state the open boundary in plain language")
     count_word = count_words.get(indexed_problem_count, "")
     count_pattern = "|".join(
         re.escape(token) for token in (count_word, str(indexed_problem_count)) if token

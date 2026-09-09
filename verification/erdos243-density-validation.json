@@ -1,0 +1,270 @@
+{
+  "claim": {
+    "binding": [
+      "Erdos243V5.classified_profile_phase_windows",
+      "Erdos243V5.twelve_unit_profile_lower_density"
+    ],
+    "consumer_rule": "The first declaration proves the exact phase windows under the two recurrence hypotheses. The second, under the same recurrences and c = 1 or c = -1, proves LowerDensityAtLeast of the mismatch set at 1/7. Since 1/28 <= 1/7, it supplies the paper's weaker numerical conclusion.",
+    "occurrence_id": "243L-C008",
+    "paper": {
+      "bytes": 156171,
+      "path": "paper/erdos243-reciprocal-tail-reasoning-surface.tex",
+      "sha256": "ed0477376d0ff7932910d3acf2fbb9c3cf6b08e42ae2545c8ba4fd61bee4a6fe"
+    },
+    "paper_assertion": "For c=1 at phase 0 mod 7 and c=-1 at phase 1 mod 7, every sufficiently late four-index window contains a mismatch; hence lower density is at least 1/7 and therefore at least 1/28.",
+    "problem": 243
+  },
+  "configuration": [
+    {
+      "bytes": 4910,
+      "path": "lakefile.toml",
+      "sha256": "d1dbb2e490cc11e648bb6e53b935cca391878bf63e8f62b969ec0f9de0fb4067"
+    },
+    {
+      "bytes": 26,
+      "path": "lean-toolchain",
+      "sha256": "88a1d79c54cf3777f22b61a68377f44150124ba67f889c98587b2291885358a5"
+    },
+    {
+      "bytes": 3205,
+      "path": "lake-manifest.json",
+      "sha256": "ce8af3495139dac717402363eea258de3aa128cf01384511f97107320dc0f90c"
+    }
+  ],
+  "exact_printed_types": {
+    "classified_profile_phase_windows": "forall a u v T, the two tail recurrences imply phase-0-mod-7 plus-profile and phase-1-mod-7 minus-profile four-window mismatch witnesses",
+    "twelve_unit_profile_lower_density": "forall a u v c T, c=1 or c=-1 and the two tail recurrences imply LowerDensityAtLeast {n | u n != 12*risingBinomial n+c} (1/7)"
+  },
+  "generated_at": "2026-09-09",
+  "promotion_gate": {
+    "no_other_occurrence_changes": true,
+    "private_source_current_status": "243L-C008 may be counted verified in the private source-current survey",
+    "public_status": "243L-C008_VERIFIED_PUBLIC_LONG_CENSUS_7_VERIFIED_58_STRICT_BLOCKERS"
+  },
+  "public_audit": {
+    "bytes": 342,
+    "command": "lake env lean Erdos243V5/DensityValidationAudit.lean",
+    "launch_state": "PASS_IN_PUBLIC_CHECKOUT",
+    "path": "Erdos243V5/DensityValidationAudit.lean",
+    "sha256": "3aff57dc87c1aee352408debec30d8cf8d11d53112d49b830de5d7ace37ed914",
+    "public_commit": "41298352677c19a6491acc4294a2dcdc916fda8e",
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "authority_output_sha256": "9e52acb27116c0b1150d3b02195ed54b159ee82f424b4042c82dd66d0225dd2b",
+    "printed_declarations": [
+      "Erdos243V5.classified_profile_phase_windows",
+      "Erdos243V5.twelve_unit_profile_lower_density"
+    ],
+    "axiom_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "unexpected_axioms": []
+  },
+  "public_recursive_local_import_closure": [
+    {
+      "bytes": 6610,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.CubicNeighbourIdentity",
+      "path": "ErdosProblems/Erdos243/CubicNeighbourIdentity.lean",
+      "private_source_sha256": "309fd2710addf2827db2b0179688997041697d30218ebba4fd1d87cf352c9bb8",
+      "provenance": "byte_exact_source_export",
+      "sha256": "309fd2710addf2827db2b0179688997041697d30218ebba4fd1d87cf352c9bb8"
+    },
+    {
+      "bytes": 11198,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR9.PolynomialCorrections",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR9/PolynomialCorrections.lean",
+      "private_source_sha256": "ad005c8f3eeb6495ad9e931dd78d2dac493db1bfae7f03c0e002ed841300f43b",
+      "provenance": "byte_exact_source_export",
+      "sha256": "ad005c8f3eeb6495ad9e931dd78d2dac493db1bfae7f03c0e002ed841300f43b"
+    },
+    {
+      "bytes": 8951,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.WindowIncidence",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/WindowIncidence.lean",
+      "private_source_sha256": "f3026b4ff000e67e21a7111058d43b27521619dd5d47ed76f85b5ba70e0a7c19",
+      "provenance": "byte_exact_source_export",
+      "sha256": "f3026b4ff000e67e21a7111058d43b27521619dd5d47ed76f85b5ba70e0a7c19"
+    },
+    {
+      "bytes": 6405,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicIntegralNormalisation",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicIntegralNormalisation.lean",
+      "private_source_sha256": "08e75ae2edc2c05194f739f702db430f5c76448803ebdf972c71eadf24c75d6c",
+      "provenance": "byte_exact_source_export",
+      "sha256": "08e75ae2edc2c05194f739f702db430f5c76448803ebdf972c71eadf24c75d6c"
+    },
+    {
+      "bytes": 5306,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.FrobeniusDescent",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/FrobeniusDescent.lean",
+      "private_source_sha256": "f18be1002165ec3bdf19a55d8791586aed2a77743557c40403c69c078b77fc6b",
+      "provenance": "byte_exact_source_export",
+      "sha256": "f18be1002165ec3bdf19a55d8791586aed2a77743557c40403c69c078b77fc6b"
+    },
+    {
+      "bytes": 5956,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CRTObstructionDensity",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CRTObstructionDensity.lean",
+      "private_source_sha256": "a6ddffd9f103f3d317cc6ddf8e71b2f98ba18b3679e3555e10768e447c3d140e",
+      "provenance": "byte_exact_source_export",
+      "sha256": "a6ddffd9f103f3d317cc6ddf8e71b2f98ba18b3679e3555e10768e447c3d140e"
+    },
+    {
+      "bytes": 5799,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.ReciprocalProductAmplification",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/ReciprocalProductAmplification.lean",
+      "private_source_sha256": "a4fe62c8bd7ca43503a53a157939c8623444060f97927f62833214ddd81b983e",
+      "provenance": "byte_exact_source_export",
+      "sha256": "a4fe62c8bd7ca43503a53a157939c8623444060f97927f62833214ddd81b983e"
+    },
+    {
+      "bytes": 10076,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicWindowTransport",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicWindowTransport.lean",
+      "private_source_sha256": "8564d629fda96a13b3fafa7bae6145d2ed2f4af50b144c51c52122f9a1590c74",
+      "provenance": "byte_exact_source_export",
+      "sha256": "8564d629fda96a13b3fafa7bae6145d2ed2f4af50b144c51c52122f9a1590c74"
+    },
+    {
+      "bytes": 93799,
+      "exact_private_bytes": false,
+      "module": "ErdosProblems.Erdos243.ReciprocalTailRigidity",
+      "path": "ErdosProblems/Erdos243/ReciprocalTailRigidity.lean",
+      "private_source_sha256": "b67410ec01838b03740985bb4200c683d074b473772db0077562d66cdc2009cf",
+      "provenance": "public_preexisting_variant",
+      "sha256": "3145b8a5a4c3783fa4c79b726e20f55285a7a43ec58a5e876bf3e4a3d1f88ff9"
+    },
+    {
+      "bytes": 7962,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicGcdFence",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicGcdFence.lean",
+      "private_source_sha256": "f5db1608de85a655eafb2c6ce122b4d96667ed9d2e953f3c6603700ba8966adf",
+      "provenance": "byte_exact_source_export",
+      "sha256": "f5db1608de85a655eafb2c6ce122b4d96667ed9d2e953f3c6603700ba8966adf"
+    },
+    {
+      "bytes": 8633,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicPrimitiveNormalisation",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicPrimitiveNormalisation.lean",
+      "private_source_sha256": "f5d6b3a3dcea60c2502ddb236da4ea9f39248ecb49a2859b4ba578f8298db025",
+      "provenance": "byte_exact_source_export",
+      "sha256": "f5d6b3a3dcea60c2502ddb236da4ea9f39248ecb49a2859b4ba578f8298db025"
+    },
+    {
+      "bytes": 8470,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.DensityTransport",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/DensityTransport.lean",
+      "private_source_sha256": "5aa710761e48b2ceab4c25367061797e16bfd42a23a3a7b5a3125c2ce46709fa",
+      "provenance": "byte_exact_source_export",
+      "sha256": "5aa710761e48b2ceab4c25367061797e16bfd42a23a3a7b5a3125c2ce46709fa"
+    },
+    {
+      "bytes": 7187,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicDivisorObstruction",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicDivisorObstruction.lean",
+      "private_source_sha256": "d30ebd3cf98fb6a589df260a8c3f2cd2dd1277e2655032d5b3797684d1eb6cd9",
+      "provenance": "byte_exact_source_export",
+      "sha256": "d30ebd3cf98fb6a589df260a8c3f2cd2dd1277e2655032d5b3797684d1eb6cd9"
+    },
+    {
+      "bytes": 5182,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicModularDensity",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicModularDensity.lean",
+      "private_source_sha256": "6aacb54326f165e18046428ec13f8aa75ea31a295111485ecb2bce2c7eed3ae8",
+      "provenance": "byte_exact_source_export",
+      "sha256": "6aacb54326f165e18046428ec13f8aa75ea31a295111485ecb2bce2c7eed3ae8"
+    },
+    {
+      "bytes": 6989,
+      "exact_private_bytes": true,
+      "module": "ErdosProblems.Erdos243.PaperCompleteR11.CubicZeroDensityShape",
+      "path": "ErdosProblems/Erdos243/PaperCompleteR11/CubicZeroDensityShape.lean",
+      "private_source_sha256": "e344c04c30ef3e2d042e9db5b9d659ac48ce4a4222bb12f59ddb68b90d851759",
+      "provenance": "byte_exact_source_export",
+      "sha256": "e344c04c30ef3e2d042e9db5b9d659ac48ce4a4222bb12f59ddb68b90d851759"
+    },
+    {
+      "bytes": 3935,
+      "exact_private_bytes": true,
+      "module": "Erdos243V5.DensityQuantifiers",
+      "path": "Erdos243V5/DensityQuantifiers.lean",
+      "private_source_sha256": "965cc39b2e002cd7360c3dcf5a792589b9f19c2d3f1872e26f84da69d02c49d3",
+      "provenance": "byte_exact_source_export",
+      "sha256": "965cc39b2e002cd7360c3dcf5a792589b9f19c2d3f1872e26f84da69d02c49d3"
+    },
+    {
+      "bytes": 2693,
+      "exact_private_bytes": true,
+      "module": "Erdos243V5.SurvivorProfiles",
+      "path": "Erdos243V5/SurvivorProfiles.lean",
+      "private_source_sha256": "97a57438a9142e6bc59ef1295f27327089b0b8a0be4af6e3c95a8a62f6ad78bf",
+      "provenance": "byte_exact_source_export",
+      "sha256": "97a57438a9142e6bc59ef1295f27327089b0b8a0be4af6e3c95a8a62f6ad78bf"
+    }
+  ],
+  "public_source_root": {
+    "module": "Erdos243V5.SurvivorProfiles",
+    "path": "Erdos243V5/SurvivorProfiles.lean",
+    "sha256": "97a57438a9142e6bc59ef1295f27327089b0b8a0be4af6e3c95a8a62f6ad78bf"
+  },
+  "schema": "public_erdos243_density_validation_export_v0",
+  "static_checks": {
+    "all_16_new_source_files_byte_exact_to_source": true,
+    "all_local_imports_resolve": true,
+    "audit_names_both_declarations": true,
+    "lean_launched": false,
+    "preexisting_variant_preserved": true,
+    "target_paths_were_absent_before_write": true
+  },
+  "status": "PASS_SOURCE_CURRENT_PUBLIC_REPLAY_AND_PERMITTED_AXIOMS",
+  "upstream_exact_source_kernel_receipts": [
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "declaration": "Erdos243V5.classified_profile_phase_windows",
+      "source_sha256": "97a57438a9142e6bc59ef1295f27327089b0b8a0be4af6e3c95a8a62f6ad78bf",
+      "status": "PASS_EXACT_SOURCE",
+      "stdout_sha256": "d1d010d94a13ae2c3c68585700da81e534fa734e64068746e3dd8d1f21ff5572"
+    },
+    {
+      "audit_source_sha256": "4346b26fba26232addde1f0b51e2b0c9a6540f9ab08d066ebd4b563677e3cbe2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "declaration": "Erdos243V5.twelve_unit_profile_lower_density",
+      "source_sha256": "97a57438a9142e6bc59ef1295f27327089b0b8a0be4af6e3c95a8a62f6ad78bf",
+      "status": "PASS_EXACT_SOURCE",
+      "stdout_sha256": "3eb720af4848a9db4dd0ee2b097fcb84a5f59633493660a138bb2d6fa326b772"
+    }
+  ],
+  "variant_boundary": {
+    "assessment": "The public file is retained. Its differing regions concern unrelated eventual-periodic, tail-realization, and bounded-negative endpoints; all names consumed by the exported cubic chain are present. This is static compatibility evidence only.",
+    "effect": "A single public named-print replay is still required before the public graph may claim kernel verification.",
+    "exact_source_environment_sha256": "b67410ec01838b03740985bb4200c683d074b473772db0077562d66cdc2009cf",
+    "path": "ErdosProblems/Erdos243/ReciprocalTailRigidity.lean",
+    "public_sha256": "3145b8a5a4c3783fa4c79b726e20f55285a7a43ec58a5e876bf3e4a3d1f88ff9"
+  }
+}

@@ -10,12 +10,23 @@
     "runner"
   ],
   "synthetic_home_segments_reason": "scripts/check_release.py documents /Users/example/, /Users/private/ and /Users/will/ as its own detector fixtures (HYGIENE_SYNTHETIC_HOME_PREFIXES); /Users/someone/ is the scanner docstring's example; /home/runner/ is the GitHub Actions checkout. None is a workstation account.",
-  "synthetic_secret_fingerprints": [],
+  "synthetic_secret_fingerprints": [
+    {
+      "fingerprint": "sha256:457643f44d19aed85fd756aa50cc0cd6b57376d4e8f5a72f9f85972a522002a3",
+      "disposition": "synthetic_release_test_fixture",
+      "reason": "Reviewed historical scripts/check_release.py blob 085dd8da877c867921bf9d701113bea909cbbd50: the checker explicitly identifies this literal as its synthetic AWS-shaped redaction fixture, never a credential."
+    },
+    {
+      "fingerprint": "sha256:c8967071e3cb1709f87071a25981dead0f941765df31e50ebab9965dc214c890",
+      "disposition": "synthetic_release_test_fixture",
+      "reason": "Reviewed historical scripts/check_release.py blobs 085dd8da877c867921bf9d701113bea909cbbd50, 814b3e1aea1812689dd050c08642ea3bca0f9d91 and 98e5026c27e85a560dc292254f8d92bcbf18aea4: this literal is a credential_shape hygiene detector test case, not an operational credential."
+    }
+  ],
   "public_safe_paths": [
     {
       "path": "ErdosProblems/Erdos68/EndpointWeightedPrivateSupport.lean",
       "disposition": "public_safe_mathematical_identifier",
-      "reason": "The word names the private (non-shared) support set of an endpoint-weighted family in the Erdős #68 formalisation. It is a mathematical identifier, not private material."
+      "reason": "The word names the private (non-shared) support set of an endpoint-weighted family in the Erd\u0151s #68 formalisation. It is a mathematical identifier, not private material."
     }
   ],
   "object_rows": []

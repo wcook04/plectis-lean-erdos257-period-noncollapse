@@ -3,7 +3,7 @@
 blank_issues_enabled: true
 contact_links:
   - name: Security or sensitive report (private)
-    url: https://github.com/wcook04/plectis-lean-erdos249-257/security/advisories/new
+    url: https://github.com/wcook04/plectis-erdos/security/advisories/new
     about: Supply-chain, CI, or leaked-material concerns. Not for mathematical errors.
   # This pointed at erdos249-257-main-paper.pdf, which docs/papers/corpus.json
   # records as retired: "its problem-specific successors are the active reader
@@ -12,5 +12,5 @@ contact_links:
   # told them to read it first. The guide indexes the active papers, one per
   # problem, and names what each establishes.
   - name: The papers (one per problem)
-    url: https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/docs/papers/README.md
+    url: https://github.com/wcook04/plectis-erdos/blob/main/docs/papers/README.md
     about: Read the paper for that problem in ordinary notation, and what it states as still open, before filing a discrepancy.

@@ -20,7 +20,7 @@ irrational?
 
 Every rational representation $`S=a/q`$, $`q>0`$, of $`S=\sum_{n\ge2}(n!-1)^{-1}`$ satisfies
 ``` math
-q\nmid299999!,\qquad q\ge2^{39990}>10^{12038}.
+q\nmid299999!,\qquad q\ge2^{39990},\qquad q>10^{12040}.
 ```
 The first exclusion follows from an exact strict-successor carry test; the second from continued fractions. An integral divisor basis determines the cancelling vectors and their attainable factorial moments. At fixed moment, every correction translates the full residual by an integer. Actual prime-power cancellations explain why common-denominator growth alone does not control reduced prefixes. The companion constant $`S-e+2`$ gives an exact factorial-orbit criterion; the remaining assertion is strict-successor divisibility failure at arbitrarily large indices.
 
@@ -361,7 +361,7 @@ The extended-real statement, with the real exponent $`3/2`$, is [Lean source](ht
 \log L_N\ge\sum_{n=N-k+1}^N\log(n!-1)
 -\binom{k+1}{3}\log N.
 ```
-Taking $`k=\lfloor\alpha\sqrt N\rfloor`$ gives leading coefficient $`\alpha-\alpha^3/6`$, maximised by $`\alpha=\sqrt2`$. The same argument applies to every fixed nonzero polynomial perturbation $`n!+P(n)`$, using
+Taking $`k=\lfloor\alpha\sqrt N\rfloor`$ gives leading coefficient $`\alpha-\alpha^3/6`$, maximised by $`\alpha=\sqrt2`$. For a fixed $`P\in\mathbb Z[X]\setminus\{0\}`$, the same ordinary argument gives this bound for $`\operatorname{lcm}_{n_0\le n\le N}(n!+P(n))`$, where $`n_0`$ is sufficiently large that all factors are positive and the collision differences below are nonzero, as in Lai’s Lemma 2.1 \[lai\]. The lower cutoff matters: $`P=-2`$ makes the factor at $`n=2`$ vanish. The argument uses
 ``` math
 \gcd(i!+P(i),j!+P(j))\mid P(j)-(j!/i!)P(i);
 ```
@@ -532,7 +532,7 @@ The exact GMP carry certificate covers $`3\le m\le300000`$. Its unit carries occ
 ```
 In particular $`b_{300000}\ne1`$, yielding $`q\nmid299999!`$ by <a href="#eq:finite-denominator-consumer" data-reference-type="eqref" data-reference="eq:finite-denominator-consumer">[eq:finite-denominator-consumer]</a>. This excludes every divisor of that factorial, including large divisors. It does not exclude all integers with small prime factors, since their multiplicities can be too large.
 
-The separate $`80000`$-bit exact rational enclosure forces $`23449`$ common continued-fraction partial quotients. Its best-approximation certificate gives $`q\ge2^{39990}>10^{12038}`$. The open-versus-closed complete-quotient endpoint convention matters for a sharper extraction; no stronger numerical floor is asserted here. The exact sources, enclosure and integer-computation receipts are retained with the long record. Neither finite calculation supplies <a href="#eq:canonical-open-target" data-reference-type="eqref" data-reference="eq:canonical-open-target">[eq:canonical-open-target]</a>.
+The separate $`80000`$-bit exact rational enclosure lies strictly between Farey neighbours whose denominator sum is both at least $`2^{39990}`$ and greater than $`10^{12040}`$. Hence every rational in the enclosure has denominator $`q\ge2^{39990}`$ and $`q>10^{12040}`$. The decimal bound comes from the denominator sum itself, not from the weaker binary comparison. The exact sources, enclosure and integer-computation receipts are retained with the long record. Neither finite calculation supplies <a href="#eq:canonical-open-target" data-reference-type="eqref" data-reference="eq:canonical-open-target">[eq:canonical-open-target]</a>.
 
 <a id="app:sources"></a>
 
@@ -653,3 +653,5 @@ The complete infinite rationality boundary is checked in `ErdosProblems/Erdos68/
 P. Erdős, *On the irrationality of certain series: problems and results*, in A. Baker (ed.), *New Advances in Transcendence Theory*, Cambridge UP, 1988, pp. 102–109, doi:[10.1017/CBO9780511897184.009](https://doi.org/10.1017/CBO9780511897184.009). T. F. Bloom, *Erdős Problem \#68*. <https://www.erdosproblems.com/68>, accessed 28 July 2026. G. Cantor, *Über die einfachen Zahlensysteme*, Z. Math. Phys. **14** (1869), 121–128. J. Galambos, *Representations of Real Numbers by Infinite Series*, Lecture Notes in Math. **502**, Springer, 1976, Chapter 1. J. Louwsma and J. Martino, *Rational numbers with odd greedy expansion of fixed length*, arXiv:[2309.07280v1](https://arxiv.org/abs/2309.07280), 2023, Lemma 4.1, p. 10. L. Lai, *On the largest prime divisor of $`n!+1`$*, arXiv:[2103.14894v1](https://arxiv.org/abs/2103.14894), 2021, proof of Lemma 2.4, (2.5).
 
 </div>
+
+*Companion system context.* The [claim and trust boundary](../../../claim-faithful-publication-systems-paper.pdf#nameddest=systems-trust), [cold-clone route to proof authority](../../../cold-clone-to-proof-receipt.pdf#nameddest=cold-clone-authority), and [public contribution protocol](../../../open-source-mathematics-strategy.pdf#nameddest=strategy-protocol) are described in sibling papers. Those descriptions do not change the mathematical status of this note.

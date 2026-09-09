@@ -203,17 +203,17 @@
         {
           "declaration": "dyadicInternalPower_exponent_unique",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 668
+          "line": 669
         },
         {
           "declaration": "dyadicBlockBase235_cases",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 699
+          "line": 762
         },
         {
           "declaration": "dyadicBlockBase235_mem_interval",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 711
+          "line": 774
         }
       ]
     },
@@ -236,7 +236,7 @@
         {
           "declaration": "kernel_235_minor_eq_neg_one_fifteen",
           "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-          "line": 721
+          "line": 827
         }
       ]
     },
@@ -656,42 +656,42 @@
     {
       "declaration": "DyadicInternalPower",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 662,
+      "line": 663,
       "role": "concept",
       "statement_node": "dyadic_block_radix_has_exact_four_letter_alphabet"
     },
     {
       "declaration": "dyadicInternalPower_exponent_unique",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 668,
+      "line": 669,
       "role": "engine",
       "statement_node": "dyadic_block_radix_has_exact_four_letter_alphabet"
     },
     {
       "declaration": "dyadicBlockBase235",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 688,
+      "line": 751,
       "role": "representation",
       "statement_node": "dyadic_block_radix_has_exact_four_letter_alphabet"
     },
     {
       "declaration": "dyadicBlockBase235_cases",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 699,
+      "line": 762,
       "role": "statement",
       "statement_node": "dyadic_block_radix_has_exact_four_letter_alphabet"
     },
     {
       "declaration": "dyadicBlockBase235_mem_interval",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 711,
+      "line": 774,
       "role": "statement",
       "statement_node": "dyadic_block_radix_has_exact_four_letter_alphabet"
     },
     {
       "declaration": "kernel_235_minor_eq_neg_one_fifteen",
       "module": "ErdosProblems/Erdos269/ThreePrimeRunningLcm.lean",
-      "line": 721,
+      "line": 827,
       "role": "statement",
       "statement_node": "kernel_235_has_exact_negative_one_fifteen_minor"
     },

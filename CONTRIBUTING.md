@@ -10,7 +10,7 @@ another person can check, a clearer boundary, or a repaired public check can
 all save future work.
 
 If you want to help but do not yet have a target, begin with the pinned
-[eight-frontier issue](https://github.com/wcook04/plectis-lean-erdos249-257/issues/105).
+[eight-frontier issue](https://github.com/wcook04/plectis-erdos/issues/105).
 It links each problem paper and lists useful contributions beyond complete
 proofs.
 
@@ -40,7 +40,7 @@ There are two first-class tracks:
    contributor experience.
 
 You can contribute an architecture idea before you have code. Use the
-[architecture proposal form](https://github.com/wcook04/plectis-lean-erdos249-257/issues/new?template=architecture_proposal.yml)
+[architecture proposal form](https://github.com/wcook04/plectis-erdos/issues/new?template=architecture_proposal.yml)
 or read the [architecture contribution path](docs/research-commons/ARCHITECTURE_CONTRIBUTIONS.md).
 If an idea is adopted, the accepting change preserves the originator's credit
 in a tracked artifact and accepted receipt.
@@ -49,7 +49,7 @@ The ordinary contribution path is enough: fork or clone the repository, make
 a focused change, and open a pull request. Explain the question you started
 from, what you changed or learned, what another person can inspect, and what
 remains unresolved. If you have an observation but no finished patch, open the
-[plain-language research-progress form](https://github.com/wcook04/plectis-lean-erdos249-257/issues/new?template=research_progress.yml)
+[plain-language research-progress form](https://github.com/wcook04/plectis-erdos/issues/new?template=research_progress.yml)
 and write it in your own words. You do not need to learn the receipt format
 before telling us something useful.
 
